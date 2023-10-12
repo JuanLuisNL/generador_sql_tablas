@@ -1958,7 +1958,8 @@ class RelacionesTablas {
     row.isEmpresasGrupo = lEmpGrupo;
     String cAlias = alias;
     if (cAlias == "") {
-      cAlias = mapAlias[tablaDestino.toLowerCase()] ?? tablaDestino.substring(0,3).toLowerCase();
+      String cTmp = tablaDestino.toLowerCase().replaceAll("_","");
+      cAlias = mapAlias[cTmp] ?? cTmp.substring(0,3);
     }
     row.alias = cAlias;
     lstRelaciones.add(row);
@@ -1980,6 +1981,7 @@ class RelacionesTablas {
     mapAlias["centrocostesarbolesx"] = "ccArbX";
     mapAlias["centrocostesproyectos"] = "ccProy";
     mapAlias["centrocostesvalores"] = "ccVal";
+    mapAlias["centrocostesdefecto"] = "ccDef";
     mapAlias["comisiones"] = "comi";
     mapAlias["comisionitas"] = "comiTas";
     mapAlias["contactosexternos"] = "contExt";

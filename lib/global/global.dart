@@ -145,9 +145,9 @@ class CreaClasesTablaAndDRow {
   String getAll() {
     String cDatos = "";
     String tabla = tablaLower.replaceAll("_", "");
-    DRowRelacionesCamposEtc? row = lstRelaciones.firstWhereOrNull((it) => it.tablaJoin.toLowerCase() == tabla);
+    DRowRelacionesCamposEtc? row = lstRelaciones.firstWhereOrNull((it) => it.tablaJoin.toLowerCase().replaceAll("_", "") == tabla);
     if (row == null) {
-      aliasTabla = mapAlias[tablaLower] ?? tablaLower.substring(0, 3);
+      aliasTabla = mapAlias[tabla] ?? tablaLower.substring(0, 3);
     } else {
       aliasTabla = row.alias;
     }
