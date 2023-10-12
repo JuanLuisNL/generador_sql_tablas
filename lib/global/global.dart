@@ -5,9 +5,7 @@ import 'package:generador_sql_tablas/global/relaciones_tablas.dart';
 import 'package:collection/collection.dart';
 import 'package:postgres/postgres.dart';
 
-
 class GBL {
-
   static late PostgreSQLConnection oCnBase;
   static late PostgreSQLConnection oCnEmp;
   static late PostgreSQLConnection oCnImgs;
@@ -27,7 +25,10 @@ class GBL {
 
 class CreaClasesTablaAndDRow {
   late String tablaProper, tablaLower, aliasTabla;
-  late List<String> lstAsignacionesCamposSQL = [], lstVarsDeclaraciones = [], lstJoins = [], lstAsignacionesJoins = [];
+  late List<String> lstCamposSQLVars = [], lstGetsCamposSQL = [];
+  late List<String> lstVarsTblJoins = [], lstGetsTblJoins = [];
+
+  late List<String> lstAsignacionesCamposSQL = [], lstJoins = [], lstAsignacionesJoins = [];
   late List<String> lstDeclaracionesDRows = [], lstAsignacionesDRows = [], lstJoinsDRows = [];
   late List<String> lstGetsSetsDRowsNew = [], lstJoinsDRowsNew = [];
   late List<DRowRelacionesCamposEtc> lstRelaciones = [];
@@ -71,8 +72,12 @@ class CreaClasesTablaAndDRow {
   // cat = CategoriasSQL(join: "LEFT JOIN categorias cat ON a.id_categoria = cat.verialid");
 
   void initListsAndMaps() {
+    lstCamposSQLVars = [];
+    lstGetsCamposSQL = [];
+    lstVarsTblJoins = [];
+    lstGetsTblJoins = [];
+
     lstAsignacionesCamposSQL = [];
-    lstVarsDeclaraciones = [];
     lstJoins = [];
     mapImports = {};
 
@@ -90,15 +95,18 @@ class CreaClasesTablaAndDRow {
   // ? despues "getAll" se encarga de ordenarlos y crear losque faltan
   void addItemsFromCols() {
     String campo, type;
-    lstAsignacionesCamposSQL.add("all = CampoSQL('*', '', oTablaMain: this);");
     for (List<dynamic> row in lstCols) {
       campo = row[0];
       type = row[1];
       String cVar = getNameVariable(campo);
       String cType = getTipoSQL(type, row[2] ?? 0, row[3] ?? 0, row[4] ?? 0);
       String cPlantilla = '$cVar = CampoSQL("$campo", "$cType", oTablaMain: this);';
+      String cPlantillaGet = 'CampoSQL get $cVar => _$cVar ?? CampoSQL("$campo", "$cType", this);\n';
+
       lstAsignacionesCamposSQL.add(cPlantilla);
-      lstVarsDeclaraciones.add(cVar);
+
+      lstCamposSQLVars.add("_$cVar");
+      lstGetsCamposSQL.add(cPlantillaGet);
 
       // DRows
       String cTipoDart = getTipoDart(type);
@@ -130,14 +138,13 @@ class CreaClasesTablaAndDRow {
         cPlantilla = "set $cVar($cTipoDart valor) => map['$campo'] = valor;\n";
         lstGetsSetsDRowsNew.add(cPlantilla);
       }
-
     }
   }
 
   // ? Compone las clases necesarias para cada tabla
   String getAll() {
     String cDatos = "";
-    String tabla =  tablaLower.replaceAll("_", "");
+    String tabla = tablaLower.replaceAll("_", "");
     DRowRelacionesCamposEtc? row = lstRelaciones.firstWhereOrNull((it) => it.tablaJoin.toLowerCase() == tabla);
     if (row == null) {
       aliasTabla = mapAlias[tablaLower] ?? tablaLower.substring(0, 3);
@@ -174,12 +181,23 @@ class CreaClasesTablaAndDRow {
   //   aliasSQL = 'arb';
 
   String getConstructorClaseTabla() {
+    /// JOINS CON OTRAS TABLAS
+    getDeclaracionJoinsFromRelaciones();
+
     /// CLASE
     String cCad = "class ${tablaProper}SQL extends TablaSQL {\n";
+
     /// VARIABLES
     cCad += getDeclaracionVars();
-    /// JOINS CON OTRAS TABLAS
-    cCad += getDeclaracionJoinsFromRelaciones();
+    cCad += "/// Joins Vars\n";
+    cCad += lstVarsTblJoins.join();
+
+    cCad += "/// CamposSQL Gets\n";
+    cCad += "CampoSQL get all => CampoSQL('*', '', this);\n";
+    cCad += lstGetsCamposSQL.join();
+    cCad += "/// JOINS Gets\n";
+    cCad += lstGetsTblJoins.join();
+
     /// CONSTRUCTOR JOINS
     cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasJoin, TablaSQL? oTablaSelectJoin) {\n";
     cCad += "initCampos();\n";
@@ -187,50 +205,49 @@ class CreaClasesTablaAndDRow {
     cCad += "aliasJoin = cAliasJoin;\n";
     //cCad += "joinSentence = cJoinSentence;\n";
     cCad += "oTablaJoin = oTablaSelectJoin;\n}\n\n";
+
     /// CONSTRUCTOR
     cCad += "${tablaProper}SQL() {\n initCampos();\n}\n\n";
+
     /// INITCAMPOS
     cCad += "void initCampos() {\n";
     cCad += "nombreSQL = '$tablaLower';\n";
     cCad += "aliasSQL = '$aliasTabla';\n";
-    cCad += lstAsignacionesCamposSQL.join("\n");
+    // cCad += lstAsignacionesCamposSQL.join("\n");
     cCad += "\n}\n}\n\n";
     return cCad;
   }
 
   String getDeclaracionVars() {
-    String cFila = "late CampoSQL ", cTodo = "";
-    int x = 1;
-    for (String campo in lstVarsDeclaraciones) {
-      cFila += "$campo${(x == 5) ? ";\n" : ", "}";
-      x++;
-      if (x == 6) {
-        cTodo += "${cFila.trim()}\n";
-        cFila = "late CampoSQL ";
-        x = 1;
+    const String cTipo = "CampoSQL? ";
+    String cFila = cTipo, cTodo = "";
+    for (String campo in lstCamposSQLVars) {
+      if ((cFila.length + campo.length) > 150) {
+        cFila = cFila.trim().replaceFirst(",", ";", cFila.length - 2);
+        cTodo += "$cFila\n";
+        cFila = "$cTipo$campo, ";
+      } else {
+        cFila += "$campo, ";
       }
     }
-    if (cFila.length > 15) {
+    if (cFila != cTipo) {
       if (cFila.trim().endsWith(",")) {
         cFila = cFila.replaceFirst(",", ";", cFila.length - 2);
       }
       cTodo += "${cFila.trim()}\n";
     }
-    cTodo = "late CampoSQL all;\n$cTodo";
     return "$cTodo\n";
   }
 
-
-
-  String getDeclaracionJoinsFromRelaciones() {
-    String cDeclaraciones = "";
+  void getDeclaracionJoinsFromRelaciones() {
     for (var campo in lstJoins) {
-      DRowRelacionesCamposEtc? rowRel = lstRelaciones.firstWhereOrNull((it) => it.tablaOrigen == tablaLower && it.campoID == campo);
+      DRowRelacionesCamposEtc? rowRel = lstRelaciones.firstWhereOrNull(
+          (it) => it.tablaOrigen.replaceAll("_", "") == tablaLower.replaceAll("_", "") && it.campoID.replaceAll("_", "") == campo.replaceAll("_", ""));
       if (rowRel == null) {
         continue;
       }
 
-      if ( rowRel.tablaJoin.toLowerCase().contains("_g") ||  rowRel.tablaJoin.toLowerCase().contains("_i")) {
+      if (rowRel.tablaJoin.toLowerCase().contains("_g") || rowRel.tablaJoin.toLowerCase().contains("_i")) {
         continue;
       }
       String cJoinCamelCase = rowRel.tablaJoin.replaceAll("_", "");
@@ -241,6 +258,7 @@ class CreaClasesTablaAndDRow {
         if (cImport != "") {
           mapImports[cJoinCamelCase] = "import '${cImport}_base.dart';";
         } else {
+          // hay alguna tabla original con guiones
           String cImport = lstTablasServer.firstWhereOrNull((it) => it == cJoinCamelCase.toLowerCase()) ?? "";
           if (cImport != "") {
             mapImports[cJoinCamelCase] = "import '${cImport}_base.dart';";
@@ -251,10 +269,14 @@ class CreaClasesTablaAndDRow {
       }
       // ? EJEMPLO
       /// ArbolesSQL? _arbCat;
-      /// ArbolesSQL get arbCat => (_arbCat == null) ? ArbolesSQL.joins('id_categoria', 'arbCat', this) : _arbCat!;
+      /// ArbolesSQL get arb => _arb ?? ArbolesSQL.joins('id_padre', 'arb', this);
       String alias = rowRel.alias;
-      cDeclaraciones += "$varTablaSQL? _$alias;\n";
-      cDeclaraciones += "$varTablaSQL get $alias => (_$alias == null) ? $varTablaSQL.joins('${rowRel.campoID}', '$alias', this) : _$alias!;\n";
+      String cTablaJoinVar = "$varTablaSQL? _$alias;\n";
+      lstVarsTblJoins.add(cTablaJoinVar);
+
+      String cTablaJoinGet = "$varTablaSQL get $alias => _$alias ?? $varTablaSQL.joins('${rowRel.campoID}', '$alias', this);\n";
+      lstGetsTblJoins.add(cTablaJoinGet);
+
       /// TODO Ver los joins manuales. habrá que ver cuales son realmente
 
       // DRowNew
@@ -263,9 +285,7 @@ class CreaClasesTablaAndDRow {
       cPlantilla = " late $cDRow? row${alias.proper} = $cDRow.join(mapParam!['$cJoinCamelCase']);\n";
       lstJoinsDRowsNew.add(cPlantilla);
     }
-    return cDeclaraciones;
   }
-
 
   String getImports() {
     String cCad = "import '../abstract/entidades_sql.dart';\n";
@@ -305,10 +325,10 @@ class CreaClasesTablaAndDRow {
       lstJoins.add(campo);
     }
     List<String> lstPartes = campo.split("_");
-    for(String it in lstPartes) {
+    for (String it in lstPartes) {
       cFinal += it.proper;
     }
-    cFinal = cFinal.substring(0,1).toLowerCase() + cFinal.substring(1);
+    cFinal = cFinal.substring(0, 1).toLowerCase() + cFinal.substring(1);
     if (cFinal == "final") cFinal = "finalStr"; //? Por ser palabra reservada
     return cFinal;
   }

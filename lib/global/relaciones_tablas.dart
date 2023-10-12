@@ -191,26 +191,26 @@ class RelacionesTablas {
     String cFiltro = "";
     String cJoinDocClix = "LEFT JOIN doccli ON docclix.id_documento = doccli.verialid";
     String cJoinDocCliValores = "LEFT JOIN doccli ON docclivalores.id_documento = doccli.verialid";
-    String cJoinDocProX = "LEFT JOIN docpro ON docprox.id_documento = docpro.verialid";
+    String cJoinDocProx = "LEFT JOIN docpro ON docprox.id_documento = docpro.verialid";
     String cJoinDocProValores = "LEFT JOIN docpro ON docprovalores.id_documento = docpro.verialid";
 
-    String cJoinDocAlmacenX = "LEFT JOIN DocAlmacen ON DocAlmacenX.ID_Documento = DocAlmacen.VerialID";
-    String cJoinDocHotelX = "LEFT JOIN DocHotel ON DocHotelX.ID_Documento = DocHotel.VerialID";
-    String cJoinHstDocHotelX = "LEFT JOIN HstDocHotel ON HstDocHotelX.ID_Documento = HstDocHotel.VerialID";
+    String cJoinDocAlmacenx = "LEFT JOIN DocAlmacen ON DocAlmacenx.ID_Documento = DocAlmacen.VerialID";
+    String cJoinDocHotelx = "LEFT JOIN DocHotel ON DocHotelx.ID_Documento = DocHotel.VerialID";
+    String cJoinHstDocHotelx = "LEFT JOIN HstDocHotel ON HstDocHotelx.ID_Documento = HstDocHotel.VerialID";
     String cJoinAveriasArticulos = "LEFT JOIN Averias ON ArtRevisionesAverias.ID_AveriaRevision=Averias.VerialID";
     String cJoinRevisionesArticulos = "LEFT JOIN Revisiones ON ArtRevisionesAverias.ID_AveriaRevision=Revisiones.VerialID";
     String cJoinAveriasTecnicos = "LEFT JOIN Averias ON TecnicosRevisionesAverias.ID_AveriaRevision=Averias.VerialID";
     String cJoinRevisionesTecnicos = "LEFT JOIN Revisiones ON TecnicosRevisionesAverias.ID_AveriaRevision=Revisiones.VerialID";
-    String cJoinDHXPrevision = "LEFT JOIN DocHotelX ON DocHotelXPrevision.ID_DocHotelX=DocHotelX.VerialID";
+    String cJoinDHXPrevision = "LEFT JOIN DocHotelx ON DocHotelxPrevision.ID_DocHotelx=DocHotelx.VerialID";
     String cJoinArtLotes = "LEFT JOIN ArtLotes ON ArtLotesX.ID_ArtLotes = ArtLotes.VerialID";
     String cJoinMenuEventos = "LEFT JOIN MenuEventos ON MenuEventosX.ID_MenuEventos = MenuEventos.VerialID";
     String cJoinPartesReparaciones = "LEFT JOIN PartesReparaciones ON PartesReparacionesX.ID_ParteReparacion = PartesReparaciones.VerialID";
     String cJoinPartesReparacionesX = "LEFT JOIN PartesReparaciones ON PartesReparacionesX.ID_ParteReparacion = PartesReparaciones.VerialID";
     String cJoinSalonesX = "LEFT JOIN Salones ON SalonesX.ID_Salon = Salones.VerialID";
-    String cJoinRecursosActos = "LEFT JOIN DocHotelX ON RecursosActos.ID_DocHotelX = DocHotelX.VerialID"
-        " LEFT JOIN DocHotel ON DocHotelX.ID_Documento = DocHotel.VerialID"
-        " LEFT JOIN DocCliX ON RecursosActos.ID_DocCliX = DocCliX.VerialID"
-        " LEFT JOIN DocCli ON DocCliX.ID_Documento = DocCli.VerialID";
+    String cJoinRecursosActos = "LEFT JOIN DocHotelx ON RecursosActos.ID_DocHotelx = DocHotelx.VerialID"
+        " LEFT JOIN DocHotel ON DocHotelx.ID_Documento = DocHotel.VerialID"
+        " LEFT JOIN DocClix ON RecursosActos.ID_DocClix = DocClix.VerialID"
+        " LEFT JOIN DocCli ON DocClix.ID_Documento = DocCli.VerialID";
     String cJoinFabricacion = "LEFT JOIN Fabricacion ON FabricacionX.ID_Fabricacion = Fabricacion.VerialID";
     String cJoinClientesX = "LEFT JOIN Clientes ON ClientesX.ID_Cliente = Clientes.verialID";
     String cJoinProveedoresX = "LEFT JOIN Proveedores ON ProveedoresX.ID_Proveedor = Proveedores.verialID";
@@ -234,10 +234,10 @@ class RelacionesTablas {
     addRelation("Almacenes", "Mensajes", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
     addRelation("Almacenes", "Data_Imp", "ID_Almacen");
     addRelation("Almacenes", "DocCli", "ID_Almacen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Almacenes", "DocCliX", "ID_Almacen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
+    addRelation("Almacenes", "DocClix", "ID_Almacen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
     addRelation("Almacenes", "DocPro", "ID_Almacen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
     addRelation("Almacenes", "DocPro", "ID_AlmacenOrigen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "almOrigen");
-    addRelation("Almacenes", "DocProX", "ID_Almacen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProX);
+    addRelation("Almacenes", "DocProx", "ID_Almacen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx);
     addRelation("Almacenes", "Pdas", "ID_Almacen");
     addRelation("Almacenes", "Pdas", "ID_AlmacenPedidos", alias: "almPedidos");
     addRelation("Almacenes", "Tpvext_Cajas", "ID_Almacen");
@@ -246,15 +246,15 @@ class RelacionesTablas {
     addRelation("Almacenes", "PuestosX", "ID_AlmacenUnico", selectCanBeDel: "ID_Puesto");
     addRelation("Almacenes", "AreasCompra", "ID_Almacen");
     addRelation("Almacenes", "DocHotel", "ID_Almacen", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("Almacenes", "DocHotelX", "ID_Almacen", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX);
+    addRelation("Almacenes", "DocHotelx", "ID_Almacen", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
     addRelation("Almacenes", "Inventario", "ID_Almacen");
     addRelation("Almacenes", "FabricacionGrupo", "ID_AlmacenOrigen", alias: "almOrigen");
     addRelation("Almacenes", "FabricacionGrupo", "ID_AlmacenDestino", alias: "almDestino");
     addRelation("Almacenes", "Fabricacion", "ID_AlmacenOrigen", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", alias: "almOrigen");
     addRelation("Almacenes", "Fabricacion", "ID_AlmacenDestino", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", alias: "almDestino");
     addRelation("Almacenes", "HstDocHotel", "ID_Almacen", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Almacenes", "HstDocHotelX", "ID_Almacen",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX);
+    addRelation("Almacenes", "HstDocHotelx", "ID_Almacen",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
     addRelation("Almacenes", "Clientes", "ID_AlmacenURDI");
     addRelation("Almacenes", AppTablas.cStock, "ID_Almacen", lCanBeDeleteManual: true);
 
@@ -270,7 +270,7 @@ class RelacionesTablas {
     addRelation("Aparatos", "RutasFicheros", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
 
     addRelation("Aparatos", "FabricacionX", "ID_Aparato", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", joinStr: cJoinFabricacion);
-    addRelation("Aparatos", "DocCliX", "ID_Aparato", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
+    addRelation("Aparatos", "DocClix", "ID_Aparato", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
 
     // AppBlobs_I
     addRelation("AppBlobs_I", "Empresas", "ID_SII_Certificado");
@@ -318,7 +318,7 @@ class RelacionesTablas {
     // AreasCompra
     addRelation("AreasCompra", "PuestosX", "ID_AreaCompra", selectCanBeDel: "ID_Puesto");
     addRelation("AreasCompra", "DocPro", "ID_AreaCompra", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("AreasCompra", "DocProX", "ID_AreaCompra", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProX);
+    addRelation("AreasCompra", "DocProx", "ID_AreaCompra", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx);
     addRelation("AreasCompra", "Pdas", "ID_AreaCompra");
 
     // AreasVenta
@@ -326,9 +326,9 @@ class RelacionesTablas {
     addRelation("AreasVenta", "Articulos", "ID_AreaVenta");
     addRelation("AreasVenta", "Data_Imp", "ID_AreaVenta");
     addRelation("AreasVenta", "DocCli", "ID_AreaVenta", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("AreasVenta", "DocCliX", "ID_AreaVenta", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
+    addRelation("AreasVenta", "DocClix", "ID_AreaVenta", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
     addRelation("AreasVenta", "DocHotel", "ID_AreaVenta", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("AreasVenta", "DocHotelX", "ID_AreaVenta", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX);
+    addRelation("AreasVenta", "DocHotelx", "ID_AreaVenta", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
     addRelation("AreasVenta", "Habitaciones", "ID_AreaVenta");
     addRelation("AreasVenta", "Mesas", "ID_AreaVenta");
     addRelation("AreasVenta", "ReservasRest", "ID_AreaVenta");
@@ -345,8 +345,8 @@ class RelacionesTablas {
     addRelation("AreasVenta", "TiendasVirtuales", "ID_AreaVenta");
     addRelation("AreasVenta", "Cupos", "ID_AreaVenta");
     addRelation("AreasVenta", "HstDocHotel", "ID_AreaVenta", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("AreasVenta", "HstDocHotelX", "ID_AreaVenta",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX);
+    addRelation("AreasVenta", "HstDocHotelx", "ID_AreaVenta",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
     addRelation("AreasVenta", "Numeraciones", "ID_AreaVenta");
     addRelation("AreasVenta", "PartesMedicos", "ID_AreaVenta");
     addRelation("AreasVenta", "Mantenimientos", "ID_AreaVenta");
@@ -357,10 +357,10 @@ class RelacionesTablas {
     // Arqueos
     addRelation("Arqueos", "ArqueosX", "ID_Arqueo", lCanBeDeleteManual: true);
     addRelation("Arqueos", "OperacionesTPV", "ID_Arqueo", lCanBeDeleteManual: true);
-    addRelation("Arqueos", "DocCliX", "ID_Arqueo",        selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, lCanBeDeleteManual: true);
-    addRelation("Arqueos", "DocHotelX", "ID_Arqueo",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, lCanBeDeleteManual: true);
+    addRelation("Arqueos", "DocClix", "ID_Arqueo",        selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, lCanBeDeleteManual: true);
+    addRelation("Arqueos", "DocHotelx", "ID_Arqueo",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true);
     addRelation("Arqueos", "Efectos", "ID_Arqueo", lCanBeDeleteManual: true);
-    addRelation("Arqueos", "HstDocHotelX", "ID_Arqueo",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, lCanBeDeleteManual: true);
+    addRelation("Arqueos", "HstDocHotelx", "ID_Arqueo",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true);
     addRelation("Arqueos", "Fianzas", "ID_ArqueoConstitucion", alias: "arqConst");
     addRelation("Arqueos", "Fianzas", "ID_ArqueoCancelacion", alias: "arqCanc");
 
@@ -392,15 +392,15 @@ class RelacionesTablas {
     addRelation("Articulos", "GruposComisionesX", "ID_Articulo");
     addRelation("Articulos", "Data_ImpX", "ID_Origen");
 
-    cFiltro = "DocCliX.TipoOrigen=${EnumDocXTipoOrigen.articulo.index}";
-    addRelation("Articulos", "DocCliX", "ID_Origen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
+    cFiltro = "DocClix.TipoOrigen=${EnumDocXTipoOrigen.articulo.index}";
+    addRelation("Articulos", "DocClix", "ID_Origen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
 
-    cFiltro = "DocHotelX.TipoOrigen=${EnumDocXTipoOrigen.articulo.index}";
-    addRelation("Articulos", "DocHotelX", "ID_Origen",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", filtro: cFiltro, joinStr: cJoinDocHotelX);
+    cFiltro = "DocHotelx.TipoOrigen=${EnumDocXTipoOrigen.articulo.index}";
+    addRelation("Articulos", "DocHotelx", "ID_Origen",
+        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", filtro: cFiltro, joinStr: cJoinDocHotelx);
 
-    addRelation("Articulos", "DocHotelXPrevision", "ID_Cargo", selectCanBeDel: "DocHotelX.ID_Documento", joinStr: cJoinDHXPrevision);
-    addRelation("Articulos", "DocProX", "ID_Origen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProX);
+    addRelation("Articulos", "DocHotelxPrevision", "ID_Cargo", selectCanBeDel: "DocHotelx.ID_Documento", joinStr: cJoinDHXPrevision);
+    addRelation("Articulos", "DocProx", "ID_Origen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx);
     addRelation("Articulos", "TipoHabitaciones", "ID_CargoDefecto");
     addRelation("Articulos", "ArtLotesX", "ID_Articulo", selectCanBeDel: "ArtLotes.verialID", joinStr: cJoinArtLotes);
     addRelation("Articulos", "CartaArticulos", "ID_Articulo");
@@ -415,11 +415,11 @@ class RelacionesTablas {
     addRelation("Articulos", "Cfg_CentralReservasCargos", "ID_Cargo");
     addRelation("Articulos", "Tecnicos", "ID_ArticuloTrab", alias: "artTrab");
     addRelation("Articulos", "Tecnicos", "ID_ArticuloDesp", alias: "artDesp");
-    addRelation("Articulos", "DocAlmacenX", "ID_Origen", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", joinStr: cJoinDocAlmacenX);
+    addRelation("Articulos", "DocAlmacenx", "ID_Origen", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", joinStr: cJoinDocAlmacenx);
     addRelation("Articulos", "ArtDelegaciones", "ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "DocHotelX", "ID_CargoSup1", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, alias: "artSup1");
-    addRelation("Articulos", "DocHotelX", "ID_CargoSup2", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, alias: "artSup2");
-    addRelation("Articulos", "DocHotelX", "ID_CargoSup3", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, alias: "artSup3");
+    addRelation("Articulos", "DocHotelx", "ID_CargoSup1", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "artSup1");
+    addRelation("Articulos", "DocHotelx", "ID_CargoSup2", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "artSup2");
+    addRelation("Articulos", "DocHotelx", "ID_CargoSup3", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "artSup3");
     addRelation("Articulos", "MenuRest", "ID_Articulo");
     addRelation("Articulos", "MenuRestX", "ID_Articulo");
     addRelation("Articulos", "TarifaHotel", "ID_CargoDefecto");
@@ -439,11 +439,11 @@ class RelacionesTablas {
     addRelation("Articulos", "Fabricacion", "ID_Articulo", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo");
     addRelation("Articulos", "FabricacionX", "ID_Articulo", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", joinStr: cJoinFabricacion);
     addRelation("Articulos", "Mesas", "ID_Cubierto");
-    cFiltro = "HstDocHotelX.TipoOrigen=${EnumDocXTipoOrigen.articulo.index}";
-    addRelation("Articulos", "HstDocHotelX", "ID_Origen",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", filtro: cFiltro, joinStr: cJoinHstDocHotelX, lCanBeDeleteManual: true);
-    addRelation("Articulos", "HstDocHotelX", "ID_CargoSup1",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, alias: "artSup1");
-    addRelation("Articulos", "HstDocHotelX", "ID_CargoSup2",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, alias: "artSup2");
-    addRelation("Articulos", "HstDocHotelX", "ID_CargoSup3",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, alias: "artSup3");
+    cFiltro = "HstDocHotelx.TipoOrigen=${EnumDocXTipoOrigen.articulo.index}";
+    addRelation("Articulos", "HstDocHotelx", "ID_Origen",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", filtro: cFiltro, joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true);
+    addRelation("Articulos", "HstDocHotelx", "ID_CargoSup1",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "artSup1");
+    addRelation("Articulos", "HstDocHotelx", "ID_CargoSup2",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "artSup2");
+    addRelation("Articulos", "HstDocHotelx", "ID_CargoSup3",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "artSup3");
     addRelation("Articulos", "Articulos", "ID_ArticuloEcoTasas", alias: "artEcoTasas");
     addRelation("Articulos", "TarifasDocX", "ID_Articulo");
     addRelation("Articulos", "Logi_UnidadesX", "ID_Articulo");
@@ -550,13 +550,13 @@ class RelacionesTablas {
 
     // CentroCostes_Arboles
     addRelation("CentroCostes_Arboles", "CentroCostes_Proyectos", "ID_Arbol");
-    addRelation("CentroCostes_Arboles", "CentroCostes_ArbolesX", "ID_Arbol");
+    addRelation("CentroCostes_Arboles", "CentroCostes_Arbolesx", "ID_Arbol");
 
-    // CentroCostes_ArbolesX
-    addRelation("CentroCostes_ArbolesX", "CentroCostes_ArbolesX", "ID_Padre", alias: "centroCostesArbolesXPadre");
-    addRelation("CentroCostes_ArbolesX", "CentroCostes_ArbolesX", "ID_ArbolXGeneral", alias: "centroCostesArbolesXGeneral");
-    addRelation("CentroCostes_ArbolesX", "CentroCostes_Defecto", "ID_ArbolX");
-    addRelation("CentroCostes_ArbolesX", "CentroCostes_Valores", "ID_ArbolX");
+    // CentroCostes_Arbolesx
+    addRelation("CentroCostes_Arbolesx", "CentroCostes_Arbolesx", "ID_Padre", alias: "centroCostesArbolesxPadre");
+    addRelation("CentroCostes_Arbolesx", "CentroCostes_Arbolesx", "ID_ArbolXGeneral", alias: "centroCostesArbolesxGeneral");
+    addRelation("CentroCostes_Arbolesx", "CentroCostes_Defecto", "ID_ArbolX");
+    addRelation("CentroCostes_Arbolesx", "CentroCostes_Valores", "ID_ArbolX");
 
     // CentroCostes_Proyectos
     addRelation("CentroCostes_Proyectos", "CentroCostes_Defecto", "ID_Proyecto");
@@ -606,13 +606,13 @@ class RelacionesTablas {
     addRelation("Clientes", "DocCli", "ID_Cliente", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
     addRelation("Clientes", "DocCli", "ID_Reservador", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "cliReservador");
     addRelation("Clientes", "DocCli", "ID_ClienteAgencia", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "cliAgencia");
-    addRelation("Clientes", "DocCliX", "ID_Reservador", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "cliResevador");
-    addRelation("Clientes", "DocCliX", "ID_ClienteAgencia", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "cliAgencia");
+    addRelation("Clientes", "DocClix", "ID_Reservador", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "cliResevador");
+    addRelation("Clientes", "DocClix", "ID_ClienteAgencia", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "cliAgencia");
     addRelation("Clientes", "PuntosClientes", "ID_Cliente");
     addRelation("Clientes", "DocHotel", "ID_Cliente", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
     addRelation("Clientes", "DocHotel", "ID_Reservador", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", alias: "cliReservador");
-    addRelation("Clientes", "DocHotelX", "ID_Cliente", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX);
-    addRelation("Clientes", "DocHotelX", "ID_QuienPaga", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, alias: "cliPagador");
+    addRelation("Clientes", "DocHotelx", "ID_Cliente", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
+    addRelation("Clientes", "DocHotelx", "ID_QuienPaga", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "cliPagador");
     addRelation("Clientes", "Cupos", "ID_Cliente");
     addRelation("Clientes", "Instalaciones", "ID_Cliente");
     addRelation("Clientes", "Instalaciones", "ID_Vendedor", alias: "cliVendedor");
@@ -643,10 +643,10 @@ class RelacionesTablas {
         selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", lCanBeDeleteManual: true);
     addRelation("Clientes", "HstDocHotel", "ID_Reservador",
         selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", lCanBeDeleteManual: true, alias: "cliReservador");
-    addRelation("Clientes", "HstDocHotelX", "ID_Cliente",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, lCanBeDeleteManual: true);
-    addRelation("Clientes", "HstDocHotelX", "ID_QuienPaga",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, lCanBeDeleteManual: true, alias: "cliPagador");
+    addRelation("Clientes", "HstDocHotelx", "ID_Cliente",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true);
+    addRelation("Clientes", "HstDocHotelx", "ID_QuienPaga",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true, alias: "cliPagador");
     addRelation("Clientes", "HstOcupantesX", "ID_Cliente", lCanBeDeleteManual: true);
     addRelation("Clientes", "PartesMedicos", "ID_Cliente");
     addRelation("Clientes", "Clientes", "ID_ReceptorEFactura", alias: "cliReceptorEFac");
@@ -684,12 +684,12 @@ class RelacionesTablas {
     addRelation("Comisionistas", "DocCli", "ID_Agente1", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "comisionistasAg1");
     addRelation("Comisionistas", "DocCli", "ID_Agente2", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "comisionistasAg2");
     addRelation("Comisionistas", "DocCli", "ID_Agente3", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "comisionistasAg3");
-    addRelation("Comisionistas", "DocCliX", "ID_Agente1", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "comisionistasAg1");
-    addRelation("Comisionistas", "DocCliX", "ID_Agente2", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "comisionistasAg2");
-    addRelation("Comisionistas", "DocCliX", "ID_Agente3", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "comisionistasAg3");
-    addRelation("Comisionistas", "DocHotelX", "ID_Agente1", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, alias: "comisionistasAg1");
-    addRelation("Comisionistas", "DocHotelX", "ID_Agente2", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, alias: "comisionistasAg2");
-    addRelation("Comisionistas", "DocHotelX", "ID_Agente3", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, alias: "comisionistasAg3");
+    addRelation("Comisionistas", "DocClix", "ID_Agente1", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "comisionistasAg1");
+    addRelation("Comisionistas", "DocClix", "ID_Agente2", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "comisionistasAg2");
+    addRelation("Comisionistas", "DocClix", "ID_Agente3", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "comisionistasAg3");
+    addRelation("Comisionistas", "DocHotelx", "ID_Agente1", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "comisionistasAg1");
+    addRelation("Comisionistas", "DocHotelx", "ID_Agente2", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "comisionistasAg2");
+    addRelation("Comisionistas", "DocHotelx", "ID_Agente3", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "comisionistasAg3");
     addRelation("Comisionistas", "Pdas", "ID_Agente1", alias: "comisionistasAg1");
     addRelation("Comisionistas", "Pdas", "ID_Agente2", alias: "comisionistasAg2");
     addRelation("Comisionistas", "UsuariosX", "ID_AgenteAtencion", selectCanBeDel: "ID_Usuario");
@@ -698,12 +698,12 @@ class RelacionesTablas {
     addRelation("Comisionistas", "HstDocHotel", "ID_Agente1", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", alias: "comisionistasAg1");
     addRelation("Comisionistas", "HstDocHotel", "ID_Agente2", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", alias: "comisionistasAg2");
     addRelation("Comisionistas", "HstDocHotel", "ID_Agente3", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", alias: "comisionistasAg3");
-    addRelation("Comisionistas", "HstDocHotelX", "ID_Agente1",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, alias: "comisionistasAg1");
-    addRelation("Comisionistas", "HstDocHotelX", "ID_Agente2",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, alias: "comisionistasAg2");
-    addRelation("Comisionistas", "HstDocHotelX", "ID_Agente3",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, alias: "comisionistasAg3");
+    addRelation("Comisionistas", "HstDocHotelx", "ID_Agente1",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "comisionistasAg1");
+    addRelation("Comisionistas", "HstDocHotelx", "ID_Agente2",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "comisionistasAg2");
+    addRelation("Comisionistas", "HstDocHotelx", "ID_Agente3",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "comisionistasAg3");
     addRelation("Comisionistas", "ClientesX", "ID_Agente1",
         selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX, alias: "comisionistasAg1");
     addRelation("Comisionistas", "ClientesX", "ID_Agente2",
@@ -718,7 +718,7 @@ class RelacionesTablas {
 
     // ContactosExternos
     addRelation("ContactosExternos", "DocCli", "ID_ContactoExterno", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("ContactosExternos", "DocCliX", "ID_ContactoExterno", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
+    addRelation("ContactosExternos", "DocClix", "ID_ContactoExterno", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
     addRelation("ContactosExternos", "Clientes", "ID_ContactoExterno");
     addRelation("ContactosExternos", "Aparatos", "ID_ContactoExterno");
 
@@ -793,8 +793,8 @@ class RelacionesTablas {
     // Cupos
     addRelation("Cupos", "CuposX", "ID_Cupo", lCanBeDeleteManual: true);
     addRelation("Cupos", "TarifaHotel", "ID_Cupo", lCanBeDeleteManual: true);
-    addRelation("Cupos", "DocHotelX", "ID_Cupo", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX);
-    addRelation("Cupos", "HstDocHotelX", "ID_Cupo", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX);
+    addRelation("Cupos", "DocHotelx", "ID_Cupo", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
+    addRelation("Cupos", "HstDocHotelx", "ID_Cupo", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
 
     // Data_Imp
     addRelation("Data_Imp", "Data_ImpX", "ID_Data_Imp");
@@ -897,7 +897,7 @@ class RelacionesTablas {
     addRelation("DocAlmacen", "Averias", "ID_DocAlmacen", lCanBeDeleteManual: true);
     addRelation("DocAlmacen", "Revisiones", "ID_DocAlmacen", lCanBeDeleteManual: true);
     addRelation("DocAlmacen", "DocAlmacen", "ID_DocTraspaso", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo");
-    addRelation("DocAlmacen", "DocAlmacenX", "ID_Documento",    selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", joinStr: cJoinDocAlmacenX, lCanBeDeleteManual: true);
+    addRelation("DocAlmacen", "DocAlmacenx", "ID_Documento",    selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", joinStr: cJoinDocAlmacenx, lCanBeDeleteManual: true);
     addRelation("DocAlmacen", "PartesReparaciones", "ID_DocAlmacen", lCanBeDeleteManual: true);
     addRelation("DocAlmacen", "Fabricacion", "ID_DocAlmacenSalida",        selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", lCanBeDeleteManual: true, alias: "docAlmSal");
     addRelation("DocAlmacen", "Fabricacion", "ID_DocAlmacenEntrada",        selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", lCanBeDeleteManual: true, alias: "docAlmEnt");
@@ -913,12 +913,12 @@ class RelacionesTablas {
     addRelation("DocCli", "DocCli", "ID_CierreCaja", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "dcCiereCaja");
     addRelation("DocCli", "DocCli", "ID_Devolucion", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "dcDev");
     addRelation("DocCli", "DocCliValores", "ID_Documento", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocCliValores);
-    addRelation("DocCli", "DocCliX", "ID_Documento", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcDoc");
-    addRelation("DocCli", "DocCliX", "ID_Procedencia", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcProc");
-    addRelation("DocCli", "DocCliX", "ID_DocOrigen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcOrigen");
+    addRelation("DocCli", "DocClix", "ID_Documento", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcDoc");
+    addRelation("DocCli", "DocClix", "ID_Procedencia", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcProc");
+    addRelation("DocCli", "DocClix", "ID_DocOrigen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcOrigen");
     addRelation("DocCli", "PuntosClientes", "ID_Documento");
     addRelation("DocCli", "DocHotel", "ID_DocCli", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("DocCli", "DocHotelX", "ID_DocCli", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX);
+    addRelation("DocCli", "DocHotelx", "ID_DocCli", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
     addRelation("DocCli", "DocPro", "ID_InversionSP", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "dcInvSP");
     addRelation("DocCli", "DocPro", "ID_DocCliTransfer", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", lCanBeDeleteManual: true, alias: "dcTransfer");
     addRelation("DocCli", "DocPro", "ID_DocCliPedido", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", lCanBeDeleteManual: true, alias: "dcPedido");
@@ -933,42 +933,42 @@ class RelacionesTablas {
     addRelation("DocCli", "HstDocHotel", "ID_DocCli", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", lCanBeDeleteManual: true);
     addRelation("DocCli", "DocCli", "ID_FacturaRectificada", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
     addRelation("DocCli", "Logi_Envios", "ID_DocCli");
-    addRelation("DocCli", "DocAlmacenX", "ID_DocCliDepositario",
-        selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", joinStr: cJoinDocAlmacenX);
+    addRelation("DocCli", "DocAlmacenx", "ID_DocCliDepositario",
+        selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", joinStr: cJoinDocAlmacenx);
     addRelation("DocCli", "DocCli", "ID_FacturaTicket", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "dcFacTic");
     addRelation("DocCli", "Aparatos", "ID_DocCliCopias", lCanBeDeleteManual: true);
     addRelation("DocCli", "DocCli", "ID_Pedido", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", lCanBeDeleteManual: true, alias: "dcPedido");
     addRelation("DocCli", "DocCli", "ID_PedidoReserva", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "dcPedidoRes");
     addRelation("DocCli", "DocCli", "ID_Anterior", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "dcAnterior");
 
-    // DocCliX
+    // DocClix
     cFiltro = "NumerosSerie.Tipo=${EnumNumerosSerieTipo.doccliente.index}";
-    addRelation("DocCliX", "NumerosSerie", "ID_Contenido", filtro: cFiltro);
-    addRelation("DocCliX", "DocCliX", "ID_DocCliX", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-    addRelation("DocCliX", "DocCliX", "ID_GrupoImpresion", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcxGrpImp");
-    addRelation("DocCliX", "DocCliX", "ID_DocxMenu", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcxMenu");
-    addRelation("DocCliX", "DocCliX", "ID_SubCompuesto", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcxSubComp");
-    addRelation("DocCliX", "DocCliX", "ID_GrupoActoEvento", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcxGrpActoEvento");
-    addRelation("DocCliX", "OcupantesX", "ID_DocCliX");
-    addRelation("DocCliX", "RecursosActos", "ID_DocCliX",
+    addRelation("DocClix", "NumerosSerie", "ID_Contenido", filtro: cFiltro);
+    addRelation("DocClix", "DocClix", "ID_DocClix", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
+    addRelation("DocClix", "DocClix", "ID_GrupoImpresion", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcxGrpImp");
+    addRelation("DocClix", "DocClix", "ID_DocxMenu", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcxMenu");
+    addRelation("DocClix", "DocClix", "ID_SubCompuesto", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcxSubComp");
+    addRelation("DocClix", "DocClix", "ID_GrupoActoEvento", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcxGrpActoEvento");
+    addRelation("DocClix", "OcupantesX", "ID_DocClix");
+    addRelation("DocClix", "RecursosActos", "ID_DocClix",
         selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc, DocCli.verialID, DocCli.Tipo", joinStr: cJoinRecursosActos);
 
     // DocHotel
-    addRelation("DocHotel", "DocHotelX", "ID_Documento",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, lCanBeDeleteManual: true);
+    addRelation("DocHotel", "DocHotelx", "ID_Documento",
+        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true);
     addRelation("DocHotel", "Efectos", "ID_DocHotel");
     addRelation("DocHotel", "ComandaVisual", "ID_DocHotel");
 
-    // DocHotelX
-    addRelation("DocHotelX", "DocHotelX", "ID_DocHotelX", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, lCanBeDeleteManual: true);
-    addRelation("DocHotelX", "DocHotelX", "ID_GrupoImpresion", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, lCanBeDeleteManual: true, alias: "dhxGrpImp");
-    addRelation("DocHotelX", "DocHotelX", "ID_DocxMenu", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, lCanBeDeleteManual: true, alias: "dhxMenu");
-    addRelation("DocHotelX", "DocHotelX", "ID_SubCompuesto",selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, lCanBeDeleteManual: true, alias: "dhxSubComp");
-    addRelation("DocHotelX", "DocHotelX", "ID_GrupoActoEvento",selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, lCanBeDeleteManual: true, alias: "dhxGrpActoEvento");
+    // DocHotelx
+    addRelation("DocHotelx", "DocHotelx", "ID_DocHotelx", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true);
+    addRelation("DocHotelx", "DocHotelx", "ID_GrupoImpresion", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true, alias: "dhxGrpImp");
+    addRelation("DocHotelx", "DocHotelx", "ID_DocxMenu", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true, alias: "dhxMenu");
+    addRelation("DocHotelx", "DocHotelx", "ID_SubCompuesto",selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true, alias: "dhxSubComp");
+    addRelation("DocHotelx", "DocHotelx", "ID_GrupoActoEvento",selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true, alias: "dhxGrpActoEvento");
 
-    addRelation("DocHotelX", "DocHotelXPrevision", "ID_DocHotelX", selectCanBeDel: "DocHotelX.ID_Documento", joinStr: cJoinDHXPrevision, lCanBeDeleteManual: true);
-    addRelation("DocHotelX", "OcupantesX", "ID_DocHotelX", lCanBeDeleteManual: true);
-    addRelation("DocHotelX", "RecursosActos", "ID_DocHotelX",
+    addRelation("DocHotelx", "DocHotelxPrevision", "ID_DocHotelx", selectCanBeDel: "DocHotelx.ID_Documento", joinStr: cJoinDHXPrevision, lCanBeDeleteManual: true);
+    addRelation("DocHotelx", "OcupantesX", "ID_DocHotelx", lCanBeDeleteManual: true);
+    addRelation("DocHotelx", "RecursosActos", "ID_DocHotelx",
         selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc, DocCli.verialID, DocCli.Tipo",
         joinStr: cJoinRecursosActos,
         lCanBeDeleteManual: true);
@@ -978,7 +978,7 @@ class RelacionesTablas {
     addRelation("DocPro", "Asientos", "ID_Documento", filtro: cFiltro, lCanBeDeleteManual: true);
     addRelation("DocPro", "DocCli", "ID_InversionSP", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
     addRelation("DocPro", "DocCli", "ID_DocProTransfer", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", lCanBeDeleteManual: true, alias: "dpTransfer");
-    addRelation("DocPro", "DocCliX", "ID_Partida", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
+    addRelation("DocPro", "DocClix", "ID_Partida", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
     addRelation("DocPro", "DocPro", "ID_Facturado", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "dpFacturado");
     addRelation("DocPro", "DocPro", "ID_Devolucion", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "dpDev");
     addRelation("DocPro", "DocPro", "ID_FacturaRectificada", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "dpFacRec");
@@ -987,13 +987,13 @@ class RelacionesTablas {
     addRelation("DocPro", "DocProValores", "ID_Documento", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProValores);
     addRelation("DocPro", "DocProValores", "ID_RefDocPro", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProValores, alias: "dpRefDoc");
 
-    addRelation("DocPro", "DocProX", "ID_Documento", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProX);
-    addRelation("DocPro", "DocProX", "ID_Procedencia", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProX, alias: "dpProc");
-    addRelation("DocPro", "DocProX", "ID_Partida", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProX, alias: "dpPart");
-    addRelation("DocPro", "DocProX", "ID_DocOrigen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProX, alias: "dpDocOrigen");
+    addRelation("DocPro", "DocProx", "ID_Documento", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx);
+    addRelation("DocPro", "DocProx", "ID_Procedencia", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx, alias: "dpProc");
+    addRelation("DocPro", "DocProx", "ID_Partida", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx, alias: "dpPart");
+    addRelation("DocPro", "DocProx", "ID_DocOrigen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx, alias: "dpDocOrigen");
 
     addRelation("DocPro", "Inmovilizado", "ID_Factura");
-    addRelation("DocPro", "DocAlmacenX", "ID_Partida", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", joinStr: cJoinDocAlmacenX);
+    addRelation("DocPro", "DocAlmacenx", "ID_Partida", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", joinStr: cJoinDocAlmacenx);
     addRelation("DocPro", "CentroCostes_Valores", "ID_DocPro", lCanBeDeleteManual: true);
 
     cFiltro = "CamposAuxiliares.Tipo=${EnumCamposAuxiliaresTipo.docpro.index}";
@@ -1013,10 +1013,10 @@ class RelacionesTablas {
 
     addRelation("DocPro", AppTablas.cStock, "ID_Partida");
 
-    // DocProX
+    // DocProx
     cFiltro = "NumerosSerie.Tipo=${EnumNumerosSerieTipo.docproveedor.index}";
-    addRelation("DocProX", "NumerosSerie", "ID_Contenido", filtro: cFiltro);
-    addRelation("DocProX", "CentroCostes_Valores", "ID_DocProX");
+    addRelation("DocProx", "NumerosSerie", "ID_Contenido", filtro: cFiltro);
+    addRelation("DocProx", "CentroCostes_Valores", "ID_DocProx");
 
     // DocSINLI
     addRelation("DocSINLI", "DocSINLIX", "ID_DocSINLI");
@@ -1033,6 +1033,7 @@ class RelacionesTablas {
     cFiltro = "CuentasBancarias.TipoFicha=${EnumCuentasBancariasTipoFicha.empresas.index}";
     addRelation("Empresas", "CuentasBancarias", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
     addRelation("Empresas", "GruposSeries", "ID_Empresa");
+    addRelation("Empresas", "Almacenes", "ID_Empresa");
     addRelation("Empresas", "Delegaciones", "ID_Empresa");
     addRelation("Empresas", "Aeat", "ID_Empresa");
     addRelation("Empresas", "MetodosPago", "ID_Empresa");
@@ -1116,7 +1117,7 @@ class RelacionesTablas {
     addRelation("Grupos", "GruposComisionesX", "ID_CriterioTarifa", lCanBeDeleteManual: true, alias: "grpCritTar");
     addRelation("Grupos", "Data_ImpX", "ID_Curso", lCanBeDeleteManual: true, alias: "grpCurso");
     addRelation("Grupos", "Data_ImpX", "ID_Asignatura", lCanBeDeleteManual: true, alias: "grpAsig");
-    addRelation("Grupos", "DocHotelX", "ID_GrupoRegimen",selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, lCanBeDeleteManual: true);
+    addRelation("Grupos", "DocHotelx", "ID_GrupoRegimen",selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true);
     addRelation("Grupos", "CartaGrupos", "ID_Carta", lCanBeDeleteManual: true, alias: "grpCarta");
     addRelation("Grupos", "CartaGrupos", "ID_Grupofactura", lCanBeDeleteManual: true, alias: "grpFac");
     addRelation("Grupos", "Tarifas", "ID_CriterioTarifa", lCanBeDeleteManual: true);
@@ -1129,12 +1130,12 @@ class RelacionesTablas {
     addRelation("Grupos", "Agenda", "ID_Grupo", lCanBeDeleteManual: true);
     addRelation("Grupos", "Agenda", "ID_MarcaHora", lCanBeDeleteManual: true, alias: "grpMH");
     addRelation("Grupos", "MenuEventos", "ID_Tipo", lCanBeDeleteManual: true);
-    addRelation("Grupos", "DocHotelX", "ID_TipoActo",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, lCanBeDeleteManual: true, alias: "grpTipoActo");
-    addRelation("Grupos", "DocCliX", "ID_TipoActo",        selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, lCanBeDeleteManual: true, alias: "grpTipoActo");
+    addRelation("Grupos", "DocHotelx", "ID_TipoActo",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true, alias: "grpTipoActo");
+    addRelation("Grupos", "DocClix", "ID_TipoActo",        selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, lCanBeDeleteManual: true, alias: "grpTipoActo");
     addRelation("Grupos", "RecursosActos", "ID_PosicionPersona",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc, DocCli.verialID, DocCli.Tipo",
         joinStr: cJoinRecursosActos,        lCanBeDeleteManual: true);
-    addRelation("Grupos", "DocHotelX", "ID_MontajeSalon",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, lCanBeDeleteManual: true, alias: "grpMontajeSalon");
-    addRelation("Grupos", "DocCliX", "ID_MontajeSalon",
+    addRelation("Grupos", "DocHotelx", "ID_MontajeSalon",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true, alias: "grpMontajeSalon");
+    addRelation("Grupos", "DocClix", "ID_MontajeSalon",
         selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, lCanBeDeleteManual: true);
     addRelation("Grupos", "ReservasRest", "ID_Tipo", lCanBeDeleteManual: true);
     addRelation("Grupos", "Articulos", "ID_TipoTratamiento", lCanBeDeleteManual: true, alias: "grpTipoTrat");
@@ -1150,9 +1151,9 @@ class RelacionesTablas {
     addRelation("Grupos", "FabricacionGrupo", "ID_Prioridad", lCanBeDeleteManual: true, alias: "grpPrioridad");
     addRelation("Grupos", "FabricacionGrupo", "ID_Incidencia", lCanBeDeleteManual: true, alias: "grpIncid");
     addRelation("Grupos", "CentroInformes", "ID_Grupo", lCanBeDeleteManual: true);
-    addRelation("Grupos", "HstDocHotelX", "ID_GrupoRegimen",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, lCanBeDeleteManual: true,  alias: "grpRegimen");
-    addRelation("Grupos", "HstDocHotelX", "ID_TipoActo",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, lCanBeDeleteManual: true, alias: "grpTipoActo");
-    addRelation("Grupos", "HstDocHotelX", "ID_MontajeSalon",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, lCanBeDeleteManual: true, alias: "grpMontajesalon");
+    addRelation("Grupos", "HstDocHotelx", "ID_GrupoRegimen",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true,  alias: "grpRegimen");
+    addRelation("Grupos", "HstDocHotelx", "ID_TipoActo",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true, alias: "grpTipoActo");
+    addRelation("Grupos", "HstDocHotelx", "ID_MontajeSalon",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true, alias: "grpMontajesalon");
     addRelation("Grupos", "HstRecursosActos", "ID_PosicionPersona", lCanBeDeleteManual: true);
     addRelation("Grupos", "OrdenesTrabajo", "ID_Tipo", lCanBeDeleteManual: true, alias: "grpTipo");
     addRelation("Grupos", "OrdenesTrabajo", "ID_Etapa", lCanBeDeleteManual: true, alias: "grpEtapa");
@@ -1193,15 +1194,15 @@ class RelacionesTablas {
     addRelation("GruposSeries", "Fianzas", "ID_GrupoSeries");
 
     // Habitaciones
-    cFiltro = "DocCliX.TipoOrigen=${EnumDocXTipoOrigen.habitacion.index}";
-    addRelation("Habitaciones", "DocCliX", "ID_Origen",        selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
-    addRelation("Habitaciones", "DocCliX", "ID_HabitacionCargo", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "habCargo");
-    addRelation("Habitaciones", "DocHotelX", "ID_HabitacionCargo",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX, alias: "habCargo");
-    addRelation("Habitaciones", "DocHotelX", "ID_Habitacion",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX);
+    cFiltro = "DocClix.TipoOrigen=${EnumDocXTipoOrigen.habitacion.index}";
+    addRelation("Habitaciones", "DocClix", "ID_Origen",        selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
+    addRelation("Habitaciones", "DocClix", "ID_HabitacionCargo", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "habCargo");
+    addRelation("Habitaciones", "DocHotelx", "ID_HabitacionCargo",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "habCargo");
+    addRelation("Habitaciones", "DocHotelx", "ID_Habitacion",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
     addRelation("Habitaciones", "HabitacionesX", "ID_Habitacion", lCanBeDeleteManual: true);
     addRelation("Habitaciones", "PartesReparaciones", "ID_Habitacion");
-    addRelation("Habitaciones", "HstDocHotelX", "ID_Habitacion",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX);
-    addRelation("Habitaciones", "HstDocHotelX", "ID_HabitacionCargo",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, alias: "habCargo");
+    addRelation("Habitaciones", "HstDocHotelx", "ID_Habitacion",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
+    addRelation("Habitaciones", "HstDocHotelx", "ID_HabitacionCargo",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "habCargo");
 
     // HabitacionesProps
     addRelation("HabitacionesProps", "HabitacionesX", "ID_Propiedad", lCanBeDeleteManual: true);
@@ -1214,15 +1215,15 @@ class RelacionesTablas {
     addRelation("HotelDtos", "TarifaHotel", "ID_HotelDtos");
 
     // HstDocHotel
-    addRelation("HstDocHotel", "HstDocHotelX", "ID_Documento",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX);
+    addRelation("HstDocHotel", "HstDocHotelx", "ID_Documento",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
 
-    // HstDocHotelX
-    addRelation("HstDocHotelX", "HstDocHotelX", "ID_HstDocHotelX",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX);
-    addRelation("HstDocHotelX", "HstDocHotelX", "ID_GrupoImpresion",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, alias: "hstDhXGrpImp");
-    addRelation("HstDocHotelX", "HstDocHotelX", "ID_GrupoActoEvento",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, alias: "hstDhXGrpActoEvento");
-    addRelation("HstDocHotelX", "HstDocHotelX", "ID_DocXMenu",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, alias: "hstDhXMenu");
-    addRelation("HstDocHotelX", "HstOcupantesX", "ID_HstDocHotelX");
-    addRelation("HstDocHotelX", "HstRecursosActos", "ID_HstDocHotelX");
+    // HstDocHotelx
+    addRelation("HstDocHotelx", "HstDocHotelx", "ID_HstDocHotelx",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
+    addRelation("HstDocHotelx", "HstDocHotelx", "ID_GrupoImpresion",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "hstDhXGrpImp");
+    addRelation("HstDocHotelx", "HstDocHotelx", "ID_GrupoActoEvento",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "hstDhXGrpActoEvento");
+    addRelation("HstDocHotelx", "HstDocHotelx", "ID_DocXMenu",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "hstDhXMenu");
+    addRelation("HstDocHotelx", "HstOcupantesX", "ID_HstDocHotelx");
+    addRelation("HstDocHotelx", "HstRecursosActos", "ID_HstDocHotelx");
 
     // HstRecursosActos
     addRelation("HstRecursosActos", "HstRecursosActos", "ID_Padre");
@@ -1313,12 +1314,12 @@ class RelacionesTablas {
     // Mantenimientos
     addRelation("Mantenimientos", "Aparatos", "ID_Contrato", alias: "manC1");
     addRelation("Mantenimientos", "Aparatos", "ID_Contrato2", alias: "manC2");
-    addRelation("Mantenimientos", "DocCliX", "ID_Mantenimiento", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
+    addRelation("Mantenimientos", "DocClix", "ID_Mantenimiento", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
     addRelation("Mantenimientos", "Instalaciones", "ID_Mantenimiento");
 
     // MenuEventos
-    cFiltro = "DocCliX.TipoOrigen=${EnumDocXTipoOrigen.actomenu.index}";
-    addRelation("MenuEventos", "DocCliX", "ID_Origen",
+    cFiltro = "DocClix.TipoOrigen=${EnumDocXTipoOrigen.actomenu.index}";
+    addRelation("MenuEventos", "DocClix", "ID_Origen",
         selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
     addRelation("MenuEventos", "MenuEventosX", "ID_MenuEventos",
         selectCanBeDel: "MenuEventos.verialID", joinStr: cJoinMenuEventos, lCanBeDeleteManual: true);
@@ -1327,11 +1328,11 @@ class RelacionesTablas {
     addRelation("MenuRest", "MenuRestX", "ID_MenuRest", lCanBeDeleteManual: true);
 
     // Mesas
-    addRelation("Mesas", "DocCliX", "ID_Mesa", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
+    addRelation("Mesas", "DocClix", "ID_Mesa", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
     addRelation("Mesas", "DocHotel", "ID_Mesa", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("Mesas", "DocHotelX", "ID_Mesa", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX);
+    addRelation("Mesas", "DocHotelx", "ID_Mesa", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
     addRelation("Mesas", "HstDocHotel", "ID_Mesa", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Mesas", "HstDocHotelX", "ID_Mesa", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX);
+    addRelation("Mesas", "HstDocHotelx", "ID_Mesa", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
 
     // Messenger
     addRelation("Messenger_G", AppTablas.cMessengerX, "ID_Messenger");
@@ -1464,11 +1465,11 @@ class RelacionesTablas {
     addRelation("Personal", "Mensajes", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
     addRelation("Personal", "DocCli", "ID_Autorizacion", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
 
-    cFiltro = "DocCliX.TipoOrigen=${EnumDocXTipoOrigen.personal.index}";
-    addRelation("Personal", "DocCliX", "ID_Origen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
+    cFiltro = "DocClix.TipoOrigen=${EnumDocXTipoOrigen.personal.index}";
+    addRelation("Personal", "DocClix", "ID_Origen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
 
-    cFiltro = "DocHotelX.TipoOrigen=${EnumDocXTipoOrigen.personal.index}";
-    addRelation("Personal", "DocHotelX", "ID_Origen", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", filtro: cFiltro, joinStr: cJoinDocHotelX);
+    cFiltro = "DocHotelx.TipoOrigen=${EnumDocXTipoOrigen.personal.index}";
+    addRelation("Personal", "DocHotelx", "ID_Origen", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", filtro: cFiltro, joinStr: cJoinDocHotelx);
     addRelation("Personal", "DocPro", "ID_Autorizacion", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "persAut");
     addRelation("Personal", "DocPro", "ID_Recepcion", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "persRecep");
     addRelation("Personal", "Habitaciones", "ID_Camarera");
@@ -1488,9 +1489,9 @@ class RelacionesTablas {
     cFiltro = "RutasFicheros.TipoFicha=${EnumRutasFicherosTipoFicha.personal.index}";
     addRelation("Personal", "RutasFicheros", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
     addRelation("Personal", "CentroCostes_Defecto", "ID_Personal", lCanBeDeleteManual: true);
-    cFiltro = "HstDocHotelX.TipoOrigen=${EnumDocXTipoOrigen.personal.index}";
-    addRelation("Personal", "HstDocHotelX", "ID_Origen",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", filtro: cFiltro, joinStr: cJoinHstDocHotelX);
+    cFiltro = "HstDocHotelx.TipoOrigen=${EnumDocXTipoOrigen.personal.index}";
+    addRelation("Personal", "HstDocHotelx", "ID_Origen",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", filtro: cFiltro, joinStr: cJoinHstDocHotelx);
     addRelation("Personal", "ObjetosPerdidos", "ID_PersonalEncontrado", alias: "persEncontrado");
     addRelation("Personal", "ObjetosPerdidos", "ID_PersonalEnvio", alias: "persEnvio");
     addRelation("Personal", "Presencia", "ID_Personal");
@@ -1583,10 +1584,10 @@ class RelacionesTablas {
     addRelation("Puestos_G", "XSettings", "ID_Puesto");
     addRelation("Puestos_G", "Data_Imp", "ID_Puesto");
     addRelation("Puestos_G", "DocCli", "ID_Puesto", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Puestos_G", "DocCliX", "ID_Puesto", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
+    addRelation("Puestos_G", "DocClix", "ID_Puesto", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
     addRelation("Puestos_G", "PuntosClientes", "ID_Puesto");
     addRelation("Puestos_G", "DocHotel", "ID_Puesto", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("Puestos_G", "DocHotelX", "ID_Puesto", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX);
+    addRelation("Puestos_G", "DocHotelx", "ID_Puesto", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
     addRelation("Puestos_G", "DocPro", "ID_Puesto", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
     addRelation("Puestos_G", "Mandatos", "ID_Puesto");
     addRelation("Puestos_G", "ReservasRest", "ID_Puesto");
@@ -1601,8 +1602,8 @@ class RelacionesTablas {
     addRelation("Puestos_G", "InventarioX", "ID_Puesto");
     addRelation("Puestos_G", "HstDocHotel", "ID_PuestoProceso", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
     addRelation("Puestos_G", "HstDocHotel", "ID_Puesto", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Puestos_G", "HstDocHotelX", "ID_Puesto",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX);
+    addRelation("Puestos_G", "HstDocHotelx", "ID_Puesto",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
     addRelation("Puestos_G", "InstalacionesProps", "ID_Puesto");
     addRelation("Puestos_G", "Fianzas", "ID_Puesto");
     addRelation("Puestos_G", "Webs", "ID_Puesto");
@@ -1612,7 +1613,7 @@ class RelacionesTablas {
     addRelation("Puestos_G", AppTablas.cExTrans, "ID_Puesto");
 
     // Recetas
-    addRelation("Recetas", "DocCliX", "ID_Receta", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
+    addRelation("Recetas", "DocClix", "ID_Receta", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
 
     // RecursosActos
     addRelation("RecursosActos", "RecursosActos", "ID_Padre",
@@ -1650,8 +1651,8 @@ class RelacionesTablas {
         lCanBeDeleteManual: true);
 
     // Salones
-    cFiltro = "DocCliX.TipoOrigen=${EnumDocXTipoOrigen.salon.index}";
-    addRelation("Salones", "DocCliX", "ID_Origen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
+    cFiltro = "DocClix.TipoOrigen=${EnumDocXTipoOrigen.salon.index}";
+    addRelation("Salones", "DocClix", "ID_Origen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
     addRelation("Salones", "RecursosActos", "ID_Salon",
         selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc, DocCli.verialID, DocCli.Tipo", joinStr: cJoinRecursosActos);
     addRelation("Salones", "ReservasRest", "ID_Salon");
@@ -1711,11 +1712,11 @@ class RelacionesTablas {
     // TarifaHotel
     addRelation("TarifaHotel", "DocHotel", "ID_TarifaCliente", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", alias: "tarHotCli");
     addRelation("TarifaHotel", "DocHotel", "ID_TarifaEmpresa", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", alias: "tarHotEmp");
-    addRelation("TarifaHotel", "DocHotelX", "ID_TarifaHotel",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX);
+    addRelation("TarifaHotel", "DocHotelx", "ID_TarifaHotel",
+        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
     addRelation("TarifaHotel", "TarifaHotelClientes", "ID_TarifaHotel", lCanBeDeleteManual: true);
-    addRelation("TarifaHotel", "TarifaHotelX", "ID_TarifaHotel", lCanBeDeleteManual: true);
-    addRelation("TarifaHotel", "TarifaHotelX", "ID_TarifaFija", alias: "tarHotFija");
+    addRelation("TarifaHotel", "TarifaHotelx", "ID_TarifaHotel", lCanBeDeleteManual: true);
+    addRelation("TarifaHotel", "TarifaHotelx", "ID_TarifaFija", alias: "tarHotFija");
     addRelation("TarifaHotel", "Tarifas", "ID_TarifaHotel", lCanBeDeleteManual: true);
     addRelation("TarifaHotel", "Cfg_CentralReservas", "ID_TarifaHotel");
     addRelation("TarifaHotel", "Delegaciones", "ID_CliTarifaHotelDefecto");
@@ -1723,8 +1724,8 @@ class RelacionesTablas {
         selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", lCanBeDeleteManual: true, alias: "tarHotCli");
     addRelation("TarifaHotel", "HstDocHotel", "ID_TarifaEmpresa",
         selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", lCanBeDeleteManual: true, alias: "tarHotEmp");
-    addRelation("TarifaHotel", "HstDocHotelX", "ID_TarifaHotel",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX, lCanBeDeleteManual: true);
+    addRelation("TarifaHotel", "HstDocHotelx", "ID_TarifaHotel",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true);
     addRelation("TarifaHotel", "ClientesX", "ID_TarifaHotel",
         selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX);
     addRelation("TarifaHotel", "AreasVenta", "ID_TarifaKioskoHotel");
@@ -1736,6 +1737,9 @@ class RelacionesTablas {
     addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaPreciosTpvext", alias: "tarPrTpvEx");
     addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaOfertasTpvext", alias: "tarOfTpvEx");
     addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaComponentes", alias: "tarComponentes");
+    addRelation("TarifasArticulos", "AreasVenta", "ID_Tarifa_Cli_Varios");
+    addRelation("TarifasArticulos", "AreasVenta", "ID_Tarifa_Excepciones_Cli_Varios");
+
     addRelation("TarifasArticulos", "Data_Imp", "ID_TarifaArticulos");
     addRelation("TarifasArticulos", "DocCli", "ID_Tarifa", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
     addRelation("TarifasArticulos", "DocCli", "ID_TarifaExcepciones", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "tarExp");
@@ -1769,6 +1773,7 @@ class RelacionesTablas {
     addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaVisorPrecios", alias: "tarVisor");
     addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaExcepcionesVisorPrecios", alias: "tarExcepVisor");
     addRelation("TarifasArticulos", "CartaClientes", "ID_Tarifa");
+
     addRelation("TarifasArticulos", "PuestosX", "ID_TarifaWeb", selectCanBeDel: "ID_Puesto", alias: "tarWeb");
     addRelation("TarifasArticulos", "PuestosX", "ID_TarifaExcepcionesWeb", selectCanBeDel: "ID_Puesto", alias: "tarExcepWeb");
 
@@ -1776,7 +1781,7 @@ class RelacionesTablas {
     addRelation("TarifasDoc", "TarifasDocX", "ID_TarifaDoc", lCanBeDeleteManual: true);
     addRelation("TarifasDoc", "TarifasArticulosX", "ID_TarifaDoc",
         selectCanBeDel: "TarifasArticulosX.ID_TarifaArticulos, TarifasArticulos.Opciones", joinStr: cJoinTarifasArticulosX);
-    addRelation("TarifasDoc", "DocCliX", "ID_TarifaDoc",
+    addRelation("TarifasDoc", "DocClix", "ID_TarifaDoc",
         selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, lCanBeDeleteManual: true);
 
     // Tecnicos
@@ -1795,7 +1800,7 @@ class RelacionesTablas {
         joinStr: cJoinRevisionesTecnicos);
 
     addRelation("Tecnicos", "DocCli", "ID_Tecnico", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Tecnicos", "DocCliX", "ID_Tecnico", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
+    addRelation("Tecnicos", "DocClix", "ID_Tecnico", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
     addRelation("Tecnicos", "FabricacionX", "ID_Tecnico", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", joinStr: cJoinFabricacion);
     addRelation("Tecnicos", "FabricacionTareas", "ID_Tecnico");
     addRelation("Tecnicos", "PartesMedicos", "ID_Medico");
@@ -1808,12 +1813,12 @@ class RelacionesTablas {
     addRelation("TiendasVirtuales", "Destinos", "ID_TiendaVirtual");
 
     // TipoHabitaciones
-    addRelation("TipoHabitaciones", "DocHotelX", "ID_TipoHabitacion",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX);
+    addRelation("TipoHabitaciones", "DocHotelx", "ID_TipoHabitacion",
+        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
     addRelation("TipoHabitaciones", "Habitaciones", "ID_Tipo");
     addRelation("TipoHabitaciones", "Cfg_CentralReservasCargos", "ID_TipoHabitacion");
-    addRelation("TipoHabitaciones", "HstDocHotelX", "ID_TipoHabitacion",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX);
+    addRelation("TipoHabitaciones", "HstDocHotelx", "ID_TipoHabitacion",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
 
     // TPVExt_Cajas
     cFiltro = "Data_Imp.TipoOrigen=${EnumDataImpTipoOrigen.tpvexterno.index}";
@@ -1868,10 +1873,10 @@ class RelacionesTablas {
     addRelation("Usuarios_G", "OperacionesTPV", "ID_Usuario");
     addRelation("Usuarios_G", "Data_Imp", "ID_Usuario");
     addRelation("Usuarios_G", "DocCli", "ID_Usuario", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Usuarios_G", "DocCliX", "ID_Usuario", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
+    addRelation("Usuarios_G", "DocClix", "ID_Usuario", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
     addRelation("Usuarios_G", "PuntosClientes", "ID_Usuario");
     addRelation("Usuarios_G", "DocHotel", "ID_Usuario", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("Usuarios_G", "DocHotelX", "ID_Usuario", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelX);
+    addRelation("Usuarios_G", "DocHotelx", "ID_Usuario", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
     addRelation("Usuarios_G", "DocPro", "ID_Usuario", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
     addRelation("Usuarios_G", "InstalacionesX", "ID_Usuario");
     addRelation("Usuarios_G", "Mandatos", "ID_Usuario");
@@ -1886,13 +1891,13 @@ class RelacionesTablas {
 
     addRelation("Usuarios_G", "HstDocHotel", "ID_UsuarioProceso", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
     addRelation("Usuarios_G", "HstDocHotel", "ID_Usuario", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Usuarios_G", "HstDocHotelX", "ID_Usuario",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX);
+    addRelation("Usuarios_G", "HstDocHotelx", "ID_Usuario",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
 
     addRelation("Usuarios_G", "HstDocHotel", "ID_UsuarioProceso", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
     addRelation("Usuarios_G", "HstDocHotel", "ID_Usuario", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Usuarios_G", "HstDocHotelX", "ID_Usuario",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelX);
+    addRelation("Usuarios_G", "HstDocHotelx", "ID_Usuario",
+        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
     addRelation("Usuarios_G", "CRM_Cfg", "ID_Usuario");
     addRelation("Usuarios_G", "Fianzas", "ID_Usuario");
     addRelation("Usuarios_G", "Conocimientos", "ID_Usuario");
@@ -1971,8 +1976,10 @@ class RelacionesTablas {
     mapAlias["artlotes"] = "artLot";
     mapAlias["artrevisionesaverias"] = "artRevAv";
     mapAlias["balancesx"] = "balX";
-    mapAlias["centrocostes_arboles"] = "ccArb";
-    mapAlias["centrocostes_arbolesx"] = "ccArbX";
+    mapAlias["centrocostesarboles"] = "ccArb";
+    mapAlias["centrocostesarbolesx"] = "ccArbX";
+    mapAlias["centrocostesproyectos"] = "ccProy";
+    mapAlias["centrocostesvalores"] = "ccVal";
     mapAlias["comisiones"] = "comi";
     mapAlias["comisionitas"] = "comiTas";
     mapAlias["contactosexternos"] = "contExt";
