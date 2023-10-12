@@ -1971,12 +1971,12 @@ class RelacionesTablas {
     mapAlias["artlotes"] = "artLot";
     mapAlias["artrevisionesaverias"] = "artRevAv";
     mapAlias["balancesx"] = "balX";
-    mapAlias["centrocostes_arboles"] = "centroCostesArboles";
-    mapAlias["centrocostes_arbolesx"] = "centroCostesArbolesX";
-    mapAlias["comisiones"] = "comis";
-    mapAlias["comisionitas"] = "comisionistas";
+    mapAlias["centrocostes_arboles"] = "ccArb";
+    mapAlias["centrocostes_arbolesx"] = "ccArbX";
+    mapAlias["comisiones"] = "comi";
+    mapAlias["comisionitas"] = "comiTas";
     mapAlias["contactosexternos"] = "contExt";
-    mapAlias["ctasanuales"] = "ctasAnuales";
+    mapAlias["ctasanuales"] = "ctasAn";
     mapAlias["cuentas"] = "ctas";
     mapAlias["cuentasbancarias"] = "ctasBan";
     mapAlias["cuentasespeciales"] = "ctasEsp";
@@ -1992,12 +1992,12 @@ class RelacionesTablas {
     mapAlias["docsinli"] = "docSINLI";
     mapAlias["docsinlix"] = "docSINLIX";
     mapAlias["efectos"] = "efec";
-    mapAlias["fabricacion"] = "fab";
+    mapAlias["fabricacion"] = "fabN";
     mapAlias["fabricacioncfg"] = "fabCfg";
-    mapAlias["fabricacionetapas"] = "fabEtapas";
+    mapAlias["fabricacionetapas"] = "fabEt";
     mapAlias["fabricaciongrupo"] = "fabGrp";
-    mapAlias["fabricaciontareas"] = "fabTareas";
-    mapAlias["fabricantes"] = "fabricantes";
+    mapAlias["fabricaciontareas"] = "fabTar";
+    mapAlias["fabricantes"] = "fabTes";
     mapAlias["grupos"] = "grp";
     mapAlias["habitacionesprops"] = "habProps";
     mapAlias["hstdochotel"] = "hstDh";
@@ -2007,85 +2007,16 @@ class RelacionesTablas {
     mapAlias["logi_formas"] = "logiForm";
     mapAlias["metodospago"] = "metPag";
     mapAlias["perfiles"] = "perf";
-    mapAlias["perfilescamposaux"] = "perfCampAux";
+    mapAlias["perfilescamposaux"] = "perfAux";
     mapAlias["personal"] = "pers";
     mapAlias["plazospago"] = "plazos";
     mapAlias["programas"] = "prg";
     mapAlias["proveedoresx"] = "proX";
     mapAlias["tarifahotel"] = "tarHot";
     mapAlias["tarifasdoc"] = "tarDoc";
-    mapAlias["tpvext_cajas"] = "tpvExCajas";
-    mapAlias["tpvext_saldos"] = "tpvExSaldos";
+    mapAlias["tpvext_cajas"] = "tpvExCaj";
+    mapAlias["tpvext_saldos"] = "tpvExSal";
     mapAlias["usuarios"] = "usr";
-
-
-    // mapAlias["aeat"] = "aeat";
-    // mapAlias["aeatx"] = "aeatX";
-    // mapAlias["articulos"] = "art";
-    // mapAlias["arboles"] = "arb";
-    // mapAlias["arbolesauxiliares"] = "arbAux";
-    //
-    // mapAlias["grupos"] = "grp";
-    // mapAlias["usuarios"] = "usr";
-    // mapAlias["cuentas"] = "ctas";
-    // mapAlias["cuentasbancarias"] = "ctasBan";
-    // mapAlias["cuentasespeciales"] = "ctasEsp";
-    // mapAlias["ctasanuales"] = "ctasAnuales";
-    //
-    //
-    // mapAlias["perfiles"] = "perf";
-    // mapAlias["perfilescamposaux"] = "perfCampAux";
-    // mapAlias["artlotes"] = "artLot";
-    // mapAlias["artrevisionesaverias"] = "artRevAv";
-    // mapAlias["doccli"] = "dc";
-    // mapAlias["docclix"] = "dcX";
-    // mapAlias["docclivalores"] = "dcVal";
-    // mapAlias["docpro"] = "dp";
-    // mapAlias["docprox"] = "dpX";
-    // mapAlias["docprovalores"] = "dpVal";
-    // mapAlias["dochotel"] = "dh";
-    // mapAlias["dochotelx"] = "dhX";
-    // mapAlias["hstdochotel"] = "hstDh";
-    // mapAlias["hstdochotelx"] = "hstDhX";
-    // mapAlias["docalmacen"] = "docAlm";
-    // mapAlias["proveedoresx"] = "proX";
-    // mapAlias["personal"] = "pers";
-    // mapAlias["balancesx"] = "balX";
-    // mapAlias["comisiones"] = "comis";
-    // mapAlias["comisionitas"] = "comisionistas";
-    // mapAlias["contactosexternos"] = "contExt";
-    // mapAlias["tarifahotel"] = "tarHot";
-    // mapAlias["tarifasdoc"] = "tarDoc";
-    // mapAlias["plazospago"] = "plazos";
-    // mapAlias["metodospago"] = "metPag";
-    // mapAlias["logi_destinos"] = "logiDest";
-    // mapAlias["logi_envios"] = "logiEnv";
-    // mapAlias["logi_formas"] = "logiForm";
-    // mapAlias["habitacionesprops"] = "habProps";
-    // mapAlias["efectos"] = "efec";
-    //
-    // mapAlias["fabricacion"] = "fab";
-    // mapAlias["fabricacionetapas"] = "fabEtapas";
-    // mapAlias["fabricacioncfg"] = "fabCfg";
-    // mapAlias["fabricaciongrupo"] = "fabGrp";
-    // mapAlias["fabricaciontareas"] = "fabTareas";
-    // mapAlias["fabricantes"] = "fabricantes";
-    //
-    // mapAlias["areascompra"] = "ac";
-    // mapAlias["areasventa"] = "av";
-    // mapAlias["appblobs_i"] = "blobsImg";
-    // mapAlias["programas"] = "prg";
-    // mapAlias["docsinli"] = "docSINLI";
-    // mapAlias["docsinlix"] = "docSINLIX";
-    //
-    // mapAlias["tpvext_cajas"] = "tpvExCajas";
-    // mapAlias["tpvext_saldos"] = "tpvExSaldos";
-    //
-    // mapAlias["centrocostes_arboles"] = "centroCostesArboles";
-    // mapAlias["centrocostes_arbolesx"] = "centroCostesArbolesX";
-
-
-
   }
 }
 

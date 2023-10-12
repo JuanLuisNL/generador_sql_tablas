@@ -145,10 +145,7 @@ class CreaClasesTablaAndDRow {
       aliasTabla = row.alias;
     }
     try {
-      cDatos += "class ${tablaProper}SQL extends TablaSQL {\n";
-      cDatos += getDeclaracionVars();
-      cDatos += getDeclaracionJoinsFromRelaciones();
-      cDatos += getConstructorClaseTabla();
+      cDatos = getConstructorClaseTabla();
       cDatos = getImports() + cDatos;
       cDatos += getDRows();
       cDatos += getDRowsNew();
@@ -160,14 +157,42 @@ class CreaClasesTablaAndDRow {
     return cDatos;
   }
 
+  // ArbolesSQL.joins({String cJoinSentence = '', String cAliasJoin = '', String cCampoJoin = '', TablaSQL? oTablaSelectJoin}) {
+  //   initCampos();
+  //   campoJoin = cCampoJoin;
+  //   aliasSelectJoinSQL = cAliasJoin;
+  //   joinSentence = cJoinSentence;
+  //   oTablaJoin = oTablaSelectJoin;
+  // }
+  //
+  // ArbolesSQL() {
+  //   initCampos();
+  // }
+  //
+  // void initCampos() {
+  //   nombreSQL = 'arboles';
+  //   aliasSQL = 'arb';
+
   String getConstructorClaseTabla() {
-    String cCad = "${tablaProper}SQL({String cJoinSentence = '', String cAliasJoin = '', String cCampoJoin = '', TablaSQL? oTablaSelectJoin}) {\n";
+    /// CLASE
+    String cCad = "class ${tablaProper}SQL extends TablaSQL {\n";
+    /// VARIABLES
+    cCad += getDeclaracionVars();
+    /// JOINS CON OTRAS TABLAS
+    cCad += getDeclaracionJoinsFromRelaciones();
+    /// CONSTRUCTOR JOINS
+    cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasJoin, TablaSQL? oTablaSelectJoin) {\n";
+    cCad += "initCampos();\n";
+    cCad += "campoJoin = cCampoJoin;\n";
+    cCad += "aliasJoin = cAliasJoin;\n";
+    //cCad += "joinSentence = cJoinSentence;\n";
+    cCad += "oTablaJoin = oTablaSelectJoin;\n}\n\n";
+    /// CONSTRUCTOR
+    cCad += "${tablaProper}SQL() {\n initCampos();\n}\n\n";
+    /// INITCAMPOS
+    cCad += "void initCampos() {\n";
     cCad += "nombreSQL = '$tablaLower';\n";
     cCad += "aliasSQL = '$aliasTabla';\n";
-    cCad += "campoJoin = cCampoJoin;\n";
-    cCad += "aliasSelectJoinSQL = cAliasJoin;\n";
-    cCad += "joinSentence = cJoinSentence;\n";
-    cCad += "oTablaJoin = oTablaSelectJoin;\n";
     cCad += lstAsignacionesCamposSQL.join("\n");
     cCad += "\n}\n}\n\n";
     return cCad;
@@ -224,15 +249,14 @@ class CreaClasesTablaAndDRow {
           }
         }
       }
-
+      // ? EJEMPLO
+      /// ArbolesSQL? _arbCat;
+      /// ArbolesSQL get arbCat => (_arbCat == null) ? ArbolesSQL.joins('id_categoria', 'arbCat', this) : _arbCat!;
       String alias = rowRel.alias;
-      cDeclaraciones += "$varTablaSQL get $alias => ";
-      if (rowRel.joins == "") {
-        // String cLeftJoin = "LEFT JOIN ${rowRel.tablaJoin} $alias ON $aliasTabla.${rowRel.campoID} = $alias.verialid";
-        cDeclaraciones += "$varTablaSQL(cCampoJoin: '${rowRel.campoID}', cAliasJoin: '$alias', oTablaSelectJoin: this);\n";
-      } else {
-        cDeclaraciones += "$varTablaSQL(cJoinSentence: '${rowRel.joins}', cAliasJoin: '$alias', oTablaSelectJoin: this);\n";
-      }
+      cDeclaraciones += "$varTablaSQL? _$alias;\n";
+      cDeclaraciones += "$varTablaSQL get $alias => (_$alias == null) ? $varTablaSQL.joins('${rowRel.campoID}', '$alias', this) : _$alias!;\n";
+      /// TODO Ver los joins manuales. habrá que ver cuales son realmente
+
       // DRowNew
       String cPlantilla;
       String cDRow = "DRow${cJoinCamelCase}Mapping";
