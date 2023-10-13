@@ -1019,7 +1019,7 @@ class RelacionesTablas {
     addRelation("DocProx", "CentroCostes_Valores", "ID_DocProx");
 
     // DocSINLI
-    addRelation("DocSINLI", "DocSINLIX", "ID_DocSINLI");
+    addRelation("DocSinli", "DocSinliX", "ID_DocSINLI");
 
     // Efectos
     cFiltro =
@@ -1737,8 +1737,8 @@ class RelacionesTablas {
     addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaPreciosTpvext", alias: "tarPrTpvEx");
     addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaOfertasTpvext", alias: "tarOfTpvEx");
     addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaComponentes", alias: "tarComponentes");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_Tarifa_Cli_Varios");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_Tarifa_Excepciones_Cli_Varios");
+    addRelation("TarifasArticulos", "AreasVenta", "ID_Tarifa_Cli_Varios", alias: "tarCliVarios");
+    addRelation("TarifasArticulos", "AreasVenta", "ID_Tarifa_Excepciones_Cli_Varios", alias: "tarExcCliVarios");
 
     addRelation("TarifasArticulos", "Data_Imp", "ID_TarifaArticulos");
     addRelation("TarifasArticulos", "DocCli", "ID_Tarifa", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
@@ -1825,10 +1825,10 @@ class RelacionesTablas {
     addRelation("Tpvext_Cajas", "Data_Imp", "ID_Origen", filtro: cFiltro);
 
     // TPVEXT_Cajas
-    addRelation("Tpvext_Cajas", "Tpvext_Saldos", "ID_Caja");
+    addRelation("Tpvext_Cajas", "Tpvext_Saldos", "ID_Caja", alias: "tpvExCaja");
 
     // TPVExt_Saldos
-    addRelation("Tpvext_Saldos", "Tpvext_Saldos", "ID_Operacion");
+    addRelation("Tpvext_Saldos", "Tpvext_Saldos", "ID_Operacion", alias: "tpvExOp");
 
     // Transportistas
     addRelation("Transportistas", "Clientes", "ID_Transportista");
@@ -1998,8 +1998,8 @@ class RelacionesTablas {
     mapAlias["docpro"] = "dp";
     mapAlias["docprovalores"] = "dpVal";
     mapAlias["docprox"] = "dpX";
-    mapAlias["docsinli"] = "docSINLI";
-    mapAlias["docsinlix"] = "docSINLIX";
+    mapAlias["docsinli"] = "docSinli";
+    mapAlias["docsinlix"] = "docSinliX";
     mapAlias["efectos"] = "efec";
     mapAlias["fabricacion"] = "fabN";
     mapAlias["fabricacioncfg"] = "fabCfg";
@@ -2022,10 +2022,16 @@ class RelacionesTablas {
     mapAlias["programas"] = "prg";
     mapAlias["proveedoresx"] = "proX";
     mapAlias["tarifahotel"] = "tarHot";
+    mapAlias["tarifasarticulos"] = "tarArt";
     mapAlias["tarifasdoc"] = "tarDoc";
     mapAlias["tpvext_cajas"] = "tpvExCaj";
     mapAlias["tpvext_saldos"] = "tpvExSal";
     mapAlias["usuarios"] = "usr";
+    mapAlias["logidestinos"] = "logiDes";
+    mapAlias["logiformas"] = "logiFormas";
+    mapAlias["logiformatos"] = "logiFormat";
+    mapAlias["logiuds"] = "logiFormat";
+
   }
 }
 

@@ -255,15 +255,17 @@ class CreaClasesTablaAndDRow {
 
       if (cJoinCamelCase.toLowerCase() != tablaLower) {
         String cImport = lstTablasServer.firstWhereOrNull((it) => it.replaceAll("_", "") == cJoinCamelCase.toLowerCase()) ?? "";
-        if (cImport != "") {
-          mapImports[cJoinCamelCase] = "import '${cImport}_base.dart';";
-        } else {
-          // hay alguna tabla original con guiones
-          String cImport = lstTablasServer.firstWhereOrNull((it) => it == cJoinCamelCase.toLowerCase()) ?? "";
+        if (cImport != tablaLower) {
           if (cImport != "") {
             mapImports[cJoinCamelCase] = "import '${cImport}_base.dart';";
           } else {
-            print(tablaLower);
+            // hay alguna tabla original con guiones
+            String cImport = lstTablasServer.firstWhereOrNull((it) => it == cJoinCamelCase.toLowerCase()) ?? "";
+            if (cImport != "") {
+              mapImports[cJoinCamelCase] = "import '${cImport}_base.dart';";
+            } else {
+              print(tablaLower);
+            }
           }
         }
       }
