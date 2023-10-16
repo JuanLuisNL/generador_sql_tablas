@@ -32,7 +32,7 @@ class CreaClasesTablaAndDRow {
   late List<String> lstDeclaracionesDRows = [], lstAsignacionesDRows = [], lstJoinsDRows = [];
   late List<String> lstGetsSetsDRowsNew = [], lstJoinsDRowsNew = [];
   late List<DRowRelacionesCamposEtc> lstRelaciones = [];
-  Map<String, String> mapImports = {}, mapAlias = {};
+  Map<String, String> mapImports = {}, mapCamposExc = {};
   Map<String, List<String>> mapVarsROW = {};
   List<List<dynamic>> lstCols = [];
   List<String> lstTablasServer = [];
@@ -40,17 +40,18 @@ class CreaClasesTablaAndDRow {
   Future<void> run() async {
     RelacionesTablas oRelTab = RelacionesTablas();
     lstRelaciones = oRelTab.init();
-    mapAlias = oRelTab.mapAlias;
     await creaClases();
   }
 
   Future<void> creaClases() async {
+
     String cSQL = "SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE' AND table_schema = 'public'";
     List<List<dynamic>> lstTablasSQL = await GBL.oCnEmp.query(cSQL);
 
     for (var row in lstTablasSQL) {
       lstTablasServer.add(row[0]);
     }
+    initMapCamposExcepciones();
     for (String tabla in lstTablasServer) {
       cSQL = "SELECT column_name, data_type, character_maximum_length, numeric_precision_radix, numeric_scale";
       cSQL += " FROM INFORMATION_SCHEMA.COLUMNS";
@@ -89,6 +90,69 @@ class CreaClasesTablaAndDRow {
     lstGetsSetsDRowsNew = [];
     lstJoinsDRowsNew = [];
     lstAsignacionesJoins = [];
+  }
+
+  void initMapCamposExcepciones() {
+    mapCamposExc["id_marca_hora"] = "grpMH"; // grupos
+    mapCamposExc["id_contrato"] = "manCon"; // mantenimientos
+    mapCamposExc["id_contrato2"] = "manCon2";
+    mapCamposExc["id_contrapartida"] = "ctasCP"; //Cuentas
+    mapCamposExc["id_serie_defecto"] = "serDef"; //Areas Compra
+    mapCamposExc["id_serie_alternativa"] = "serAlt";
+    mapCamposExc["id_tarifa1"] = "tarArt1"; //Areas Venta
+    mapCamposExc["id_tarifa2"] = "tarArt2";
+    mapCamposExc["id_tarifa3"] = "tarArt3";
+    mapCamposExc["id_tarifa_componentes"] = "tarComp";
+    mapCamposExc["id_tarifa_precios_tpvext"] = "tarPrecTpvExt";
+    mapCamposExc["id_tarifa_ofertas_tpvext"] = "tarOferTpvExt";
+    mapCamposExc["id_tarifa_alquiler_no_devuelto"] = "tarAlqNoDev";
+    mapCamposExc["id_tarifa_gestion"] = "tarGes";
+    mapCamposExc["id_tarifa_visor_precios"] = "tarVisor";
+    mapCamposExc["id_tarifa_excepciones_visor_precios"] = "tarVisorExc";
+    mapCamposExc["id_tarifa_cli_varios"] = "tarCliVarios";
+    mapCamposExc["id_tarifa_excepciones_cli_varios"] = "tarCliVariosExc";
+    mapCamposExc["id_metodo_cobro1"] = "metPag1";
+    mapCamposExc["id_metodo_cobro2"] = "metPag2";
+    mapCamposExc["id_metodo_cobro3"] = "metPag3";
+    mapCamposExc["id_metodo_cobro4"] = "metPag4";
+    mapCamposExc["id_metodo_cobro5"] = "metPag5";
+    mapCamposExc["id_metodo_cobro6"] = "metPag6";
+    mapCamposExc["id_metodo_cobro7"] = "metPag7";
+    mapCamposExc["id_metodo_cobro8"] = "metPag8";
+    mapCamposExc["id_metodo_efectivo"] = "metPagEf";
+    mapCamposExc["id_metodo_telepedido"] = "metPagTele";
+    mapCamposExc["id_metodo_efectivo_kiosko_hotel"] = "metPagEfKiosko";
+    mapCamposExc["id_metodo_tarjeta_kiosko_hotel"] = "metPagTarKiosko";
+    mapCamposExc["id_cargo_sup_individual"] = "artSupInd";
+    mapCamposExc["id_cargo_sup_estancia_corta"] = "artSuoEstCor";
+    mapCamposExc["id_cargo_sup_extra1"] = "artSupEx1";
+    mapCamposExc["id_cargo_sup_extra2"] = "artSupEx2";
+    mapCamposExc["id_cargo_sup_extra3"] = "artSupEx3";
+    mapCamposExc["id_art_gastos_envio_telepedido"] = "artGasTele";
+    mapCamposExc["id_art_bolsa_telepedido"] = "artBolsaTele";
+    mapCamposExc["id_serie_defecto_tickets"] = "serDefTic";
+    mapCamposExc["id_serie_alternativa_tickets"] = "serAltTic";
+    mapCamposExc["id_grupo_destino"] = "grpDest";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 
   // ? Desde cada Campo en DB se componen la mayor parte de los elementos de las clases
@@ -144,10 +208,10 @@ class CreaClasesTablaAndDRow {
   // ? Compone las clases necesarias para cada tabla
   String getAll() {
     String cDatos = "";
-    String tabla = tablaLower.replaceAll("_", "");
-    DRowRelacionesCamposEtc? row = lstRelaciones.firstWhereOrNull((it) => it.tablaJoin.toLowerCase().replaceAll("_", "") == tabla);
+    String tabla = tablaLower;
+    DRowRelacionesCamposEtc? row = lstRelaciones.firstWhereOrNull((it) => it.tablaJoin == tabla);
     if (row == null) {
-      aliasTabla = mapAlias[tabla] ?? tablaLower.substring(0, 3);
+      aliasTabla = tablaLower.substring(0, 3);
     } else {
       aliasTabla = row.alias;
     }
@@ -241,8 +305,7 @@ class CreaClasesTablaAndDRow {
 
   void getDeclaracionJoinsFromRelaciones() {
     for (var campo in lstJoins) {
-      DRowRelacionesCamposEtc? rowRel = lstRelaciones.firstWhereOrNull(
-          (it) => it.tablaOrigen.replaceAll("_", "") == tablaLower.replaceAll("_", "") && it.campoID.replaceAll("_", "") == campo.replaceAll("_", ""));
+      DRowRelacionesCamposEtc? rowRel = lstRelaciones.firstWhereOrNull((it) => it.tablaOrigen == tablaLower && it.campoID == campo);
       if (rowRel == null) {
         continue;
       }
@@ -250,21 +313,22 @@ class CreaClasesTablaAndDRow {
       if (rowRel.tablaJoin.toLowerCase().contains("_g") || rowRel.tablaJoin.toLowerCase().contains("_i")) {
         continue;
       }
-      String cJoinCamelCase = rowRel.tablaJoin.replaceAll("_", "");
-      String varTablaSQL = "${cJoinCamelCase}SQL";
+      String cTablaJoin = rowRel.tablaJoin;
 
-      if (cJoinCamelCase.toLowerCase() != tablaLower) {
-        String cImport = lstTablasServer.firstWhereOrNull((it) => it.replaceAll("_", "") == cJoinCamelCase.toLowerCase()) ?? "";
+      if (cTablaJoin != tablaLower) {
+        String cImport = lstTablasServer.firstWhereOrNull((it) => it == cTablaJoin) ?? "";
         if (cImport != tablaLower) {
           if (cImport != "") {
-            mapImports[cJoinCamelCase] = "import '${cImport}_base.dart';";
+            mapImports[cTablaJoin] = "import '${cImport}_base.dart';";
           } else {
             // hay alguna tabla original con guiones
-            String cImport = lstTablasServer.firstWhereOrNull((it) => it == cJoinCamelCase.toLowerCase()) ?? "";
+            String cImport = lstTablasServer.firstWhereOrNull((it) => it == cTablaJoin) ?? "";
             if (cImport != "") {
-              mapImports[cJoinCamelCase] = "import '${cImport}_base.dart';";
+              mapImports[cTablaJoin] = "import '${cImport}_base.dart';";
             } else {
-              print(tablaLower);
+              if (kDebugMode) {
+                print(tablaLower);
+              }
             }
           }
         }
@@ -273,18 +337,23 @@ class CreaClasesTablaAndDRow {
       /// ArbolesSQL? _arbCat;
       /// ArbolesSQL get arb => _arb ?? ArbolesSQL.joins('id_padre', 'arb', this);
       String alias = rowRel.alias;
-      String cTablaJoinVar = "$varTablaSQL? _$alias;\n";
+      if (mapCamposExc[rowRel.campoID] != null) {
+        alias = mapCamposExc[rowRel.campoID]!;
+      }
+
+      String tipoDatoTabla = "${getNameVariable(cTablaJoin).proper}SQL";
+      String cTablaJoinVar = "$tipoDatoTabla? _$alias;\n";
       lstVarsTblJoins.add(cTablaJoinVar);
 
-      String cTablaJoinGet = "$varTablaSQL get $alias => _$alias ?? $varTablaSQL.joins('${rowRel.campoID}', '$alias', this);\n";
+      String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ?? $tipoDatoTabla.joins('${rowRel.campoID}', '$alias', this);\n";
       lstGetsTblJoins.add(cTablaJoinGet);
 
       /// TODO Ver los joins manuales. habrá que ver cuales son realmente
 
       // DRowNew
       String cPlantilla;
-      String cDRow = "DRow${cJoinCamelCase}Mapping";
-      cPlantilla = " late $cDRow? row${alias.proper} = $cDRow.join(mapParam!['$cJoinCamelCase']);\n";
+      String cDRow = "DRow${getNameVariable(cTablaJoin).proper}Mapping";
+      cPlantilla = " late $cDRow? row${alias.proper} = $cDRow.join(mapParam!['${cTablaJoin.proper}']);\n";
       lstJoinsDRowsNew.add(cPlantilla);
     }
   }

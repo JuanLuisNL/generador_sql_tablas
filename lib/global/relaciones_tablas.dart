@@ -188,1744 +188,1525 @@ class RelacionesTablas {
 
   List<DRowRelacionesCamposEtc>  init() {
     getAliasTablas();
-    String cFiltro = "";
-    String cJoinDocClix = "LEFT JOIN doccli ON docclix.id_documento = doccli.verialid";
-    String cJoinDocCliValores = "LEFT JOIN doccli ON docclivalores.id_documento = doccli.verialid";
-    String cJoinDocProx = "LEFT JOIN docpro ON docprox.id_documento = docpro.verialid";
-    String cJoinDocProValores = "LEFT JOIN docpro ON docprovalores.id_documento = docpro.verialid";
-
-    String cJoinDocAlmacenx = "LEFT JOIN DocAlmacen ON DocAlmacenx.ID_Documento = DocAlmacen.VerialID";
-    String cJoinDocHotelx = "LEFT JOIN DocHotel ON DocHotelx.ID_Documento = DocHotel.VerialID";
-    String cJoinHstDocHotelx = "LEFT JOIN HstDocHotel ON HstDocHotelx.ID_Documento = HstDocHotel.VerialID";
-    String cJoinAveriasArticulos = "LEFT JOIN Averias ON ArtRevisionesAverias.ID_AveriaRevision=Averias.VerialID";
-    String cJoinRevisionesArticulos = "LEFT JOIN Revisiones ON ArtRevisionesAverias.ID_AveriaRevision=Revisiones.VerialID";
-    String cJoinAveriasTecnicos = "LEFT JOIN Averias ON TecnicosRevisionesAverias.ID_AveriaRevision=Averias.VerialID";
-    String cJoinRevisionesTecnicos = "LEFT JOIN Revisiones ON TecnicosRevisionesAverias.ID_AveriaRevision=Revisiones.VerialID";
-    String cJoinDHXPrevision = "LEFT JOIN DocHotelx ON DocHotelxPrevision.ID_DocHotelx=DocHotelx.VerialID";
-    String cJoinArtLotes = "LEFT JOIN ArtLotes ON ArtLotesX.ID_ArtLotes = ArtLotes.VerialID";
-    String cJoinMenuEventos = "LEFT JOIN MenuEventos ON MenuEventosX.ID_MenuEventos = MenuEventos.VerialID";
-    String cJoinPartesReparaciones = "LEFT JOIN PartesReparaciones ON PartesReparacionesX.ID_ParteReparacion = PartesReparaciones.VerialID";
-    String cJoinPartesReparacionesX = "LEFT JOIN PartesReparaciones ON PartesReparacionesX.ID_ParteReparacion = PartesReparaciones.VerialID";
-    String cJoinSalonesX = "LEFT JOIN Salones ON SalonesX.ID_Salon = Salones.VerialID";
-    String cJoinRecursosActos = "LEFT JOIN DocHotelx ON RecursosActos.ID_DocHotelx = DocHotelx.VerialID"
-        " LEFT JOIN DocHotel ON DocHotelx.ID_Documento = DocHotel.VerialID"
-        " LEFT JOIN DocClix ON RecursosActos.ID_DocClix = DocClix.VerialID"
-        " LEFT JOIN DocCli ON DocClix.ID_Documento = DocCli.VerialID";
-    String cJoinFabricacion = "LEFT JOIN Fabricacion ON FabricacionX.ID_Fabricacion = Fabricacion.VerialID";
-    String cJoinClientesX = "LEFT JOIN Clientes ON ClientesX.ID_Cliente = Clientes.verialID";
-    String cJoinProveedoresX = "LEFT JOIN Proveedores ON ProveedoresX.ID_Proveedor = Proveedores.verialID";
-    String cJoinTarifasArticulosX = "LEFT JOIN TarifasArticulos ON TarifasArticulosX.ID_TarifaArticulos = TarifasArticulos.verialID";
-
-    // AEAT
-    addRelation("Aeat", "Aeatx", "ID_Aeat");
-
-    // Agenda
-    addRelation("Agenda", "Agenda", "ID_Padre");
-
-    // Almacenes
-    addRelation("Almacenes", "Averias", "ID_Almacen");
-    addRelation("Almacenes", "Mantenimientos", "ID_Almacen");
-    addRelation("Almacenes", "Revisiones", "ID_Almacen");
-    addRelation("Almacenes", "AreasVenta", "ID_Almacen");
-    addRelation("Almacenes", "ArtAlmacenes", "ID_Almacen", lCanBeDeleteManual: true);
-    addRelation("Almacenes", "ArtStocks", "ID_Almacen", selectCanBeDel: "ID_Articulo");
-    addRelation("Almacenes", "Estantes", "ID_Almacen", lCanBeDeleteManual: true);
-    cFiltro = "Mensajes.TipoFicha=${EnumMensajesTipoFicha.almacen.index}";
-    addRelation("Almacenes", "Mensajes", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Almacenes", "Data_Imp", "ID_Almacen");
-    addRelation("Almacenes", "DocCli", "ID_Almacen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Almacenes", "DocClix", "ID_Almacen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-    addRelation("Almacenes", "DocPro", "ID_Almacen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("Almacenes", "DocPro", "ID_AlmacenOrigen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "almOrigen");
-    addRelation("Almacenes", "DocProx", "ID_Almacen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx);
-    addRelation("Almacenes", "Pdas", "ID_Almacen");
-    addRelation("Almacenes", "Pdas", "ID_AlmacenPedidos", alias: "almPedidos");
-    addRelation("Almacenes", "Tpvext_Cajas", "ID_Almacen");
-    addRelation("Almacenes", "DocAlmacen", "ID_AlmacenOrigen", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", alias: "almOrigen");
-    addRelation("Almacenes", "DocAlmacen", "ID_AlmacenDestino", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", alias: "almDestino");
-    addRelation("Almacenes", "PuestosX", "ID_AlmacenUnico", selectCanBeDel: "ID_Puesto");
-    addRelation("Almacenes", "AreasCompra", "ID_Almacen");
-    addRelation("Almacenes", "DocHotel", "ID_Almacen", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("Almacenes", "DocHotelx", "ID_Almacen", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
-    addRelation("Almacenes", "Inventario", "ID_Almacen");
-    addRelation("Almacenes", "FabricacionGrupo", "ID_AlmacenOrigen", alias: "almOrigen");
-    addRelation("Almacenes", "FabricacionGrupo", "ID_AlmacenDestino", alias: "almDestino");
-    addRelation("Almacenes", "Fabricacion", "ID_AlmacenOrigen", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", alias: "almOrigen");
-    addRelation("Almacenes", "Fabricacion", "ID_AlmacenDestino", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", alias: "almDestino");
-    addRelation("Almacenes", "HstDocHotel", "ID_Almacen", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Almacenes", "HstDocHotelx", "ID_Almacen",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
-    addRelation("Almacenes", "Clientes", "ID_AlmacenURDI");
-    addRelation("Almacenes", AppTablas.cStock, "ID_Almacen", lCanBeDeleteManual: true);
-
-    // Aparatos
-    addRelation("Aparatos", "Averias", "ID_Aparato", lCanBeDeleteManual: true);
-    addRelation("Aparatos", "OrdenesTrabajo", "ID_Aparato", lCanBeDeleteManual: true);
-    addRelation("Aparatos", "Revisiones", "ID_Aparato", lCanBeDeleteManual: true);
-
-    cFiltro = "CamposAuxiliares.Tipo=${EnumCamposAuxiliaresTipo.aparatos.index}";
-    addRelation("Aparatos", "CamposAuxiliares", "ID_Origen", filtro: cFiltro, lCanBeDeleteManual: true);
-
-    cFiltro = "RutasFicheros.TipoFicha=${EnumRutasFicherosTipoFicha.aparatos.index}";
-    addRelation("Aparatos", "RutasFicheros", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-
-    addRelation("Aparatos", "FabricacionX", "ID_Aparato", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", joinStr: cJoinFabricacion);
-    addRelation("Aparatos", "DocClix", "ID_Aparato", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-
-    // AppBlobs_I
-    addRelation("AppBlobs_I", "Empresas", "ID_SII_Certificado");
-    addRelation("AppBlobs_I", "Empresas", "ID_CertificadoRecetas");
-    addRelation("AppBlobs_I", "Veterinarios", "ID_Certificado");
-    addRelation("AppBlobs_I", "Delegaciones", "ID_CertificadoPDF");
-
-    // Arboles
-    addRelation("Arboles", "Arboles", "ID_Padre", lCanBeDeleteManual: true);
-    addRelation("Arboles", "ArtCompuestos", "ID_Categoria", lCanBeDeleteManual: true);
-    addRelation("Arboles", "Articulos", "ID_Categoria", lCanBeDeleteManual: true, alias: "arbCat");
-    addRelation("Arboles", "Clientes", "ID_Grupo", lCanBeDeleteManual: true);
-    addRelation("Arboles", "GruposComisionesX", "ID_Categoria", lCanBeDeleteManual: true);
-    addRelation("Arboles", "Data_ImpX", "ID_Categoria", lCanBeDeleteManual: true);
-    addRelation("Arboles", "DocCli", "ID_TipoContingente", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", lCanBeDeleteManual: true);
-    addRelation("Arboles", "DocHotel", "ID_TipoContingente",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", lCanBeDeleteManual: true);
-    addRelation("Arboles", "Proveedores", "ID_Grupo", lCanBeDeleteManual: true);
-    addRelation("Arboles", "Tarifas", "ID_Categoria", lCanBeDeleteManual: true);
-    addRelation("Arboles", "Cfg_CentralReservas", "ID_TipoContingente", lCanBeDeleteManual: true);
-    addRelation("Arboles", "CentroCostes_Defecto", "ID_Categoria", lCanBeDeleteManual: true);
-    addRelation("Arboles", "Personal", "ID_Grupo", lCanBeDeleteManual: true);
-    addRelation("Arboles", "CentroCostes_Defecto", "ID_GrupoProveedores", lCanBeDeleteManual: true, alias: "arbProv");
-    addRelation("Arboles", "CentroCostes_Defecto", "ID_GrupoPersonal", lCanBeDeleteManual: true, alias: "arbPers");
-    addRelation("Arboles", "HstDocHotel", "ID_TipoContingente",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", lCanBeDeleteManual: true);
-    addRelation("Arboles", "Clientes", "ID_TipoContingente", lCanBeDeleteManual: true, alias: "arbTipoCon");
-    addRelation("Arboles", "TarifasDocX", "ID_Categoria", lCanBeDeleteManual: true);
-    addRelation("Arboles", "Inmovilizado", "ID_Categoria", lCanBeDeleteManual: true);
-    addRelation("Arboles", "Articulos", "ID_CategoriaWeb", lCanBeDeleteManual: true);
-    addRelation("Arboles", "CategoriasDe", "ID_Categoria", lCanBeDeleteManual: true);
-    addRelation("Arboles", "Articulos", "ID_CategoriaWeb2", lCanBeDeleteManual: true, alias: "arbWeb1");
-    addRelation("Arboles", "Articulos", "ID_CategoriaWeb3", lCanBeDeleteManual: true, alias: "arbWeb2");
-    addRelation("Arboles", "Articulos", "ID_CategoriaWeb4", lCanBeDeleteManual: true, alias: "arbWeb3");
-    addRelation("Arboles", "Cfg_CentralReservasClientesAgencias", "ID_TipoContingente", lCanBeDeleteManual: true);
-
-    // ArbolesAuxiliares
-    addRelation("ArbolesAuxiliares", "CamposAuxiliares", "ID_Arbol01", selectCanBeDel: "CamposAuxiliares.ID_Origen, CamposAuxiliares.Tipo", alias: "arbAux1");
-    addRelation("ArbolesAuxiliares", "CamposAuxiliares", "ID_Arbol02", selectCanBeDel: "CamposAuxiliares.ID_Origen, CamposAuxiliares.Tipo", alias: "arbAux2");
-    addRelation("ArbolesAuxiliares", "CamposAuxiliares", "ID_Arbol03", selectCanBeDel: "CamposAuxiliares.ID_Origen, CamposAuxiliares.Tipo", alias: "arbAux3");
-    addRelation("ArbolesAuxiliares", "CamposAuxiliares", "ID_Arbol04", selectCanBeDel: "CamposAuxiliares.ID_Origen, CamposAuxiliares.Tipo", alias: "arbAux4");
-    addRelation("ArbolesAuxiliares", "CamposAuxiliares", "ID_Arbol05", selectCanBeDel: "CamposAuxiliares.ID_Origen, CamposAuxiliares.Tipo", alias: "arbAux5");
-    addRelation("ArbolesAuxiliares", "ArbolesAuxiliares", "ID_Padre");
-
-    // AreasCompra
-    addRelation("AreasCompra", "PuestosX", "ID_AreaCompra", selectCanBeDel: "ID_Puesto");
-    addRelation("AreasCompra", "DocPro", "ID_AreaCompra", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("AreasCompra", "DocProx", "ID_AreaCompra", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx);
-    addRelation("AreasCompra", "Pdas", "ID_AreaCompra");
-
-    // AreasVenta
-    addRelation("AreasVenta", "Aparatos", "ID_AreaVenta");
-    addRelation("AreasVenta", "Articulos", "ID_AreaVenta");
-    addRelation("AreasVenta", "Data_Imp", "ID_AreaVenta");
-    addRelation("AreasVenta", "DocCli", "ID_AreaVenta", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("AreasVenta", "DocClix", "ID_AreaVenta", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-    addRelation("AreasVenta", "DocHotel", "ID_AreaVenta", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("AreasVenta", "DocHotelx", "ID_AreaVenta", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
-    addRelation("AreasVenta", "Habitaciones", "ID_AreaVenta");
-    addRelation("AreasVenta", "Mesas", "ID_AreaVenta");
-    addRelation("AreasVenta", "ReservasRest", "ID_AreaVenta");
-    addRelation("AreasVenta", "Turnos", "ID_AreaVenta");
-    addRelation("AreasVenta", "Pdas", "ID_AreaVenta");
-    addRelation("AreasVenta", "Tpvext_Cajas", "ID_AreaVenta");
-    addRelation("AreasVenta", "Cfg_CentralReservas", "ID_AreaVenta");
-    addRelation("AreasVenta", "PuestosX", "ID_AreaVenta1", selectCanBeDel: "ID_Puesto", alias: "av1");
-    addRelation("AreasVenta", "PuestosX", "ID_AreaVenta2", selectCanBeDel: "ID_Puesto", alias: "av2");
-    addRelation("AreasVenta", "PuestosX", "ID_AreaVenta3", selectCanBeDel: "ID_Puesto", alias: "av3");
-    addRelation("AreasVenta", "PuestosX", "ID_AreaVenta4", selectCanBeDel: "ID_Puesto", alias: "av4");
-    addRelation("AreasVenta", "PuestosX", "ID_AreaVenta5", selectCanBeDel: "ID_Puesto", alias: "av5");
-    addRelation("AreasVenta", "PartesReparaciones", "ID_AreaVenta");
-    addRelation("AreasVenta", "TiendasVirtuales", "ID_AreaVenta");
-    addRelation("AreasVenta", "Cupos", "ID_AreaVenta");
-    addRelation("AreasVenta", "HstDocHotel", "ID_AreaVenta", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("AreasVenta", "HstDocHotelx", "ID_AreaVenta",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
-    addRelation("AreasVenta", "Numeraciones", "ID_AreaVenta");
-    addRelation("AreasVenta", "PartesMedicos", "ID_AreaVenta");
-    addRelation("AreasVenta", "Mantenimientos", "ID_AreaVenta");
-    addRelation("AreasVenta", "BonosAcceso", "ID_AreaVenta");
-    addRelation("AreasVenta", "Webs", "ID_AreaVenta");
-    addRelation("AreasVenta", "BasculasTPV", "ID_AreaVenta");
-
-    // Arqueos
-    addRelation("Arqueos", "ArqueosX", "ID_Arqueo", lCanBeDeleteManual: true);
-    addRelation("Arqueos", "OperacionesTPV", "ID_Arqueo", lCanBeDeleteManual: true);
-    addRelation("Arqueos", "DocClix", "ID_Arqueo",        selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, lCanBeDeleteManual: true);
-    addRelation("Arqueos", "DocHotelx", "ID_Arqueo",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true);
-    addRelation("Arqueos", "Efectos", "ID_Arqueo", lCanBeDeleteManual: true);
-    addRelation("Arqueos", "HstDocHotelx", "ID_Arqueo",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true);
-    addRelation("Arqueos", "Fianzas", "ID_ArqueoConstitucion", alias: "arqConst");
-    addRelation("Arqueos", "Fianzas", "ID_ArqueoCancelacion", alias: "arqCanc");
-
-    // Articulos
-    addRelation("Articulos", "Mantenimientos", "ID_Articulo");    cFiltro = "ArtRevisionesAverias.Tipo=${EnumArtRevisionesAveriasTipo.averia.index}";
-    addRelation("Articulos", "ArtRevisionesAverias", "ID_Articulo",        selectCanBeDel: "Averias.verialID, Averias.ID_Aparato, ArtRevisionesAverias.Tipo", filtro: cFiltro, joinStr: cJoinAveriasArticulos);
-    cFiltro = "ArtRevisionesAverias.Tipo=${EnumArtRevisionesAveriasTipo.revision.index}";
-    addRelation("Articulos", "ArtRevisionesAverias", "ID_Articulo",        selectCanBeDel: "Revisiones.verialID, Revisiones.ID_Aparato, ArtRevisionesAverias.Tipo",
-        filtro: cFiltro,
-        joinStr: cJoinRevisionesArticulos);
-
-    addRelation("Articulos", "AreasVenta", "ID_Cubierto", alias: "artCub");
-    addRelation("Articulos", "AreasVenta", "ID_CargoSupIndividual", alias: "artSupInd");
-    addRelation("Articulos", "AreasVenta", "ID_CargoSupEstanciaCorta", alias: "artSupEstC");
-    addRelation("Articulos", "AreasVenta", "ID_CargoSupExtra1", alias: "artSupEx1");
-    addRelation("Articulos", "AreasVenta", "ID_CargoSupExtra2", alias: "artSupEx2");
-    addRelation("Articulos", "AreasVenta", "ID_CargoSupExtra3", alias: "artSupEx3");
-    addRelation("Articulos", "ArtCompuestos", "ID_Compuesto", lCanBeDeleteManual: true, alias: "artComp");
-    addRelation("Articulos", "ArtCompuestos", "ID_Articulo");
-    addRelation("Articulos", "ArtCodigos", "ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "Articulos", "ID_Agrupado", alias: "artAgrup");
-    addRelation("Articulos", "Articulos", "ID_ArticuloStock", alias: "artStk");
-    addRelation("Articulos", "ArtIBIC", "ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "ArtProveedor", "ID_Articulo", selectCanBeDel: "ArtProveedor.ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "ArtAlmacenes", "ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "ArtStocks", "ID_Articulo", selectCanBeDel: "ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "Autores", "ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "EstantesX", "ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "GruposComisionesX", "ID_Articulo");
-    addRelation("Articulos", "Data_ImpX", "ID_Origen");
-
-    cFiltro = "DocClix.TipoOrigen=${EnumDocXTipoOrigen.articulo.index}";
-    addRelation("Articulos", "DocClix", "ID_Origen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
-
-    cFiltro = "DocHotelx.TipoOrigen=${EnumDocXTipoOrigen.articulo.index}";
-    addRelation("Articulos", "DocHotelx", "ID_Origen",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", filtro: cFiltro, joinStr: cJoinDocHotelx);
-
-    addRelation("Articulos", "DocHotelxPrevision", "ID_Cargo", selectCanBeDel: "DocHotelx.ID_Documento", joinStr: cJoinDHXPrevision);
-    addRelation("Articulos", "DocProx", "ID_Origen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx);
-    addRelation("Articulos", "TipoHabitaciones", "ID_CargoDefecto");
-    addRelation("Articulos", "ArtLotesX", "ID_Articulo", selectCanBeDel: "ArtLotes.verialID", joinStr: cJoinArtLotes);
-    addRelation("Articulos", "CartaArticulos", "ID_Articulo");
-    addRelation("Articulos", "Tarifas", "ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "Tpvext_Secciones", "ID_Articulo");
-    addRelation("Articulos", "Cfg_CentralReservas", "ID_CargoDesayuno", alias: "artDesayuno");
-    addRelation("Articulos", "Cfg_CentralReservas", "ID_CargoMediaPension", alias: "artMP");
-    addRelation("Articulos", "Cfg_CentralReservas", "ID_CargoPensionCompleta", alias: "artPC");
-    addRelation("Articulos", "Cfg_CentralReservas", "ID_CargoTodoIncluido", alias: "artTodoIncluido");
-    addRelation("Articulos", "Cfg_CentralReservas", "ID_CargoUsoIndividual", alias: "artUsoInd");
-    addRelation("Articulos", "Cfg_CentralReservas", "ID_CargoCamaSupletoria", alias: "artCamaSup");
-    addRelation("Articulos", "Cfg_CentralReservasCargos", "ID_Cargo");
-    addRelation("Articulos", "Tecnicos", "ID_ArticuloTrab", alias: "artTrab");
-    addRelation("Articulos", "Tecnicos", "ID_ArticuloDesp", alias: "artDesp");
-    addRelation("Articulos", "DocAlmacenx", "ID_Origen", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", joinStr: cJoinDocAlmacenx);
-    addRelation("Articulos", "ArtDelegaciones", "ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "DocHotelx", "ID_CargoSup1", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "artSup1");
-    addRelation("Articulos", "DocHotelx", "ID_CargoSup2", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "artSup2");
-    addRelation("Articulos", "DocHotelx", "ID_CargoSup3", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "artSup3");
-    addRelation("Articulos", "MenuRest", "ID_Articulo");
-    addRelation("Articulos", "MenuRestX", "ID_Articulo");
-    addRelation("Articulos", "TarifaHotel", "ID_CargoDefecto");
-    addRelation("Articulos", "Salones", "ID_Articulo");
-    addRelation("Articulos", "MenuEventos", "ID_Articulo");
-    addRelation("Articulos", "MenuEventosX", "ID_Articulo", selectCanBeDel: "MenuEventos.verialID", joinStr: cJoinMenuEventos);
-    addRelation("Articulos", "InventarioX", "ID_Articulo");
-    addRelation("Articulos", "PartesReparacionesX", "ID_Articulo",
-        selectCanBeDel: "PartesReparaciones.verialID", joinStr: cJoinPartesReparacionesX);
-    addRelation("Articulos", "CentroCostes_Defecto", "ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "SalonesX", "ID_Articulo", selectCanBeDel: "SalonesX.ID_Salon", joinStr: cJoinSalonesX);
-    cFiltro = "CamposAuxiliares.Tipo=${EnumCamposAuxiliaresTipo.articulos.index}";
-    addRelation("Articulos", "CamposAuxiliares", "ID_Origen", filtro: cFiltro, lCanBeDeleteManual: true);
-    cFiltro = "RutasFicheros.TipoFicha=${EnumRutasFicherosTipoFicha.articulos.index}";
-    addRelation("Articulos", "RutasFicheros", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Articulos", "Delegaciones", "ID_ArticuloCentralita");
-    addRelation("Articulos", "Fabricacion", "ID_Articulo", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo");
-    addRelation("Articulos", "FabricacionX", "ID_Articulo", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", joinStr: cJoinFabricacion);
-    addRelation("Articulos", "Mesas", "ID_Cubierto");
-    cFiltro = "HstDocHotelx.TipoOrigen=${EnumDocXTipoOrigen.articulo.index}";
-    addRelation("Articulos", "HstDocHotelx", "ID_Origen",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", filtro: cFiltro, joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true);
-    addRelation("Articulos", "HstDocHotelx", "ID_CargoSup1",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "artSup1");
-    addRelation("Articulos", "HstDocHotelx", "ID_CargoSup2",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "artSup2");
-    addRelation("Articulos", "HstDocHotelx", "ID_CargoSup3",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "artSup3");
-    addRelation("Articulos", "Articulos", "ID_ArticuloEcoTasas", alias: "artEcoTasas");
-    addRelation("Articulos", "TarifasDocX", "ID_Articulo");
-    addRelation("Articulos", "Logi_UnidadesX", "ID_Articulo");
-    addRelation("Articulos", "Articulos", "ID_ArticuloEnvase", alias: "artEnvase");
-    addRelation("Articulos", "Suscripciones", "ID_PrimerNumero");
-    addRelation("Articulos", "Cfg_CentralReservasCargosXPersona", "ID_Cargo");
-    addRelation("Articulos", "Coleccionables", "ID_Libro", alias: "artLibro");
-    addRelation("Articulos", "Coleccionables", "ID_Articulo");
-    addRelation("Articulos", "ArtSimilares", "ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "TareasTecnicos", "ID_Articulo");
-    addRelation("Articulos", "CartaClientes_Articulos", "ID_Articulo");
-    addRelation("Articulos", "ArtIngredientes", "ID_Articulo", lCanBeDeleteManual: true);
-    addRelation("Articulos", "ArtIngredientes", "ID_Ingrediente", alias: "artIngred");
-    addRelation("Articulos", "AreasVenta", "ID_ArtGastosEnvioTelepedido", alias: "artGastoEnvTelep");
-    addRelation("Articulos", "AreasVenta", "ID_ArtBolsaTelepedido", alias: "artBolsaTelep");
-    addRelation("Articulos", "TelepedidoOfertasX", "ID_Articulo");
-    addRelation("Articulos", "PuestosX", "ID_ArticuloPortesWeb", selectCanBeDel: "ID_Puesto");
-    addRelation("Articulos", AppTablas.cStock, "ID_Articulo", lCanBeDeleteManual: true);
-
-    // ArtLotes
-    addRelation("ArtLotes", "ArtLotesX", "ID_ArtLotes",
-        selectCanBeDel: "ArtLotes.verialID", joinStr: cJoinArtLotes, lCanBeDeleteManual: true);
-
-    // ArtRevisionesAverias
-    cFiltro = "ArtRevisionesAverias.Tipo=${EnumArtRevisionesAveriasTipo.averia.index}";
-    addRelation("ArtRevisionesAverias", "ArtRevisionesAverias", "ID_ArtRevisionesAverias",
-        selectCanBeDel: "Averias.verialID, Averias.ID_Aparato, ArtRevisionesAverias.Tipo", filtro: cFiltro, joinStr: cJoinAveriasArticulos);
-    cFiltro = "ArtRevisionesAverias.Tipo=${EnumArtRevisionesAveriasTipo.revision.index}";
-    addRelation("ArtRevisionesAverias", "ArtRevisionesAverias", "ID_ArtRevisionesAverias",
-        selectCanBeDel: "Revisiones.verialID, Revisiones.ID_Aparato, ArtRevisionesAverias.Tipo",
-        filtro: cFiltro,
-        joinStr: cJoinRevisionesArticulos);
-    cFiltro = "NumerosSerie.Tipo=${EnumNumerosSerieTipo.sat.index}";
-    addRelation("ArtRevisionesAverias", "NumerosSerie", "ID_Contenido", filtro: cFiltro);
-
-    // ArtStocks
-    addRelation("ArtStocks", "ArtSerie", "ID_Stocks", lCanBeDeleteManual: true);
-    addRelation("ArtStocks", "ArtSerieUdsAux", "ID_Stocks", lCanBeDeleteManual: true);
-
-    // Asientos
-    addRelation("Asientos", "Apuntes", "ID_Asiento", selectCanBeDel: "ID_Asiento", lCanBeDeleteManual: true);
-    addRelation("Asientos", "Comisiones", "ID_Asiento");
-    addRelation("Asientos", "DocCli", "ID_Asiento", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Asientos", "DocPro", "ID_Asiento", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("Asientos", "Nominas", "ID_Asiento");
-    addRelation("Asientos", "Efectos", "ID_AsientoFormalizacion", alias: "asiForm");
-    addRelation("Asientos", "Efectos", "ID_AsientoAlBanco", alias: "asiAlBanco");
-    addRelation("Asientos", "Efectos", "ID_AsientoRechazo", alias: "asiRechazo");
-    addRelation("Asientos", "Efectos", "ID_AsientoDudosoCobro", alias: "asiDudosoCobro");
-    addRelation("Asientos", "Efectos", "ID_AsientoIncobrable", alias: "asiIncobrable");
-    addRelation("Asientos", "Efectos", "ID_AsientoPagado", alias: "asiPagado");
-    addRelation("Asientos", "Efectos", "ID_AsientoAgrupacion", alias: "asiAgrup");
-    addRelation("Asientos", "RemesasAsientos", "ID_Asiento");
-    addRelation("Asientos", "Remesas", "ID_Asiento");
-    addRelation("Asientos", "Fianzas", "ID_AsientoConstitucion", alias: "asiConst");
-    addRelation("Asientos", "Fianzas", "ID_AsientoCancelacion", alias: "asiCanc");
-
-    // Averias
-    addRelation("Averias", "OrdenesTrabajo", "ID_Averia", lCanBeDeleteManual: true);
-    cFiltro = "ArtRevisionesAverias.Tipo=${EnumArtRevisionesAveriasTipo.averia.index}";
-    addRelation("Averias", "ArtRevisionesAverias", "ID_AveriaRevision",
-        selectCanBeDel: "Averias.verialID, Averias.ID_Aparato, ArtRevisionesAverias.Tipo",
-        filtro: cFiltro,
-        joinStr: cJoinAveriasArticulos,
-        lCanBeDeleteManual: true);
-    cFiltro = "TecnicosRevisionesAverias.Tipo=${EnumTecnicosRevisionesAveriasTipo.averia.index}";
-    addRelation("Averias", "TecnicosRevisionesAverias", "ID_AveriaRevision",
-        selectCanBeDel: "Averias.verialID, Averias.ID_Aparato, TecnicosRevisionesAverias.Tipo",
-        filtro: cFiltro,
-        joinStr: cJoinAveriasTecnicos,
-        lCanBeDeleteManual: true);
-
-    // Balances
-    addRelation("Balances", "Balances", "ID_Padre");
-    addRelation("Balances", "BalancesX", "ID_Balance", lCanBeDeleteManual: true);
-    addRelation("Balances", "BalancesX", "ID_SubBalance", alias: "balXSub");
-
-    // Bancos
-    addRelation("Bancos_G", "CuentasBancarias", "ID_Banco");
-
-    // BonosAcceso
-    addRelation("BonosAcceso", "BonosAccesoX", "ID_BonoAcceso", lCanBeDeleteManual: true);
-
-    // Cajones
-    addRelation("Cajones", "AreasVenta", "ID_Cajon");
-    addRelation("Cajones", "Arqueos", "ID_Cajon");
-    addRelation("Cajones", "OperacionesTPV", "ID_Cajon");
-    addRelation("Cajones", "Efectos", "ID_Cajon");
-    addRelation("Cajones", "PuestosX", "ID_Cajon", selectCanBeDel: "ID_Puesto");
-    addRelation("Cajones", "UsuariosX", "ID_Cajon", selectCanBeDel: "ID_Usuario");
-    addRelation("Cajones", "Fianzas", "ID_CajonConstitucion", alias: "cajConst");
-    addRelation("Cajones", "Fianzas", "ID_CajonCancelacion", alias: "cajCanc");
-    addRelation("Cajones", "Pdas", "ID_Cajon");
-
-    // CartaClientes
-    addRelation("CartaClientes", "CartaClientes_Grupos", "ID_CartaClientes", lCanBeDeleteManual: true);
-    addRelation("CartaClientes", "PuestosX", "ID_CartaAutopedido", selectCanBeDel: "ID_Puesto");
-
-    // CartaClientes_Grupos
-    addRelation("CartaClientes_Grupos", "CartaClientes_Articulos", "ID_CartaClientes_Grupo");
-
-    // CartaGrupos
-    addRelation("CartaGrupos", "CartaArticulos", "ID_Grupo", lCanBeDeleteManual: true);
-
-    // CentroCostes_Arboles
-    addRelation("CentroCostes_Arboles", "CentroCostes_Proyectos", "ID_Arbol");
-    addRelation("CentroCostes_Arboles", "CentroCostes_Arbolesx", "ID_Arbol");
-
-    // CentroCostes_Arbolesx
-    addRelation("CentroCostes_Arbolesx", "CentroCostes_Arbolesx", "ID_Padre", alias: "centroCostesArbolesxPadre");
-    addRelation("CentroCostes_Arbolesx", "CentroCostes_Arbolesx", "ID_ArbolXGeneral", alias: "centroCostesArbolesxGeneral");
-    addRelation("CentroCostes_Arbolesx", "CentroCostes_Defecto", "ID_ArbolX");
-    addRelation("CentroCostes_Arbolesx", "CentroCostes_Valores", "ID_ArbolX");
-
-    // CentroCostes_Proyectos
-    addRelation("CentroCostes_Proyectos", "CentroCostes_Defecto", "ID_Proyecto");
-    addRelation("CentroCostes_Proyectos", "CentroCostes_Valores", "ID_Proyecto");
-
-    // CentroInformes
-    addRelation("CentroInformes", "CentroInformesX", "ID_CentroInformes", lCanBeDeleteManual: true);
-
-    // Cfg_CentralReservas
-    addRelation("Cfg_CentralReservas", "Cfg_CentralReservasCargos", "ID_Cfg_CentralReservas");
-    addRelation("Cfg_CentralReservas", "Cfg_CentralReservasCargosXPersona", "ID_Cfg_CentralReservas");
-    addRelation("Cfg_CentralReservas", "Cfg_CentralReservasClientesAgencias", "ID_Cfg_CentralReservas");
-    addRelation("Cfg_CentralReservas", "Cfg_CentralReservasSincronizacionAuto", "ID_Cfg_CentralReservas");
-
-    // Cfg_FicheroPolicia
-    addRelation("Cfg_FicheroPolicia", "Delegaciones", "ID_Cfg_FicheroPolicia");
-    addRelation("Cfg_FicheroPolicia", "AreasVenta", "ID_Cfg_FicheroPolicia");
-    addRelation("Cfg_FicheroPolicia", "Habitaciones", "ID_Cfg_FicheroPolicia");
-
-    // Cfg_Fondo
-    addRelation("Cfg_Fondo_G", AppTablas.cCfgFondoX, "ID_Cfg_Fondo", lCanBeDeleteManual: true);
-    addRelation("Cfg_Fondo_G", AppTablas.cUsuarios, "ID_Cfg_Fondo");
-
-    // Cfg_Menu
-    addRelation("Cfg_Menu_G", AppTablas.cCfgMenuX, "ID_Cfg_Menu", lCanBeDeleteManual: true);
-    addRelation("Cfg_Menu_G", AppTablas.cUsuarios, "ID_Cfg_Menu");
-
-    // Clientes
-    addRelation("Clientes", "Mantenimientos", "ID_ClienteAtendido", alias: "cliAtend");
-    addRelation("Clientes", "Mantenimientos", "ID_ClienteFacturacion", alias: "cliFac");
-    addRelation("Clientes", "AreasVenta", "ID_ClienteDefecto");
-
-    cFiltro = "CuentasBancarias.TipoFicha=${EnumCuentasBancariasTipoFicha.clientes.index}";
-    addRelation("Clientes", "CuentasBancarias", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Clientes", "Clientes", "ID_FichaFiscal", lCanBeDeleteManual: true, alias: "cliFiscal");
-    addRelation("Clientes", "Clientes", "ID_FichaVarios", alias: "cliVarios");
-    addRelation("Clientes", "Clientes", "ID_Agencia", alias: "cliAgencia");
-
-    cFiltro = "Mensajes.TipoFicha=${EnumMensajesTipoFicha.cliente.index}";
-    addRelation("Clientes", "Mensajes", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-
-    cFiltro = "Data_Imp.TipoEmisor=${EnumDataImpTipoEmisor.cliente.index}";
-    addRelation("Clientes", "Data_Imp", "ID_Emisor", filtro: cFiltro);
-
-    cFiltro = "Data_Imp.TipoDocumento=${EnumDataImpTipoDocumento.documentocliente.index}";
-    addRelation("Clientes", "Data_Imp", "ID_TitularDoc", filtro: cFiltro, alias: "cliTitular");
-    addRelation("Clientes", "DocCli", "ID_Cliente", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Clientes", "DocCli", "ID_Reservador", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "cliReservador");
-    addRelation("Clientes", "DocCli", "ID_ClienteAgencia", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "cliAgencia");
-    addRelation("Clientes", "DocClix", "ID_Reservador", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "cliResevador");
-    addRelation("Clientes", "DocClix", "ID_ClienteAgencia", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "cliAgencia");
-    addRelation("Clientes", "PuntosClientes", "ID_Cliente");
-    addRelation("Clientes", "DocHotel", "ID_Cliente", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("Clientes", "DocHotel", "ID_Reservador", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", alias: "cliReservador");
-    addRelation("Clientes", "DocHotelx", "ID_Cliente", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
-    addRelation("Clientes", "DocHotelx", "ID_QuienPaga", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "cliPagador");
-    addRelation("Clientes", "Cupos", "ID_Cliente");
-    addRelation("Clientes", "Instalaciones", "ID_Cliente");
-    addRelation("Clientes", "Instalaciones", "ID_Vendedor", alias: "cliVendedor");
-    addRelation("Clientes", "Instalaciones", "ID_Mayorista", alias: "climayorista");
-    cFiltro = "Nombres.TipoFicha=${EnumNombresTipoFicha.clientesContactos.index}";
-    addRelation("Clientes", "Nombres", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Clientes", "Mandatos", "ID_Cliente", lCanBeDeleteManual: true);
-    addRelation("Clientes", "ReservasRest", "ID_Cliente");
-    addRelation("Clientes", "TarifaHotelClientes", "ID_Cliente");
-    addRelation("Clientes", "Tpvext_Saldos", "ID_Cliente");
-    addRelation("Clientes", "Aparatos", "ID_Cliente");
-    addRelation("Clientes", "Delegaciones", "ID_ClienteVarios");
-    addRelation("Clientes", "OcupantesX", "ID_Cliente");
-    addRelation("Clientes", "Agenda", "ID_Cliente");
-
-    cFiltro = "CamposAuxiliares.Tipo=${EnumCamposAuxiliaresTipo.clientes.index}";
-    addRelation("Clientes", "CamposAuxiliares", "ID_Origen", filtro: cFiltro, lCanBeDeleteManual: true, alias: "cliOrigen");
-
-    cFiltro = "CamposAuxiliares.Tipo=${EnumCamposAuxiliaresTipo.clientesFichamedica.index}";
-    addRelation("Clientes", "CamposAuxiliares", "ID_Origen", filtro: cFiltro, lCanBeDeleteManual: true, alias: "cliOrigenFichaMedica");
-
-    cFiltro = "RutasFicheros.TipoFicha=${EnumRutasFicherosTipoFicha.clientes.index}";
-    addRelation("Clientes", "RutasFicheros", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Clientes", "FabricacionGrupo", "ID_Cliente");
-    addRelation("Clientes", "DocCli", "ID_RemitenteCliente", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "cliRemitente");
-    addRelation("Clientes", "DocCli", "ID_EnvioCliente", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "cliEnvio");
-    addRelation("Clientes", "HstDocHotel", "ID_Cliente",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", lCanBeDeleteManual: true);
-    addRelation("Clientes", "HstDocHotel", "ID_Reservador",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", lCanBeDeleteManual: true, alias: "cliReservador");
-    addRelation("Clientes", "HstDocHotelx", "ID_Cliente",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true);
-    addRelation("Clientes", "HstDocHotelx", "ID_QuienPaga",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true, alias: "cliPagador");
-    addRelation("Clientes", "HstOcupantesX", "ID_Cliente", lCanBeDeleteManual: true);
-    addRelation("Clientes", "PartesMedicos", "ID_Cliente");
-    addRelation("Clientes", "Clientes", "ID_ReceptorEFactura", alias: "cliReceptorEFac");
-    addRelation("Clientes", "Clientes", "ID_PagadorEFactura", alias: "cliPagadorEFac");
-    addRelation("Clientes", "Clientes", "ID_ContableEFactura", alias: "cliContableEFac");
-    addRelation("Clientes", "ObjetosPerdidos", "ID_ClienteEncontrado", alias: "cliEncontrado");
-    addRelation("Clientes", "ObjetosPerdidos", "ID_ClienteReclamado", alias: "cliReclamado");
-    addRelation("Clientes", "BonosAcceso", "ID_Cliente");
-    addRelation("Clientes", "ClientesX", "ID_Cliente",
-        selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX, lCanBeDeleteManual: true);
-    addRelation("Clientes", "DocAlmacen", "ID_Cliente", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo");
-    addRelation("Clientes", "Suscripciones", "ID_Cliente");
-    addRelation("Clientes", "Cfg_CentralReservasClientesAgencias", "ID_Cliente");
-    cFiltro = "CategoriasDe.Tipo=${EnumCategoriasDeTipo.clientes.index}";
-    addRelation("Clientes", "CategoriasDe", "ID_Quien", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Clientes", "CartaClientes", "ID_Cliente");
-
-    // Coleccionables
-    addRelation("Coleccionables", "Articulos", "ID_Coleccionable");
-
-    // Comisiones
-    cFiltro = "Asientos.Tipo=${EnumAsientosTipo.comisiones.index}";
-    addRelation("Comisiones", "Asientos", "ID_Documento", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Comisiones", "ComisionesX", "ID_Comisiones", lCanBeDeleteManual: true);
-    addRelation("Comisiones", "ComisionesX", "ID_ComisRetro", alias: "comisRetro");
-    addRelation("Comisiones", "ComisionesX", "ID_ComisConfirm", alias: "comisConfim");
-
-    // Comisionistas
-    addRelation("Comisionistas", "Mantenimientos", "ID_Agente");
-    addRelation("Comisionistas", "Comisiones", "ID_Comisionista");
-    addRelation("Comisionistas", "ComisionesX", "ID_Comisionista");
-    addRelation("Comisionistas", "DocHotel", "ID_Agente1", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", alias: "comisionistasAg1");
-    addRelation("Comisionistas", "DocHotel", "ID_Agente2", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", alias: "comisionistasAg2");
-    addRelation("Comisionistas", "DocHotel", "ID_Agente3", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", alias: "comisionistasAg3");
-    addRelation("Comisionistas", "DocCli", "ID_Agente1", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "comisionistasAg1");
-    addRelation("Comisionistas", "DocCli", "ID_Agente2", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "comisionistasAg2");
-    addRelation("Comisionistas", "DocCli", "ID_Agente3", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "comisionistasAg3");
-    addRelation("Comisionistas", "DocClix", "ID_Agente1", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "comisionistasAg1");
-    addRelation("Comisionistas", "DocClix", "ID_Agente2", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "comisionistasAg2");
-    addRelation("Comisionistas", "DocClix", "ID_Agente3", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "comisionistasAg3");
-    addRelation("Comisionistas", "DocHotelx", "ID_Agente1", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "comisionistasAg1");
-    addRelation("Comisionistas", "DocHotelx", "ID_Agente2", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "comisionistasAg2");
-    addRelation("Comisionistas", "DocHotelx", "ID_Agente3", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "comisionistasAg3");
-    addRelation("Comisionistas", "Pdas", "ID_Agente1", alias: "comisionistasAg1");
-    addRelation("Comisionistas", "Pdas", "ID_Agente2", alias: "comisionistasAg2");
-    addRelation("Comisionistas", "UsuariosX", "ID_AgenteAtencion", selectCanBeDel: "ID_Usuario");
-    addRelation("Comisionistas", "Delegaciones", "ID_AgenteDefecto");
-    addRelation("Comisionistas", "Cupos", "ID_CentralReservas");
-    addRelation("Comisionistas", "HstDocHotel", "ID_Agente1", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", alias: "comisionistasAg1");
-    addRelation("Comisionistas", "HstDocHotel", "ID_Agente2", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", alias: "comisionistasAg2");
-    addRelation("Comisionistas", "HstDocHotel", "ID_Agente3", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", alias: "comisionistasAg3");
-    addRelation("Comisionistas", "HstDocHotelx", "ID_Agente1",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "comisionistasAg1");
-    addRelation("Comisionistas", "HstDocHotelx", "ID_Agente2",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "comisionistasAg2");
-    addRelation("Comisionistas", "HstDocHotelx", "ID_Agente3",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "comisionistasAg3");
-    addRelation("Comisionistas", "ClientesX", "ID_Agente1",
-        selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX, alias: "comisionistasAg1");
-    addRelation("Comisionistas", "ClientesX", "ID_Agente2",
-        selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX, alias: "comisionistasAg2");
-    addRelation("Comisionistas", "ClientesX", "ID_Agente3",
-        selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX, alias: "comisionistasAg3");
-    addRelation("Comisionistas", "ComisionistasX", "ID_Comisionista", lCanBeDeleteManual: true);
-
-    // Conocimientos
-    addRelation("Conocimientos", "Conocimientos", "ID_Duplicado");
-    addRelation("Conocimientos", "ConocimientosX", "ID_Conocimientos");
-
-    // ContactosExternos
-    addRelation("ContactosExternos", "DocCli", "ID_ContactoExterno", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("ContactosExternos", "DocClix", "ID_ContactoExterno", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-    addRelation("ContactosExternos", "Clientes", "ID_ContactoExterno");
-    addRelation("ContactosExternos", "Aparatos", "ID_ContactoExterno");
-
-    // CtasAnuales
-    addRelation("CtasAnuales", "CtasAnualesCeldas", "ID_CtaAnual");
-    addRelation("CtasAnuales", "CtasAnualesClaves", "ID_CtaAnual");
-
-    // Cuentas
-    addRelation("Cuentas", "Apuntes", "ID_Cuenta", selectCanBeDel: "ID_Asiento");
-    addRelation("Cuentas", "Apuntes", "ID_Contrapartida", selectCanBeDel: "ID_Asiento", alias: "ctasCP");
-    addRelation("Cuentas", "ConceptosContables", "ID_Cuenta");
-    addRelation("Cuentas", "ConceptosContables", "ID_Contrapartida", alias: "ctasCP");
-    addRelation("Cuentas", "CuentasBancarias", "ID_Cuenta");
-    addRelation("Cuentas", "Clientes", "ID_Cuenta");
-    addRelation("Cuentas", "Clientes", "ID_CuentaIngresos", alias: "ctasIngr");
-    addRelation("Cuentas", "CuentasEspeciales", "ID_CtaGastos", alias: "ctasGastos");
-    addRelation("Cuentas", "CuentasEspeciales", "ID_CtaIngresos", alias: "ctasIngr");
-    addRelation("Cuentas", "CuentasEspeciales", "ID_CtaExistencias", alias: "ctasExist");
-    addRelation("Cuentas", "Presupuestos", "ID_Cuenta");
-    addRelation("Cuentas", "DocCliValores", "ID_Cuenta", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocCliValores);
-    addRelation("Cuentas", "DocProValores", "ID_Cuenta", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProValores);
-    addRelation("Cuentas", "Retenciones", "ID_CtaHPDeudora", alias: "ctasHpDeud");
-    addRelation("Cuentas", "Retenciones", "ID_CtaHPAcreedora", alias: "ctasHpAcre");
-    addRelation("Cuentas", "Inmovilizado", "ID_CtaInmovilizado", alias: "ctasInmov");
-    addRelation("Cuentas", "Inmovilizado", "ID_CtaDotacion", alias: "ctasDotac");
-    addRelation("Cuentas", "Inmovilizado", "ID_CtaAcumulado", alias: "ctasAcum");
-    addRelation("Cuentas", "MetodosPago", "ID_Cuenta");
-    addRelation("Cuentas", "MetodosPago", "ID_AltCuenta", alias: "ctasAlt");
-    addRelation("Cuentas", "MetodosPago", "ID_CtaGastos", alias: "ctasGastos");
-    addRelation("Cuentas", "MetodosPago", "ID_CtaDtoEfectos", alias: "ctasDtoEfec");
-    addRelation("Cuentas", "Nominas", "ID_CtaIndemnizaciones", alias: "ctasIndem");
-    addRelation("Cuentas", "Nominas", "ID_CtaPrestacionesSS", alias: "ctasPretSS");
-    addRelation("Cuentas", "Nominas", "ID_CtaRetencionSS", alias: "ctasRetSS");
-    addRelation("Cuentas", "Nominas", "ID_CtaRetencionSSEmpresa", alias: "ctasRetSSEmp");
-    addRelation("Cuentas", "Nominas", "ID_CtaCreditosLP", alias: "ctasCredLP");
-    addRelation("Cuentas", "Nominas", "ID_CtaCreditosCP", alias: "ctasCredCP");
-    addRelation("Cuentas", "Nominas", "ID_CtaEnEspecie", alias: "ctasEnEsp");
-    addRelation("Cuentas", "Nominas", "ID_CtaSSEmpresa", alias: "ctasSSEmp");
-    addRelation("Cuentas", "Personal", "ID_CtaPendiente", alias: "ctasPendiente");
-    addRelation("Cuentas", "Personal", "ID_CtaAnticipos", alias: "ctasAnticipos");
-    addRelation("Cuentas", "Personal", "ID_CtaSalarios", alias: "ctasSalarios");
-    addRelation("Cuentas", "Proveedores", "ID_Cuenta");
-    addRelation("Cuentas", "Proveedores", "ID_CuentaGastos", alias: "ctasGastos");
-    addRelation("Cuentas", "Prevision", "ID_Cuenta");
-    addRelation("Cuentas", "CuentasBancarias", "ID_CuentaDtoEfectos", alias: "ctasDtoEfectos");
-    addRelation("Cuentas", "Nominas", "ID_CtaOtrosDevengos", alias: "ctasOtrosDev");
-    addRelation("Cuentas", "Nominas", "ID_CtaOtrasDeducciones", alias: "ctasOtrasDed");
-    addRelation("Cuentas", "Fianzas", "ID_CtaFianzas", alias: "ctasFianzas");
-    addRelation("Cuentas", "Fianzas", "ID_CtaIngresos", alias: "ctasIngr");
-    addRelation("Cuentas", "FianzasX", "ID_CtaFianzas", alias: "ctasFianzas");
-    addRelation("Cuentas", "FianzasX", "ID_CtaIngresos", alias: "ctasIngr");
-    addRelation("Cuentas", "CuentasEspeciales", "ID_CtaSociosIngresos", alias: "ctasSocIngr");
-    addRelation("Cuentas", "CuentasEspeciales", "ID_CtaSociosGastos", alias: "ctasSoxGastos");
-
-    // CuentasBancarias
-    addRelation("CuentasBancarias", "MetodosPago", "ID_CtaBancaria");
-    cFiltro =
-        "Nombres.TipoFicha IN(${EnumNombresTipoFicha.cuentasBancariasPropiasOficina.index},${EnumNombresTipoFicha.cuentasBancariasPropiasContactos.index})";
-    addRelation("CuentasBancarias", "Nombres", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("CuentasBancarias", "Nominas", "ID_CuentaBancaria");
-    addRelation("CuentasBancarias", "Mandatos", "ID_CtaCliente");
-    addRelation("CuentasBancarias", "Efectos", "ID_CuentaBancaria");
-
-    // CuentasEmail
-    addRelation("CuentasEmail", "UsuariosX", "ID_CuentaEmail", selectCanBeDel: "ID_Usuario");
-
-    // CuentasEspeciales
-    addRelation("CuentasEspeciales", "AreasVenta", "ID_CuentaEspecial");
-    addRelation("CuentasEspeciales", "Articulos", "ID_CuentaEspecial");
-    addRelation("CuentasEspeciales", "Data_ImpX", "ID_CuentaEspecial");
-
-    // Cupos
-    addRelation("Cupos", "CuposX", "ID_Cupo", lCanBeDeleteManual: true);
-    addRelation("Cupos", "TarifaHotel", "ID_Cupo", lCanBeDeleteManual: true);
-    addRelation("Cupos", "DocHotelx", "ID_Cupo", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
-    addRelation("Cupos", "HstDocHotelx", "ID_Cupo", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
-
-    // Data_Imp
-    addRelation("Data_Imp", "Data_ImpX", "ID_Data_Imp");
-
-    // Data_ImpX
-    addRelation("Data_ImpX", "Data_ImpX_Detalle", "ID_Data_ImpX");
-
-    // Delegaciones
-    addRelation("Delegaciones", "PuestosX", "ID_Delegacion", selectCanBeDel: "ID_Puesto");
-    addRelation("Delegaciones", "Delegaciones", "ID_FichaPrincipal");
-    addRelation("Delegaciones", "Aparatos", "ID_Delegacion");
-    addRelation("Delegaciones", "Mantenimientos", "ID_Delegacion");
-    addRelation("Delegaciones", "ArtLotes", "ID_Delegacion");
-    addRelation("Delegaciones", "CartaGrupos", "ID_Delegacion");
-    addRelation("Delegaciones", "ContactosExternos", "ID_Delegacion");
-    addRelation("Delegaciones", "GruposComisiones", "ID_Delegacion");
-    addRelation("Delegaciones", "ITPV_Settings", "ID_Delegacion");
-    addRelation("Delegaciones", "TarifaHotel", "ID_Delegacion");
-    addRelation("Delegaciones", "Tecnicos", "ID_Delegacion");
-    addRelation("Delegaciones", "Transportistas", "ID_Delegacion");
-    addRelation("Delegaciones", "Vehiculos", "ID_Delegacion");
-    addRelation("Delegaciones", "Veterinarios", "ID_Delegacion");
-    addRelation("Delegaciones", "Zonas", "ID_Delegacion");
-    addRelation("Delegaciones", "AreasVenta", "ID_Delegacion");
-    addRelation("Delegaciones", "AreasCompra", "ID_Delegacion");
-    addRelation("Delegaciones", "ArtDelegaciones", "ID_Delegacion");
-    addRelation("Delegaciones", "TarifasArticulos", "ID_Delegacion");
-    addRelation("Delegaciones", "Agenda", "ID_Delegacion");
-    addRelation("Delegaciones", "PartesReparaciones", "ID_Delegacion");
-    addRelation("Delegaciones", "Salones", "ID_Delegacion");
-    addRelation("Delegaciones", "Almacenes", "ID_Delegacion");
-    addRelation("Delegaciones", "FabricacionGrupo", "ID_Delegacion");
-    addRelation("Delegaciones", "CentroCostes_Proyectos", "ID_Delegacion");
-    addRelation("Delegaciones", "DocPro", "ID_Delegacion", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("Delegaciones", "Personal", "ID_Delegacion");
-    addRelation("Delegaciones", "OperacionesTPV", "ID_Delegacion");
-    addRelation("Delegaciones", "Efectos", "ID_Delegacion");
-    addRelation("Delegaciones", "DocCli", "ID_Delegacion", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Delegaciones", "GruposSeries", "ID_Delegacion");
-    addRelation("Delegaciones", "DocHotel", "ID_Delegacion", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("Delegaciones", "HstDocHotel", "ID_Delegacion",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", lCanBeDeleteManual: true);
-    addRelation("Delegaciones", "Inmovilizado", "ID_Delegacion");
-    addRelation("Delegaciones", "ArtProveedor", "ID_Delegacion", selectCanBeDel: "ArtProveedor.ID_Articulo");
-    addRelation("Delegaciones", "Cajones", "ID_Delegacion");
-    addRelation("Delegaciones", "Fianzas", "ID_Delegacion");
-    addRelation("Delegaciones", "ObjetosPerdidos", "ID_Delegacion");
-    addRelation("Delegaciones", "Tpvext_Secciones", "ID_Delegacion");
-    addRelation("Delegaciones", "TarifasDoc", "ID_Delegacion");
-    addRelation("Delegaciones", "MetodosPago", "ID_Delegacion");
-    addRelation("Delegaciones", "FabricacionEtapas", "ID_Delegacion");
-
-    // Dispositivos
-    addRelation("Dispositivos_G", AppTablas.cImpresoras, "ID_Dispositivo");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_Impresora");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_Ticadora");
-    addRelation("Dispositivos_G", AppTablas.cInformesCfgX, "ID_Dispositivo");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_Visor");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_ScannerBarras");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_ScannerMag");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_Bascula");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_SmartCard");
-    addRelation("Dispositivos_G", AppTablas.cDispositivos, "ID_Dispositivo");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_SrvInHova1");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_SrvInHova2");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_FirmaManuscrita");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_Impresora1Comandero");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_Impresora2Comandero");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_Impresora3Comandero");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_TerminalCobro");
-    addRelation("Dispositivos_G", AppTablas.cPuestos, "ID_Etiquetadora");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpresoraFacturas");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpresoraAlbaranes");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpresoraTickets");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpresoraJustificantes");
-    addRelation("Dispositivos_G", "CartaArticulos", "ID_Impresora1");
-    addRelation("Dispositivos_G", "CartaArticulos", "ID_Impresora2");
-    addRelation("Dispositivos_G", "CartaGrupos", "ID_Impresora1");
-    addRelation("Dispositivos_G", "CartaGrupos", "ID_Impresora2");
-    addRelation("Dispositivos_G", "MenuRestX", "ID_Impresora1");
-    addRelation("Dispositivos_G", "MenuRestX", "ID_Impresora2");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpresoraFacturasTic");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpresoraAlbaranesTic");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpresoraTicketsTic");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpresoraPedidos");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpresoraPedidosTic");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpresoraPresupuestos");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpresoraPresupuestosTic");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpresoraJustificantesTic");
-    addRelation("Dispositivos_G", "Cajones", "ID_Dispositivo");
-    addRelation("Dispositivos_G", "Habitaciones", "ID_SrvInHova");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpFacturasPlantilla");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpAlbaranesPlantilla");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpTicketsPlantilla");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpPedidosPlantilla");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpPresupuestosPlantilla");
-    addRelation("Dispositivos_G", "AreasVenta", "ID_ImpNotasPlantilla");
-
-    // DocAlmacen
-    addRelation("DocAlmacen", "Averias", "ID_DocAlmacen", lCanBeDeleteManual: true);
-    addRelation("DocAlmacen", "Revisiones", "ID_DocAlmacen", lCanBeDeleteManual: true);
-    addRelation("DocAlmacen", "DocAlmacen", "ID_DocTraspaso", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo");
-    addRelation("DocAlmacen", "DocAlmacenx", "ID_Documento",    selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", joinStr: cJoinDocAlmacenx, lCanBeDeleteManual: true);
-    addRelation("DocAlmacen", "PartesReparaciones", "ID_DocAlmacen", lCanBeDeleteManual: true);
-    addRelation("DocAlmacen", "Fabricacion", "ID_DocAlmacenSalida",        selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", lCanBeDeleteManual: true, alias: "docAlmSal");
-    addRelation("DocAlmacen", "Fabricacion", "ID_DocAlmacenEntrada",        selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", lCanBeDeleteManual: true, alias: "docAlmEnt");
-
-    // DocCli
-    addRelation("DocCli", "Averias", "ID_DocCli");
-    addRelation("DocCli", "OrdenesTrabajo", "ID_DocCli");
-    addRelation("DocCli", "Revisiones", "ID_DocCli");
-    cFiltro = "Asientos.Tipo IN(${EnumAsientosTipo.facturaemitida.index},${EnumAsientosTipo.cierredecaja.index})";
-    addRelation("DocCli", "Asientos", "ID_Documento", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("DocCli", "ComisionesX", "ID_DocCli");
-    addRelation("DocCli", "DocCli", "ID_Facturado", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "dcFac");
-    addRelation("DocCli", "DocCli", "ID_CierreCaja", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "dcCiereCaja");
-    addRelation("DocCli", "DocCli", "ID_Devolucion", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "dcDev");
-    addRelation("DocCli", "DocCliValores", "ID_Documento", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocCliValores);
-    addRelation("DocCli", "DocClix", "ID_Documento", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcDoc");
-    addRelation("DocCli", "DocClix", "ID_Procedencia", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcProc");
-    addRelation("DocCli", "DocClix", "ID_DocOrigen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcOrigen");
-    addRelation("DocCli", "PuntosClientes", "ID_Documento");
-    addRelation("DocCli", "DocHotel", "ID_DocCli", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("DocCli", "DocHotelx", "ID_DocCli", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
-    addRelation("DocCli", "DocPro", "ID_InversionSP", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "dcInvSP");
-    addRelation("DocCli", "DocPro", "ID_DocCliTransfer", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", lCanBeDeleteManual: true, alias: "dcTransfer");
-    addRelation("DocCli", "DocPro", "ID_DocCliPedido", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", lCanBeDeleteManual: true, alias: "dcPedido");
-
-    addRelation("DocCli", "DocAlmacen", "ID_DocCli", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo");
-    addRelation("DocCli", "Efectos", "ID_CierreCaja", alias: "dcCierre");
-    addRelation("DocCli", "Efectos", "ID_Pedido", alias: "dcPedido");
-    cFiltro = "CamposAuxiliares.Tipo=${EnumCamposAuxiliaresTipo.doccli.index}";
-    addRelation("DocCli", "CamposAuxiliares", "ID_Origen", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("DocCli", "FabricacionGrupo", "ID_DocCli", lCanBeDeleteManual: true);
-    addRelation("DocCli", "FabricacionGrupo", "ID_Pedido", lCanBeDeleteManual: true, alias: "dcPedido");
-    addRelation("DocCli", "HstDocHotel", "ID_DocCli", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", lCanBeDeleteManual: true);
-    addRelation("DocCli", "DocCli", "ID_FacturaRectificada", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("DocCli", "Logi_Envios", "ID_DocCli");
-    addRelation("DocCli", "DocAlmacenx", "ID_DocCliDepositario",
-        selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", joinStr: cJoinDocAlmacenx);
-    addRelation("DocCli", "DocCli", "ID_FacturaTicket", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "dcFacTic");
-    addRelation("DocCli", "Aparatos", "ID_DocCliCopias", lCanBeDeleteManual: true);
-    addRelation("DocCli", "DocCli", "ID_Pedido", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", lCanBeDeleteManual: true, alias: "dcPedido");
-    addRelation("DocCli", "DocCli", "ID_PedidoReserva", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "dcPedidoRes");
-    addRelation("DocCli", "DocCli", "ID_Anterior", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "dcAnterior");
-
-    // DocClix
-    cFiltro = "NumerosSerie.Tipo=${EnumNumerosSerieTipo.doccliente.index}";
-    addRelation("DocClix", "NumerosSerie", "ID_Contenido", filtro: cFiltro);
-    addRelation("DocClix", "DocClix", "ID_DocClix", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-    addRelation("DocClix", "DocClix", "ID_GrupoImpresion", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcxGrpImp");
-    addRelation("DocClix", "DocClix", "ID_DocxMenu", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcxMenu");
-    addRelation("DocClix", "DocClix", "ID_SubCompuesto", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcxSubComp");
-    addRelation("DocClix", "DocClix", "ID_GrupoActoEvento", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "dcxGrpActoEvento");
-    addRelation("DocClix", "OcupantesX", "ID_DocClix");
-    addRelation("DocClix", "RecursosActos", "ID_DocClix",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc, DocCli.verialID, DocCli.Tipo", joinStr: cJoinRecursosActos);
-
-    // DocHotel
-    addRelation("DocHotel", "DocHotelx", "ID_Documento",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true);
-    addRelation("DocHotel", "Efectos", "ID_DocHotel");
-    addRelation("DocHotel", "ComandaVisual", "ID_DocHotel");
-
-    // DocHotelx
-    addRelation("DocHotelx", "DocHotelx", "ID_DocHotelx", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true);
-    addRelation("DocHotelx", "DocHotelx", "ID_GrupoImpresion", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true, alias: "dhxGrpImp");
-    addRelation("DocHotelx", "DocHotelx", "ID_DocxMenu", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true, alias: "dhxMenu");
-    addRelation("DocHotelx", "DocHotelx", "ID_SubCompuesto",selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true, alias: "dhxSubComp");
-    addRelation("DocHotelx", "DocHotelx", "ID_GrupoActoEvento",selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true, alias: "dhxGrpActoEvento");
-
-    addRelation("DocHotelx", "DocHotelxPrevision", "ID_DocHotelx", selectCanBeDel: "DocHotelx.ID_Documento", joinStr: cJoinDHXPrevision, lCanBeDeleteManual: true);
-    addRelation("DocHotelx", "OcupantesX", "ID_DocHotelx", lCanBeDeleteManual: true);
-    addRelation("DocHotelx", "RecursosActos", "ID_DocHotelx",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc, DocCli.verialID, DocCli.Tipo",
-        joinStr: cJoinRecursosActos,
-        lCanBeDeleteManual: true);
-
-    // DocPro
-    cFiltro = "Asientos.Tipo=${EnumAsientosTipo.facturarecibida.index}";
-    addRelation("DocPro", "Asientos", "ID_Documento", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("DocPro", "DocCli", "ID_InversionSP", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("DocPro", "DocCli", "ID_DocProTransfer", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", lCanBeDeleteManual: true, alias: "dpTransfer");
-    addRelation("DocPro", "DocClix", "ID_Partida", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-    addRelation("DocPro", "DocPro", "ID_Facturado", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "dpFacturado");
-    addRelation("DocPro", "DocPro", "ID_Devolucion", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "dpDev");
-    addRelation("DocPro", "DocPro", "ID_FacturaRectificada", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "dpFacRec");
-    addRelation("DocPro", "DocPro", "ID_DUA", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "dpDUA");
-
-    addRelation("DocPro", "DocProValores", "ID_Documento", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProValores);
-    addRelation("DocPro", "DocProValores", "ID_RefDocPro", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProValores, alias: "dpRefDoc");
-
-    addRelation("DocPro", "DocProx", "ID_Documento", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx);
-    addRelation("DocPro", "DocProx", "ID_Procedencia", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx, alias: "dpProc");
-    addRelation("DocPro", "DocProx", "ID_Partida", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx, alias: "dpPart");
-    addRelation("DocPro", "DocProx", "ID_DocOrigen", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProx, alias: "dpDocOrigen");
-
-    addRelation("DocPro", "Inmovilizado", "ID_Factura");
-    addRelation("DocPro", "DocAlmacenx", "ID_Partida", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", joinStr: cJoinDocAlmacenx);
-    addRelation("DocPro", "CentroCostes_Valores", "ID_DocPro", lCanBeDeleteManual: true);
-
-    cFiltro = "CamposAuxiliares.Tipo=${EnumCamposAuxiliaresTipo.docpro.index}";
-    addRelation("DocPro", "CamposAuxiliares", "ID_Origen", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("DocPro", "Logi_Envios", "ID_Factura", alias: "dpFactura");
-    addRelation("DocPro", "DocAlmacen", "ID_DocPro", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", lCanBeDeleteManual: true);
-
-    cFiltro = "ArtRevisionesAverias.Tipo=${EnumArtRevisionesAveriasTipo.averia.index}";
-    addRelation("DocPro", "ArtRevisionesAverias", "ID_Partida",
-        selectCanBeDel: "Averias.verialID, Averias.ID_Aparato, ArtRevisionesAverias.Tipo", filtro: cFiltro, joinStr: cJoinAveriasArticulos, alias: "dpAverias");
-
-    cFiltro = "ArtRevisionesAverias.Tipo=${EnumArtRevisionesAveriasTipo.revision.index}";
-    addRelation("DocPro", "ArtRevisionesAverias", "ID_Partida",
-        selectCanBeDel: "Revisiones.verialID, Revisiones.ID_Aparato, ArtRevisionesAverias.Tipo",
-        filtro: cFiltro,
-        joinStr: cJoinRevisionesArticulos, alias: "dpRevisiones");
-
-    addRelation("DocPro", AppTablas.cStock, "ID_Partida");
-
-    // DocProx
-    cFiltro = "NumerosSerie.Tipo=${EnumNumerosSerieTipo.docproveedor.index}";
-    addRelation("DocProx", "NumerosSerie", "ID_Contenido", filtro: cFiltro);
-    addRelation("DocProx", "CentroCostes_Valores", "ID_DocProx");
-
-    // DocSINLI
-    addRelation("DocSinli", "DocSinliX", "ID_DocSINLI");
-
-    // Efectos
-    cFiltro =
-        "Asientos.Tipo IN(${EnumAsientosTipo.efectoPago.index},${EnumAsientosTipo.efectoFormalizacion.index},${EnumAsientosTipo.efectoAlBanco.index},${EnumAsientosTipo.efectoRechazado.index},${EnumAsientosTipo.efectoDudoso.index},${EnumAsientosTipo.efectoIncobrable.index}";
-    addRelation("Efectos", "Asientos", "ID_Documento", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Efectos", "Efectos", "ID_Padre", alias: "efecPadre");
-    addRelation("Efectos", "Efectos", "ID_Rechazado", alias: "efecRechaz");
-    addRelation("Efectos", "Efectos", "ID_Consolidado", alias: "efecCons");
-
-    // Empresas
-    cFiltro = "CuentasBancarias.TipoFicha=${EnumCuentasBancariasTipoFicha.empresas.index}";
-    addRelation("Empresas", "CuentasBancarias", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Empresas", "GruposSeries", "ID_Empresa");
-    addRelation("Empresas", "Almacenes", "ID_Empresa");
-    addRelation("Empresas", "Delegaciones", "ID_Empresa");
-    addRelation("Empresas", "Aeat", "ID_Empresa");
-    addRelation("Empresas", "MetodosPago", "ID_Empresa");
-    addRelation("Empresas", "PlazosPago", "ID_Empresa");
-    addRelation("Empresas", "Articulos", "ID_Empresa");
-    addRelation("Empresas", "Personal", "ID_Empresa");
-    addRelation("Empresas", "Agenda", "ID_Empresa");
-    addRelation("Empresas", "TarifaHotel", "ID_Empresa");
-    addRelation("Empresas", "TarifasArticulos", "ID_Empresa");
-    addRelation("Empresas", "CentroCostes_Proyectos", "ID_Empresa");
-    addRelation("Empresas", "CentroCostes_Arboles", "ID_Empresa");
-    addRelation("Empresas", "CuentasEmail", "ID_Empresa");
-    addRelation("Empresas", "ClientesX", "ID_Empresa",
-        selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX, lCanBeDeleteManual: true);
-    addRelation("Empresas", "ProveedoresX", "ID_Empresa",
-        selectCanBeDel: "ProveedoresX.ID_Proveedor, ProveedoresX.ID_Empresa", joinStr: cJoinProveedoresX, lCanBeDeleteManual: true);
-    addRelation("Empresas", "TarifasDoc", "ID_Empresa");
-    addRelation("Empresas", "CuentasBancarias", "ID_EmpresaCtaDefecto");
-    addRelation("Empresas", "ComisionistasX", "ID_Empresa");
-    addRelation("Empresas", "DocCli", "ID_SII_EmpresaSucedida", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Empresas", "DocPro", "ID_SII_EmpresaSucedida", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("Empresas", "Hoja", "ID_Empresa");
-
-    // Especies
-    addRelation("Especies", "Articulos", "ID_EspecieDefecto");
-    addRelation("Especies", "Clientes", "ID_EspecieDefecto");
-    addRelation("Especies", "Recetas", "ID_Especie");
-
-    // Estantes
-    addRelation("Estantes", "EstantesX", "ID_Estante");
-
-    // Fabricacion
-    addRelation("Fabricacion", "FabricacionX", "ID_Fabricacion", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", joinStr: cJoinFabricacion, lCanBeDeleteManual: true);
-
-    // FabricacionCfg
-    addRelation("FabricacionCfg", "Fabricacion", "ID_FabricacionCfg", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo");
-
-    // FabricacionEtapas
-    addRelation("FabricacionEtapas", "FabricacionEtapas", "ID_Plantilla");
-    addRelation("FabricacionEtapas", "FabricacionEtapasX", "ID_FabricacionEtapas", lCanBeDeleteManual: true);
-    addRelation("FabricacionEtapas", "FabricacionGrupo", "ID_FabricacionEtapas");
-
-    // FabricacionGrupo
-    addRelation("FabricacionGrupo", "FabricacionGrupo", "ID_Plantilla");
-    addRelation("FabricacionGrupo", "Fabricacion", "ID_FabricacionGrupo",
-        selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", lCanBeDeleteManual: true);
-    addRelation("FabricacionGrupo", "FabricacionEtapasX", "ID_FabricacionGrupo");
-
-    // FabricacionTareas
-    addRelation("FabricacionTareas", "FabricacionX", "ID_Tarea",
-        selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", joinStr: cJoinFabricacion);
-
-    // Fabricantes
-    addRelation("Fabricantes", "Aparatos", "ID_Fabricante");
-    addRelation("Fabricantes", "Articulos", "ID_Fabricante");
-    cFiltro = "Mensajes.TipoFicha=${EnumMensajesTipoFicha.fabricante.index}";
-    addRelation("Fabricantes", "Mensajes", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    cFiltro = "Data_Imp.TipoEmisor=${EnumDataImpTipoEmisor.fabricante.index}";
-    addRelation("Fabricantes", "Data_Imp", "ID_Emisor", filtro: cFiltro);
-    addRelation("Fabricantes", "Data_ImpX", "ID_Fabricante");
-    addRelation("Fabricantes", "FabricantesX", "ID_Fabricante", lCanBeDeleteManual: true);
-    addRelation("Fabricantes", "RangosBarras", "ID_Fabricante", lCanBeDeleteManual: true);
-    addRelation("Fabricantes", "Tarifas", "ID_Fabricante");
-    addRelation("Fabricantes", "TarifasDocX", "ID_Fabricante");
-
-    // Fianzas
-    addRelation("Fianzas", "FianzasX", "ID_Fianza", lCanBeDeleteManual: true);
-
-    // Grupos
-    addRelation("Grupos", "Mantenimientos", "ID_Grupo", lCanBeDeleteManual: true);
-    addRelation("Grupos", "AreasVenta", "ID_Carta", lCanBeDeleteManual: true, alias: "grpCarta");
-    addRelation("Grupos", "AreasVenta", "ID_GrupoDestino", lCanBeDeleteManual: true, alias: "grpDestino");
-
-    addRelation("Grupos", "Articulos", "ID_CriterioTarifa", lCanBeDeleteManual: true, alias: "grpCritTar");
-    addRelation("Grupos", "Articulos", "ID_CriterioComision", lCanBeDeleteManual: true, alias: "grpCritComis");
-    addRelation("Grupos", "Articulos", "ID_GrupoArticulosDoc", lCanBeDeleteManual: true, alias: "grpArtDoc");
-    addRelation("Grupos", "Articulos", "ID_Coleccion", lCanBeDeleteManual: true, alias: "grpColec");
-    addRelation("Grupos", "Articulos", "ID_Curso", lCanBeDeleteManual: true, alias: "grpCurso");
-    addRelation("Grupos", "Articulos", "ID_Asignatura", lCanBeDeleteManual: true, alias: "grpAsig");
-    addRelation("Grupos", "GruposComisionesX", "ID_CriterioComision", lCanBeDeleteManual: true, alias: "grpCritComis");
-    addRelation("Grupos", "GruposComisionesX", "ID_CriterioTarifa", lCanBeDeleteManual: true, alias: "grpCritTar");
-    addRelation("Grupos", "Data_ImpX", "ID_Curso", lCanBeDeleteManual: true, alias: "grpCurso");
-    addRelation("Grupos", "Data_ImpX", "ID_Asignatura", lCanBeDeleteManual: true, alias: "grpAsig");
-    addRelation("Grupos", "DocHotelx", "ID_GrupoRegimen",selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true);
-    addRelation("Grupos", "CartaGrupos", "ID_Carta", lCanBeDeleteManual: true, alias: "grpCarta");
-    addRelation("Grupos", "CartaGrupos", "ID_Grupofactura", lCanBeDeleteManual: true, alias: "grpFac");
-    addRelation("Grupos", "Tarifas", "ID_CriterioTarifa", lCanBeDeleteManual: true);
-    addRelation("Grupos", "DocAlmacen", "ID_GrupoDestino", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", lCanBeDeleteManual: true);
-    addRelation("Grupos", "ArtDelegaciones", "ID_Estado", lCanBeDeleteManual: true);
-    addRelation("Grupos", "Articulos", "ID_Estado", lCanBeDeleteManual: true, alias: "grpEstado");
-    addRelation("Grupos", "Clientes", "ID_GrupoINE", lCanBeDeleteManual: true);
-    addRelation("Grupos", "Articulos", "ID_GrupoCalendario", lCanBeDeleteManual: true, alias: "grpCalen");
-    addRelation("Grupos", "Articulos", "ID_GrupoCubiculo", lCanBeDeleteManual: true, alias: "grpCubiculo");
-    addRelation("Grupos", "Agenda", "ID_Grupo", lCanBeDeleteManual: true);
-    addRelation("Grupos", "Agenda", "ID_MarcaHora", lCanBeDeleteManual: true, alias: "grpMH");
-    addRelation("Grupos", "MenuEventos", "ID_Tipo", lCanBeDeleteManual: true);
-    addRelation("Grupos", "DocHotelx", "ID_TipoActo",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true, alias: "grpTipoActo");
-    addRelation("Grupos", "DocClix", "ID_TipoActo",        selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, lCanBeDeleteManual: true, alias: "grpTipoActo");
-    addRelation("Grupos", "RecursosActos", "ID_PosicionPersona",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc, DocCli.verialID, DocCli.Tipo",
-        joinStr: cJoinRecursosActos,        lCanBeDeleteManual: true);
-    addRelation("Grupos", "DocHotelx", "ID_MontajeSalon",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, lCanBeDeleteManual: true, alias: "grpMontajeSalon");
-    addRelation("Grupos", "DocClix", "ID_MontajeSalon",
-        selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, lCanBeDeleteManual: true);
-    addRelation("Grupos", "ReservasRest", "ID_Tipo", lCanBeDeleteManual: true);
-    addRelation("Grupos", "Articulos", "ID_TipoTratamiento", lCanBeDeleteManual: true, alias: "grpTipoTrat");
-    addRelation("Grupos", "Articulos", "ID_TipoPaqueteCircuito", lCanBeDeleteManual: true, alias: "grpTipoPaquete");
-    addRelation("Grupos", "PartesReparaciones", "ID_Tipo", lCanBeDeleteManual: true);
-    addRelation("Grupos", "Cfg_CamposAuxiliares", "ID_Grupo", lCanBeDeleteManual: true);
-    addRelation("Grupos", "Articulos", "ID_GrupoSpa", lCanBeDeleteManual: true);
-    addRelation("Grupos", "MenuEventosX", "ID_Grupo",
-        selectCanBeDel: "MenuEventos.verialID", joinStr: cJoinMenuEventos, lCanBeDeleteManual: true);
-    addRelation("Grupos", "FabricacionX", "ID_CentroTrabajo",
-        selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", joinStr: cJoinFabricacion, lCanBeDeleteManual: true);
-    addRelation("Grupos", "FabricacionTareas", "ID_CentroTrabajo", lCanBeDeleteManual: true);
-    addRelation("Grupos", "FabricacionGrupo", "ID_Prioridad", lCanBeDeleteManual: true, alias: "grpPrioridad");
-    addRelation("Grupos", "FabricacionGrupo", "ID_Incidencia", lCanBeDeleteManual: true, alias: "grpIncid");
-    addRelation("Grupos", "CentroInformes", "ID_Grupo", lCanBeDeleteManual: true);
-    addRelation("Grupos", "HstDocHotelx", "ID_GrupoRegimen",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true,  alias: "grpRegimen");
-    addRelation("Grupos", "HstDocHotelx", "ID_TipoActo",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true, alias: "grpTipoActo");
-    addRelation("Grupos", "HstDocHotelx", "ID_MontajeSalon",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true, alias: "grpMontajesalon");
-    addRelation("Grupos", "HstRecursosActos", "ID_PosicionPersona", lCanBeDeleteManual: true);
-    addRelation("Grupos", "OrdenesTrabajo", "ID_Tipo", lCanBeDeleteManual: true, alias: "grpTipo");
-    addRelation("Grupos", "OrdenesTrabajo", "ID_Etapa", lCanBeDeleteManual: true, alias: "grpEtapa");
-    addRelation("Grupos", "ObjetosPerdidos", "ID_UbicacionEncontrado", lCanBeDeleteManual: true, alias: "grpUbiEnc");
-    addRelation("Grupos", "ObjetosPerdidos", "ID_UbicacionGuardado", lCanBeDeleteManual: true, alias: "grpUbiGuard");
-    addRelation("Grupos", "BonosAcceso", "ID_Descripcion", lCanBeDeleteManual: true);
-    addRelation("Grupos", "TarifasDocX", "ID_CriterioTarifa", lCanBeDeleteManual: true);
-    addRelation("Grupos", "Cfg_CentralReservasCargosXPersona", "ID_GrupoRegimen", lCanBeDeleteManual: true);
-    addRelation("Grupos", "TelepedidoOfertas", "ID_Carta", lCanBeDeleteManual: true);
-    addRelation("Grupos", "Cfg_CentralReservasCargos", "ID_GrupoRegimen", lCanBeDeleteManual: true);
-    addRelation("Grupos", "Conocimientos", "ID_Sector", lCanBeDeleteManual: true);
-
-    // Grupos
-    addRelation("Grupos_G", AppTablas.cProvincias, "ID_Grupo");
-    addRelation("Grupos_G", AppTablas.cProvincias, "ID_Region");
-    addRelation("Grupos_G", AppTablas.cPaises, "ID_EstadisticaPais");
-
-    // GruposComisiones
-    addRelation("GruposComisiones", "Comisionistas", "ID_Grupo");
-    addRelation("GruposComisiones", "GruposComisionesX", "ID_Grupo", lCanBeDeleteManual: true);
-    addRelation("GruposComisiones", "ComisionistasX", "ID_Grupo");
-
-    // GruposSeries
-    addRelation("GruposSeries", "Series", "ID_GrupoSeries", lCanBeDeleteManual: true);
-    addRelation("GruposSeries", "Nominas", "ID_GrupoSeries");
-    addRelation("GruposSeries", "Comisiones", "ID_GrupoSeries");
-    addRelation("GruposSeries", "ComisionesX", "ID_GrupoSeries");
-    addRelation("GruposSeries", "Inmovilizado", "ID_GrupoSeries");
-    addRelation("GruposSeries", "Asientos", "ID_GrupoSeries");
-    addRelation("GruposSeries", "Remesas", "ID_GrupoSeries");
-    addRelation("GruposSeries", "DocCli", "ID_GrupoSeries", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("GruposSeries", "DocPro", "ID_GrupoSeries", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("GruposSeries", "Delegaciones", "ID_CliGrupoSeriesEntregasACta");
-    addRelation("GruposSeries", "Efectos", "ID_GrupoSeries");
-    addRelation("GruposSeries", "Empresas", "ID_GrupoSeriesDefecto");
-    addRelation("GruposSeries", "Presupuestos", "ID_GrupoSeries");
-    addRelation("GruposSeries", "CentroCostes_Valores", "ID_GrupoSeries");
-    addRelation("GruposSeries", "Fianzas", "ID_GrupoSeries");
-
-    // Habitaciones
-    cFiltro = "DocClix.TipoOrigen=${EnumDocXTipoOrigen.habitacion.index}";
-    addRelation("Habitaciones", "DocClix", "ID_Origen",        selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
-    addRelation("Habitaciones", "DocClix", "ID_HabitacionCargo", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, alias: "habCargo");
-    addRelation("Habitaciones", "DocHotelx", "ID_HabitacionCargo",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx, alias: "habCargo");
-    addRelation("Habitaciones", "DocHotelx", "ID_Habitacion",        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
-    addRelation("Habitaciones", "HabitacionesX", "ID_Habitacion", lCanBeDeleteManual: true);
-    addRelation("Habitaciones", "PartesReparaciones", "ID_Habitacion");
-    addRelation("Habitaciones", "HstDocHotelx", "ID_Habitacion",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
-    addRelation("Habitaciones", "HstDocHotelx", "ID_HabitacionCargo",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "habCargo");
-
-    // HabitacionesProps
-    addRelation("HabitacionesProps", "HabitacionesX", "ID_Propiedad", lCanBeDeleteManual: true);
-
-    // Hoja
-    addRelation("Hoja", "HojaX", "ID_Hoja");
-
-    // HotelDtos
-    addRelation("HotelDtos", "HotelDtosX", "ID_HotelDtos", lCanBeDeleteManual: true);
-    addRelation("HotelDtos", "TarifaHotel", "ID_HotelDtos");
-
-    // HstDocHotel
-    addRelation("HstDocHotel", "HstDocHotelx", "ID_Documento",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
-
-    // HstDocHotelx
-    addRelation("HstDocHotelx", "HstDocHotelx", "ID_HstDocHotelx",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
-    addRelation("HstDocHotelx", "HstDocHotelx", "ID_GrupoImpresion",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "hstDhXGrpImp");
-    addRelation("HstDocHotelx", "HstDocHotelx", "ID_GrupoActoEvento",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "hstDhXGrpActoEvento");
-    addRelation("HstDocHotelx", "HstDocHotelx", "ID_DocXMenu",        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, alias: "hstDhXMenu");
-    addRelation("HstDocHotelx", "HstOcupantesX", "ID_HstDocHotelx");
-    addRelation("HstDocHotelx", "HstRecursosActos", "ID_HstDocHotelx");
-
-    // HstRecursosActos
-    addRelation("HstRecursosActos", "HstRecursosActos", "ID_Padre");
-
-    // Impuestos
-    addRelation("Impuestos", "AreasVenta", "ID_Impuesto");
-    addRelation("Impuestos", "Articulos", "ID_Impuesto");
-    addRelation("Impuestos", "Data_ImpX", "ID_Impuesto");
-    addRelation("Impuestos", "ImpuestosX", "ID_Impuesto", lCanBeDeleteManual: true);
-    addRelation("Impuestos", "TarifasArticulos", "ID_Impuesto");
-
-    // Incidencias_L
-    addRelation("Incidencias_L", AppTablas.cIncidenciasX, "ID_Incidencia");
-
-    // InformesCfg
-    addRelation("InformesCfg_G", AppTablas.cInformesCfgX, "ID_Origen");
-    addRelation("InformesCfg_G", AppTablas.cInformesCfgX, "ID_Presets");
-    addRelation("InformesCfg_G", AppTablas.cInformesCfg, "ID_CabeceraInforme");
-    addRelation("InformesCfg_G", AppTablas.cInformesCfg, "ID_PieInforme");
-    addRelation("InformesCfg_G", AppTablas.cInformesCfg, "ID_ModeloDesign");
-    addRelation("InformesCfg_G", "Delegaciones", "ID_CabeceraInformes");
-    addRelation("InformesCfg_G", "Delegaciones", "ID_PieInformes");
-    addRelation("InformesCfg_G", "Delegaciones", "ID_CabeceraDocA4");
-    addRelation("InformesCfg_G", "Delegaciones", "ID_PieDocA4");
-    addRelation("InformesCfg_G", "Delegaciones", "ID_CabeceraDocA5");
-    addRelation("InformesCfg_G", "Delegaciones", "ID_PieDocA5");
-    addRelation("InformesCfg_G", "AreasVenta", "ID_ModeloFacturas");
-    addRelation("InformesCfg_G", "AreasVenta", "ID_ModeloAlbaranes");
-    addRelation("InformesCfg_G", "AreasVenta", "ID_ModeloTickets");
-    addRelation("InformesCfg_G", "AreasVenta", "ID_ModeloPresupuestos");
-    addRelation("InformesCfg_G", "AreasVenta", "ID_ModeloPedidos");
-    addRelation("InformesCfg_G", "AreasCompra", "ID_ModeloFacturas");
-    addRelation("InformesCfg_G", "AreasCompra", "ID_ModeloAlbaranes");
-    addRelation("InformesCfg_G", "AreasCompra", "ID_ModeloPedidos");
-    addRelation("InformesCfg_G", "AreasCompra", "ID_ModeloPresupuestos");
-    addRelation("InformesCfg_G", "AreasCompra", "ID_ModeloDevoluciones");
-    addRelation("InformesCfg_G", "FabricacionCfg", "ID_ModeloEtiquetaCajas");
-    addRelation("InformesCfg_G", "FabricacionCfg", "ID_ModeloEtiquetaArticulo");
-    addRelation("InformesCfg_G", "Fabricacion", "ID_ModeloEtiquetaCajas", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo");
-    addRelation("InformesCfg_G", "Fabricacion", "ID_ModeloEtiquetaArticulo", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo");
-    addRelation("InformesCfg_G", "CentroInformesX", "ID_Presets");
-    addRelation("InformesCfg_G", "AreasVenta", "ID_ModeloWelcome");
-    addRelation("InformesCfg_G", "AreasVenta", "ID_ModeloFacturasPlantilla");
-    addRelation("InformesCfg_G", "AreasVenta", "ID_ModeloAlbaranesPlantilla");
-    addRelation("InformesCfg_G", "AreasVenta", "ID_ModeloTicketsPlantilla");
-    addRelation("InformesCfg_G", "AreasVenta", "ID_ModeloPedidosPlantilla");
-    addRelation("InformesCfg_G", "AreasVenta", "ID_ModeloPresupuestosPlantilla");
-    addRelation("InformesCfg_G", "AreasVenta", "ID_ModeloNotasPlantilla");
-
-    // InformesUsuarios
-    addRelation("InformesUsuarios", "InformesUsuariosX", "ID_InformesUsuarios");
-
-    // Inmovilizado
-    addRelation("Inmovilizado", "InmovilizadoValores", "ID_Documento", lCanBeDeleteManual: true);
-    addRelation("Inmovilizado", "InmovilizadoX", "ID_Documento", lCanBeDeleteManual: true);
-
-    // Instalaciones
-    addRelation("Instalaciones", "InstalacionesX", "ID_Instalacion", lCanBeDeleteManual: true);
-    addRelation("Instalaciones", "InstalacionesProps", "ID_Instalacion", lCanBeDeleteManual: true);
-    addRelation("Instalaciones", "Aparatos", "ID_Instalacion");
-    addRelation("Instalaciones", "Conocimientos", "ID_Instalacion");
-
-    // Inventario
-    addRelation("Inventario", "InventarioX", "ID_Inventario");
-
-    // Logi_Destinos
-    addRelation("Logi_Destinos", "Logi_Envios", "ID_Destino");
-    addRelation("Logi_Destinos", "DocCli", "ID_Destino", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-
-    // Logi_Envios
-    addRelation("Logi_Envios", "Logi_Unidades", "ID_Envio");
-
-    // Logi_Formas
-    addRelation("Logi_Formas", "Logi_Destinos", "ID_FormaEnvio", lCanBeDeleteManual: true);
-    addRelation("Logi_Formas", "Clientes", "ID_FormaEnvio");
-    addRelation("Logi_Formas", "DocCli", "ID_FormaEnvio", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Logi_Formas", "Logi_Envios", "ID_FormaEnvio");
-
-    // Logi_Formatos
-    addRelation("Logi_Formatos", "Logi_Unidades", "ID_Formato");
-
-    // Logi_Unidades
-    addRelation("Logi_Unidades", "Logi_UnidadesX", "ID_Unidad", lCanBeDeleteManual: true);
-
-    // Mandatos
-    addRelation("Mandatos", "Efectos", "ID_Mandato");
-
-    // Mantenimientos
-    addRelation("Mantenimientos", "Aparatos", "ID_Contrato", alias: "manC1");
-    addRelation("Mantenimientos", "Aparatos", "ID_Contrato2", alias: "manC2");
-    addRelation("Mantenimientos", "DocClix", "ID_Mantenimiento", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-    addRelation("Mantenimientos", "Instalaciones", "ID_Mantenimiento");
-
-    // MenuEventos
-    cFiltro = "DocClix.TipoOrigen=${EnumDocXTipoOrigen.actomenu.index}";
-    addRelation("MenuEventos", "DocClix", "ID_Origen",
-        selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
-    addRelation("MenuEventos", "MenuEventosX", "ID_MenuEventos",
-        selectCanBeDel: "MenuEventos.verialID", joinStr: cJoinMenuEventos, lCanBeDeleteManual: true);
-
-    // MenuRest
-    addRelation("MenuRest", "MenuRestX", "ID_MenuRest", lCanBeDeleteManual: true);
-
-    // Mesas
-    addRelation("Mesas", "DocClix", "ID_Mesa", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-    addRelation("Mesas", "DocHotel", "ID_Mesa", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("Mesas", "DocHotelx", "ID_Mesa", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
-    addRelation("Mesas", "HstDocHotel", "ID_Mesa", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Mesas", "HstDocHotelx", "ID_Mesa", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
-
-    // Messenger
-    addRelation("Messenger_G", AppTablas.cMessengerX, "ID_Messenger");
-
-    // MetodosPago
-    addRelation("MetodosPago", "Mantenimientos", "ID_ComoPago");
-    addRelation("MetodosPago", "AreasVenta", "ID_MetodoCobro1", alias: "metPag1");
-    addRelation("MetodosPago", "AreasVenta", "ID_MetodoCobro2", alias: "metPag2");
-    addRelation("MetodosPago", "AreasVenta", "ID_MetodoCobro3", alias: "metPag3");
-    addRelation("MetodosPago", "AreasVenta", "ID_MetodoCobro4", alias: "metPag4");
-    addRelation("MetodosPago", "AreasVenta", "ID_MetodoCobro5", alias: "metPag5");
-    addRelation("MetodosPago", "AreasVenta", "ID_MetodoCobro6", alias: "metPag6");
-    addRelation("MetodosPago", "AreasVenta", "ID_MetodoCobro7", alias: "metPag7");
-    addRelation("MetodosPago", "AreasVenta", "ID_MetodoCobro8", alias: "metPag8");
-    addRelation("MetodosPago", "AreasVenta", "ID_MetodoEfectivo", alias: "metEfec");
-    addRelation("MetodosPago", "ArqueosX", "ID_ComoPago");
-    addRelation("MetodosPago", "OperacionesTPV", "ID_ComoPago");
-    addRelation("MetodosPago", "Comisiones", "ID_ComoPago");
-    addRelation("MetodosPago", "Data_Imp", "ID_ComoPago");
-    addRelation("MetodosPago", "Data_ImpX", "ID_ComoPago");
-    addRelation("MetodosPago", "DocCli", "ID_ComoPago", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("MetodosPago", "DocPro", "ID_ComoPago", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("MetodosPago", "Nominas", "ID_MetodoPago");
-    addRelation("MetodosPago", "Remesas", "ID_ComoPago");
-    addRelation("MetodosPago", "Cfg_CentralReservas", "ID_MetodoPago1", alias: "metPag1");
-    addRelation("MetodosPago", "Cfg_CentralReservas", "ID_MetodoPago2", alias: "metPag2");
-    addRelation("MetodosPago", "Cfg_CentralReservas", "ID_MetodoPago3", alias: "metPag3");
-    addRelation("MetodosPago", "Delegaciones", "ID_MetodoEfectivo", alias: "metPagEfec");
-    addRelation("MetodosPago", "Delegaciones", "ID_CliMetodoCobroDefecto", alias: "metPagCliDef");
-    addRelation("MetodosPago", "Delegaciones", "ID_ProMetodoPagoDefecto", alias: "metPagProDef");
-    addRelation("MetodosPago", "Efectos", "ID_ComoPago");
-    addRelation("MetodosPago", "Personal", "ID_ComoPago");
-    addRelation("MetodosPago", "Fianzas", "ID_MetodoConstitucion", alias: "metPagConst");
-    addRelation("MetodosPago", "Fianzas", "ID_MetodoCancelacion", alias: "metPagCanc");
-    addRelation("MetodosPago", "ClientesX", "ID_ComoPago",
-        selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX);
-    addRelation("MetodosPago", "ProveedoresX", "ID_ComoPago",
-        selectCanBeDel: "ProveedoresX.ID_Proveedor, ProveedoresX.ID_Empresa", joinStr: cJoinProveedoresX);
-    addRelation("MetodosPago", "Cajones", "ID_MetodoApertura");
-    addRelation("MetodosPago", "AreasVenta", "ID_MetodoTelepedido", alias: "metPagTelep");
-    addRelation("MetodosPago", "DocHotel", "ID_ComoPago", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("MetodosPago", "AreasVenta", "ID_MetodoEfectivoKioskoHotel", alias: "metPagEfecKiosko");
-    addRelation("MetodosPago", "AreasVenta", "ID_MetodoTarjetaKioskoHotel", alias: "metPagTarjKiosko");
-    addRelation("MetodosPago", "Cfg_CentralReservasClientesAgencias", "ID_ComoPago");
-
-    // Monedas
-    addRelation("Monedas_G", AppTablas.cPaises, "ID_Moneda");
-    addRelation("Monedas_G", "Clientes", "ID_Moneda");
-    addRelation("Monedas_G", "DocCli", "ID_Moneda2", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Monedas_G", "ViasPago", "ID_Moneda");
-
-    // Nombres
-    addRelation("Nombres", "Data_Imp", "ID_Destinatario");
-    addRelation("Nombres", "DocPro", "ID_Visita", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "nomVista");
-    addRelation("Nombres", "DocPro", "ID_Atencion", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "nomAtencion");
-    addRelation("Nombres", "DocCli", "ID_RemitenteContacto", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "nomRem");
-    addRelation("Nombres", "DocCli", "ID_EnvioContacto", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "nomEnvio");
-
-    // Nominas
-    cFiltro = "Asientos.Tipo=${EnumAsientosTipo.nomina.index}";
-    addRelation("Nominas", "Asientos", "ID_Documento", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Nominas", "CentroCostes_Valores", "ID_Nomina", lCanBeDeleteManual: true);
-    addRelation("Nominas", "Efectos", "ID_NominaAtrasos");
-
-    // Ocupantes
-    addRelation("Ocupantes", "OcupantesX", "ID_Ocupante");
-    addRelation("Ocupantes", "HstOcupantesX", "ID_Ocupante");
-
-    // OrdenesTrabajo
-    cFiltro = "CamposAuxiliares.Tipo=${EnumCamposAuxiliaresTipo.ordenestrabajo.index}";
-    addRelation("OrdenesTrabajo", "CamposAuxiliares", "ID_Origen", filtro: cFiltro, lCanBeDeleteManual: true);
-
-    // Paises
-    addRelation("Paises_G", AppTablas.cProvincias, "ID_Pais");
-    addRelation("Paises_G", AppTablas.cBancos, "ID_Pais");
-    addRelation("Paises_G", AppTablas.cUbicaciones, "ID_Pais");
-    addRelation("Paises_G", "Articulos", "ID_Pais");
-    addRelation("Paises_G", "Clientes", "ID_PaisNacionalidad");
-    addRelation("Paises_G", "Data_ImpX", "ID_PaisPublicacion");
-    addRelation("Paises_G", "Ocupantes", "ID_Pais");
-    addRelation("Paises_G", "Ocupantes", "ID_PaisNacionalidad");
-    addRelation("Paises_G", "Nombres", "ID_Pais");
-    addRelation("Paises_G", "Clientes", "ID_Pais");
-    addRelation("Paises_G", "Proveedores", "ID_Pais");
-    addRelation("Paises_G", "Fabricantes", "ID_Pais");
-    addRelation("Paises_G", "Personal", "ID_Pais");
-    addRelation("Paises_G", "Almacenes", "ID_Pais");
-    addRelation("Paises_G", "Transportistas", "ID_Pais");
-    addRelation("Paises_G", "ContactosExternos", "ID_Pais");
-    addRelation("Paises_G", "Veterinarios", "ID_Pais");
-    addRelation("Paises_G", "Tecnicos", "ID_Pais");
-    addRelation("Paises_G", "Empresas", "ID_Pais");
-    addRelation("Paises_G", "Delegaciones", "ID_Pais");
-    addRelation("Paises_G", "OcupantesX", "ID_Pais");
-    addRelation("Paises_G", "HstOcupantesX", "ID_Pais", lCanBeDeleteManual: true);
-    addRelation("Paises_G", "ViasPago", "ID_Pais");
-    addRelation("Paises_G", "Clientes", "ID_PaisNIF");
-
-    // PartesMedicos
-    cFiltro = "CamposAuxiliares.Tipo=${EnumCamposAuxiliaresTipo.partesmedicos.index}";
-    addRelation("PartesMedicos", "CamposAuxiliares", "ID_Origen", filtro: cFiltro, lCanBeDeleteManual: true);
-
-    // PartesReparaciones
-    addRelation("PartesReparaciones", "PartesReparacionesX", "ID_ParteReparacion",
-        selectCanBeDel: "PartesReparaciones.verialID", joinStr: cJoinPartesReparacionesX, lCanBeDeleteManual: true);
-
-    // PDAs
-    cFiltro = "Data_Imp.TipoOrigen=${EnumDataImpTipoOrigen.pda.index}";
-    addRelation("Pdas", "Data_Imp", "ID_Origen", filtro: cFiltro);
-    addRelation("Pdas", "Pdas_Sincronizaciones", "ID_PDA", lCanBeDeleteManual: true);
-
-    // Perfiles
-    addRelation("Perfiles", "Articulos", "ID_Perfil");
-    addRelation("Perfiles", "Data_ImpX", "ID_Perfil");
-
-    // PerfilesCamposAux
-    addRelation("PerfilesCamposAux", "Cfg_CamposAuxiliares", "ID_PerfilCamposAux", lCanBeDeleteManual: true);
-    addRelation("PerfilesCamposAux", "Arboles", "ID_PerfilCamposAux");
-    addRelation("PerfilesCamposAux", "Articulos", "ID_PerfilCamposAux");
-    addRelation("PerfilesCamposAux", "CamposAuxiliares", "ID_PerfilCamposAux",
-        selectCanBeDel: "CamposAuxiliares.ID_Origen, CamposAuxiliares.Tipo");
-    addRelation("PerfilesCamposAux", "ArbolesAuxiliares", "ID_PerfilCamposAux", lCanBeDeleteManual: true);
-    addRelation("PerfilesCamposAux", "Aparatos", "ID_PerfilCamposAux");
-
-    // Personal
-    cFiltro = "CuentasBancarias.TipoFicha=${EnumCuentasBancariasTipoFicha.personal.index}";
-    addRelation("Personal", "CuentasBancarias", "ID_Ficha", lCanBeDeleteManual: true);
-
-    cFiltro = "Mensajes.TipoFicha=${EnumMensajesTipoFicha.personal.index}";
-    addRelation("Personal", "Mensajes", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Personal", "DocCli", "ID_Autorizacion", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-
-    cFiltro = "DocClix.TipoOrigen=${EnumDocXTipoOrigen.personal.index}";
-    addRelation("Personal", "DocClix", "ID_Origen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
-
-    cFiltro = "DocHotelx.TipoOrigen=${EnumDocXTipoOrigen.personal.index}";
-    addRelation("Personal", "DocHotelx", "ID_Origen", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", filtro: cFiltro, joinStr: cJoinDocHotelx);
-    addRelation("Personal", "DocPro", "ID_Autorizacion", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "persAut");
-    addRelation("Personal", "DocPro", "ID_Recepcion", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "persRecep");
-    addRelation("Personal", "Habitaciones", "ID_Camarera");
-    addRelation("Personal", "Nominas", "ID_Personal");
-    addRelation("Personal", "Remesas", "ID_Presentador", alias: "persPres");
-    addRelation("Personal", "Remesas", "ID_Ordenante", alias: "persOrden");
-    addRelation("Personal", "Comisionistas", "ID_Personal");
-    addRelation("Personal", "DocAlmacen", "ID_Autorizacion", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", alias: "persAut");
-    addRelation("Personal", "DocAlmacen", "ID_Recepcion", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo", alias: "persRecep");
-    addRelation("Personal", "UsuariosX", "ID_Personal", selectCanBeDel: "ID_Usuario");
-    addRelation("Personal", "Agenda", "ID_Personal");
-    addRelation("Personal", "PartesReparacionesX", "ID_Personal",
-        selectCanBeDel: "PartesReparaciones.verialID", joinStr: cJoinPartesReparacionesX);
-    addRelation("Personal", "SalonesX", "ID_Personal", selectCanBeDel: "SalonesX.ID_Salon", joinStr: cJoinSalonesX);
-    cFiltro = "CamposAuxiliares.Tipo=${EnumCamposAuxiliaresTipo.personal.index}";
-    addRelation("Personal", "CamposAuxiliares", "ID_Origen", filtro: cFiltro, lCanBeDeleteManual: true);
-    cFiltro = "RutasFicheros.TipoFicha=${EnumRutasFicherosTipoFicha.personal.index}";
-    addRelation("Personal", "RutasFicheros", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Personal", "CentroCostes_Defecto", "ID_Personal", lCanBeDeleteManual: true);
-    cFiltro = "HstDocHotelx.TipoOrigen=${EnumDocXTipoOrigen.personal.index}";
-    addRelation("Personal", "HstDocHotelx", "ID_Origen",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", filtro: cFiltro, joinStr: cJoinHstDocHotelx);
-    addRelation("Personal", "ObjetosPerdidos", "ID_PersonalEncontrado", alias: "persEncontrado");
-    addRelation("Personal", "ObjetosPerdidos", "ID_PersonalEnvio", alias: "persEnvio");
-    addRelation("Personal", "Presencia", "ID_Personal");
-
-    // PlazosPago
-    addRelation("PlazosPago", "Mantenimientos", "ID_CuandoPago");
-    addRelation("PlazosPago", "Data_Imp", "ID_CuandoPago");
-    addRelation("PlazosPago", "DocCli", "ID_CuandoPago", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("PlazosPago", "DocPro", "ID_CuandoPago", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("PlazosPago", "DiasPago", "ID_Plazos", lCanBeDeleteManual: true);
-    addRelation("PlazosPago", "Delegaciones", "ID_CliPeriodicidadDefecto", alias: "plazosCliPerDef");
-    addRelation("PlazosPago", "Delegaciones", "ID_ProPeriodicidadDefecto", alias: "plazosProPerDef");
-    addRelation("PlazosPago", "ClientesX", "ID_CuandoPago",
-        selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX);
-    addRelation("PlazosPago", "ProveedoresX", "ID_CuandoPago",
-        selectCanBeDel: "ProveedoresX.ID_Proveedor, ProveedoresX.ID_Empresa", joinStr: cJoinProveedoresX);
-
-    // Prevision
-    addRelation("Prevision", "Prevision", "ID_FichaPrevision");
-
-    // Programas
-    addRelation("Programas", "Instalaciones", "ID_Programa");
-
-    // Proveedores
-    addRelation("Proveedores", "ArtCodigos", "ID_Proveedor", lCanBeDeleteManual: true);
-    addRelation("Proveedores", "Articulos", "ID_Proveedor");
-    addRelation("Proveedores", "ArtProveedor", "ID_Proveedor", selectCanBeDel: "ArtProveedor.ID_Articulo", lCanBeDeleteManual: true);
-    cFiltro = "CuentasBancarias.TipoFicha=${EnumCuentasBancariasTipoFicha.proveedores.index}";
-    addRelation("Proveedores", "CuentasBancarias", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    cFiltro = "Mensajes.TipoFicha=${EnumMensajesTipoFicha.proveedor.index}";
-    addRelation("Proveedores", "Mensajes", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    cFiltro = "Data_Imp.TipoEmisor=${EnumDataImpTipoEmisor.proveedor.index}";
-    addRelation("Proveedores", "Data_Imp", "ID_Emisor", filtro: cFiltro);
-    cFiltro = "Data_Imp.TipoDocumento=${EnumDataImpTipoDocumento.documentoproveedor.index}";
-    addRelation("Proveedores", "Data_Imp", "ID_TitularDoc", filtro: cFiltro);
-    addRelation("Proveedores", "DocPro", "ID_Proveedor", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("Proveedores", "DocPro", "ID_Distribuidor", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", alias: "proDist");
-    addRelation("Proveedores", "Fabricantes", "ID_Proveedor");
-    addRelation("Proveedores", "FabricantesX", "ID_Proveedor", lCanBeDeleteManual: true);
-    addRelation("Proveedores", "Perfiles", "ID_Proveedor");
-    cFiltro = "Nombres.TipoFicha=${EnumNombresTipoFicha.proveedoresContactos.index}";
-    addRelation("Proveedores", "Nombres", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Proveedores", "Nominas", "ID_Sindicato");
-    addRelation("Proveedores", "Proveedores", "ID_FichaFiscal", lCanBeDeleteManual: true, alias: "proFiscal");
-    addRelation("Proveedores", "Proveedores", "ID_FichaVarios", alias: "proVarios");
-    addRelation("Proveedores", "Aparatos", "ID_Proveedor");
-    addRelation("Proveedores", "Comisionistas", "ID_Proveedor");
-    addRelation("Proveedores", "ArtDelegaciones", "ID_Proveedor");
-    addRelation("Proveedores", "Agenda", "ID_Proveedor");
-    addRelation("Proveedores", "CentroCostes_Defecto", "ID_Proveedor", lCanBeDeleteManual: true);
-    cFiltro = "CamposAuxiliares.Tipo=${EnumCamposAuxiliaresTipo.proveedores.index}";
-    addRelation("Proveedores", "CamposAuxiliares", "ID_Origen", filtro: cFiltro, lCanBeDeleteManual: true);
-    cFiltro = "RutasFicheros.TipoFicha=${EnumRutasFicherosTipoFicha.proveedores.index}";
-    addRelation("Proveedores", "RutasFicheros", "ID_Ficha", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Proveedores", "ProveedoresX", "ID_Proveedor",
-        selectCanBeDel: "ProveedoresX.ID_Proveedor, ProveedoresX.ID_Empresa", joinStr: cJoinProveedoresX, lCanBeDeleteManual: true);
-    addRelation("Proveedores", "DocAlmacen", "ID_Proveedor", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo");
-    cFiltro = "CategoriasDe.Tipo=${EnumCategoriasDeTipo.proveedores.index}";
-    addRelation("Proveedores", "CategoriasDe", "ID_Quien", filtro: cFiltro, lCanBeDeleteManual: true);
-
-    // Provincias
-    addRelation("Provincias_G", AppTablas.cUbicaciones, "ID_Provincia");
-    addRelation("Provincias_G", "Ocupantes", "ID_Provincia");
-    addRelation("Provincias_G", "Nombres", "ID_Provincia");
-    addRelation("Provincias_G", "Clientes", "ID_Provincia");
-    addRelation("Provincias_G", "Proveedores", "ID_Provincia");
-    addRelation("Provincias_G", "Fabricantes", "ID_Provincia");
-    addRelation("Provincias_G", "Personal", "ID_Provincia");
-    addRelation("Provincias_G", "Almacenes", "ID_Provincia");
-    addRelation("Provincias_G", "Transportistas", "ID_Provincia");
-    addRelation("Provincias_G", "ContactosExternos", "ID_Provincia");
-    addRelation("Provincias_G", "Veterinarios", "ID_Provincia");
-    addRelation("Provincias_G", "Tecnicos", "ID_Provincia");
-    addRelation("Provincias_G", "Empresas", "ID_Provincia");
-    addRelation("Provincias_G", "Delegaciones", "ID_Provincia");
-    addRelation("Provincias_G", "OcupantesX", "ID_Provincia");
-    addRelation("Provincias_G", "HstOcupantesX", "ID_Provincia", lCanBeDeleteManual: true);
-
-    // Puestos
-    addRelation("Puestos_G", AppTablas.cImpresoras, "ID_Puesto", lCanBeDeleteManual: true);
-    addRelation("Puestos_G", AppTablas.cXSettings, "ID_Puesto");
-    addRelation("Puestos_G", AppTablas.cInformesCfg, "ID_Puesto");
-    addRelation("Puestos_G", AppTablas.cPID, "ID_Puesto", lCanBeDeleteManual: true);
-    addRelation("Puestos_G", AppTablas.cInformesCfgX, "ID_Puesto");
-    addRelation("Puestos_G", AppTablas.cMessenger, "ID_DePuesto");
-    addRelation("Puestos_G", AppTablas.cMessengerX, "ID_Puesto");
-    addRelation("Puestos_G", "OrdenesTrabajo", "ID_Puesto");
-    addRelation("Puestos_G", "Arqueos", "ID_Puesto");
-    addRelation("Puestos_G", "OperacionesTPV", "ID_Puesto");
-    addRelation("Puestos_G", "XSettings", "ID_Puesto");
-    addRelation("Puestos_G", "Data_Imp", "ID_Puesto");
-    addRelation("Puestos_G", "DocCli", "ID_Puesto", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Puestos_G", "DocClix", "ID_Puesto", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-    addRelation("Puestos_G", "PuntosClientes", "ID_Puesto");
-    addRelation("Puestos_G", "DocHotel", "ID_Puesto", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("Puestos_G", "DocHotelx", "ID_Puesto", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
-    addRelation("Puestos_G", "DocPro", "ID_Puesto", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("Puestos_G", "Mandatos", "ID_Puesto");
-    addRelation("Puestos_G", "ReservasRest", "ID_Puesto");
-    addRelation("Puestos_G", "Pdas", "ID_Puesto");
-    addRelation("Puestos_G", "Pdas", "ID_PuestoAlternativo");
-    addRelation("Puestos_G", "Tpvext_Cajas", "ID_Puesto");
-    addRelation("Puestos_G", "DocAlmacen", "ID_Puesto", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo");
-    addRelation("Puestos_G", "PuestosX", "ID_Puesto", selectCanBeDel: "ID_Puesto", lCanBeDeleteManual: true);
-    addRelation("Puestos_G", "Efectos", "ID_Puesto");
-    addRelation("Puestos_G", "Agenda", "ID_Puesto");
-    addRelation("Puestos_G", "Inventario", "ID_Puesto");
-    addRelation("Puestos_G", "InventarioX", "ID_Puesto");
-    addRelation("Puestos_G", "HstDocHotel", "ID_PuestoProceso", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Puestos_G", "HstDocHotel", "ID_Puesto", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Puestos_G", "HstDocHotelx", "ID_Puesto",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
-    addRelation("Puestos_G", "InstalacionesProps", "ID_Puesto");
-    addRelation("Puestos_G", "Fianzas", "ID_Puesto");
-    addRelation("Puestos_G", "Webs", "ID_Puesto");
-    addRelation("Puestos_G", AppTablas.cIncidencias, "ID_Puesto");
-    addRelation("Puestos_G", AppTablas.cStock, "ID_Puesto");
-    addRelation("Puestos_G", AppTablas.cChequeos, "ID_Puesto");
-    addRelation("Puestos_G", AppTablas.cExTrans, "ID_Puesto");
-
-    // Recetas
-    addRelation("Recetas", "DocClix", "ID_Receta", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-
-    // RecursosActos
-    addRelation("RecursosActos", "RecursosActos", "ID_Padre",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc, DocCli.verialID, DocCli.Tipo", joinStr: cJoinRecursosActos);
-
-    // Remesas
-    cFiltro = "Asientos.Tipo =${EnumAsientosTipo.remesaPresentacion.index}";
-    addRelation("Remesas", "Asientos", "ID_Documento", filtro: cFiltro, lCanBeDeleteManual: true);
-    addRelation("Remesas", "Efectos", "ID_Remesa", lCanBeDeleteManual: true);
-    addRelation("Remesas", "RemesasAsientos", "ID_Remesa", lCanBeDeleteManual: true);
-
-    // Retenciones
-    addRelation("Retenciones", "Clientes", "ID_Retencion");
-    addRelation("Retenciones", "DocCli", "ID_Retencion", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Retenciones", "DocPro", "ID_Retencion", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("Retenciones", "RetencionesX", "ID_Retencion", lCanBeDeleteManual: true);
-    addRelation("Retenciones", "Nominas", "ID_RetencionIRPF");
-    addRelation("Retenciones", "Proveedores", "ID_Retencion");
-    addRelation("Retenciones", "DocCliValores", "ID_Retencion", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocCliValores);
-    addRelation("Retenciones", "DocProValores", "ID_Retencion", selectCanBeDel: "DocPro.verialID, DocPro.Tipo", joinStr: cJoinDocProValores);
-
-    // Revisiones
-    addRelation("Revisiones", "OrdenesTrabajo", "ID_Revision", lCanBeDeleteManual: true);
-    cFiltro = "ArtRevisionesAverias.Tipo=${EnumArtRevisionesAveriasTipo.revision.index}";
-    addRelation("Revisiones", "ArtRevisionesAverias", "ID_AveriaRevision",
-        selectCanBeDel: "Revisiones.verialID, Revisiones.ID_Aparato, ArtRevisionesAverias.Tipo",
-        filtro: cFiltro,
-        joinStr: cJoinRevisionesArticulos,
-        lCanBeDeleteManual: true);
-    cFiltro = "TecnicosRevisionesAverias.Tipo=${EnumTecnicosRevisionesAveriasTipo.revision.index}";
-    addRelation("Revisiones", "TecnicosRevisionesAverias", "ID_AveriaRevision",
-        selectCanBeDel: "Revisiones.verialID, Revisiones.ID_Aparato, TecnicosRevisionesAverias.Tipo",
-        filtro: cFiltro,
-        joinStr: cJoinRevisionesTecnicos,
-        lCanBeDeleteManual: true);
-
-    // Salones
-    cFiltro = "DocClix.TipoOrigen=${EnumDocXTipoOrigen.salon.index}";
-    addRelation("Salones", "DocClix", "ID_Origen", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", filtro: cFiltro, joinStr: cJoinDocClix);
-    addRelation("Salones", "RecursosActos", "ID_Salon",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc, DocCli.verialID, DocCli.Tipo", joinStr: cJoinRecursosActos);
-    addRelation("Salones", "ReservasRest", "ID_Salon");
-    addRelation("Salones", "PartesReparaciones", "ID_Salon");
-    addRelation("Salones", "SalonesX", "ID_Salon", selectCanBeDel: "SalonesX.ID_Salon", joinStr: cJoinSalonesX, lCanBeDeleteManual: true);
-    addRelation("Salones", "HstRecursosActos", "ID_Salon");
-
-    // Secciones
-    addRelation("Secciones", "SeccionesX", "ID_Seccion", lCanBeDeleteManual: true);
-    addRelation("Secciones", "CartaArticulos", "ID_Seccion");
-    addRelation("Secciones", "MenuRestX", "ID_Seccion");
-
-    // Series
-    addRelation("Series", "AreasVenta", "ID_SerieDefecto", alias: "serDef");
-    addRelation("Series", "AreasVenta", "ID_SerieAlternativa", alias: "serAlt");
-    addRelation("Series", "Data_Imp", "ID_Serie");
-    addRelation("Series", "DocCli", "ID_Serie", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Series", "DocPro", "ID_Serie", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("Series", "Numeraciones", "ID_Serie", lCanBeDeleteManual: true);
-    addRelation("Series", "Pdas", "ID_Serie");
-    addRelation("Series", "Tpvext_Cajas", "ID_Serie");
-    addRelation("Series", "AreasCompra", "ID_SerieDefecto", alias: "serDef");
-    addRelation("Series", "AreasCompra", "ID_SerieAlternativa", alias: "serAlt");
-    addRelation("Series", "Delegaciones", "ID_SerieDefecto");
-    addRelation("Series", "TiendasVirtuales", "ID_Serie");
-    addRelation("Series", "Mantenimientos", "ID_Serie");
-    addRelation("Series", "Webs", "ID_Serie");
-    addRelation("Series", "ClientesX", "ID_Serie", selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX);
-    addRelation("Series", "ProveedoresX", "ID_Serie",
-        selectCanBeDel: "ProveedoresX.ID_Proveedor, ProveedoresX.ID_Empresa", joinStr: cJoinProveedoresX);
-    addRelation("Series", "AreasVenta", "ID_SerieDefectoTickets", alias: "serDefTic");
-    addRelation("Series", "AreasVenta", "ID_SerieAlternativaTickets", alias: "serAltTic");
-    addRelation("Series", "ClientesX", "ID_SerieTickets",
-        selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX, alias: "serTic");
-    addRelation("Series", "Delegaciones", "ID_ProSerieDefecto", alias: "serProDef");
-    addRelation("Series", "Delegaciones", "ID_ProSerieAlternativa", alias: "serProAat");
-    addRelation("Series", "PuestosX", "ID_SerieWeb", selectCanBeDel: "ID_Puesto", alias: "serWeb");
-    addRelation("Series", "PuestosX", "ID_SerieTicketsWeb", selectCanBeDel: "ID_Puesto", alias: "serTicWeb");
-    addRelation("Series", "BasculasTPV", "ID_Serie");
-    addRelation("Series", "BasculasTPV", "ID_SerieTickets", alias: "serTic");
-
-    // Stock_L
-    addRelation("Stock_L", AppTablas.cStockNumSerie, "ID_Stock");
-
-    // TareasTecnicos
-    cFiltro = "TecnicosRevisionesAverias.Tipo=${EnumTecnicosRevisionesAveriasTipo.averia.index}";
-    addRelation("TareasTecnicos", "TecnicosRevisionesAverias", "ID_TareaTecnicos",
-        selectCanBeDel: "Averias.verialID, Averias.ID_Aparato, TecnicosRevisionesAverias.Tipo",
-        filtro: cFiltro,
-        joinStr: cJoinAveriasTecnicos);
-    cFiltro = "TecnicosRevisionesAverias.Tipo=${EnumTecnicosRevisionesAveriasTipo.revision.index}";
-    addRelation("TareasTecnicos", "TecnicosRevisionesAverias", "ID_TareaTecnicos",
-        selectCanBeDel: "Revisiones.verialID, Revisiones.ID_Aparato, TecnicosRevisionesAverias.Tipo",
-        filtro: cFiltro,
-        joinStr: cJoinRevisionesTecnicos);
-
-    // TarifaHotel
-    addRelation("TarifaHotel", "DocHotel", "ID_TarifaCliente", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", alias: "tarHotCli");
-    addRelation("TarifaHotel", "DocHotel", "ID_TarifaEmpresa", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", alias: "tarHotEmp");
-    addRelation("TarifaHotel", "DocHotelx", "ID_TarifaHotel",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
-    addRelation("TarifaHotel", "TarifaHotelClientes", "ID_TarifaHotel", lCanBeDeleteManual: true);
-    addRelation("TarifaHotel", "TarifaHotelx", "ID_TarifaHotel", lCanBeDeleteManual: true);
-    addRelation("TarifaHotel", "TarifaHotelx", "ID_TarifaFija", alias: "tarHotFija");
-    addRelation("TarifaHotel", "Tarifas", "ID_TarifaHotel", lCanBeDeleteManual: true);
-    addRelation("TarifaHotel", "Cfg_CentralReservas", "ID_TarifaHotel");
-    addRelation("TarifaHotel", "Delegaciones", "ID_CliTarifaHotelDefecto");
-    addRelation("TarifaHotel", "HstDocHotel", "ID_TarifaCliente",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", lCanBeDeleteManual: true, alias: "tarHotCli");
-    addRelation("TarifaHotel", "HstDocHotel", "ID_TarifaEmpresa",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", lCanBeDeleteManual: true, alias: "tarHotEmp");
-    addRelation("TarifaHotel", "HstDocHotelx", "ID_TarifaHotel",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx, lCanBeDeleteManual: true);
-    addRelation("TarifaHotel", "ClientesX", "ID_TarifaHotel",
-        selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX);
-    addRelation("TarifaHotel", "AreasVenta", "ID_TarifaKioskoHotel");
-
-    // TarifasArticulos
-    addRelation("TarifasArticulos", "AreasVenta", "ID_Tarifa1", alias: "tar1");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_Tarifa2", alias: "tar2");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_Tarifa3", alias: "tar3");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaPreciosTpvext", alias: "tarPrTpvEx");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaOfertasTpvext", alias: "tarOfTpvEx");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaComponentes", alias: "tarComponentes");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_Tarifa_Cli_Varios", alias: "tarCliVarios");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_Tarifa_Excepciones_Cli_Varios", alias: "tarExcCliVarios");
-
-    addRelation("TarifasArticulos", "Data_Imp", "ID_TarifaArticulos");
-    addRelation("TarifasArticulos", "DocCli", "ID_Tarifa", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("TarifasArticulos", "DocCli", "ID_TarifaExcepciones", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", alias: "tarExp");
-    addRelation("TarifasArticulos", "DocHotel", "ID_Tarifa", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("TarifasArticulos", "Mesas", "ID_Tarifa");
-    addRelation("TarifasArticulos", "Tarifas", "ID_TarifaArticulos", lCanBeDeleteManual: true);
-    addRelation("TarifasArticulos", "Pdas", "ID_Tarifa");
-    addRelation("TarifasArticulos", "Pdas", "ID_Tarifa2", alias: "tar2");
-    addRelation("TarifasArticulos", "Pdas", "ID_Tarifa3", alias: "tar3");
-    addRelation("TarifasArticulos", "Delegaciones", "ID_CliTarifaArticulosDefecto", alias: "tarCliArtDef");
-    addRelation("TarifasArticulos", "Delegaciones", "ID_CliTarifaExcepcionesDefecto", alias: "tarCliExcDef");
-    addRelation("TarifasArticulos", "Delegaciones", "ID_TarifaAux1", alias: "tarAux1");
-    addRelation("TarifasArticulos", "Delegaciones", "ID_TarifaAux2", alias: "tarAux2");
-    addRelation("TarifasArticulos", "Delegaciones", "ID_TarifaAux3", alias: "tarAux3");
-    addRelation("TarifasArticulos", "Delegaciones", "ID_TarifaAux4", alias: "tarAux4");
-    addRelation("TarifasArticulos", "Delegaciones", "ID_TarifaAux5", alias: "tarAux5");
-    addRelation("TarifasArticulos", "TiendasVirtuales", "ID_TarifaArticulos");
-    addRelation("TarifasArticulos", "HstDocHotel", "ID_Tarifa", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaAlquilerNoDevuelto", alias: "tarAlquilerNoDev");
-    addRelation("TarifasArticulos", "TarifasArticulos", "ID_TarifaPrecioBase");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaGestion", alias: "tarGestion");
-    addRelation("TarifasArticulos", "ClientesX", "ID_Tarifa", selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX);
-    addRelation("TarifasArticulos", "ClientesX", "ID_TarifaExcepciones",
-        selectCanBeDel: "ClientesX.ID_Cliente, ClientesX.ID_Empresa", joinStr: cJoinClientesX, alias: "tarExcep");
-    addRelation("TarifasArticulos", "TarifasArticulosX", "ID_TarifaArticulos",
-        selectCanBeDel: "TarifasArticulosX.ID_TarifaArticulos, TarifasArticulos.Opciones",
-        joinStr: cJoinTarifasArticulosX,
-        lCanBeDeleteManual: true);
-    addRelation("TarifasArticulos", "Webs", "ID_Tarifa");
-    addRelation("TarifasArticulos", "Webs", "ID_TarifaExcepciones", alias: "tarExcep");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaVisorPrecios", alias: "tarVisor");
-    addRelation("TarifasArticulos", "AreasVenta", "ID_TarifaExcepcionesVisorPrecios", alias: "tarExcepVisor");
-    addRelation("TarifasArticulos", "CartaClientes", "ID_Tarifa");
-
-    addRelation("TarifasArticulos", "PuestosX", "ID_TarifaWeb", selectCanBeDel: "ID_Puesto", alias: "tarWeb");
-    addRelation("TarifasArticulos", "PuestosX", "ID_TarifaExcepcionesWeb", selectCanBeDel: "ID_Puesto", alias: "tarExcepWeb");
-
-    // TarifasDoc
-    addRelation("TarifasDoc", "TarifasDocX", "ID_TarifaDoc", lCanBeDeleteManual: true);
-    addRelation("TarifasDoc", "TarifasArticulosX", "ID_TarifaDoc",
-        selectCanBeDel: "TarifasArticulosX.ID_TarifaArticulos, TarifasArticulos.Opciones", joinStr: cJoinTarifasArticulosX);
-    addRelation("TarifasDoc", "DocClix", "ID_TarifaDoc",
-        selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix, lCanBeDeleteManual: true);
-
-    // Tecnicos
-    addRelation("Tecnicos", "OrdenesTrabajo", "ID_TecnicoRecepcion", alias: "tecRecep");
-
-    cFiltro = "TecnicosRevisionesAverias.Tipo=${EnumTecnicosRevisionesAveriasTipo.averia.index}";
-    addRelation("Tecnicos", "TecnicosRevisionesAverias", "ID_Tecnico",
-        selectCanBeDel: "Averias.verialID, Averias.ID_Aparato, TecnicosRevisionesAverias.Tipo",
-        filtro: cFiltro,
-        joinStr: cJoinAveriasTecnicos);
-
-    cFiltro = "TecnicosRevisionesAverias.Tipo=${EnumTecnicosRevisionesAveriasTipo.revision.index}";
-    addRelation("Tecnicos", "TecnicosRevisionesAverias", "ID_Tecnico",
-        selectCanBeDel: "Revisiones.verialID, Revisiones.ID_Aparato, TecnicosRevisionesAverias.Tipo",
-        filtro: cFiltro,
-        joinStr: cJoinRevisionesTecnicos);
-
-    addRelation("Tecnicos", "DocCli", "ID_Tecnico", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Tecnicos", "DocClix", "ID_Tecnico", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-    addRelation("Tecnicos", "FabricacionX", "ID_Tecnico", selectCanBeDel: "Fabricacion.ID_FabricacionGrupo", joinStr: cJoinFabricacion);
-    addRelation("Tecnicos", "FabricacionTareas", "ID_Tecnico");
-    addRelation("Tecnicos", "PartesMedicos", "ID_Medico");
-    addRelation("Tecnicos", "OrdenesTrabajo", "ID_TecnicoTrabajo", alias: "tecTrab");
-
-    // TelepedidoOfertas
-    addRelation("TelepedidoOfertas", "TelepedidoOfertasX", "ID_TelepedidoOfertas");
-
-    // TiendasVirtuales
-    addRelation("TiendasVirtuales", "Destinos", "ID_TiendaVirtual");
-
-    // TipoHabitaciones
-    addRelation("TipoHabitaciones", "DocHotelx", "ID_TipoHabitacion",
-        selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
-    addRelation("TipoHabitaciones", "Habitaciones", "ID_Tipo");
-    addRelation("TipoHabitaciones", "Cfg_CentralReservasCargos", "ID_TipoHabitacion");
-    addRelation("TipoHabitaciones", "HstDocHotelx", "ID_TipoHabitacion",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
-
-    // TPVExt_Cajas
-    cFiltro = "Data_Imp.TipoOrigen=${EnumDataImpTipoOrigen.tpvexterno.index}";
-    addRelation("Tpvext_Cajas", "Data_Imp", "ID_Origen", filtro: cFiltro);
-
-    // TPVEXT_Cajas
-    addRelation("Tpvext_Cajas", "Tpvext_Saldos", "ID_Caja", alias: "tpvExCaja");
-
-    // TPVExt_Saldos
-    addRelation("Tpvext_Saldos", "Tpvext_Saldos", "ID_Operacion", alias: "tpvExOp");
-
-    // Transportistas
-    addRelation("Transportistas", "Clientes", "ID_Transportista");
-    addRelation("Transportistas", "Proveedores", "ID_Transportista");
-    addRelation("Transportistas", "DocCli", "ID_Transportista", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Transportistas", "DocPro", "ID_Transportista", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("Transportistas", "DocAlmacen", "ID_Transportista", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo");
-    addRelation("Transportistas", "Pdas", "ID_Transportista");
-    addRelation("Transportistas", "Delegaciones", "ID_TransportistaDefecto");
-    addRelation("Transportistas", "DocHotel", "ID_Transportista", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("Transportistas", "HstDocHotel", "ID_Transportista", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Transportistas", "Logi_Formas", "ID_Transportista");
-    addRelation("Transportistas", "Logi_Envios", "ID_Transportista");
-
-    // Turnos
-    addRelation("Turnos", "ReservasRest", "ID_Turno");
-
-    // Ubicaciones
-    addRelation("Ubicaciones_G", "Ocupantes", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "Nombres", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "Clientes", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "Proveedores", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "Fabricantes", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "Personal", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "Almacenes", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "Transportistas", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "ContactosExternos", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "Veterinarios", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "Tecnicos", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "Empresas", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "Delegaciones", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "OcupantesX", "ID_Ubicacion");
-    addRelation("Ubicaciones_G", "HstOcupantesX", "ID_Ubicacion", lCanBeDeleteManual: true);
-
-    // Usuarios
-    addRelation("Usuarios_G", AppTablas.cPuestos, "ID_Usuario");
-    addRelation("Usuarios_G", AppTablas.cUsuariosRespuestas, "ID_Usuario");
-    addRelation("Usuarios_G", AppTablas.cMessenger, "ID_DeUsuario");
-    addRelation("Usuarios_G", AppTablas.cMessengerX, "ID_Usuario");
-    addRelation("Usuarios_G", "OrdenesTrabajo", "ID_Usuario");
-    addRelation("Usuarios_G", "Arqueos", "ID_Usuario");
-    addRelation("Usuarios_G", "OperacionesTPV", "ID_Usuario");
-    addRelation("Usuarios_G", "Data_Imp", "ID_Usuario");
-    addRelation("Usuarios_G", "DocCli", "ID_Usuario", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Usuarios_G", "DocClix", "ID_Usuario", selectCanBeDel: "DocCli.verialID, DocCli.Tipo", joinStr: cJoinDocClix);
-    addRelation("Usuarios_G", "PuntosClientes", "ID_Usuario");
-    addRelation("Usuarios_G", "DocHotel", "ID_Usuario", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc");
-    addRelation("Usuarios_G", "DocHotelx", "ID_Usuario", selectCanBeDel: "DocHotel.verialID, DocHotel.TipoDoc", joinStr: cJoinDocHotelx);
-    addRelation("Usuarios_G", "DocPro", "ID_Usuario", selectCanBeDel: "DocPro.verialID, DocPro.Tipo");
-    addRelation("Usuarios_G", "InstalacionesX", "ID_Usuario");
-    addRelation("Usuarios_G", "Mandatos", "ID_Usuario");
-    addRelation("Usuarios_G", "ReservasRest", "ID_Usuario");
-    addRelation("Usuarios_G", "Pdas", "ID_Usuario");
-    addRelation("Usuarios_G", "DocAlmacen", "ID_Usuario", selectCanBeDel: "DocAlmacen.verialID, DocAlmacen.Tipo");
-    addRelation("Usuarios_G", "UsuariosX", "ID_Usuario", selectCanBeDel: "ID_Usuario", lCanBeDeleteManual: true);
-    addRelation("Usuarios_G", "Efectos", "ID_Usuario");
-    addRelation("Usuarios_G", "Agenda", "ID_Usuario");
-    addRelation("Usuarios_G", "Inventario", "ID_Usuario");
-    addRelation("Usuarios_G", "InventarioX", "ID_Usuario");
-
-    addRelation("Usuarios_G", "HstDocHotel", "ID_UsuarioProceso", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Usuarios_G", "HstDocHotel", "ID_Usuario", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Usuarios_G", "HstDocHotelx", "ID_Usuario",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
-
-    addRelation("Usuarios_G", "HstDocHotel", "ID_UsuarioProceso", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Usuarios_G", "HstDocHotel", "ID_Usuario", selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc");
-    addRelation("Usuarios_G", "HstDocHotelx", "ID_Usuario",
-        selectCanBeDel: "HstDocHotel.verialID, HstDocHotel.TipoDoc", joinStr: cJoinHstDocHotelx);
-    addRelation("Usuarios_G", "CRM_Cfg", "ID_Usuario");
-    addRelation("Usuarios_G", "Fianzas", "ID_Usuario");
-    addRelation("Usuarios_G", "Conocimientos", "ID_Usuario");
-    addRelation("Usuarios_G", "Conocimientos", "ID_Usuario2");
-    addRelation("Usuarios_G", AppTablas.cIncidencias, "ID_Usuario");
-    addRelation("Usuarios_G", AppTablas.cIncidencias, "ID_UsuarioAutorizado");
-    addRelation("Usuarios_G", AppTablas.cStock, "ID_Usuario");
-    addRelation("Usuarios_G", AppTablas.cChequeos, "ID_Usuario");
-    addRelation("Usuarios_G", AppTablas.cExTrans, "ID_Usuario");
-
-    // UsuariosPerfiles
-    addRelation("UsuariosPerfiles_G", AppTablas.cUsuarios, "ID_Perfil");
-    addRelation("UsuariosPerfiles_G", AppTablas.cUsuariosPerfilesX, "ID_Perfil", lCanBeDeleteManual: true);
-
-    // Vehiculos
-    addRelation("Vehiculos", "Transportistas", "ID_Vehiculo");
-    addRelation("Vehiculos", "Logi_Envios", "ID_Vehiculo");
-    addRelation("Vehiculos", "DocCli", "ID_Vehiculo", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-
-    // Veterinarios
-    addRelation("Veterinarios", "DocCli", "ID_Veterinario", selectCanBeDel: "DocCli.verialID, DocCli.Tipo");
-    addRelation("Veterinarios", "Clientes", "ID_Veterinario", alias: "cliVet");
-    addRelation("Veterinarios", "Delegaciones", "ID_CliVeterinarioDefecto");
-    addRelation("Veterinarios", "Recetas", "ID_Veterinario");
-    addRelation("Veterinarios", "Clientes", "ID_VeterinarioResponsable", alias: "cliVetResp");
-
-    //Zonas
-    addRelation("Zonas", "Clientes", "ID_Zona");
+
+
+//AEAT
+    addRelation("aeat", "aeatx", "id_a_eat");
+
+//Agenda
+    addRelation("agenda", "agenda", "id_padre");
+
+//Almacenes
+    addRelation("almacenes", "averias", "id_almacen");
+    addRelation("almacenes", "mantenimientos", "id_almacen");
+    addRelation("almacenes", "revisiones", "id_almacen");
+    addRelation("almacenes", "areas_venta", "id_almacen");
+    addRelation("almacenes", "art_almacenes", "id_almacen");
+    addRelation("almacenes", "art_stocks", "id_almacen");
+    addRelation("almacenes", "estantes", "id_almacen");
+    addRelation("almacenes", "mensajes", "id_ficha");
+    addRelation("almacenes", "data_imp", "id_almacen");
+    addRelation("almacenes", "doc_cli", "id_almacen");
+    addRelation("almacenes", "doc_clix", "id_almacen");
+    addRelation("almacenes", "doc_pro", "id_almacen");
+    addRelation("almacenes", "doc_prox", "id_almacen");
+    addRelation("almacenes", "pdas", "id_almacen");
+    addRelation("almacenes", "tpvext_cajas", "id_almacen");
+    addRelation("almacenes", "doc_almacen", "id_almacen_origen");
+    addRelation("almacenes", "doc_almacen", "id_almacen_destino");
+    addRelation("almacenes", "puestosx", "id_almacen_unico");
+    addRelation("almacenes", "areas_compra", "id_almacen");
+    addRelation("almacenes", "doc_hotel", "id_almacen");
+    addRelation("almacenes", "doc_hotelx", "id_almacen");
+    addRelation("almacenes", "inventario", "id_almacen");
+    addRelation("almacenes", "fabricacion_grupo", "id_almacen_origen");
+    addRelation("almacenes", "fabricacion_grupo", "id_almacen_destino");
+    addRelation("almacenes", "fabricacion", "id_almacen_origen");
+    addRelation("almacenes", "fabricacion", "id_almacen_destino");
+    addRelation("almacenes", "hst_doc_hotel", "id_almacen");
+    addRelation("almacenes", "hst_doc_hotelx", "id_almacen");
+    addRelation("almacenes", "pdas", "id_almacen_pedidos");
+    addRelation("almacenes", "doc_pro", "id_almacen_origen");
+    addRelation("almacenes", "clientes", "id_almacen_urdi");
+    addRelation("almacenes", AppTablas.cStock, "id_almacen");
+
+//Aparatos
+    addRelation("aparatos", "averias", "id_aparato");
+    addRelation("aparatos", "ordenes_trabajo", "id_aparato");
+    addRelation("aparatos", "revisiones", "id_aparato");
+    addRelation("aparatos", "campos_auxiliares", "id_origen");
+    addRelation("aparatos", "rutas_ficheros", "id_ficha");
+    addRelation("aparatos", "fabricacionx", "id_aparato");
+    addRelation("aparatos", "doc_clix", "id_aparato");
+
+//AppBlobs_I
+    addRelation("app_blobs_i", "empresas", "id_s_ii_certificado");
+    addRelation("app_blobs_i", "empresas", "id_certificado_recetas");
+    addRelation("app_blobs_i", "veterinarios", "id_certificado");
+    addRelation("app_blobs_i", "delegaciones", "id_certificado_pdf");
+
+//Arboles
+    addRelation("arboles", "arboles", "id_padre");
+    addRelation("arboles", "art_compuestos", "id_categoria");
+    addRelation("arboles", "articulos", "id_categoria");
+    addRelation("arboles", "clientes", "id_grupo");
+    addRelation("arboles", "grupos_comisionesx", "id_categoria");
+    addRelation("arboles", "data_impx", "id_categoria");
+    addRelation("arboles", "doc_cli", "id_tipo_contingente");
+    addRelation("arboles", "doc_hotel", "id_tipo_contingente");
+    addRelation("arboles", "proveedores", "id_grupo");
+    addRelation("arboles", "tarifas", "id_categoria");
+    addRelation("arboles", "cfg_central_reservas", "id_tipo_contingente");
+    addRelation("arboles", "centro_costes_defecto", "id_categoria");
+    addRelation("arboles", "personal", "id_grupo");
+    addRelation("arboles", "centro_costes_defecto", "id_grupo_proveedores");
+    addRelation("arboles", "centro_costes_defecto", "id_grupo_personal");
+    addRelation("arboles", "hst_doc_hotel", "id_tipo_contingente");
+    addRelation("arboles", "clientes", "id_tipo_contingente");
+    addRelation("arboles", "tarifas_docx", "id_categoria");
+    addRelation("arboles", "inmovilizado", "id_categoria");
+    addRelation("arboles", "articulos", "id_categoria_web");
+    addRelation("arboles", "categorias_de", "id_categoria");
+    addRelation("arboles", "articulos", "id_categoria_web2");
+    addRelation("arboles", "articulos", "id_categoria_web3");
+    addRelation("arboles", "articulos", "id_categoria_web4");
+    addRelation("arboles", "cfg_central_reservas_clientes_agencias", "id_tipo_contingente");
+
+//ArbolesAuxiliares
+    addRelation("arboles_auxiliares", "campos_auxiliares", "id_arbol01");
+    addRelation("arboles_auxiliares", "campos_auxiliares", "id_arbol02");
+    addRelation("arboles_auxiliares", "campos_auxiliares", "id_arbol03");
+    addRelation("arboles_auxiliares", "campos_auxiliares", "id_arbol04");
+    addRelation("arboles_auxiliares", "campos_auxiliares", "id_arbol05");
+    addRelation("arboles_auxiliares", "arboles_auxiliares", "id_padre");
+
+//AreasCompra
+    addRelation("areas_compra", "puestosx", "id_area_compra");
+    addRelation("areas_compra", "doc_pro", "id_area_compra");
+    addRelation("areas_compra", "doc_prox", "id_area_compra");
+    addRelation("areas_compra", "pdas", "id_area_compra");
+
+//AreasVenta
+    addRelation("areas_venta", "aparatos", "id_area_venta");
+    addRelation("areas_venta", "articulos", "id_area_venta");
+    addRelation("areas_venta", "data_imp", "id_area_venta");
+    addRelation("areas_venta", "doc_cli", "id_area_venta");
+    addRelation("areas_venta", "doc_clix", "id_area_venta");
+    addRelation("areas_venta", "doc_hotel", "id_area_venta");
+    addRelation("areas_venta", "doc_hotelx", "id_area_venta");
+    addRelation("areas_venta", "habitaciones", "id_area_venta");
+    addRelation("areas_venta", "mesas", "id_area_venta");
+    addRelation("areas_venta", "reservas_rest", "id_area_venta");
+    addRelation("areas_venta", "turnos", "id_area_venta");
+    addRelation("areas_venta", "pdas", "id_area_venta");
+    addRelation("areas_venta", "tpvext_cajas", "id_area_venta");
+    addRelation("areas_venta", "cfg_central_reservas", "id_area_venta");
+    addRelation("areas_venta", "puestosx", "id_area_venta1");
+    addRelation("areas_venta", "puestosx", "id_area_venta2");
+    addRelation("areas_venta", "puestosx", "id_area_venta3");
+    addRelation("areas_venta", "puestosx", "id_area_venta4");
+    addRelation("areas_venta", "puestosx", "id_area_venta5");
+    addRelation("areas_venta", "partes_reparaciones", "id_area_venta");
+    addRelation("areas_venta", "tiendas_virtuales", "id_area_venta");
+    addRelation("areas_venta", "cupos", "id_area_venta");
+    addRelation("areas_venta", "hst_doc_hotel", "id_area_venta");
+    addRelation("areas_venta", "hst_doc_hotelx", "id_area_venta");
+    addRelation("areas_venta", "numeraciones", "id_area_venta");
+    addRelation("areas_venta", "partes_medicos", "id_area_venta");
+    addRelation("areas_venta", "mantenimientos", "id_area_venta");
+    addRelation("areas_venta", "bonos_acceso", "id_area_venta");
+    addRelation("areas_venta", "webs", "id_area_venta");
+    addRelation("areas_venta", "basculas_tpv", "id_area_venta");
+
+//Arqueos
+    addRelation("arqueos", "arqueosx", "id_arqueo");
+    addRelation("arqueos", "operaciones_tpv", "id_arqueo");
+    addRelation("arqueos", "doc_clix", "id_arqueo");
+    addRelation("arqueos", "doc_hotelx", "id_arqueo");
+    addRelation("arqueos", "efectos", "id_arqueo");
+    addRelation("arqueos", "hst_doc_hotelx", "id_arqueo");
+    addRelation("arqueos", "fianzas", "id_arqueo_constitucion");
+    addRelation("arqueos", "fianzas", "id_arqueo_cancelacion");
+
+//Articulos
+    addRelation("articulos", "mantenimientos", "id_articulo");
+    addRelation("articulos", "art_revisiones_averias", "id_articulo");
+    addRelation("articulos", "art_revisiones_averias", "id_articulo");
+    addRelation("articulos", "areas_venta", "id_cubierto");
+    addRelation("articulos", "areas_venta", "id_cargo_sup_individual");
+    addRelation("articulos", "areas_venta", "id_cargo_sup_estancia_corta");
+    addRelation("articulos", "areas_venta", "id_cargo_sup_extra1");
+    addRelation("articulos", "areas_venta", "id_cargo_sup_extra2");
+    addRelation("articulos", "areas_venta", "id_cargo_sup_extra3");
+    addRelation("articulos", "art_compuestos", "id_compuesto");
+    addRelation("articulos", "art_compuestos", "id_articulo");
+    addRelation("articulos", "art_codigos", "id_articulo");
+    addRelation("articulos", "articulos", "id_agrupado");
+    addRelation("articulos", "articulos", "id_articulo_stock");
+    addRelation("articulos", "art_ibic", "id_articulo");
+    addRelation("articulos", "art_proveedor", "id_articulo");
+    addRelation("articulos", "art_almacenes", "id_articulo");
+    addRelation("articulos", "art_stocks", "id_articulo");
+    addRelation("articulos", "autores", "id_articulo");
+    addRelation("articulos", "estantesx", "id_articulo");
+    addRelation("articulos", "grupos_comisionesx", "id_articulo");
+    addRelation("articulos", "data_impx", "id_origen");
+    addRelation("articulos", "doc_clix", "id_origen");
+    addRelation("articulos", "doc_hotelx", "id_origen");
+    addRelation("articulos", "doc_hotel_xprevision", "id_cargo");
+    addRelation("articulos", "doc_prox", "id_origen");
+    addRelation("articulos", "tipo_habitaciones", "id_cargo_defecto");
+    addRelation("articulos", "art_lotesx", "id_articulo");
+    addRelation("articulos", "carta_articulos", "id_articulo");
+    addRelation("articulos", "tarifas", "id_articulo");
+    addRelation("articulos", "tpvext_secciones", "id_articulo");
+    addRelation("articulos", "cfg_central_reservas", "id_cargo_desayuno");
+    addRelation("articulos", "cfg_central_reservas", "id_cargo_media_pension");
+    addRelation("articulos", "cfg_central_reservas", "id_cargo_pension_completa");
+    addRelation("articulos", "cfg_central_reservas", "id_cargo_todo_incluido");
+    addRelation("articulos", "cfg_central_reservas", "id_cargo_uso_individual");
+    addRelation("articulos", "cfg_central_reservas", "id_cargo_cama_supletoria");
+    addRelation("articulos", "cfg_central_reservas_cargos", "id_cargo");
+    addRelation("articulos", "tecnicos", "id_articulo_trab");
+    addRelation("articulos", "tecnicos", "id_articulo_desp");
+    addRelation("articulos", "doc_almacenx", "id_origen");
+    addRelation("articulos", "art_delegaciones", "id_articulo");
+    addRelation("articulos", "doc_hotelx", "id_cargo_sup1");
+    addRelation("articulos", "doc_hotelx", "id_cargo_sup2");
+    addRelation("articulos", "doc_hotelx", "id_cargo_sup3");
+    addRelation("articulos", "menu_rest", "id_articulo");
+    addRelation("articulos", "menu_restx", "id_articulo");
+    addRelation("articulos", "tarifa_hotel", "id_cargo_defecto");
+    addRelation("articulos", "salones", "id_articulo");
+    addRelation("articulos", "menu_eventos", "id_articulo");
+    addRelation("articulos", "menu_eventosx", "id_articulo");
+    addRelation("articulos", "inventariox", "id_articulo");
+    addRelation("articulos", "partes_reparacionesx", "id_articulo");
+    addRelation("articulos", "centro_costes_defecto", "id_articulo");
+    addRelation("articulos", "salonesx", "id_articulo");
+    addRelation("articulos", "campos_auxiliares", "id_origen");
+    addRelation("articulos", "rutas_ficheros", "id_ficha");
+    addRelation("articulos", "delegaciones", "id_articulo_centralita");
+    addRelation("articulos", "fabricacion", "id_articulo");
+    addRelation("articulos", "fabricacionx", "id_articulo");
+    addRelation("articulos", "mesas", "id_cubierto");
+    addRelation("articulos", "hst_doc_hotelx", "id_origen");
+    addRelation("articulos", "hst_doc_hotelx", "id_cargo_sup1");
+    addRelation("articulos", "hst_doc_hotelx", "id_cargo_sup2");
+    addRelation("articulos", "hst_doc_hotelx", "id_cargo_sup3");
+    addRelation("articulos", "articulos", "id_articulo_eco_tasas");
+    addRelation("articulos", "tarifas_docx", "id_articulo");
+    addRelation("articulos", "logi_unidadesx", "id_articulo");
+    addRelation("articulos", "articulos", "id_articulo_envase");
+    addRelation("articulos", "suscripciones", "id_primer_numero");
+    addRelation("articulos", "cfg_central_reservas_cargos_xpersona", "id_cargo");
+    addRelation("articulos", "coleccionables", "id_libro");
+    addRelation("articulos", "coleccionables", "id_articulo");
+    addRelation("articulos", "art_similares", "id_articulo");
+    addRelation("articulos", "tareas_tecnicos", "id_articulo");
+    addRelation("articulos", "carta_clientes_articulos", "id_articulo");
+    addRelation("articulos", "art_ingredientes", "id_articulo");
+    addRelation("articulos", "art_ingredientes", "id_ingrediente");
+    addRelation("articulos", "areas_venta", "id_art_gastos_envio_telepedido");
+    addRelation("articulos", "areas_venta", "id_art_bolsa_telepedido");
+    addRelation("articulos", "telepedido_ofertasx", "id_articulo");
+    addRelation("articulos", "puestosx", "id_articulo_portes_web");
+    addRelation("articulos", "art_visibles_xdelegacion", "id_articulo");
+    addRelation("articulos", AppTablas.cStock, "id_articulo");
+
+//ArtLotes
+    addRelation("art_lotes", "art_lotesx", "id_art_lotes");
+
+//ArtRevisionesAverias
+    addRelation("art_revisiones_averias", "art_revisiones_averias", "id_art_revisiones_averias");
+    addRelation("art_revisiones_averias", "art_revisiones_averias", "id_art_revisiones_averias");
+    addRelation("art_revisiones_averias", "numeros_serie", "id_contenido");
+
+//ArtStocks
+    addRelation("art_stocks", "art_serie", "id_stocks");
+    addRelation("art_stocks", "art_serie_uds_aux", "id_stocks");
+
+//Asientos
+    addRelation("asientos", "apuntes", "id_asiento");
+    addRelation("asientos", "comisiones", "id_asiento");
+    addRelation("asientos", "doc_cli", "id_asiento");
+    addRelation("asientos", "doc_pro", "id_asiento");
+    addRelation("asientos", "nominas", "id_asiento");
+    addRelation("asientos", "efectos", "id_asiento_formalizacion");
+    addRelation("asientos", "efectos", "id_asiento_al_banco");
+    addRelation("asientos", "efectos", "id_asiento_rechazo");
+    addRelation("asientos", "efectos", "id_asiento_dudoso_cobro");
+    addRelation("asientos", "efectos", "id_asiento_incobrable");
+    addRelation("asientos", "efectos", "id_asiento_pagado");
+    addRelation("asientos", "efectos", "id_asiento_agrupacion");
+    addRelation("asientos", "remesas_asientos", "id_asiento");
+    addRelation("asientos", "remesas", "id_asiento");
+    addRelation("asientos", "fianzas", "id_asiento_constitucion");
+    addRelation("asientos", "fianzas", "id_asiento_cancelacion");
+
+//Averias
+    addRelation("averias", "ordenes_trabajo", "id_averia");
+    addRelation("averias", "art_revisiones_averias", "id_averia_revision");
+    addRelation("averias", "tecnicos_revisiones_averias", "id_averia_revision");
+
+//Balances
+    addRelation("balances", "balances", "id_padre");
+    addRelation("balances", "balancesx", "id_balance");
+    addRelation("balances", "balancesx", "id_sub_balance");
+
+//Bancos
+    addRelation("bancos_g", "cuentas_bancarias", "id_banco");
+
+//BonosAcceso
+    addRelation("bonos_acceso", "bonos_accesox", "id_bono_acceso");
+
+//Cajones
+    addRelation("cajones", "areas_venta", "id_cajon");
+    addRelation("cajones", "arqueos", "id_cajon");
+    addRelation("cajones", "operaciones_tpv", "id_cajon");
+    addRelation("cajones", "efectos", "id_cajon");
+    addRelation("cajones", "puestosx", "id_cajon");
+    addRelation("cajones", "usuariosx", "id_cajon");
+    addRelation("cajones", "fianzas", "id_cajon_constitucion");
+    addRelation("cajones", "fianzas", "id_cajon_cancelacion");
+    addRelation("cajones", "pdas", "id_cajon");
+
+//CartaClientes
+    addRelation("carta_clientes", "carta_clientes_grupos", "id_carta_clientes");
+    addRelation("carta_clientes", "puestosx", "id_carta_autopedido");
+
+//CartaClientes_Grupos
+    addRelation("carta_clientes_grupos", "carta_clientes_articulos", "id_carta_clientes_grupo");
+
+//CartaGrupos
+    addRelation("carta_grupos", "carta_articulos", "id_grupo");
+
+//CentroCostes_Arboles
+    addRelation("centro_costes_arboles", "centro_costes_proyectos", "id_arbol");
+    addRelation("centro_costes_arboles", "centro_costes_arbolesx", "id_arbol");
+
+//CentroCostes_ArbolesX
+    addRelation("centro_costes_arbolesx", "centro_costes_arbolesx", "id_padre");
+    addRelation("centro_costes_arbolesx", "centro_costes_arbolesx", "id_arbol_xgeneral");
+    addRelation("centro_costes_arbolesx", "centro_costes_defecto", "id_arbolx");
+    addRelation("centro_costes_arbolesx", "centro_costes_valores", "id_arbolx");
+
+//CentroCostes_Proyectos
+    addRelation("centro_costes_proyectos", "centro_costes_defecto", "id_proyecto");
+    addRelation("centro_costes_proyectos", "centro_costes_valores", "id_proyecto");
+
+//CentroInformes
+    addRelation("centro_informes", "centro_informesx", "id_centro_informes");
+
+//Cfg_CentralReservas
+    addRelation("cfg_central_reservas", "cfg_central_reservas_cargos", "id_cfg_central_reservas");
+    addRelation("cfg_central_reservas", "cfg_central_reservas_cargos_xpersona", "id_cfg_central_reservas");
+    addRelation("cfg_central_reservas", "cfg_central_reservas_clientes_agencias", "id_cfg_central_reservas");
+    addRelation("cfg_central_reservas", "cfg_central_reservas_sincronizacion_auto", "id_cfg_central_reservas");
+
+//Cfg_FicheroPolicia
+    addRelation("cfg_fichero_policia", "delegaciones", "id_cfg_fichero_policia");
+    addRelation("cfg_fichero_policia", "areas_venta", "id_cfg_fichero_policia");
+    addRelation("cfg_fichero_policia", "habitaciones", "id_cfg_fichero_policia");
+
+//Cfg_Fondo
+    addRelation("cfg_fondo_g", AppTablas.cCfgFondoX, "id_cfg_fondo");
+    addRelation("cfg_fondo_g", AppTablas.cUsuarios, "id_cfg_fondo");
+
+//Cfg_Menu
+    addRelation("cfg_menu_g", AppTablas.cCfgMenuX, "id_cfg_menu");
+    addRelation("cfg_menu_g", AppTablas.cUsuarios, "id_cfg_menu");
+
+//Clientes
+    addRelation("clientes", "mantenimientos", "id_cliente_atendido");
+    addRelation("clientes", "mantenimientos", "id_cliente_facturacion");
+    addRelation("clientes", "areas_venta", "id_cliente_defecto");
+    addRelation("clientes", "cuentas_bancarias", "id_ficha");
+    addRelation("clientes", "clientes", "id_ficha_fiscal");
+    addRelation("clientes", "clientes", "id_ficha_varios");
+    addRelation("clientes", "clientes", "id_agencia");
+    addRelation("clientes", "mensajes", "id_ficha");
+    addRelation("clientes", "data_imp", "id_emisor");
+    addRelation("clientes", "data_imp", "id_titular_doc");
+    addRelation("clientes", "doc_cli", "id_cliente");
+    addRelation("clientes", "doc_cli", "id_reservador");
+    addRelation("clientes", "doc_cli", "id_cliente_agencia");
+    addRelation("clientes", "doc_clix", "id_reservador");
+    addRelation("clientes", "doc_clix", "id_cliente_agencia");
+    addRelation("clientes", "puntos_clientes", "id_cliente");
+    addRelation("clientes", "doc_hotel", "id_cliente");
+    addRelation("clientes", "doc_hotel", "id_reservador");
+    addRelation("clientes", "doc_hotelx", "id_cliente");
+    addRelation("clientes", "doc_hotelx", "id_quien_paga");
+    addRelation("clientes", "cupos", "id_cliente");
+    addRelation("clientes", "instalaciones", "id_cliente");
+    addRelation("clientes", "instalaciones", "id_vendedor");
+    addRelation("clientes", "instalaciones", "id_mayorista");
+    addRelation("clientes", "nombres", "id_ficha");
+    addRelation("clientes", "mandatos", "id_cliente");
+    addRelation("clientes", "reservas_rest", "id_cliente");
+    addRelation("clientes", "tarifa_hotel_clientes", "id_cliente");
+    addRelation("clientes", "tpvext_saldos", "id_cliente");
+    addRelation("clientes", "aparatos", "id_cliente");
+    addRelation("clientes", "delegaciones", "id_cliente_varios");
+    addRelation("clientes", "ocupantesx", "id_cliente");
+    addRelation("clientes", "agenda", "id_cliente");
+    addRelation("clientes", "campos_auxiliares", "id_origen");
+    addRelation("clientes", "campos_auxiliares", "id_origen");
+    addRelation("clientes", "rutas_ficheros", "id_ficha");
+    addRelation("clientes", "fabricacion_grupo", "id_cliente");
+    addRelation("clientes", "doc_cli", "id_remitente_cliente");
+    addRelation("clientes", "doc_cli", "id_envio_cliente");
+    addRelation("clientes", "hst_doc_hotel", "id_cliente");
+    addRelation("clientes", "hst_doc_hotel", "id_reservador");
+    addRelation("clientes", "hst_doc_hotelx", "id_cliente");
+    addRelation("clientes", "hst_doc_hotelx", "id_quien_paga");
+    addRelation("clientes", "hst_ocupantesx", "id_cliente");
+    addRelation("clientes", "partes_medicos", "id_cliente");
+    addRelation("clientes", "clientes", "id_receptor_efactura");
+    addRelation("clientes", "clientes", "id_pagador_efactura");
+    addRelation("clientes", "clientes", "id_contable_efactura");
+    addRelation("clientes", "objetos_perdidos", "id_cliente_encontrado");
+    addRelation("clientes", "objetos_perdidos", "id_cliente_reclamado");
+    addRelation("clientes", "bonos_acceso", "id_cliente");
+    addRelation("clientes", "clientesx", "id_cliente");
+    addRelation("clientes", "doc_almacen", "id_cliente");
+    addRelation("clientes", "suscripciones", "id_cliente");
+    addRelation("clientes", "cfg_central_reservas_clientes_agencias", "id_cliente");
+    addRelation("clientes", "categorias_de", "id_quien");
+    addRelation("clientes", "carta_clientes", "id_cliente");
+    addRelation("clientes", "obras", "id_cliente");
+
+//Coleccionables
+    addRelation("coleccionables", "articulos", "id_coleccionable");
+
+//Comisiones
+    addRelation("comisiones", "asientos", "id_documento");
+    addRelation("comisiones", "comisionesx", "id_comisiones");
+    addRelation("comisiones", "comisionesx", "id_comis_retro");
+    addRelation("comisiones", "comisionesx", "id_comis_confirm");
+
+//Comisionistas
+    addRelation("comisionistas", "mantenimientos", "id_agente");
+    addRelation("comisionistas", "comisiones", "id_comisionista");
+    addRelation("comisionistas", "comisionesx", "id_comisionista");
+    addRelation("comisionistas", "doc_hotel", "id_agente1");
+    addRelation("comisionistas", "doc_hotel", "id_agente2");
+    addRelation("comisionistas", "doc_hotel", "id_agente3");
+    addRelation("comisionistas", "doc_cli", "id_agente1");
+    addRelation("comisionistas", "doc_cli", "id_agente2");
+    addRelation("comisionistas", "doc_cli", "id_agente3");
+    addRelation("comisionistas", "doc_clix", "id_agente1");
+    addRelation("comisionistas", "doc_clix", "id_agente2");
+    addRelation("comisionistas", "doc_clix", "id_agente3");
+    addRelation("comisionistas", "doc_hotelx", "id_agente1");
+    addRelation("comisionistas", "doc_hotelx", "id_agente2");
+    addRelation("comisionistas", "doc_hotelx", "id_agente3");
+    addRelation("comisionistas", "pdas", "id_agente1");
+    addRelation("comisionistas", "pdas", "id_agente2");
+    addRelation("comisionistas", "usuariosx", "id_agente_atencion");
+    addRelation("comisionistas", "delegaciones", "id_agente_defecto");
+    addRelation("comisionistas", "cupos", "id_central_reservas");
+    addRelation("comisionistas", "hst_doc_hotel", "id_agente1");
+    addRelation("comisionistas", "hst_doc_hotel", "id_agente2");
+    addRelation("comisionistas", "hst_doc_hotel", "id_agente3");
+    addRelation("comisionistas", "hst_doc_hotelx", "id_agente1");
+    addRelation("comisionistas", "hst_doc_hotelx", "id_agente2");
+    addRelation("comisionistas", "hst_doc_hotelx", "id_agente3");
+    addRelation("comisionistas", "clientesx", "id_agente1");
+    addRelation("comisionistas", "clientesx", "id_agente2");
+    addRelation("comisionistas", "clientesx", "id_agente3");
+    addRelation("comisionistas", "comisionistasx", "id_comisionista");
+
+//Conocimientos
+    addRelation("conocimientos", "conocimientos", "id_duplicado");
+    addRelation("conocimientos", "conocimientosx", "id_conocimientos");
+
+//ContactosExternos
+    addRelation("contactos_externos", "doc_cli", "id_contacto_externo");
+    addRelation("contactos_externos", "doc_clix", "id_contacto_externo");
+    addRelation("contactos_externos", "clientes", "id_contacto_externo");
+    addRelation("contactos_externos", "aparatos", "id_contacto_externo");
+
+//CtasAnuales
+    addRelation("ctas_anuales", "ctas_anuales_celdas", "id_cta_anual");
+    addRelation("ctas_anuales", "ctas_anuales_claves", "id_cta_anual");
+
+//Cuentas
+    addRelation("cuentas", "apuntes", "id_cuenta");
+    addRelation("cuentas", "apuntes", "id_contrapartida");
+    addRelation("cuentas", "conceptos_contables", "id_cuenta");
+    addRelation("cuentas", "conceptos_contables", "id_contrapartida");
+    addRelation("cuentas", "cuentas_bancarias", "id_cuenta");
+    addRelation("cuentas", "clientes", "id_cuenta");
+    addRelation("cuentas", "clientes", "id_cuenta_ingresos");
+    addRelation("cuentas", "cuentas_especiales", "id_cta_gastos");
+    addRelation("cuentas", "cuentas_especiales", "id_cta_ingresos");
+    addRelation("cuentas", "cuentas_especiales", "id_cta_existencias");
+    addRelation("cuentas", "presupuestos", "id_cuenta");
+    addRelation("cuentas", "doc_cli_valores", "id_cuenta");
+    addRelation("cuentas", "doc_pro_valores", "id_cuenta");
+    addRelation("cuentas", "retenciones", "id_cta_hpdeudora");
+    addRelation("cuentas", "retenciones", "id_cta_hpacreedora");
+    addRelation("cuentas", "inmovilizado", "id_cta_inmovilizado");
+    addRelation("cuentas", "inmovilizado", "id_cta_dotacion");
+    addRelation("cuentas", "inmovilizado", "id_cta_acumulado");
+    addRelation("cuentas", "metodos_pago", "id_cuenta");
+    addRelation("cuentas", "metodos_pago", "id_alt_cuenta");
+    addRelation("cuentas", "metodos_pago", "id_cta_gastos");
+    addRelation("cuentas", "nominas", "id_cta_indemnizaciones");
+    addRelation("cuentas", "nominas", "id_cta_prestaciones_ss");
+    addRelation("cuentas", "nominas", "id_cta_retencion_ss");
+    addRelation("cuentas", "nominas", "id_cta_retencion_ssempresa");
+    addRelation("cuentas", "nominas", "id_cta_creditos_lp");
+    addRelation("cuentas", "nominas", "id_cta_creditos_cp");
+    addRelation("cuentas", "nominas", "id_cta_en_especie");
+    addRelation("cuentas", "nominas", "id_cta_ssempresa");
+    addRelation("cuentas", "personal", "id_cta_pendiente");
+    addRelation("cuentas", "personal", "id_cta_anticipos");
+    addRelation("cuentas", "personal", "id_cta_salarios");
+    addRelation("cuentas", "proveedores", "id_cuenta");
+    addRelation("cuentas", "proveedores", "id_cuenta_gastos");
+    addRelation("cuentas", "prevision", "id_cuenta");
+    addRelation("cuentas", "metodos_pago", "id_cta_dto_efectos");
+    addRelation("cuentas", "cuentas_bancarias", "id_cuenta_dto_efectos");
+    addRelation("cuentas", "nominas", "id_cta_otros_devengos");
+    addRelation("cuentas", "nominas", "id_cta_otras_deducciones");
+    addRelation("cuentas", "fianzas", "id_cta_fianzas");
+    addRelation("cuentas", "fianzas", "id_cta_ingresos");
+    addRelation("cuentas", "fianzasx", "id_cta_fianzas");
+    addRelation("cuentas", "fianzasx", "id_cta_ingresos");
+    addRelation("cuentas", "cuentas_especiales", "id_cta_socios_ingresos");
+    addRelation("cuentas", "cuentas_especiales", "id_cta_socios_gastos");
+
+//CuentasBancarias
+    addRelation("cuentas_bancarias", "metodos_pago", "id_cta_bancaria");
+    addRelation("cuentas_bancarias", "nombres", "id_ficha");
+    addRelation("cuentas_bancarias", "nominas", "id_cuenta_bancaria");
+    addRelation("cuentas_bancarias", "mandatos", "id_cta_cliente");
+    addRelation("cuentas_bancarias", "efectos", "id_cuenta_bancaria");
+
+//CuentasEmail
+    addRelation("cuentas_email", "usuariosx", "id_cuenta_email");
+
+//CuentasEspeciales
+    addRelation("cuentas_especiales", "areas_venta", "id_cuenta_especial");
+    addRelation("cuentas_especiales", "articulos", "id_cuenta_especial");
+    addRelation("cuentas_especiales", "data_impx", "id_cuenta_especial");
+
+//Cupos
+    addRelation("cupos", "cuposx", "id_cupo");
+    addRelation("cupos", "tarifa_hotel", "id_cupo");
+    addRelation("cupos", "doc_hotelx", "id_cupo");
+    addRelation("cupos", "hst_doc_hotelx", "id_cupo");
+
+//Data_Imp
+    addRelation("data_imp", "data_impx", "id_data_imp");
+
+//Data_ImpX
+    addRelation("data_impx", "data_imp_x_detalle", "id_data_impx");
+
+//Delegaciones
+    addRelation("delegaciones", "puestosx", "id_delegacion");
+    addRelation("delegaciones", "delegaciones", "id_ficha_principal");
+    addRelation("delegaciones", "aparatos", "id_delegacion");
+    addRelation("delegaciones", "mantenimientos", "id_delegacion");
+    addRelation("delegaciones", "art_lotes", "id_delegacion");
+    addRelation("delegaciones", "carta_grupos", "id_delegacion");
+    addRelation("delegaciones", "contactos_externos", "id_delegacion");
+    addRelation("delegaciones", "grupos_comisiones", "id_delegacion");
+    addRelation("delegaciones", "itpv_settings", "id_delegacion");
+    addRelation("delegaciones", "tarifa_hotel", "id_delegacion");
+    addRelation("delegaciones", "tecnicos", "id_delegacion");
+    addRelation("delegaciones", "transportistas", "id_delegacion");
+    addRelation("delegaciones", "vehiculos", "id_delegacion");
+    addRelation("delegaciones", "veterinarios", "id_delegacion");
+    addRelation("delegaciones", "zonas", "id_delegacion");
+    addRelation("delegaciones", "areas_venta", "id_delegacion");
+    addRelation("delegaciones", "areas_compra", "id_delegacion");
+    addRelation("delegaciones", "art_delegaciones", "id_delegacion");
+    addRelation("delegaciones", "tarifas_articulos", "id_delegacion");
+    addRelation("delegaciones", "agenda", "id_delegacion");
+    addRelation("delegaciones", "partes_reparaciones", "id_delegacion");
+    addRelation("delegaciones", "salones", "id_delegacion");
+    addRelation("delegaciones", "almacenes", "id_delegacion");
+    addRelation("delegaciones", "fabricacion_grupo", "id_delegacion");
+    addRelation("delegaciones", "centro_costes_proyectos", "id_delegacion");
+    addRelation("delegaciones", "doc_pro", "id_delegacion");
+    addRelation("delegaciones", "personal", "id_delegacion");
+    addRelation("delegaciones", "operaciones_tpv", "id_delegacion");
+    addRelation("delegaciones", "efectos", "id_delegacion");
+    addRelation("delegaciones", "doc_cli", "id_delegacion");
+    addRelation("delegaciones", "grupos_series", "id_delegacion");
+    addRelation("delegaciones", "doc_hotel", "id_delegacion");
+    addRelation("delegaciones", "hst_doc_hotel", "id_delegacion");
+    addRelation("delegaciones", "inmovilizado", "id_delegacion");
+    addRelation("delegaciones", "art_proveedor", "id_delegacion");
+    addRelation("delegaciones", "cajones", "id_delegacion");
+    addRelation("delegaciones", "fianzas", "id_delegacion");
+    addRelation("delegaciones", "objetos_perdidos", "id_delegacion");
+    addRelation("delegaciones", "tpvext_secciones", "id_delegacion");
+    addRelation("delegaciones", "tarifas_doc", "id_delegacion");
+    addRelation("delegaciones", "metodos_pago", "id_delegacion");
+    addRelation("delegaciones", "fabricacion_etapas", "id_delegacion");
+    addRelation("delegaciones", "art_visibles_xdelegacion", "id_delegacion");
+    addRelation("delegaciones", "centro_informes", "id_delegacion");
+
+//Dispositivos
+    addRelation("dispositivos_g", AppTablas.cImpresoras, "id_dispositivo");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_impresora");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_ticadora");
+    addRelation("dispositivos_g", AppTablas.cInformesCfgX, "id_dispositivo");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_visor");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_scanner_barras");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_scanner_mag");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_bascula");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_smart_card");
+    addRelation("dispositivos_g", AppTablas.cDispositivos, "id_dispositivo");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_srv_in_hova1");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_srv_in_hova2");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_firma_manuscrita");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_impresora1_comandero");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_impresora2_comandero");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_impresora3_comandero");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_terminal_cobro");
+    addRelation("dispositivos_g", AppTablas.cPuestos, "id_etiquetadora");
+    addRelation("dispositivos_g", "areas_venta", "id_impresora_facturas");
+    addRelation("dispositivos_g", "areas_venta", "id_impresora_albaranes");
+    addRelation("dispositivos_g", "areas_venta", "id_impresora_tickets");
+    addRelation("dispositivos_g", "areas_venta", "id_impresora_justificantes");
+    addRelation("dispositivos_g", "carta_articulos", "id_impresora1");
+    addRelation("dispositivos_g", "carta_articulos", "id_impresora2");
+    addRelation("dispositivos_g", "carta_grupos", "id_impresora1");
+    addRelation("dispositivos_g", "carta_grupos", "id_impresora2");
+    addRelation("dispositivos_g", "menu_restx", "id_impresora1");
+    addRelation("dispositivos_g", "menu_restx", "id_impresora2");
+    addRelation("dispositivos_g", "areas_venta", "id_impresora_facturas_tic");
+    addRelation("dispositivos_g", "areas_venta", "id_impresora_albaranes_tic");
+    addRelation("dispositivos_g", "areas_venta", "id_impresora_tickets_tic");
+    addRelation("dispositivos_g", "areas_venta", "id_impresora_pedidos");
+    addRelation("dispositivos_g", "areas_venta", "id_impresora_pedidos_tic");
+    addRelation("dispositivos_g", "areas_venta", "id_impresora_presupuestos");
+    addRelation("dispositivos_g", "areas_venta", "id_impresora_presupuestos_tic");
+    addRelation("dispositivos_g", "areas_venta", "id_impresora_justificantes_tic");
+    addRelation("dispositivos_g", "cajones", "id_dispositivo");
+    addRelation("dispositivos_g", "habitaciones", "id_srv_in_hova");
+    addRelation("dispositivos_g", "areas_venta", "id_imp_facturas_plantilla");
+    addRelation("dispositivos_g", "areas_venta", "id_imp_albaranes_plantilla");
+    addRelation("dispositivos_g", "areas_venta", "id_imp_tickets_plantilla");
+    addRelation("dispositivos_g", "areas_venta", "id_imp_pedidos_plantilla");
+    addRelation("dispositivos_g", "areas_venta", "id_imp_presupuestos_plantilla");
+    addRelation("dispositivos_g", "areas_venta", "id_imp_notas_plantilla");
+
+//DocAlmacen
+    addRelation("doc_almacen", "averias", "id_doc_almacen");
+    addRelation("doc_almacen", "revisiones", "id_doc_almacen");
+    addRelation("doc_almacen", "doc_almacen", "id_doc_traspaso");
+    addRelation("doc_almacen", "doc_almacenx", "id_documento");
+    addRelation("doc_almacen", "partes_reparaciones", "id_doc_almacen");
+    addRelation("doc_almacen", "fabricacion", "id_doc_almacen_salida");
+    addRelation("doc_almacen", "fabricacion", "id_doc_almacen_entrada");
+
+//DocCli
+    addRelation("doc_cli", "averias", "id_doc_cli");
+    addRelation("doc_cli", "ordenes_trabajo", "id_doc_cli");
+    addRelation("doc_cli", "revisiones", "id_doc_cli");
+    addRelation("doc_cli", "asientos", "id_documento");
+    addRelation("doc_cli", "comisionesx", "id_doc_cli");
+    addRelation("doc_cli", "doc_cli", "id_facturado");
+    addRelation("doc_cli", "doc_cli", "id_cierre_caja");
+    addRelation("doc_cli", "doc_cli", "id_devolucion");
+    addRelation("doc_cli", "doc_cli_valores", "id_documento");
+    addRelation("doc_cli", "doc_clix", "id_documento");
+    addRelation("doc_cli", "doc_clix", "id_procedencia");
+    addRelation("doc_cli", "doc_clix", "id_doc_origen");
+    addRelation("doc_cli", "puntos_clientes", "id_documento");
+    addRelation("doc_cli", "doc_hotel", "id_doc_cli");
+    addRelation("doc_cli", "doc_hotelx", "id_doc_cli");
+    addRelation("doc_cli", "doc_pro", "id_inversion_sp");
+    addRelation("doc_cli", "doc_almacen", "id_doc_cli");
+    addRelation("doc_cli", "efectos", "id_cierre_caja");
+    addRelation("doc_cli", "efectos", "id_pedido");
+    addRelation("doc_cli", "campos_auxiliares", "id_origen");
+    addRelation("doc_cli", "fabricacion_grupo", "id_doc_cli");
+    addRelation("doc_cli", "fabricacion_grupo", "id_pedido");
+    addRelation("doc_cli", "hst_doc_hotel", "id_doc_cli");
+    addRelation("doc_cli", "doc_cli", "id_factura_rectificada");
+    addRelation("doc_cli", "logi_envios", "id_doc_cli");
+    addRelation("doc_cli", "doc_pro", "id_doc_cli_transfer");
+    addRelation("doc_cli", "doc_almacenx", "id_doc_cli_depositario");
+    addRelation("doc_cli", "doc_pro", "id_doc_cli_pedido");
+    addRelation("doc_cli", "doc_cli", "id_factura_ticket");
+    addRelation("doc_cli", "aparatos", "id_doc_cli_copias");
+    addRelation("doc_cli", "doc_cli", "id_pedido");
+    addRelation("doc_cli", "doc_cli", "id_pedido_reserva");
+    addRelation("doc_cli", "doc_cli", "id_anterior");
+
+//DocCliX
+    addRelation("doc_clix", "numeros_serie", "id_contenido");
+    addRelation("doc_clix", "doc_clix", "id_doc_clix");
+    addRelation("doc_clix", "doc_clix", "id_grupo_impresion");
+    addRelation("doc_clix", "doc_clix", "id_docx_menu");
+    addRelation("doc_clix", "ocupantesx", "id_doc_clix");
+    addRelation("doc_clix", "doc_clix", "id_sub_compuesto");
+    addRelation("doc_clix", "doc_clix", "id_grupo_acto_evento");
+    addRelation("doc_clix", "recursos_actos", "id_doc_clix");
+
+//DocHotel
+    addRelation("doc_hotel", "doc_hotelx", "id_documento");
+    addRelation("doc_hotel", "efectos", "id_doc_hotel");
+    addRelation("doc_hotel", "comanda_visual", "id_doc_hotel");
+
+//DocHotelX
+    addRelation("doc_hotelx", "doc_hotelx", "id_doc_hotelx");
+    addRelation("doc_hotelx", "doc_hotelx", "id_grupo_impresion");
+    addRelation("doc_hotelx", "doc_hotel_xprevision", "id_doc_hotelx");
+    addRelation("doc_hotelx", "doc_hotelx", "id_docx_menu");
+    addRelation("doc_hotelx", "ocupantesx", "id_doc_hotelx");
+    addRelation("doc_hotelx", "doc_hotelx", "id_sub_compuesto");
+    addRelation("doc_hotelx", "doc_hotelx", "id_grupo_acto_evento");
+    addRelation("doc_hotelx", "recursos_actos", "id_doc_hotelx");
+
+//DocPro
+    addRelation("doc_pro", "asientos", "id_documento");
+    addRelation("doc_pro", "doc_cli", "id_inversion_sp");
+    addRelation("doc_pro", "doc_clix", "id_partida");
+    addRelation("doc_pro", "doc_pro", "id_facturado");
+    addRelation("doc_pro", "doc_pro", "id_devolucion");
+    addRelation("doc_pro", "doc_pro_valores", "id_documento");
+    addRelation("doc_pro", "doc_prox", "id_documento");
+    addRelation("doc_pro", "doc_prox", "id_procedencia");
+    addRelation("doc_pro", "doc_prox", "id_partida");
+    addRelation("doc_pro", "doc_prox", "id_doc_origen");
+    addRelation("doc_pro", "inmovilizado", "id_factura");
+    addRelation("doc_pro", "doc_almacenx", "id_partida");
+    addRelation("doc_pro", "doc_pro_valores", "id_ref_doc_pro");
+    addRelation("doc_pro", "centro_costes_valores", "id_doc_pro");
+    addRelation("doc_pro", "campos_auxiliares", "id_origen");
+    addRelation("doc_pro", "doc_pro", "id_factura_rectificada");
+    addRelation("doc_pro", "doc_pro", "id_d_ua");
+    addRelation("doc_pro", "logi_envios", "id_factura");
+    addRelation("doc_pro", "doc_cli", "id_doc_pro_transfer");
+    addRelation("doc_pro", "doc_almacen", "id_doc_pro");
+    addRelation("doc_pro", "art_revisiones_averias", "id_partida");
+    addRelation("doc_pro", "art_revisiones_averias", "id_partida");
+    addRelation("doc_pro", AppTablas.cStock, "id_partida");
+
+//DocProX
+    addRelation("doc_prox", "numeros_serie", "id_contenido");
+    addRelation("doc_prox", "centro_costes_valores", "id_doc_prox");
+
+//DocSINLI
+    addRelation("doc_sinli", "doc_sinlix", "id_doc_sinli");
+
+//Efectos
+    addRelation("efectos", "asientos", "id_documento");
+    addRelation("efectos", "efectos", "id_padre");
+    addRelation("efectos", "efectos", "id_rechazado");
+    addRelation("efectos", "efectos", "id_consolidado");
+
+//Empresas
+    addRelation("empresas", "cuentas_bancarias", "id_ficha");
+    addRelation("empresas", "grupos_series", "id_empresa");
+    addRelation("empresas", "delegaciones", "id_empresa");
+    addRelation("empresas", "aeat", "id_empresa");
+    addRelation("empresas", "metodos_pago", "id_empresa");
+    addRelation("empresas", "plazos_pago", "id_empresa");
+    addRelation("empresas", "articulos", "id_empresa");
+    addRelation("empresas", "personal", "id_empresa");
+    addRelation("empresas", "agenda", "id_empresa");
+    addRelation("empresas", "tarifa_hotel", "id_empresa");
+    addRelation("empresas", "tarifas_articulos", "id_empresa");
+    addRelation("empresas", "centro_costes_proyectos", "id_empresa");
+    addRelation("empresas", "centro_costes_arboles", "id_empresa");
+    addRelation("empresas", "cuentas_email", "id_empresa");
+    addRelation("empresas", "clientesx", "id_empresa");
+    addRelation("empresas", "proveedoresx", "id_empresa");
+    addRelation("empresas", "tarifas_doc", "id_empresa");
+    addRelation("empresas", "cuentas_bancarias", "id_empresa_cta_defecto");
+    addRelation("empresas", "comisionistasx", "id_empresa");
+    addRelation("empresas", "doc_cli", "id_s_ii_empresa_sucedida");
+    addRelation("empresas", "doc_pro", "id_s_ii_empresa_sucedida");
+    addRelation("empresas", "hoja", "id_empresa");
+    addRelation("empresas", "almacenes", "id_empresa");
+    addRelation("empresas", "centro_informes", "id_empresa");
+
+//Especies
+    addRelation("especies", "articulos", "id_especie_defecto");
+    addRelation("especies", "clientes", "id_especie_defecto");
+    addRelation("especies", "recetas", "id_especie");
+
+//Estantes
+    addRelation("estantes", "estantesx", "id_estante");
+
+//Fabricacion
+    addRelation("fabricacion", "fabricacionx", "id_fabricacion");
+
+//FabricacionCfg
+    addRelation("fabricacion_cfg", "fabricacion", "id_fabricacion_cfg");
+
+//FabricacionEtapas
+    addRelation("fabricacion_etapas", "fabricacion_etapas", "id_plantilla");
+    addRelation("fabricacion_etapas", "fabricacion_etapasx", "id_fabricacion_etapas");
+    addRelation("fabricacion_etapas", "fabricacion_grupo", "id_fabricacion_etapas");
+
+//FabricacionGrupo
+    addRelation("fabricacion_grupo", "fabricacion_grupo", "id_plantilla");
+    addRelation("fabricacion_grupo", "fabricacion", "id_fabricacion_grupo");
+    addRelation("fabricacion_grupo", "fabricacion_etapasx", "id_fabricacion_grupo");
+
+//FabricacionTareas
+    addRelation("fabricacion_tareas", "fabricacionx", "id_tarea");
+
+//Fabricantes
+    addRelation("fabricantes", "aparatos", "id_fabricante");
+    addRelation("fabricantes", "articulos", "id_fabricante");
+    addRelation("fabricantes", "mensajes", "id_ficha");
+    addRelation("fabricantes", "data_imp", "id_emisor");
+    addRelation("fabricantes", "data_impx", "id_fabricante");
+    addRelation("fabricantes", "fabricantesx", "id_fabricante");
+    addRelation("fabricantes", "rangos_barras", "id_fabricante");
+    addRelation("fabricantes", "tarifas", "id_fabricante");
+    addRelation("fabricantes", "tarifas_docx", "id_fabricante");
+
+//Fianzas
+    addRelation("fianzas", "fianzasx", "id_fianza");
+
+//Grupos
+    addRelation("grupos", "mantenimientos", "id_grupo");
+    addRelation("grupos", "areas_venta", "id_carta");
+    addRelation("grupos", "areas_venta", "id_grupo_destino");
+    addRelation("grupos", "articulos", "id_criterio_tarifa");
+    addRelation("grupos", "articulos", "id_criterio_comision");
+    addRelation("grupos", "articulos", "id_grupo_articulos_doc");
+    addRelation("grupos", "articulos", "id_coleccion");
+    addRelation("grupos", "articulos", "id_curso");
+    addRelation("grupos", "articulos", "id_asignatura");
+    addRelation("grupos", "grupos_comisionesx", "id_criterio_comision");
+    addRelation("grupos", "grupos_comisionesx", "id_criterio_tarifa");
+    addRelation("grupos", "data_impx", "id_curso");
+    addRelation("grupos", "data_impx", "id_asignatura");
+    addRelation("grupos", "doc_hotelx", "id_grupo_regimen");
+    addRelation("grupos", "carta_grupos", "id_carta");
+    addRelation("grupos", "carta_grupos", "id_grupofactura");
+    addRelation("grupos", "tarifas", "id_criterio_tarifa");
+    addRelation("grupos", "doc_almacen", "id_grupo_destino");
+    addRelation("grupos", "art_delegaciones", "id_estado");
+    addRelation("grupos", "articulos", "id_estado");
+    addRelation("grupos", "clientes", "id_grupo_ine");
+    addRelation("grupos", "articulos", "id_grupo_calendario");
+    addRelation("grupos", "articulos", "id_grupo_cubiculo");
+    addRelation("grupos", "agenda", "id_grupo");
+    addRelation("grupos", "agenda", "id_marca_hora");
+    addRelation("grupos", "menu_eventos", "id_tipo");
+    addRelation("grupos", "doc_hotelx", "id_tipo_acto");
+    addRelation("grupos", "doc_clix", "id_tipo_acto");
+    addRelation("grupos", "recursos_actos", "id_posicion_persona");
+    addRelation("grupos", "doc_hotelx", "id_montaje_salon");
+    addRelation("grupos", "doc_clix", "id_montaje_salon");
+    addRelation("grupos", "reservas_rest", "id_tipo");
+    addRelation("grupos", "articulos", "id_tipo_tratamiento");
+    addRelation("grupos", "articulos", "id_tipo_paquete_circuito");
+    addRelation("grupos", "partes_reparaciones", "id_tipo");
+    addRelation("grupos", "cfg_campos_auxiliares", "id_grupo");
+    addRelation("grupos", "articulos", "id_grupo_spa");
+    addRelation("grupos", "menu_eventosx", "id_grupo");
+    addRelation("grupos", "fabricacionx", "id_centro_trabajo");
+    addRelation("grupos", "fabricacion_tareas", "id_centro_trabajo");
+    addRelation("grupos", "fabricacion_grupo", "id_prioridad");
+    addRelation("grupos", "fabricacion_grupo", "id_incidencia");
+    addRelation("grupos", "centro_informes", "id_grupo");
+    addRelation("grupos", "hst_doc_hotelx", "id_grupo_regimen");
+    addRelation("grupos", "hst_doc_hotelx", "id_tipo_acto");
+    addRelation("grupos", "hst_doc_hotelx", "id_montaje_salon");
+    addRelation("grupos", "hst_recursos_actos", "id_posicion_persona");
+    addRelation("grupos", "ordenes_trabajo", "id_tipo");
+    addRelation("grupos", "ordenes_trabajo", "id_etapa");
+    addRelation("grupos", "objetos_perdidos", "id_ubicacion_encontrado");
+    addRelation("grupos", "objetos_perdidos", "id_ubicacion_guardado");
+    addRelation("grupos", "bonos_acceso", "id_descripcion");
+    addRelation("grupos", "tarifas_docx", "id_criterio_tarifa");
+    addRelation("grupos", "cfg_central_reservas_cargos_xpersona", "id_grupo_regimen");
+    addRelation("grupos", "telepedido_ofertas", "id_carta");
+    addRelation("grupos", "cfg_central_reservas_cargos", "id_grupo_regimen");
+    addRelation("grupos", "conocimientos", "id_sector");
+    addRelation("grupos", "doc_clix", "id_grupo_regimen");
+
+//Grupos
+    addRelation("grupos_g", AppTablas.cProvincias, "id_grupo");
+    addRelation("grupos_g", AppTablas.cProvincias, "id_region");
+    addRelation("grupos_g", AppTablas.cPaises, "id_estadistica_pais");
+
+//GruposComisiones
+    addRelation("grupos_comisiones", "comisionistas", "id_grupo");
+    addRelation("grupos_comisiones", "grupos_comisionesx", "id_grupo");
+    addRelation("grupos_comisiones", "comisionistasx", "id_grupo");
+
+//GruposSeries
+    addRelation("grupos_series", "series", "id_grupo_series");
+    addRelation("grupos_series", "nominas", "id_grupo_series");
+    addRelation("grupos_series", "comisiones", "id_grupo_series");
+    addRelation("grupos_series", "comisionesx", "id_grupo_series");
+    addRelation("grupos_series", "inmovilizado", "id_grupo_series");
+    addRelation("grupos_series", "asientos", "id_grupo_series");
+    addRelation("grupos_series", "remesas", "id_grupo_series");
+    addRelation("grupos_series", "doc_cli", "id_grupo_series");
+    addRelation("grupos_series", "doc_pro", "id_grupo_series");
+    addRelation("grupos_series", "delegaciones", "id_cli_grupo_series_entregas_acta");
+    addRelation("grupos_series", "efectos", "id_grupo_series");
+    addRelation("grupos_series", "empresas", "id_grupo_series_defecto");
+    addRelation("grupos_series", "presupuestos", "id_grupo_series");
+    addRelation("grupos_series", "centro_costes_valores", "id_grupo_series");
+    addRelation("grupos_series", "fianzas", "id_grupo_series");
+
+//Habitaciones
+    addRelation("habitaciones", "doc_clix", "id_origen");
+    addRelation("habitaciones", "doc_clix", "id_habitacion_cargo");
+    addRelation("habitaciones", "doc_hotelx", "id_habitacion_cargo");
+    addRelation("habitaciones", "habitacionesx", "id_habitacion");
+    addRelation("habitaciones", "doc_hotelx", "id_habitacion");
+    addRelation("habitaciones", "partes_reparaciones", "id_habitacion");
+    addRelation("habitaciones", "hst_doc_hotelx", "id_habitacion");
+    addRelation("habitaciones", "hst_doc_hotelx", "id_habitacion_cargo");
+
+//HabitacionesProps
+    addRelation("habitaciones_props", "habitacionesx", "id_propiedad");
+
+//Hoja
+    addRelation("hoja", "hojax", "id_hoja");
+
+//HotelDtos
+    addRelation("hotel_dtos", "hotel_dtosx", "id_hotel_dtos");
+    addRelation("hotel_dtos", "tarifa_hotel", "id_hotel_dtos");
+
+//HstDocHotel
+    addRelation("hst_doc_hotel", "hst_doc_hotelx", "id_documento");
+
+//HstDocHotelX
+    addRelation("hst_doc_hotelx", "hst_doc_hotelx", "id_hst_doc_hotelx");
+    addRelation("hst_doc_hotelx", "hst_doc_hotelx", "id_sub_compuesto");
+    addRelation("hst_doc_hotelx", "hst_doc_hotelx", "id_grupo_impresion");
+    addRelation("hst_doc_hotelx", "hst_doc_hotelx", "id_grupo_acto_evento");
+    addRelation("hst_doc_hotelx", "hst_doc_hotelx", "id_doc_xmenu");
+    addRelation("hst_doc_hotelx", "hst_ocupantesx", "id_hst_doc_hotelx");
+    addRelation("hst_doc_hotelx", "hst_recursos_actos", "id_hst_doc_hotelx");
+
+//HstRecursosActos
+    addRelation("hst_recursos_actos", "hst_recursos_actos", "id_padre");
+
+//Impuestos
+    addRelation("impuestos", "areas_venta", "id_impuesto");
+    addRelation("impuestos", "articulos", "id_impuesto");
+    addRelation("impuestos", "data_impx", "id_impuesto");
+    addRelation("impuestos", "impuestosx", "id_impuesto");
+    addRelation("impuestos", "tarifas_articulos", "id_impuesto");
+
+//Incidencias_L
+    addRelation("incidencias_l", AppTablas.cIncidenciasX, "id_incidencia");
+
+//InformesCfg
+    addRelation("informes_cfg_g", AppTablas.cInformesCfgX, "id_origen");
+    addRelation("informes_cfg_g", AppTablas.cInformesCfgX, "id_presets");
+    addRelation("informes_cfg_g", AppTablas.cInformesCfg, "id_cabecera_informe");
+    addRelation("informes_cfg_g", AppTablas.cInformesCfg, "id_pie_informe");
+    addRelation("informes_cfg_g", AppTablas.cInformesCfg, "id_modelo_design");
+    addRelation("informes_cfg_g", "delegaciones", "id_cabecera_informes");
+    addRelation("informes_cfg_g", "delegaciones", "id_pie_informes");
+    addRelation("informes_cfg_g", "delegaciones", "id_cabecera_doc_a4");
+    addRelation("informes_cfg_g", "delegaciones", "id_pie_doc_a4");
+    addRelation("informes_cfg_g", "delegaciones", "id_cabecera_doc_a5");
+    addRelation("informes_cfg_g", "delegaciones", "id_pie_doc_a5");
+    addRelation("informes_cfg_g", "areas_venta", "id_modelo_facturas");
+    addRelation("informes_cfg_g", "areas_venta", "id_modelo_albaranes");
+    addRelation("informes_cfg_g", "areas_venta", "id_modelo_tickets");
+    addRelation("informes_cfg_g", "areas_venta", "id_modelo_presupuestos");
+    addRelation("informes_cfg_g", "areas_venta", "id_modelo_pedidos");
+    addRelation("informes_cfg_g", "areas_compra", "id_modelo_facturas");
+    addRelation("informes_cfg_g", "areas_compra", "id_modelo_albaranes");
+    addRelation("informes_cfg_g", "areas_compra", "id_modelo_pedidos");
+    addRelation("informes_cfg_g", "areas_compra", "id_modelo_presupuestos");
+    addRelation("informes_cfg_g", "areas_compra", "id_modelo_devoluciones");
+    addRelation("informes_cfg_g", "fabricacion_cfg", "id_modelo_etiqueta_cajas");
+    addRelation("informes_cfg_g", "fabricacion_cfg", "id_modelo_etiqueta_articulo");
+    addRelation("informes_cfg_g", "fabricacion", "id_modelo_etiqueta_cajas");
+    addRelation("informes_cfg_g", "fabricacion", "id_modelo_etiqueta_articulo");
+    addRelation("informes_cfg_g", "centro_informesx", "id_presets");
+    addRelation("informes_cfg_g", "areas_venta", "id_modelo_welcome");
+    addRelation("informes_cfg_g", "areas_venta", "id_modelo_facturas_plantilla");
+    addRelation("informes_cfg_g", "areas_venta", "id_modelo_albaranes_plantilla");
+    addRelation("informes_cfg_g", "areas_venta", "id_modelo_tickets_plantilla");
+    addRelation("informes_cfg_g", "areas_venta", "id_modelo_pedidos_plantilla");
+    addRelation("informes_cfg_g", "areas_venta", "id_modelo_presupuestos_plantilla");
+    addRelation("informes_cfg_g", "areas_venta", "id_modelo_notas_plantilla");
+
+//InformesUsuarios
+    addRelation("informes_usuarios", "informes_usuariosx", "id_informes_usuarios");
+
+//Inmovilizado
+    addRelation("inmovilizado", "inmovilizado_valores", "id_documento");
+    addRelation("inmovilizado", "inmovilizadox", "id_documento");
+
+//Instalaciones
+    addRelation("instalaciones", "instalacionesx", "id_instalacion");
+    addRelation("instalaciones", "instalaciones_props", "id_instalacion");
+    addRelation("instalaciones", "aparatos", "id_instalacion");
+    addRelation("instalaciones", "conocimientos", "id_instalacion");
+
+//Inventario
+    addRelation("inventario", "inventariox", "id_inventario");
+
+//Logi_Destinos
+    addRelation("logi_destinos", "logi_envios", "id_destino");
+    addRelation("logi_destinos", "doc_cli", "id_destino");
+
+//Logi_Envios
+    addRelation("logi_envios", "logi_unidades", "id_envio");
+
+//Logi_Formas
+    addRelation("logi_formas", "logi_destinos", "id_forma_envio");
+    addRelation("logi_formas", "clientes", "id_forma_envio");
+    addRelation("logi_formas", "doc_cli", "id_forma_envio");
+    addRelation("logi_formas", "logi_envios", "id_forma_envio");
+
+//Logi_Formatos
+    addRelation("logi_formatos", "logi_unidades", "id_formato");
+
+//Logi_Unidades
+    addRelation("logi_unidades", "logi_unidadesx", "id_unidad");
+
+//Mandatos
+    addRelation("mandatos", "efectos", "id_mandato");
+
+//Mantenimientos
+    addRelation("mantenimientos", "aparatos", "id_contrato");
+    addRelation("mantenimientos", "aparatos", "id_contrato2");
+    addRelation("mantenimientos", "doc_clix", "id_mantenimiento");
+    addRelation("mantenimientos", "instalaciones", "id_mantenimiento");
+
+//MenuEventos
+    addRelation("menu_eventos", "doc_clix", "id_origen");
+    addRelation("menu_eventos", "menu_eventosx", "id_menu_eventos");
+
+//MenuRest
+    addRelation("menu_rest", "menu_restx", "id_menu_rest");
+
+//Mesas
+    addRelation("mesas", "doc_clix", "id_mesa");
+    addRelation("mesas", "doc_hotel", "id_mesa");
+    addRelation("mesas", "doc_hotelx", "id_mesa");
+    addRelation("mesas", "hst_doc_hotel", "id_mesa");
+    addRelation("mesas", "hst_doc_hotelx", "id_mesa");
+
+//Messenger
+    addRelation("messenger_g", AppTablas.cMessengerX, "id_messenger");
+
+//MetodosPago
+    addRelation("metodos_pago", "mantenimientos", "id_como_pago");
+    addRelation("metodos_pago", "areas_venta", "id_metodo_cobro1");
+    addRelation("metodos_pago", "areas_venta", "id_metodo_cobro2");
+    addRelation("metodos_pago", "areas_venta", "id_metodo_cobro3");
+    addRelation("metodos_pago", "areas_venta", "id_metodo_cobro4");
+    addRelation("metodos_pago", "areas_venta", "id_metodo_cobro5");
+    addRelation("metodos_pago", "areas_venta", "id_metodo_cobro6");
+    addRelation("metodos_pago", "areas_venta", "id_metodo_cobro7");
+    addRelation("metodos_pago", "areas_venta", "id_metodo_cobro8");
+    addRelation("metodos_pago", "areas_venta", "id_metodo_efectivo");
+    addRelation("metodos_pago", "arqueosx", "id_como_pago");
+    addRelation("metodos_pago", "operaciones_tpv", "id_como_pago");
+    addRelation("metodos_pago", "comisiones", "id_como_pago");
+    addRelation("metodos_pago", "data_imp", "id_como_pago");
+    addRelation("metodos_pago", "data_impx", "id_como_pago");
+    addRelation("metodos_pago", "doc_cli", "id_como_pago");
+    addRelation("metodos_pago", "doc_pro", "id_como_pago");
+    addRelation("metodos_pago", "nominas", "id_metodo_pago");
+    addRelation("metodos_pago", "remesas", "id_como_pago");
+    addRelation("metodos_pago", "cfg_central_reservas", "id_metodo_pago1");
+    addRelation("metodos_pago", "cfg_central_reservas", "id_metodo_pago2");
+    addRelation("metodos_pago", "cfg_central_reservas", "id_metodo_pago3");
+    addRelation("metodos_pago", "delegaciones", "id_metodo_efectivo");
+    addRelation("metodos_pago", "delegaciones", "id_cli_metodo_cobro_defecto");
+    addRelation("metodos_pago", "delegaciones", "id_pro_metodo_pago_defecto");
+    addRelation("metodos_pago", "efectos", "id_como_pago");
+    addRelation("metodos_pago", "personal", "id_como_pago");
+    addRelation("metodos_pago", "fianzas", "id_metodo_constitucion");
+    addRelation("metodos_pago", "fianzas", "id_metodo_cancelacion");
+    addRelation("metodos_pago", "clientesx", "id_como_pago");
+    addRelation("metodos_pago", "proveedoresx", "id_como_pago");
+    addRelation("metodos_pago", "cajones", "id_metodo_apertura");
+    addRelation("metodos_pago", "areas_venta", "id_metodo_telepedido");
+    addRelation("metodos_pago", "doc_hotel", "id_como_pago");
+    addRelation("metodos_pago", "areas_venta", "id_metodo_efectivo_kiosko_hotel");
+    addRelation("metodos_pago", "areas_venta", "id_metodo_tarjeta_kiosko_hotel");
+    addRelation("metodos_pago", "cfg_central_reservas_clientes_agencias", "id_como_pago");
+
+//Monedas
+    addRelation("monedas_g", AppTablas.cPaises, "id_moneda");
+    addRelation("monedas_g", "clientes", "id_moneda");
+    addRelation("monedas_g", "doc_cli", "id_moneda2");
+    addRelation("monedas_g", "vias_pago", "id_moneda");
+
+//Nombres
+    addRelation("nombres", "data_imp", "id_destinatario");
+    addRelation("nombres", "doc_pro", "id_visita");
+    addRelation("nombres", "doc_pro", "id_atencion");
+    addRelation("nombres", "doc_cli", "id_remitente_contacto");
+    addRelation("nombres", "doc_cli", "id_envio_contacto");
+
+//Nominas
+    addRelation("nominas", "asientos", "id_documento");
+    addRelation("nominas", "centro_costes_valores", "id_nomina");
+    addRelation("nominas", "efectos", "id_nomina_atrasos");
+
+//Obras
+    addRelation("obras", "doc_cli", "id_obra");
+    addRelation("obras", "doc_pro", "id_obra");
+
+//Ocupantes
+    addRelation("ocupantes", "ocupantesx", "id_ocupante");
+    addRelation("ocupantes", "hst_ocupantesx", "id_ocupante");
+
+//OrdenesTrabajo
+    addRelation("ordenes_trabajo", "campos_auxiliares", "id_origen");
+
+//Paises
+    addRelation("paises_g", AppTablas.cProvincias, "id_pais");
+    addRelation("paises_g", AppTablas.cBancos, "id_pais");
+    addRelation("paises_g", AppTablas.cUbicaciones, "id_pais");
+    addRelation("paises_g", "articulos", "id_pais");
+    addRelation("paises_g", "clientes", "id_pais_nacionalidad");
+    addRelation("paises_g", "data_impx", "id_pais_publicacion");
+    addRelation("paises_g", "ocupantes", "id_pais");
+    addRelation("paises_g", "ocupantes", "id_pais_nacionalidad");
+    addRelation("paises_g", "nombres", "id_pais");
+    addRelation("paises_g", "clientes", "id_pais");
+    addRelation("paises_g", "proveedores", "id_pais");
+    addRelation("paises_g", "fabricantes", "id_pais");
+    addRelation("paises_g", "personal", "id_pais");
+    addRelation("paises_g", "almacenes", "id_pais");
+    addRelation("paises_g", "transportistas", "id_pais");
+    addRelation("paises_g", "contactos_externos", "id_pais");
+    addRelation("paises_g", "veterinarios", "id_pais");
+    addRelation("paises_g", "tecnicos", "id_pais");
+    addRelation("paises_g", "empresas", "id_pais");
+    addRelation("paises_g", "delegaciones", "id_pais");
+    addRelation("paises_g", "ocupantesx", "id_pais");
+    addRelation("paises_g", "hst_ocupantesx", "id_pais");
+    addRelation("paises_g", "vias_pago", "id_pais");
+    addRelation("paises_g", "clientes", "id_pais_nif");
+    addRelation("paises_g", "obras", "id_pais");
+
+//PartesMedicos
+    addRelation("partes_medicos", "campos_auxiliares", "id_origen");
+
+//PartesReparaciones
+    addRelation("partes_reparaciones", "partes_reparacionesx", "id_parte_reparacion");
+
+//PDAs
+    addRelation("pdas", "data_imp", "id_origen");
+    addRelation("pdas", "pdas_sincronizaciones", "id_p_da");
+
+//Perfiles
+    addRelation("perfiles", "articulos", "id_perfil");
+    addRelation("perfiles", "data_impx", "id_perfil");
+
+//PerfilesCamposAux
+    addRelation("perfiles_campos_aux", "cfg_campos_auxiliares", "id_perfil_campos_aux");
+    addRelation("perfiles_campos_aux", "arboles", "id_perfil_campos_aux");
+    addRelation("perfiles_campos_aux", "articulos", "id_perfil_campos_aux");
+    addRelation("perfiles_campos_aux", "campos_auxiliares", "id_perfil_campos_aux");
+    addRelation("perfiles_campos_aux", "arboles_auxiliares", "id_perfil_campos_aux");
+    addRelation("perfiles_campos_aux", "aparatos", "id_perfil_campos_aux");
+
+//Personal
+    addRelation("personal", "cuentas_bancarias", "id_ficha");
+    addRelation("personal", "mensajes", "id_ficha");
+    addRelation("personal", "doc_cli", "id_autorizacion");
+    addRelation("personal", "doc_clix", "id_origen");
+    addRelation("personal", "doc_hotelx", "id_origen");
+    addRelation("personal", "doc_pro", "id_autorizacion");
+    addRelation("personal", "doc_pro", "id_recepcion");
+    addRelation("personal", "habitaciones", "id_camarera");
+    addRelation("personal", "nominas", "id_personal");
+    addRelation("personal", "remesas", "id_presentador");
+    addRelation("personal", "remesas", "id_ordenante");
+    addRelation("personal", "comisionistas", "id_personal");
+    addRelation("personal", "doc_almacen", "id_autorizacion");
+    addRelation("personal", "doc_almacen", "id_recepcion");
+    addRelation("personal", "usuariosx", "id_personal");
+    addRelation("personal", "agenda", "id_personal");
+    addRelation("personal", "partes_reparacionesx", "id_personal");
+    addRelation("personal", "salonesx", "id_personal");
+    addRelation("personal", "campos_auxiliares", "id_origen");
+    addRelation("personal", "rutas_ficheros", "id_ficha");
+    addRelation("personal", "centro_costes_defecto", "id_personal");
+    addRelation("personal", "hst_doc_hotelx", "id_origen");
+    addRelation("personal", "objetos_perdidos", "id_personal_encontrado");
+    addRelation("personal", "objetos_perdidos", "id_personal_envio");
+    addRelation("personal", "presencia", "id_personal");
+
+//PlazosPago
+    addRelation("plazos_pago", "mantenimientos", "id_cuando_pago");
+    addRelation("plazos_pago", "data_imp", "id_cuando_pago");
+    addRelation("plazos_pago", "doc_cli", "id_cuando_pago");
+    addRelation("plazos_pago", "doc_pro", "id_cuando_pago");
+    addRelation("plazos_pago", "dias_pago", "id_plazos");
+    addRelation("plazos_pago", "delegaciones", "id_cli_periodicidad_defecto");
+    addRelation("plazos_pago", "delegaciones", "id_pro_periodicidad_defecto");
+    addRelation("plazos_pago", "clientesx", "id_cuando_pago");
+    addRelation("plazos_pago", "proveedoresx", "id_cuando_pago");
+
+//Prevision
+    addRelation("prevision", "prevision", "id_ficha_prevision");
+
+//Programas
+    addRelation("programas", "instalaciones", "id_programa");
+
+//Proveedores
+    addRelation("proveedores", "art_codigos", "id_proveedor");
+    addRelation("proveedores", "articulos", "id_proveedor");
+    addRelation("proveedores", "art_proveedor", "id_proveedor");
+    addRelation("proveedores", "cuentas_bancarias", "id_ficha");
+    addRelation("proveedores", "mensajes", "id_ficha");
+    addRelation("proveedores", "data_imp", "id_emisor");
+    addRelation("proveedores", "data_imp", "id_titular_doc");
+    addRelation("proveedores", "doc_pro", "id_proveedor");
+    addRelation("proveedores", "doc_pro", "id_distribuidor");
+    addRelation("proveedores", "fabricantes", "id_proveedor");
+    addRelation("proveedores", "fabricantesx", "id_proveedor");
+    addRelation("proveedores", "perfiles", "id_proveedor");
+    addRelation("proveedores", "nombres", "id_ficha");
+    addRelation("proveedores", "nominas", "id_sindicato");
+    addRelation("proveedores", "proveedores", "id_ficha_fiscal");
+    addRelation("proveedores", "proveedores", "id_ficha_varios");
+    addRelation("proveedores", "aparatos", "id_proveedor");
+    addRelation("proveedores", "comisionistas", "id_proveedor");
+    addRelation("proveedores", "art_delegaciones", "id_proveedor");
+    addRelation("proveedores", "agenda", "id_proveedor");
+    addRelation("proveedores", "centro_costes_defecto", "id_proveedor");
+    addRelation("proveedores", "campos_auxiliares", "id_origen");
+    addRelation("proveedores", "rutas_ficheros", "id_ficha");
+    addRelation("proveedores", "proveedoresx", "id_proveedor");
+    addRelation("proveedores", "doc_almacen", "id_proveedor");
+    addRelation("proveedores", "categorias_de", "id_quien");
+
+//Provincias
+    addRelation("provincias_g", AppTablas.cUbicaciones, "id_provincia");
+    addRelation("provincias_g", "ocupantes", "id_provincia");
+    addRelation("provincias_g", "nombres", "id_provincia");
+    addRelation("provincias_g", "clientes", "id_provincia");
+    addRelation("provincias_g", "proveedores", "id_provincia");
+    addRelation("provincias_g", "fabricantes", "id_provincia");
+    addRelation("provincias_g", "personal", "id_provincia");
+    addRelation("provincias_g", "almacenes", "id_provincia");
+    addRelation("provincias_g", "transportistas", "id_provincia");
+    addRelation("provincias_g", "contactos_externos", "id_provincia");
+    addRelation("provincias_g", "veterinarios", "id_provincia");
+    addRelation("provincias_g", "tecnicos", "id_provincia");
+    addRelation("provincias_g", "empresas", "id_provincia");
+    addRelation("provincias_g", "delegaciones", "id_provincia");
+    addRelation("provincias_g", "ocupantesx", "id_provincia");
+    addRelation("provincias_g", "hst_ocupantesx", "id_provincia");
+    addRelation("provincias_g", "obras", "id_provincia");
+
+//Puestos
+    addRelation("puestos_g", AppTablas.cImpresoras, "id_puesto");
+    addRelation("puestos_g", AppTablas.cXSettings, "id_puesto");
+    addRelation("puestos_g", AppTablas.cInformesCfg, "id_puesto");
+    addRelation("puestos_g", AppTablas.cPID, "id_puesto");
+    addRelation("puestos_g", AppTablas.cInformesCfgX, "id_puesto");
+    addRelation("puestos_g", AppTablas.cMessenger, "id_de_puesto");
+    addRelation("puestos_g", AppTablas.cMessengerX, "id_puesto");
+    addRelation("puestos_g", "ordenes_trabajo", "id_puesto");
+    addRelation("puestos_g", "arqueos", "id_puesto");
+    addRelation("puestos_g", "operaciones_tpv", "id_puesto");
+    addRelation("puestos_g", "xsettings", "id_puesto");
+    addRelation("puestos_g", "data_imp", "id_puesto");
+    addRelation("puestos_g", "doc_cli", "id_puesto");
+    addRelation("puestos_g", "doc_clix", "id_puesto");
+    addRelation("puestos_g", "puntos_clientes", "id_puesto");
+    addRelation("puestos_g", "doc_hotel", "id_puesto");
+    addRelation("puestos_g", "doc_hotelx", "id_puesto");
+    addRelation("puestos_g", "doc_pro", "id_puesto");
+    addRelation("puestos_g", "mandatos", "id_puesto");
+    addRelation("puestos_g", "reservas_rest", "id_puesto");
+    addRelation("puestos_g", "pdas", "id_puesto");
+    addRelation("puestos_g", "pdas", "id_puesto_alternativo");
+    addRelation("puestos_g", "tpvext_cajas", "id_puesto");
+    addRelation("puestos_g", "doc_almacen", "id_puesto");
+    addRelation("puestos_g", "puestosx", "id_puesto");
+    addRelation("puestos_g", "efectos", "id_puesto");
+    addRelation("puestos_g", "agenda", "id_puesto");
+    addRelation("puestos_g", "inventario", "id_puesto");
+    addRelation("puestos_g", "inventariox", "id_puesto");
+    addRelation("puestos_g", "hst_doc_hotel", "id_puesto_proceso");
+    addRelation("puestos_g", "hst_doc_hotel", "id_puesto");
+    addRelation("puestos_g", "hst_doc_hotelx", "id_puesto");
+    addRelation("puestos_g", "instalaciones_props", "id_puesto");
+    addRelation("puestos_g", "fianzas", "id_puesto");
+    addRelation("puestos_g", "webs", "id_puesto");
+    addRelation("puestos_g", AppTablas.cIncidencias, "id_puesto");
+    addRelation("puestos_g", AppTablas.cStock, "id_puesto");
+    addRelation("puestos_g", AppTablas.cChequeos, "id_puesto");
+    addRelation("puestos_g", AppTablas.cExTrans, "id_puesto");
+
+//Recetas
+    addRelation("recetas", "doc_clix", "id_receta");
+
+//RecursosActos
+    addRelation("recursos_actos", "recursos_actos", "id_padre");
+
+//Remesas
+    addRelation("remesas", "asientos", "id_documento");
+    addRelation("remesas", "efectos", "id_remesa");
+    addRelation("remesas", "remesas_asientos", "id_remesa");
+
+//Retenciones
+    addRelation("retenciones", "clientes", "id_retencion");
+    addRelation("retenciones", "doc_cli", "id_retencion");
+    addRelation("retenciones", "doc_pro", "id_retencion");
+    addRelation("retenciones", "retencionesx", "id_retencion");
+    addRelation("retenciones", "nominas", "id_retencion_irpf");
+    addRelation("retenciones", "proveedores", "id_retencion");
+    addRelation("retenciones", "doc_cli_valores", "id_retencion");
+    addRelation("retenciones", "doc_pro_valores", "id_retencion");
+
+//Revisiones
+    addRelation("revisiones", "ordenes_trabajo", "id_revision");
+    addRelation("revisiones", "art_revisiones_averias", "id_averia_revision");
+    addRelation("revisiones", "tecnicos_revisiones_averias", "id_averia_revision");
+
+//Salones
+    addRelation("salones", "doc_clix", "id_origen");
+    addRelation("salones", "recursos_actos", "id_salon");
+    addRelation("salones", "reservas_rest", "id_salon");
+    addRelation("salones", "partes_reparaciones", "id_salon");
+    addRelation("salones", "salonesx", "id_salon");
+    addRelation("salones", "hst_recursos_actos", "id_salon");
+
+//Secciones
+    addRelation("secciones", "seccionesx", "id_seccion");
+    addRelation("secciones", "carta_articulos", "id_seccion");
+    addRelation("secciones", "menu_restx", "id_seccion");
+
+//Series
+    addRelation("series", "areas_venta", "id_serie_defecto");
+    addRelation("series", "areas_venta", "id_serie_alternativa");
+    addRelation("series", "data_imp", "id_serie");
+    addRelation("series", "doc_cli", "id_serie");
+    addRelation("series", "doc_pro", "id_serie");
+    addRelation("series", "numeraciones", "id_serie");
+    addRelation("series", "pdas", "id_serie");
+    addRelation("series", "tpvext_cajas", "id_serie");
+    addRelation("series", "areas_compra", "id_serie_defecto");
+    addRelation("series", "areas_compra", "id_serie_alternativa");
+    addRelation("series", "delegaciones", "id_serie_defecto");
+    addRelation("series", "tiendas_virtuales", "id_serie");
+    addRelation("series", "mantenimientos", "id_serie");
+    addRelation("series", "webs", "id_serie");
+    addRelation("series", "clientesx", "id_serie");
+    addRelation("series", "proveedoresx", "id_serie");
+    addRelation("series", "areas_venta", "id_serie_defecto_tickets");
+    addRelation("series", "areas_venta", "id_serie_alternativa_tickets");
+    addRelation("series", "clientesx", "id_serie_tickets");
+    addRelation("series", "delegaciones", "id_pro_serie_defecto");
+    addRelation("series", "delegaciones", "id_pro_serie_alternativa");
+    addRelation("series", "puestosx", "id_serie_web");
+    addRelation("series", "puestosx", "id_serie_tickets_web");
+    addRelation("series", "basculas_tpv", "id_serie");
+    addRelation("series", "basculas_tpv", "id_serie_tickets");
+
+//Stock_L
+    addRelation("stock_l", AppTablas.cStockNumSerie, "id_stock");
+
+//TareasTecnicos
+    addRelation("tareas_tecnicos", "tecnicos_revisiones_averias", "id_tarea_tecnicos");
+    addRelation("tareas_tecnicos", "tecnicos_revisiones_averias", "id_tarea_tecnicos");
+
+//TarifaHotel
+    addRelation("tarifa_hotel", "doc_hotel", "id_tarifa_cliente");
+    addRelation("tarifa_hotel", "doc_hotel", "id_tarifa_empresa");
+    addRelation("tarifa_hotel", "doc_hotelx", "id_tarifa_hotel");
+    addRelation("tarifa_hotel", "tarifa_hotel_clientes", "id_tarifa_hotel");
+    addRelation("tarifa_hotel", "tarifa_hotelx", "id_tarifa_hotel");
+    addRelation("tarifa_hotel", "tarifa_hotelx", "id_tarifa_fija");
+    addRelation("tarifa_hotel", "tarifas", "id_tarifa_hotel");
+    addRelation("tarifa_hotel", "cfg_central_reservas", "id_tarifa_hotel");
+    addRelation("tarifa_hotel", "delegaciones", "id_cli_tarifa_hotel_defecto");
+    addRelation("tarifa_hotel", "hst_doc_hotel", "id_tarifa_cliente");
+    addRelation("tarifa_hotel", "hst_doc_hotel", "id_tarifa_empresa");
+    addRelation("tarifa_hotel", "hst_doc_hotelx", "id_tarifa_hotel");
+    addRelation("tarifa_hotel", "clientesx", "id_tarifa_hotel");
+    addRelation("tarifa_hotel", "areas_venta", "id_tarifa_kiosko_hotel");
+
+//TarifasArticulos
+    addRelation("tarifas_articulos", "areas_venta", "id_tarifa1");
+    addRelation("tarifas_articulos", "areas_venta", "id_tarifa2");
+    addRelation("tarifas_articulos", "areas_venta", "id_tarifa3");
+    addRelation("tarifas_articulos", "areas_venta", "id_tarifa_precios_tpvext");
+    addRelation("tarifas_articulos", "areas_venta", "id_tarifa_ofertas_tpvext");
+    addRelation("tarifas_articulos", "data_imp", "id_tarifa_articulos");
+    addRelation("tarifas_articulos", "doc_cli", "id_tarifa");
+    addRelation("tarifas_articulos", "doc_cli", "id_tarifa_excepciones");
+    addRelation("tarifas_articulos", "doc_hotel", "id_tarifa");
+    addRelation("tarifas_articulos", "mesas", "id_tarifa");
+    addRelation("tarifas_articulos", "tarifas", "id_tarifa_articulos");
+    addRelation("tarifas_articulos", "pdas", "id_tarifa");
+    addRelation("tarifas_articulos", "pdas", "id_tarifa2");
+    addRelation("tarifas_articulos", "pdas", "id_tarifa3");
+    addRelation("tarifas_articulos", "delegaciones", "id_cli_tarifa_articulos_defecto");
+    addRelation("tarifas_articulos", "delegaciones", "id_cli_tarifa_excepciones_defecto");
+    addRelation("tarifas_articulos", "delegaciones", "id_tarifa_aux1");
+    addRelation("tarifas_articulos", "delegaciones", "id_tarifa_aux2");
+    addRelation("tarifas_articulos", "delegaciones", "id_tarifa_aux3");
+    addRelation("tarifas_articulos", "areas_venta", "id_tarifa_componentes");
+    addRelation("tarifas_articulos", "delegaciones", "id_tarifa_aux4");
+    addRelation("tarifas_articulos", "delegaciones", "id_tarifa_aux5");
+    addRelation("tarifas_articulos", "tiendas_virtuales", "id_tarifa_articulos");
+    addRelation("tarifas_articulos", "hst_doc_hotel", "id_tarifa");
+    addRelation("tarifas_articulos", "areas_venta", "id_tarifa_alquiler_no_devuelto");
+    addRelation("tarifas_articulos", "tarifas_articulos", "id_tarifa_precio_base");
+    addRelation("tarifas_articulos", "areas_venta", "id_tarifa_gestion");
+    addRelation("tarifas_articulos", "clientesx", "id_tarifa");
+    addRelation("tarifas_articulos", "clientesx", "id_tarifa_excepciones");
+    addRelation("tarifas_articulos", "tarifas_articulosx", "id_tarifa_articulos");
+    addRelation("tarifas_articulos", "webs", "id_tarifa");
+    addRelation("tarifas_articulos", "webs", "id_tarifa_excepciones");
+    addRelation("tarifas_articulos", "areas_venta", "id_tarifa_visor_precios");
+    addRelation("tarifas_articulos", "areas_venta", "id_tarifa_excepciones_visor_precios");
+    addRelation("tarifas_articulos", "carta_clientes", "id_tarifa");
+    addRelation("tarifas_articulos", "puestosx", "id_tarifa_web");
+    addRelation("tarifas_articulos", "puestosx", "id_tarifa_excepciones_web");
+    addRelation("tarifas_articulos", "areas_venta", "id_tarifa_cli_varios");
+    addRelation("tarifas_articulos", "areas_venta", "id_tarifa_excepciones_cli_varios");
+
+//TarifasDoc
+    addRelation("tarifas_doc", "tarifas_docx", "id_tarifa_doc");
+    addRelation("tarifas_doc", "tarifas_articulosx", "id_tarifa_doc");
+    addRelation("tarifas_doc", "doc_clix", "id_tarifa_doc");
+
+//Tecnicos
+    addRelation("tecnicos", "ordenes_trabajo", "id_tecnico_recepcion");
+    addRelation("tecnicos", "tecnicos_revisiones_averias", "id_tecnico");
+    addRelation("tecnicos", "tecnicos_revisiones_averias", "id_tecnico");
+    addRelation("tecnicos", "doc_cli", "id_tecnico");
+    addRelation("tecnicos", "doc_clix", "id_tecnico");
+    addRelation("tecnicos", "fabricacionx", "id_tecnico");
+    addRelation("tecnicos", "fabricacion_tareas", "id_tecnico");
+    addRelation("tecnicos", "partes_medicos", "id_medico");
+    addRelation("tecnicos", "ordenes_trabajo", "id_tecnico_trabajo");
+
+//TelepedidoOfertas
+    addRelation("telepedido_ofertas", "telepedido_ofertasx", "id_telepedido_ofertas");
+
+//TiendasVirtuales
+    addRelation("tiendas_virtuales", "destinos", "id_tienda_virtual");
+
+//TipoHabitaciones
+    addRelation("tipo_habitaciones", "doc_hotelx", "id_tipo_habitacion");
+    addRelation("tipo_habitaciones", "habitaciones", "id_tipo");
+    addRelation("tipo_habitaciones", "cfg_central_reservas_cargos", "id_tipo_habitacion");
+    addRelation("tipo_habitaciones", "hst_doc_hotelx", "id_tipo_habitacion");
+
+//TPVExt_Cajas
+    addRelation("tpvext_cajas", "data_imp", "id_origen");
+
+//TPVEXT_Cajas
+    addRelation("tpvext_cajas", "tpvext_saldos", "id_caja");
+
+//TPVExt_Saldos
+    addRelation("tpvext_saldos", "tpvext_saldos", "id_operacion");
+
+//Transportistas
+    addRelation("transportistas", "clientes", "id_transportista");
+    addRelation("transportistas", "proveedores", "id_transportista");
+    addRelation("transportistas", "doc_cli", "id_transportista");
+    addRelation("transportistas", "doc_pro", "id_transportista");
+    addRelation("transportistas", "doc_almacen", "id_transportista");
+    addRelation("transportistas", "pdas", "id_transportista");
+    addRelation("transportistas", "delegaciones", "id_transportista_defecto");
+    addRelation("transportistas", "doc_hotel", "id_transportista");
+    addRelation("transportistas", "hst_doc_hotel", "id_transportista");
+    addRelation("transportistas", "logi_formas", "id_transportista");
+    addRelation("transportistas", "logi_envios", "id_transportista");
+
+//Turnos
+    addRelation("turnos", "reservas_rest", "id_turno");
+
+//Ubicaciones
+    addRelation("ubicaciones_g", "ocupantes", "id_ubicacion");
+    addRelation("ubicaciones_g", "nombres", "id_ubicacion");
+    addRelation("ubicaciones_g", "clientes", "id_ubicacion");
+    addRelation("ubicaciones_g", "proveedores", "id_ubicacion");
+    addRelation("ubicaciones_g", "fabricantes", "id_ubicacion");
+    addRelation("ubicaciones_g", "personal", "id_ubicacion");
+    addRelation("ubicaciones_g", "almacenes", "id_ubicacion");
+    addRelation("ubicaciones_g", "transportistas", "id_ubicacion");
+    addRelation("ubicaciones_g", "contactos_externos", "id_ubicacion");
+    addRelation("ubicaciones_g", "veterinarios", "id_ubicacion");
+    addRelation("ubicaciones_g", "tecnicos", "id_ubicacion");
+    addRelation("ubicaciones_g", "empresas", "id_ubicacion");
+    addRelation("ubicaciones_g", "delegaciones", "id_ubicacion");
+    addRelation("ubicaciones_g", "ocupantesx", "id_ubicacion");
+    addRelation("ubicaciones_g", "hst_ocupantesx", "id_ubicacion");
+    addRelation("ubicaciones_g", "obras", "id_ubicacion");
+
+//Usuarios
+    addRelation("usuarios_g", AppTablas.cPuestos, "id_usuario");
+    addRelation("usuarios_g", AppTablas.cUsuariosRespuestas, "id_usuario");
+    addRelation("usuarios_g", AppTablas.cMessenger, "id_de_usuario");
+    addRelation("usuarios_g", AppTablas.cMessengerX, "id_usuario");
+    addRelation("usuarios_g", "ordenes_trabajo", "id_usuario");
+    addRelation("usuarios_g", "arqueos", "id_usuario");
+    addRelation("usuarios_g", "operaciones_tpv", "id_usuario");
+    addRelation("usuarios_g", "data_imp", "id_usuario");
+    addRelation("usuarios_g", "doc_cli", "id_usuario");
+    addRelation("usuarios_g", "doc_clix", "id_usuario");
+    addRelation("usuarios_g", "puntos_clientes", "id_usuario");
+    addRelation("usuarios_g", "doc_hotel", "id_usuario");
+    addRelation("usuarios_g", "doc_hotelx", "id_usuario");
+    addRelation("usuarios_g", "doc_pro", "id_usuario");
+    addRelation("usuarios_g", "instalacionesx", "id_usuario");
+    addRelation("usuarios_g", "mandatos", "id_usuario");
+    addRelation("usuarios_g", "reservas_rest", "id_usuario");
+    addRelation("usuarios_g", "pdas", "id_usuario");
+    addRelation("usuarios_g", "doc_almacen", "id_usuario");
+    addRelation("usuarios_g", "usuariosx", "id_usuario");
+    addRelation("usuarios_g", "efectos", "id_usuario");
+    addRelation("usuarios_g", "agenda", "id_usuario");
+    addRelation("usuarios_g", "inventario", "id_usuario");
+    addRelation("usuarios_g", "inventariox", "id_usuario");
+    addRelation("usuarios_g", "hst_doc_hotel", "id_usuario_proceso");
+    addRelation("usuarios_g", "hst_doc_hotel", "id_usuario");
+    addRelation("usuarios_g", "hst_doc_hotelx", "id_usuario");
+    addRelation("usuarios_g", "crm_cfg", "id_usuario");
+    addRelation("usuarios_g", "fianzas", "id_usuario");
+    addRelation("usuarios_g", "conocimientos", "id_usuario");
+    addRelation("usuarios_g", "conocimientos", "id_usuario2");
+    addRelation("usuarios_g", AppTablas.cIncidencias, "id_usuario");
+    addRelation("usuarios_g", AppTablas.cIncidencias, "id_usuario_autorizado");
+    addRelation("usuarios_g", AppTablas.cStock, "id_usuario");
+    addRelation("usuarios_g", AppTablas.cChequeos, "id_usuario");
+    addRelation("usuarios_g", AppTablas.cExTrans, "id_usuario");
+
+//UsuariosPerfiles
+    addRelation("usuarios_perfiles_g", AppTablas.cUsuarios, "id_perfil");
+    addRelation("usuarios_perfiles_g", AppTablas.cUsuariosPerfilesX, "id_perfil");
+
+//Vehiculos
+    addRelation("vehiculos", "transportistas", "id_vehiculo");
+    addRelation("vehiculos", "logi_envios", "id_vehiculo");
+    addRelation("vehiculos", "doc_cli", "id_vehiculo");
+
+//Veterinarios
+    addRelation("veterinarios", "doc_cli", "id_veterinario");
+    addRelation("veterinarios", "clientes", "id_veterinario");
+    addRelation("veterinarios", "delegaciones", "id_cli_veterinario_defecto");
+    addRelation("veterinarios", "recetas", "id_veterinario");
+    addRelation("veterinarios", "clientes", "id_veterinario_responsable");
+
+//Zonas
+    addRelation("zonas", "clientes", "id_zona");
+
 
     return lstRelaciones;
   }
@@ -1958,8 +1739,11 @@ class RelacionesTablas {
     row.isEmpresasGrupo = lEmpGrupo;
     String cAlias = alias;
     if (cAlias == "") {
-      String cTmp = tablaDestino.toLowerCase().replaceAll("_","");
-      cAlias = mapAlias[cTmp] ?? cTmp.substring(0,3);
+      if (mapAlias[tablaDestino] != null) {
+        cAlias = mapAlias[tablaDestino]!;
+      } else {
+        cAlias = tablaDestino.replaceAll("_", "").substring(0, 3);
+      }
     }
     row.alias = cAlias;
     lstRelaciones.add(row);
@@ -1968,69 +1752,78 @@ class RelacionesTablas {
   void getAliasTablas() {
     mapAlias["aeat"] = "aeat";
     mapAlias["aeatx"] = "aeatX";
-    mapAlias["appblobs_i"] = "appBlobsImg";
+    mapAlias["agenda"] = "age";
+    mapAlias["almacenes"] = "alm";
+    mapAlias["aparatos"] = "apar";
+    mapAlias["app_blobs_i"] = "appBlobsImg";
     mapAlias["arboles"] = "arb";
-    mapAlias["arbolesauxiliares"] = "arbAux";
-    mapAlias["areascompra"] = "ac";
-    mapAlias["areasventa"] = "av";
+    mapAlias["arboles_auxiliares"] = "arbAux";
+    mapAlias["areas_compra"] = "ac";
+    mapAlias["areas_venta"] = "av";
     mapAlias["articulos"] = "art";
-    mapAlias["artlotes"] = "artLot";
-    mapAlias["artrevisionesaverias"] = "artRevAv";
+    mapAlias["art_stocks"] = "artStk";
+    mapAlias["arqueos"] = "arq";
+    mapAlias["art_lotes"] = "artLot";
+    mapAlias["art_revisiones_averias"] = "artRevAv";
+    mapAlias["asientos"] = "asi";
+    mapAlias["averias"] = "ave";
+    mapAlias["balances"] = "bal";
     mapAlias["balancesx"] = "balX";
-    mapAlias["centrocostesarboles"] = "ccArb";
-    mapAlias["centrocostesarbolesx"] = "ccArbX";
-    mapAlias["centrocostesproyectos"] = "ccProy";
-    mapAlias["centrocostesvalores"] = "ccVal";
-    mapAlias["centrocostesdefecto"] = "ccDef";
+    mapAlias["bancos_g"] = "bang";
+    mapAlias["bonos_acceso"] = "bonAcc";
+    mapAlias["cajones"] = "caj";
+    mapAlias["centro_costes_arboles"] = "ccArb";
+    mapAlias["centro_costes_arbolesx"] = "ccArbX";
+    mapAlias["centro_costes_proyectos"] = "ccProy";
+    mapAlias["centro_costes_valores"] = "ccVal";
+    mapAlias["centro_costes_defecto"] = "ccDef";
     mapAlias["comisiones"] = "comi";
     mapAlias["comisionitas"] = "comiTas";
-    mapAlias["contactosexternos"] = "contExt";
-    mapAlias["ctasanuales"] = "ctasAn";
+    mapAlias["contactos_externos"] = "contExt";
+    mapAlias["ctas_anuales"] = "ctasAn";
     mapAlias["cuentas"] = "ctas";
-    mapAlias["cuentasbancarias"] = "ctasBan";
-    mapAlias["cuentasespeciales"] = "ctasEsp";
-    mapAlias["docalmacen"] = "docAlm";
-    mapAlias["doccli"] = "dc";
-    mapAlias["docclivalores"] = "dcVal";
-    mapAlias["docclix"] = "dcX";
-    mapAlias["dochotel"] = "dh";
-    mapAlias["dochotelx"] = "dhX";
-    mapAlias["docpro"] = "dp";
-    mapAlias["docprovalores"] = "dpVal";
-    mapAlias["docprox"] = "dpX";
-    mapAlias["docsinli"] = "docSinli";
-    mapAlias["docsinlix"] = "docSinliX";
+    mapAlias["cuentas_bancarias"] = "ctasBan";
+    mapAlias["cuentas_especiales"] = "ctasEsp";
+    mapAlias["doc_almacen"] = "docAlm";
+    mapAlias["doc_cli"] = "dc";
+    mapAlias["doc_cli_valores"] = "dcVal";
+    mapAlias["doc_clix"] = "dcX";
+    mapAlias["doc_hotel"] = "dh";
+    mapAlias["doc_hotelx"] = "dhX";
+    mapAlias["doc_pro"] = "dp";
+    mapAlias["doc_pro_valores"] = "dpVal";
+    mapAlias["doc_prox"] = "dpX";
+    mapAlias["doc_sinli"] = "docSinli";
+    mapAlias["doc_sinlix"] = "docSinliX";
     mapAlias["efectos"] = "efec";
     mapAlias["fabricacion"] = "fabN";
-    mapAlias["fabricacioncfg"] = "fabCfg";
-    mapAlias["fabricacionetapas"] = "fabEt";
-    mapAlias["fabricaciongrupo"] = "fabGrp";
-    mapAlias["fabricaciontareas"] = "fabTar";
+    mapAlias["fabricacion_cfg"] = "fabCfg";
+    mapAlias["fabricacion_etapas"] = "fabEt";
+    mapAlias["fabricacion_grupo"] = "fabGrp";
+    mapAlias["fabricacion_tareas"] = "fabTar";
     mapAlias["fabricantes"] = "fabTes";
     mapAlias["grupos"] = "grp";
-    mapAlias["habitacionesprops"] = "habProps";
-    mapAlias["hstdochotel"] = "hstDh";
-    mapAlias["hstdochotelx"] = "hstDhX";
-    mapAlias["logi_destinos"] = "logiDest";
-    mapAlias["logi_envios"] = "logiEnv";
-    mapAlias["logi_formas"] = "logiForm";
-    mapAlias["metodospago"] = "metPag";
+    mapAlias["habitaciones_props"] = "habProps";
+    mapAlias["hst_doc_hotel"] = "hstDh";
+    mapAlias["hst_doc_hotelx"] = "hstDhX";
+    mapAlias["metodos_pago"] = "metPag";
     mapAlias["perfiles"] = "perf";
-    mapAlias["perfilescamposaux"] = "perfAux";
+    mapAlias["perfiles_campos_aux"] = "perfAux";
     mapAlias["personal"] = "pers";
-    mapAlias["plazospago"] = "plazos";
+    mapAlias["plazos_pago"] = "plazos";
     mapAlias["programas"] = "prg";
     mapAlias["proveedoresx"] = "proX";
-    mapAlias["tarifahotel"] = "tarHot";
-    mapAlias["tarifasarticulos"] = "tarArt";
-    mapAlias["tarifasdoc"] = "tarDoc";
+    mapAlias["tarifa_hotel"] = "tarHot";
+    mapAlias["tarifas_articulos"] = "tarArt";
+    mapAlias["tarifas_doc"] = "tarDoc";
     mapAlias["tpvext_cajas"] = "tpvExCaj";
     mapAlias["tpvext_saldos"] = "tpvExSal";
     mapAlias["usuarios"] = "usr";
-    mapAlias["logidestinos"] = "logiDes";
-    mapAlias["logiformas"] = "logiFormas";
-    mapAlias["logiformatos"] = "logiFormat";
-    mapAlias["logiuds"] = "logiFormat";
+    mapAlias["logi_destinos"] = "logiDes";
+    mapAlias["logi_envios"] = "logiEnv";
+    mapAlias["logi_formas"] = "logiFormas";
+    mapAlias["logi_formatos"] = "logiFormat";
+    mapAlias["logi_uds"] = "logiFormat";
 
   }
 }
