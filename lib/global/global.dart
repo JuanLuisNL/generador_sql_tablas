@@ -133,6 +133,65 @@ class CreaClasesTablaAndDRow {
     mapCamposExc["id_serie_defecto_tickets"] = "serDefTic";
     mapCamposExc["id_serie_alternativa_tickets"] = "serAltTic";
     mapCamposExc["id_grupo_destino"] = "grpDest";
+    mapCamposExc["id_compuesto"] = "artComp"; //ArtCompuestosSQL
+    mapCamposExc["id_ingrediente"] = "artIngr"; //ArtIngredientesSQL
+
+    mapCamposExc["id_categoria"] = "arbCat"; //Articulos
+    mapCamposExc["id_fabricante"] = "fab";
+    mapCamposExc["id_proveedor"] = "proveedor";
+    mapCamposExc["id_criterio_tarifa"] = "grpCriTar";
+    mapCamposExc["id_criterio_comision"] = "grpCriComis";
+    mapCamposExc["id_grupo_spa"] = "grpSpa";
+    mapCamposExc["id_grupo_articulos_doc"] = "grpArtDoc";
+    mapCamposExc["id_grupo_calendario"] = "grpCalen";
+    mapCamposExc["id_grupo_cubiculo"] = "grpCubic";
+    mapCamposExc["id_estado"] = "grpEstado";
+    mapCamposExc["id_coleccion"] = "grpColec";
+    mapCamposExc["id_curso"] = "grpCurso";
+    mapCamposExc["id_asignatura"] = "grpAsig";
+    mapCamposExc["id_tipo_tratamiento"] = "grpTipoTrat";
+    mapCamposExc["id_tipo_paquete_circuito"] = "grpTipoPaq";
+    mapCamposExc["id_articulo_stock"] = "artStk";
+    mapCamposExc["id_articulo_eco_tasas"] = "artEcoTas";
+    mapCamposExc["id_articulo_envase"] = "artEnv";
+    mapCamposExc["id_categoria_web"] = "arbWeb1";
+    mapCamposExc["id_categoria_web2"] = "arbWeb2";
+    mapCamposExc["id_categoria_web3"] = "arbWeb3";
+    mapCamposExc["id_categoria_web4"] = "arbWeb4";
+    mapCamposExc["id_coleccionable"] = "colec";
+    mapCamposExc["id_sub_balance"] = "balSub"; // Balances
+    mapCamposExc["id_serie_tickets"] = "serTic"; // BasculasTpvSQL
+    mapCamposExc["id_arbol01"] = "arbAux01"; // CamposAuxiliaresSQL
+    mapCamposExc["id_arbol02"] = "arbAux02";
+    mapCamposExc["id_arbol03"] = "arbAux03";
+    mapCamposExc["id_arbol04"] = "arbAux04";
+    mapCamposExc["id_arbol05"] = "arbAux05";
+    mapCamposExc["id_grupofactura"] = "grpFac"; // CartaGruposSQL
+    mapCamposExc["id_carta"] = "grpCarta";
+    mapCamposExc["id_arbol_xgeneral"] = "ccArbXGen"; // CentroCostesArbolesxSQL
+    mapCamposExc["id_padre"] = "ccArbXPadre";
+    mapCamposExc["id_grupo_proveedores"] = "arbGrpProv"; // CentroCostesDefectoSQL
+    mapCamposExc["id_grupo_personal"] = "arbGrpPers";
+
+    mapCamposExc["id_cargo_desayuno"] = "artDesay"; // CfgCentralReservasSQL
+    mapCamposExc["id_cargo_media_pension"] = "artMp"; //
+    mapCamposExc["id_cargo_pension_completa"] = "artPc"; //
+    mapCamposExc["id_cargo_todo_incluido"] = "artTInc"; //
+    mapCamposExc["id_cargo_uso_individual"] = "artUsoInd"; //
+    mapCamposExc["id_cargo_cama_supletoria"] = "artCamSup"; //
+
+    mapCamposExc["id_metodo_pago1"] = "metPagCr1"; //
+    mapCamposExc["id_metodo_pago2"] = "metPagCr2"; //
+    mapCamposExc["id_metodo_pago3"] = "metPagCr3"; //
+
+
+
+
+
+
+
+
+
 
 
 
@@ -339,6 +398,8 @@ class CreaClasesTablaAndDRow {
       String alias = rowRel.alias;
       if (mapCamposExc[rowRel.campoID] != null) {
         alias = mapCamposExc[rowRel.campoID]!;
+      } else {
+        alias = alias + getNameVariable(rowRel.campoID.substring(3)).proper; // ? provisional, se irá haciendo poco a poco
       }
 
       String tipoDatoTabla = "${getNameVariable(cTablaJoin).proper}SQL";
