@@ -138,7 +138,7 @@ class CreaClasesTablaAndDRow {
 
     mapCamposExc["id_categoria"] = "arbCat"; //Articulos
     mapCamposExc["id_fabricante"] = "fab";
-    mapCamposExc["id_proveedor"] = "proveedor";
+    mapCamposExc["id_proveedor"] = "prvdor";
     mapCamposExc["id_criterio_tarifa"] = "grpCriTar";
     mapCamposExc["id_criterio_comision"] = "grpCriComis";
     mapCamposExc["id_grupo_spa"] = "grpSpa";
