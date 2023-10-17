@@ -26,10 +26,11 @@ class GBL {
 class CreaClasesTablaAndDRow {
   late String tablaProper, tablaLower, aliasTabla;
   late List<String> lstCamposSQLVars = [], lstGetsCamposSQL = [];
-  late List<String> lstVarsTblJoins = [], lstGetsTblJoins = [];
+  late List<String> lstGetsTblJoins = [];
+  late Map<String, List<String>> mapVarsTblJoins = {};
 
   late List<String> lstAsignacionesCamposSQL = [], lstJoins = [], lstAsignacionesJoins = [];
-  late List<String> lstDeclaracionesDRows = [], lstAsignacionesDRows = [], lstJoinsDRows = [];
+  late List<String> lstAsignacionesDRows = [], lstJoinsDRows = [];
   late List<String> lstGetsSetsDRowsNew = [], lstJoinsDRowsNew = [];
   late List<DRowRelacionesCamposEtc> lstRelaciones = [];
   Map<String, String> mapImports = {}, mapCamposExc = {};
@@ -75,15 +76,15 @@ class CreaClasesTablaAndDRow {
   void initListsAndMaps() {
     lstCamposSQLVars = [];
     lstGetsCamposSQL = [];
-    lstVarsTblJoins = [];
     lstGetsTblJoins = [];
 
     lstAsignacionesCamposSQL = [];
     lstJoins = [];
     mapImports = {};
+    mapVarsTblJoins = {};
 
     // DROW
-    lstDeclaracionesDRows = [];
+    mapVarsROW = {};
     lstAsignacionesDRows = [];
     lstJoinsDRows = [];
     // DROWNEW
@@ -103,14 +104,14 @@ class CreaClasesTablaAndDRow {
     mapCamposExc["id_tarifa2"] = "tarArt2";
     mapCamposExc["id_tarifa3"] = "tarArt3";
     mapCamposExc["id_tarifa_componentes"] = "tarComp";
-    mapCamposExc["id_tarifa_precios_tpvext"] = "tarPrecTpvExt";
-    mapCamposExc["id_tarifa_ofertas_tpvext"] = "tarOferTpvExt";
+    mapCamposExc["id_tarifa_precios_tpvext"] = "tarPrecTEx";
+    mapCamposExc["id_tarifa_ofertas_tpvext"] = "tarOferTEx";
     mapCamposExc["id_tarifa_alquiler_no_devuelto"] = "tarAlqNoDev";
     mapCamposExc["id_tarifa_gestion"] = "tarGes";
     mapCamposExc["id_tarifa_visor_precios"] = "tarVisor";
     mapCamposExc["id_tarifa_excepciones_visor_precios"] = "tarVisorExc";
-    mapCamposExc["id_tarifa_cli_varios"] = "tarCliVarios";
-    mapCamposExc["id_tarifa_excepciones_cli_varios"] = "tarCliVariosExc";
+    mapCamposExc["id_tarifa_cli_varios"] = "tarCliVar";
+    mapCamposExc["id_tarifa_excepciones_cli_varios"] = "tarCliVarExc";
     mapCamposExc["id_metodo_cobro1"] = "metPag1";
     mapCamposExc["id_metodo_cobro2"] = "metPag2";
     mapCamposExc["id_metodo_cobro3"] = "metPag3";
@@ -183,35 +184,6 @@ class CreaClasesTablaAndDRow {
     mapCamposExc["id_metodo_pago1"] = "metPagCr1"; //
     mapCamposExc["id_metodo_pago2"] = "metPagCr2"; //
     mapCamposExc["id_metodo_pago3"] = "metPagCr3"; //
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
 
   // ? Desde cada Campo en DB se componen la mayor parte de los elementos de las clases
@@ -233,8 +205,20 @@ class CreaClasesTablaAndDRow {
 
       // DRows
       String cTipoDart = getTipoDart(type);
-      cPlantilla = "late $cTipoDart $cVar;\n";
-      lstDeclaracionesDRows.add(cPlantilla);
+      // cPlantilla = "late $cTipoDart $cVar;\n";
+      // lstDeclaracionesDRows.add(cPlantilla);
+
+      String key = "late $cTipoDart";
+      if (mapVarsROW[key] == null) {
+        mapVarsROW[key] = [cVar];
+      } else {
+        List<String> lstTmp =  mapVarsROW[key]!;
+        lstTmp.add(cVar);
+        mapVarsROW[key] = lstTmp;
+      }
+
+
+
       String cDef = getDefectoDart(type);
       if (cTipoDart == "double") {
         cPlantilla = '$cVar = double.tryParse(map["$campo"].toString()) ?? 0;\n';
@@ -244,8 +228,6 @@ class CreaClasesTablaAndDRow {
         cPlantilla = '$cVar = map["$campo"] ?? $cDef;\n';
       }
       lstAsignacionesDRows.add(cPlantilla);
-
-      // ? Faltan JOINS TODO
 
       // DRowsNew
       if (campo == "verialid") {
@@ -311,9 +293,11 @@ class CreaClasesTablaAndDRow {
     String cCad = "class ${tablaProper}SQL extends TablaSQL {\n";
 
     /// VARIABLES
-    cCad += getDeclaracionVars();
+    cCad += getDeclaracionVars("CampoSQL?", lstCamposSQLVars);
     cCad += "/// Joins Vars\n";
-    cCad += lstVarsTblJoins.join();
+    mapVarsTblJoins.forEach((key, value) {
+      cCad += getDeclaracionVars(key, value);
+    });
 
     cCad += "/// CamposSQL Gets\n";
     cCad += "CampoSQL get all => CampoSQL('*', '', this);\n";
@@ -341,10 +325,10 @@ class CreaClasesTablaAndDRow {
     return cCad;
   }
 
-  String getDeclaracionVars() {
-    const String cTipo = "CampoSQL? ";
+  String getDeclaracionVars(String cTipo, List<String> lstVars) {
+    cTipo += " ";
     String cFila = cTipo, cTodo = "";
-    for (String campo in lstCamposSQLVars) {
+    for (String campo in lstVars) {
       if ((cFila.length + campo.length) > 150) {
         cFila = cFila.trim().replaceFirst(",", ";", cFila.length - 2);
         cTodo += "$cFila\n";
@@ -359,7 +343,7 @@ class CreaClasesTablaAndDRow {
       }
       cTodo += "${cFila.trim()}\n";
     }
-    return "$cTodo\n";
+    return cTodo;
   }
 
   void getDeclaracionJoinsFromRelaciones() {
@@ -403,8 +387,16 @@ class CreaClasesTablaAndDRow {
       }
 
       String tipoDatoTabla = "${getNameVariable(cTablaJoin).proper}SQL";
-      String cTablaJoinVar = "$tipoDatoTabla? _$alias;\n";
-      lstVarsTblJoins.add(cTablaJoinVar);
+
+      // Map de declaraciones de Joins para luego dividir por filas
+      String key = "$tipoDatoTabla?";
+      if (mapVarsTblJoins[key] == null) {
+        mapVarsTblJoins[key] = ["_$alias"];
+      } else {
+        List<String> lstTmp =  mapVarsTblJoins[key]!;
+        lstTmp.add("_$alias");
+        mapVarsTblJoins[key] = lstTmp;
+      }
 
       String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ?? $tipoDatoTabla.joins('${rowRel.campoID}', '$alias', this);\n";
       lstGetsTblJoins.add(cTablaJoinGet);
@@ -430,7 +422,10 @@ class CreaClasesTablaAndDRow {
 
   String getDRows() {
     String cCad = "class DRow$tablaProper {\n";
-    cCad += lstDeclaracionesDRows.join("");
+    mapVarsROW.forEach((key, value) {
+      cCad += getDeclaracionVars(key, value);
+    });
+
     cCad += "DRow$tablaProper.fromMap(Map<String, dynamic> mapParam) {\n";
     cCad += "try {\n";
     cCad += 'Map<String, dynamic> map = mapParam["$tablaLower"];\n';
