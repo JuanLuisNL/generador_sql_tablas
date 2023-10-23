@@ -2,8 +2,8 @@ import 'package:generador_sql_tablas/global/relaciones_tablas.dart';
 import 'package:generador_sql_tablas/global/utils.dart';
 
 class GenerarDRowJson {
-  GenerarDRowJson(this.tablaLower, this.lstRelaciones, this.lstCols);
-  final String tablaLower;
+  GenerarDRowJson(this.tablaLower, this.tablaProper, this.lstRelaciones, this.lstCols);
+  final String tablaLower, tablaProper;
   final List<DRowRelacionesCamposEtc> lstRelaciones;
   final List<List<dynamic>> lstCols;
 
@@ -13,15 +13,25 @@ class GenerarDRowJson {
 
   String create() {
     initListsAndMaps();
+    addItemsFromCols();
 
 
     return generarClaseDRowJson();
   }
 
   String generarClaseDRowJson() {
-    String cClase = "";
+    String cCad = "class DRow$tablaProper {\n";
+    mapVarsROW.forEach((key, value) {
+      cCad += Utils.getDeclaracionVars(key, value);
+    });
 
-    return cClase;
+    cCad += "DRow$tablaProper.fromMap(Map<String, dynamic> mapParam) {\n";
+    cCad += "try {\n";
+    cCad += 'Map<String, dynamic> map = mapParam["$tablaLower"];\n';
+    cCad += lstAsignacionesDRows.join("");
+    cCad += '} catch (e, stack) {\n';
+    cCad += 'Utils.printError(e, traza: stack, mapInfo: {"Proceso": "DRowArticulo.fromMap"});\n}\n}\n';
+    return "$cCad}\n\n";
   }
 
   void initListsAndMaps() {
@@ -29,6 +39,7 @@ class GenerarDRowJson {
     lstAsignacionesDRows = [];
     lstJoinsDRows = [];
   }
+
   void addItemsFromCols() {
     String campo, type;
     for (List<dynamic> row in lstCols) {
@@ -46,6 +57,16 @@ class GenerarDRowJson {
         lstTmp.add(cVar);
         mapVarsROW[key] = lstTmp;
       }
+      String cPlantilla = "";
+      String cDef = Utils.getDefectoDart(type);
+      if (cTipoDart == "double") {
+        cPlantilla = '$cVar = double.tryParse(map["$campo"].toString()) ?? 0;\n';
+      } else if (cDef == "") {
+        cPlantilla = '$cVar = map["$campo"];\n';
+      } else {
+        cPlantilla = '$cVar = map["$campo"] ?? $cDef;\n';
+      }
+      lstAsignacionesDRows.add(cPlantilla);
 
     }
   }

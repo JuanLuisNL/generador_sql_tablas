@@ -47,7 +47,7 @@ class MapExcepciones {
 
     mapCamposExc["id_categoria"] = "arbCat"; //Articulos
     mapCamposExc["id_fabricante"] = "fab";
-    mapCamposExc["id_proveedor"] = "prvdor";
+    mapCamposExc["id_proveedor"] = "prvd";
     mapCamposExc["id_criterio_tarifa"] = "grpCriTar";
     mapCamposExc["id_criterio_comision"] = "grpCriComis";
     mapCamposExc["id_grupo_spa"] = "grpSpa";
@@ -111,6 +111,7 @@ class MapExcepciones {
     String cJoin = "";
     Map<String, List<String>> map = {};
     cJoin = "LEFT JOIN art_delegaciones artDel ON artDel.id_articulo = art.id AND artDel.id_delegacion == GBL.idDelegacion";
+    cJoin += "LEFT JOIN proveedores prvdDel ON artDel.id_proveedor = prvdDel.id";
     map["articulos"] = ["ArtDelegacionesSQL get artDel => _artDel ?? ArtDelegacionesSQL.joins('', 'artDel', this,\n joinManual: '$cJoin');\n"];
     return map;
   }

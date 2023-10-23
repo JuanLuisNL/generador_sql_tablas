@@ -1813,7 +1813,8 @@ class RelacionesTablas {
     mapAlias["personal"] = "pers";
     mapAlias["plazos_pago"] = "plazos";
     mapAlias["programas"] = "prg";
-    mapAlias["proveedoresx"] = "proX";
+    mapAlias["proveedores"] = "prvd";
+    mapAlias["proveedoresx"] = "prvdX";
     mapAlias["tarifa_hotel"] = "tarHot";
     mapAlias["tarifas_articulos"] = "tarArt";
     mapAlias["tarifas_doc"] = "tarDoc";

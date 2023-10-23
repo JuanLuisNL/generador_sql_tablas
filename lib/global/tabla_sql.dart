@@ -5,22 +5,22 @@ import 'package:generador_sql_tablas/global/utils.dart';
 import 'maps_excepciones.dart';
 
 class GenerarTablaSQL {
-  GenerarTablaSQL(this.tablaLower, this.lstRelaciones, this.lstCols, this.lstTablasServer);
-  final String tablaLower;
+  GenerarTablaSQL(this.tablaLower, this.tablaProper, this.lstRelaciones, this.lstCols, this.lstTablasServer);
+  final String tablaLower, tablaProper;
   final List<DRowRelacionesCamposEtc> lstRelaciones;
   final List<List<dynamic>> lstCols;
   final List<String> lstTablasServer;
 
-  late List<String> lstCamposSQLVars = [], lstGetsCamposSQL = [],  lstJoinsTablas = [], lstAsignacionesCamposSQL = [];
-  late List<String> lstGetsTblJoins = [];
+  late List<String> lstCamposSQLVars, lstGetsCamposSQL,  lstJoinsTablas, lstAsignacionesCamposSQL;
+  late List<String> lstGetsTblJoins;
   late Map<String, List<String>> mapVarsTblJoins = {};
-  Map<String, String> mapImports = {}, mapExcepCampos = {};
-  Map<String, List<String>> mapExcepVarsTbl = {}, mapExcepJoinsTbl = {}, mapExcepImportsTbl = {};
+  late Map<String, String> mapImports, mapExcepCampos;
+  late Map<String, List<String>> mapExcepVarsTbl, mapExcepJoinsTbl , mapExcepImportsTbl;
 
 
   String create() {
     initListsAndMaps();
-
+    addItemsFromCols();
 
     return generarClaseTablaSQL();
   }
@@ -31,6 +31,8 @@ class GenerarTablaSQL {
     mapExcepVarsTbl = MapExcepciones.initTablaVarsExcepciones();
     mapExcepJoinsTbl = MapExcepciones.initTablaJoinsExcepciones();
     mapExcepImportsTbl = MapExcepciones.initTablaImportsExcepciones();
+    mapExcepCampos = MapExcepciones.initMapCamposExcepciones();
+
     DRowRelacionesCamposEtc? row = lstRelaciones.firstWhereOrNull((it) => it.tablaJoin == tablaLower);
     if (row == null) {
       aliasTabla = tablaLower.substring(0, 3);
@@ -38,8 +40,6 @@ class GenerarTablaSQL {
       aliasTabla = row.alias;
     }
 
-
-    String tablaProper = tablaLower.proper;
     /// JOINS CON OTRAS TABLAS
     getDeclaracionJoinsFromRelaciones();
 
@@ -89,6 +89,8 @@ class GenerarTablaSQL {
     cCad += "aliasSQL = '$aliasTabla';\n";
     // cCad += lstAsignacionesCamposSQL.join("\n");
     cCad += "\n}\n}\n\n";
+    cCad = getImports() + cCad;
+
     return cCad;
   }
 
@@ -164,6 +166,23 @@ class GenerarTablaSQL {
       lstCamposSQLVars.add("_$cVar");
       lstGetsCamposSQL.add(cPlantillaGet);
     }
+  }
+
+  String getImports() {
+    String cCad = "import '../abstract/entidades_sql.dart';\n";
+    cCad += "import '../../global/utils.dart';\n";
+
+    mapImports.forEach((key, value) {
+      cCad += "$value\n";
+    });
+    if (mapExcepImportsTbl[tablaLower] != null) {
+      for(var it in mapExcepImportsTbl[tablaLower]!) {
+        if (!mapImports.values.contains(it)) {
+          cCad += it;
+        }
+      }
+    }
+    return "$cCad\n\n";
   }
 
   String getNameVariableCampo(String campo) {
