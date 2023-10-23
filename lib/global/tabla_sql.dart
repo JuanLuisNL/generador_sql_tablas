@@ -77,7 +77,7 @@ class GenerarTablaSQL {
     cCad += "initCampos();\n";
     cCad += "campoJoin = cCampoJoin;\n";
     cCad += "aliasJoin = cAliasJoin;\n";
-    //cCad += "joinSentence = cJoinSentence;\n";
+    cCad += "joinStr = joinManual;\n";
     cCad += "oTablaJoin = oTablaSelectJoin;\n}\n\n";
 
     /// CONSTRUCTOR
@@ -87,7 +87,6 @@ class GenerarTablaSQL {
     cCad += "void initCampos() {\n";
     cCad += "nombreSQL = '$tablaLower';\n";
     cCad += "aliasSQL = '$aliasTabla';\n";
-    // cCad += lstAsignacionesCamposSQL.join("\n");
     cCad += "\n}\n}\n\n";
     cCad = getImports() + cCad;
 
@@ -171,6 +170,7 @@ class GenerarTablaSQL {
   String getImports() {
     String cCad = "import '../abstract/entidades_sql.dart';\n";
     cCad += "import '../../global/utils.dart';\n";
+    cCad += "import '../main_tablas/joins_manuales.dart';";
 
     mapImports.forEach((key, value) {
       cCad += "$value\n";

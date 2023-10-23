@@ -110,9 +110,7 @@ class MapExcepciones {
   static Map<String, List<String>> initTablaJoinsExcepciones() {
     String cJoin = "";
     Map<String, List<String>> map = {};
-    cJoin = "LEFT JOIN art_delegaciones artDel ON artDel.id_articulo = art.id AND artDel.id_delegacion == GBL.idDelegacion";
-    cJoin += "LEFT JOIN proveedores prvdDel ON artDel.id_proveedor = prvdDel.id";
-    map["articulos"] = ["ArtDelegacionesSQL get artDel => _artDel ?? ArtDelegacionesSQL.joins('', 'artDel', this,\n joinManual: '$cJoin');\n"];
+    map["articulos"] = ["ArtDelegacionesSQL get artDel => _artDel ?? ArtDelegacionesSQL.joins('', 'artDel', this, joinManual: JoinsManuales.artJoinArtDelegaciones);\n"];
     return map;
   }
 
