@@ -45,7 +45,7 @@ class GenerarDRowMapping {
     for (List<dynamic> row in lstCols) {
       campo = row[0];
       type = row[1];
-      String cVar = Utils.getNameVariable(campo);
+      String cVar = getNameVariableCampo(campo);
 
       // DRowsNew
       String cTipoDart = Utils.getTipoDart(type);
@@ -77,13 +77,15 @@ class GenerarDRowMapping {
       if (mapExcepCampos[rowRel.campoID] != null) {
         alias = mapExcepCampos[rowRel.campoID]!;
       } else {
-        alias = alias + getNameVariableCampo(rowRel.campoID.substring(3)).proper; // ? provisional, se irá haciendo poco a poco
+        alias = alias + getNameVariableCampo(rowRel.campoID.substring(3)).proper; // ? provisional, se irá haciendo poco a poco en relacionestablas
       }
 
       String cTablaJoin = rowRel.tablaJoin;
+      if (cTablaJoin.endsWith("_g") || cTablaJoin.endsWith("_i")) continue; // *************** TODO: ver que se hace
+
       String cPlantilla;
       String cDRow = "DRow${getNameVariableCampo(cTablaJoin).proper}Mapping";
-      cPlantilla = " late $cDRow? row${alias.proper} = $cDRow.join(mapParam!['${cTablaJoin.proper}']);\n";
+      cPlantilla = " late $cDRow? row${alias.proper} = $cDRow.join(mapParam!['$cTablaJoin']);\n";
       lstJoinsDRowsNew.add(cPlantilla);
     }
 

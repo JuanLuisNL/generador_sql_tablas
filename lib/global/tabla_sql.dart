@@ -101,7 +101,7 @@ class GenerarTablaSQL {
         continue;
       }
 
-      if (rowRel.tablaJoin.toLowerCase().contains("_g") || rowRel.tablaJoin.toLowerCase().contains("_i")) {
+      if (rowRel.tablaJoin.endsWith("_g") || rowRel.tablaJoin.endsWith("_i")) {
         continue;
       }
       String cTablaJoin = rowRel.tablaJoin;

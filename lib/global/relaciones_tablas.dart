@@ -1715,16 +1715,20 @@ class RelacionesTablas {
   void addRelation(String tablaDestino, String tablaOrigen, String campoID,
       {String selectCanBeDel = "verialid", String filtro = "", String joinStr = "", String alias = "", bool lCanBeDeleteManual = false}) {
     String tablaJoin = tablaDestino;
-    if (tablaDestino.endsWith("_G")) {
-      tablaJoin = tablaDestino.replaceAll("_G", "");
-    } else if (tablaDestino.endsWith("_I")) {
-      tablaJoin = tablaDestino.replaceAll("_I", "");
-    } else if (tablaDestino.endsWith("_L")) {
-      tablaJoin = tablaDestino.replaceAll("_L", "");
+    // TODO ************
+    if (tablaDestino.endsWith("_g")) {
+      tablaJoin = tablaDestino.replaceAll("_g", "");
+      return;
+    } else if (tablaDestino.endsWith("_i")) {
+      tablaJoin = tablaDestino.replaceAll("_i", "");
+      return;
+    } else if (tablaDestino.endsWith("_l")) {
+      tablaJoin = tablaDestino.replaceAll("_l", "");
+      return;
     }
 
     bool lEmpGrupo = false;
-    if (tablaDestino.endsWith("_G") && !tablaOrigen.contains(".")) {
+    if (tablaDestino.endsWith("_g") && !tablaOrigen.contains(".")) {
       lEmpGrupo = true;
     }
 
@@ -1773,18 +1777,30 @@ class RelacionesTablas {
     mapAlias["bancos_g"] = "bang";
     mapAlias["bonos_acceso"] = "bonAcc";
     mapAlias["cajones"] = "caj";
+    mapAlias["carta_clientes"] = "carCli";
+    mapAlias["carta_clientes_grupos"] = "carCliGrp";
+    mapAlias["carta_grupos"] = "carGrp";
     mapAlias["centro_costes_arboles"] = "ccArb";
     mapAlias["centro_costes_arbolesx"] = "ccArbX";
     mapAlias["centro_costes_proyectos"] = "ccProy";
     mapAlias["centro_costes_valores"] = "ccVal";
     mapAlias["centro_costes_defecto"] = "ccDef";
+    mapAlias["centro_informes"] = "cenInf";
+    mapAlias["cfg_central_reservas"] = "cfgCenRes";
+    mapAlias["cfg_fichero_policia"] = "cfgFicPol";
+    mapAlias["clientes"] = "cli";
+    mapAlias["coleccionables"] = "colec";
     mapAlias["comisiones"] = "comi";
-    mapAlias["comisionitas"] = "comiTas";
+    mapAlias["comisionistas"] = "comiTas";
+    mapAlias["conocimientos"] = "conoc";
     mapAlias["contactos_externos"] = "contExt";
     mapAlias["ctas_anuales"] = "ctasAn";
     mapAlias["cuentas"] = "ctas";
     mapAlias["cuentas_bancarias"] = "ctasBan";
+    mapAlias["cuentas_email"] = "ctasEmail";
     mapAlias["cuentas_especiales"] = "ctasEsp";
+    mapAlias["cupos"] = "cupos";
+    /// POR AQUI
     mapAlias["doc_almacen"] = "docAlm";
     mapAlias["doc_cli"] = "dc";
     mapAlias["doc_cli_valores"] = "dcVal";
@@ -1807,6 +1823,8 @@ class RelacionesTablas {
     mapAlias["habitaciones_props"] = "habProps";
     mapAlias["hst_doc_hotel"] = "hstDh";
     mapAlias["hst_doc_hotelx"] = "hstDhX";
+    mapAlias["mantenimientos"] = "manten";
+
     mapAlias["metodos_pago"] = "metPag";
     mapAlias["perfiles"] = "perf";
     mapAlias["perfiles_campos_aux"] = "perfAux";

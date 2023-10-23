@@ -5,7 +5,6 @@ import 'package:generador_sql_tablas/global/drow_mapping.dart';
 import 'package:generador_sql_tablas/global/extension_metodos.dart';
 import 'package:generador_sql_tablas/global/maps_excepciones.dart';
 import 'package:generador_sql_tablas/global/relaciones_tablas.dart';
-import 'package:collection/collection.dart';
 import 'package:generador_sql_tablas/global/tabla_sql.dart';
 import 'package:generador_sql_tablas/global/utils.dart';
 import 'package:postgres/postgres.dart';
@@ -176,6 +175,10 @@ class CreaClasesTablaAndDRow {
 
       GenerarDRowMapping oGenDRowMapping = GenerarDRowMapping(tablaLower, tablaProper, lstRelaciones, lstCols);
       cDatos += oGenDRowMapping.create();
+
+
+
+
     } catch (e) {
       if (kDebugMode) {
         print(e);
@@ -378,13 +381,7 @@ class CreaClasesTablaAndDRow {
     if (campo.startsWith("id_")) {
       lstJoinsTablas.add(campo);
     }
-    List<String> lstPartes = campo.split("_");
-    for (String it in lstPartes) {
-      cFinal += it.proper;
-    }
-    cFinal = cFinal.substring(0, 1).toLowerCase() + cFinal.substring(1);
-    if (cFinal == "final") cFinal = "finalStr"; //? Por ser palabra reservada
-    return cFinal;
+    return Utils.getNameVariable(campo);
   }
 
   // ? tipos para sql [PENDIENTE] TODO
