@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:generador_sql_tablas/global/extension_metodos.dart';
+import 'package:generador_sql_tablas/global/maps_excepciones.dart';
 import 'package:generador_sql_tablas/global/relaciones_tablas.dart';
 import 'package:collection/collection.dart';
+import 'package:generador_sql_tablas/global/utils.dart';
 import 'package:postgres/postgres.dart';
 
 class GBL {
@@ -29,12 +31,12 @@ class CreaClasesTablaAndDRow {
   late List<String> lstGetsTblJoins = [];
   late Map<String, List<String>> mapVarsTblJoins = {};
 
-  late List<String> lstAsignacionesCamposSQL = [], lstJoins = [], lstAsignacionesJoins = [];
+  late List<String> lstAsignacionesCamposSQL = [], lstJoinsTablas = [] ;
   late List<String> lstAsignacionesDRows = [], lstJoinsDRows = [];
   late List<String> lstGetsSetsDRowsNew = [], lstJoinsDRowsNew = [];
   late List<DRowRelacionesCamposEtc> lstRelaciones = [];
-  Map<String, String> mapImports = {}, mapCamposExc = {};
-  Map<String, List<String>> mapVarsROW = {};
+  Map<String, String> mapImports = {}, mapExcepCampos = {};
+  Map<String, List<String>> mapVarsROW = {}, mapExcepDRow = {}, mapExcepVarsTbl = {}, mapExcepJoinsTbl = {}, mapExcepImportsTbl = {};
   List<List<dynamic>> lstCols = [];
   List<String> lstTablasServer = [];
 
@@ -52,15 +54,20 @@ class CreaClasesTablaAndDRow {
     for (var row in lstTablasSQL) {
       lstTablasServer.add(row[0]);
     }
-    initMapCamposExcepciones();
+    mapExcepVarsTbl = MapExcepciones.initTablaVarsExcepciones();
+    mapExcepJoinsTbl = MapExcepciones.initTablaJoinsExcepciones();
+    mapExcepImportsTbl = MapExcepciones.initTablaImportsExcepciones();
+    mapExcepCampos = MapExcepciones.initMapCamposExcepciones();
+    mapExcepDRow = MapExcepciones.initMapDRowsExcepciones();
+
     for (String tabla in lstTablasServer) {
       cSQL = "SELECT column_name, data_type, character_maximum_length, numeric_precision_radix, numeric_scale";
       cSQL += " FROM INFORMATION_SCHEMA.COLUMNS";
       cSQL += " WHERE table_name = '$tabla'";
       cSQL += " ORDER BY ordinal_position";
       lstCols = await GBL.oCnEmp.query(cSQL);
-      tablaProper = getNameVariable(tabla).proper;
-      tablaLower = tabla.toLowerCase();
+      tablaProper = tabla.proper;
+      tablaLower = tabla;
       initListsAndMaps();
       addItemsFromCols();
       String cFile = getAll();
@@ -79,9 +86,10 @@ class CreaClasesTablaAndDRow {
     lstGetsTblJoins = [];
 
     lstAsignacionesCamposSQL = [];
-    lstJoins = [];
+    lstJoinsTablas = [];
     mapImports = {};
     mapVarsTblJoins = {};
+    // mapCamposExc, mapDRowExc, mapVarsTblExc, mapJoinsTblExc  NO se vacia
 
     // DROW
     mapVarsROW = {};
@@ -90,101 +98,9 @@ class CreaClasesTablaAndDRow {
     // DROWNEW
     lstGetsSetsDRowsNew = [];
     lstJoinsDRowsNew = [];
-    lstAsignacionesJoins = [];
   }
 
-  void initMapCamposExcepciones() {
-    mapCamposExc["id_marca_hora"] = "grpMH"; // grupos
-    mapCamposExc["id_contrato"] = "manCon"; // mantenimientos
-    mapCamposExc["id_contrato2"] = "manCon2";
-    mapCamposExc["id_contrapartida"] = "ctasCP"; //Cuentas
-    mapCamposExc["id_serie_defecto"] = "serDef"; //Areas Compra
-    mapCamposExc["id_serie_alternativa"] = "serAlt";
-    mapCamposExc["id_tarifa1"] = "tarArt1"; //Areas Venta
-    mapCamposExc["id_tarifa2"] = "tarArt2";
-    mapCamposExc["id_tarifa3"] = "tarArt3";
-    mapCamposExc["id_tarifa_componentes"] = "tarComp";
-    mapCamposExc["id_tarifa_precios_tpvext"] = "tarPrecTEx";
-    mapCamposExc["id_tarifa_ofertas_tpvext"] = "tarOferTEx";
-    mapCamposExc["id_tarifa_alquiler_no_devuelto"] = "tarAlqNoDev";
-    mapCamposExc["id_tarifa_gestion"] = "tarGes";
-    mapCamposExc["id_tarifa_visor_precios"] = "tarVisor";
-    mapCamposExc["id_tarifa_excepciones_visor_precios"] = "tarVisorExc";
-    mapCamposExc["id_tarifa_cli_varios"] = "tarCliVar";
-    mapCamposExc["id_tarifa_excepciones_cli_varios"] = "tarCliVarExc";
-    mapCamposExc["id_metodo_cobro1"] = "metPag1";
-    mapCamposExc["id_metodo_cobro2"] = "metPag2";
-    mapCamposExc["id_metodo_cobro3"] = "metPag3";
-    mapCamposExc["id_metodo_cobro4"] = "metPag4";
-    mapCamposExc["id_metodo_cobro5"] = "metPag5";
-    mapCamposExc["id_metodo_cobro6"] = "metPag6";
-    mapCamposExc["id_metodo_cobro7"] = "metPag7";
-    mapCamposExc["id_metodo_cobro8"] = "metPag8";
-    mapCamposExc["id_metodo_efectivo"] = "metPagEf";
-    mapCamposExc["id_metodo_telepedido"] = "metPagTele";
-    mapCamposExc["id_metodo_efectivo_kiosko_hotel"] = "metPagEfKiosko";
-    mapCamposExc["id_metodo_tarjeta_kiosko_hotel"] = "metPagTarKiosko";
-    mapCamposExc["id_cargo_sup_individual"] = "artSupInd";
-    mapCamposExc["id_cargo_sup_estancia_corta"] = "artSuoEstCor";
-    mapCamposExc["id_cargo_sup_extra1"] = "artSupEx1";
-    mapCamposExc["id_cargo_sup_extra2"] = "artSupEx2";
-    mapCamposExc["id_cargo_sup_extra3"] = "artSupEx3";
-    mapCamposExc["id_art_gastos_envio_telepedido"] = "artGasTele";
-    mapCamposExc["id_art_bolsa_telepedido"] = "artBolsaTele";
-    mapCamposExc["id_serie_defecto_tickets"] = "serDefTic";
-    mapCamposExc["id_serie_alternativa_tickets"] = "serAltTic";
-    mapCamposExc["id_grupo_destino"] = "grpDest";
-    mapCamposExc["id_compuesto"] = "artComp"; //ArtCompuestosSQL
-    mapCamposExc["id_ingrediente"] = "artIngr"; //ArtIngredientesSQL
 
-    mapCamposExc["id_categoria"] = "arbCat"; //Articulos
-    mapCamposExc["id_fabricante"] = "fab";
-    mapCamposExc["id_proveedor"] = "prvdor";
-    mapCamposExc["id_criterio_tarifa"] = "grpCriTar";
-    mapCamposExc["id_criterio_comision"] = "grpCriComis";
-    mapCamposExc["id_grupo_spa"] = "grpSpa";
-    mapCamposExc["id_grupo_articulos_doc"] = "grpArtDoc";
-    mapCamposExc["id_grupo_calendario"] = "grpCalen";
-    mapCamposExc["id_grupo_cubiculo"] = "grpCubic";
-    mapCamposExc["id_estado"] = "grpEstado";
-    mapCamposExc["id_coleccion"] = "grpColec";
-    mapCamposExc["id_curso"] = "grpCurso";
-    mapCamposExc["id_asignatura"] = "grpAsig";
-    mapCamposExc["id_tipo_tratamiento"] = "grpTipoTrat";
-    mapCamposExc["id_tipo_paquete_circuito"] = "grpTipoPaq";
-    mapCamposExc["id_articulo_stock"] = "artStk";
-    mapCamposExc["id_articulo_eco_tasas"] = "artEcoTas";
-    mapCamposExc["id_articulo_envase"] = "artEnv";
-    mapCamposExc["id_categoria_web"] = "arbWeb1";
-    mapCamposExc["id_categoria_web2"] = "arbWeb2";
-    mapCamposExc["id_categoria_web3"] = "arbWeb3";
-    mapCamposExc["id_categoria_web4"] = "arbWeb4";
-    mapCamposExc["id_coleccionable"] = "colec";
-    mapCamposExc["id_sub_balance"] = "balSub"; // Balances
-    mapCamposExc["id_serie_tickets"] = "serTic"; // BasculasTpvSQL
-    mapCamposExc["id_arbol01"] = "arbAux01"; // CamposAuxiliaresSQL
-    mapCamposExc["id_arbol02"] = "arbAux02";
-    mapCamposExc["id_arbol03"] = "arbAux03";
-    mapCamposExc["id_arbol04"] = "arbAux04";
-    mapCamposExc["id_arbol05"] = "arbAux05";
-    mapCamposExc["id_grupofactura"] = "grpFac"; // CartaGruposSQL
-    mapCamposExc["id_carta"] = "grpCarta";
-    mapCamposExc["id_arbol_xgeneral"] = "ccArbXGen"; // CentroCostesArbolesxSQL
-    mapCamposExc["id_padre"] = "ccArbXPadre";
-    mapCamposExc["id_grupo_proveedores"] = "arbGrpProv"; // CentroCostesDefectoSQL
-    mapCamposExc["id_grupo_personal"] = "arbGrpPers";
-
-    mapCamposExc["id_cargo_desayuno"] = "artDesay"; // CfgCentralReservasSQL
-    mapCamposExc["id_cargo_media_pension"] = "artMp"; //
-    mapCamposExc["id_cargo_pension_completa"] = "artPc"; //
-    mapCamposExc["id_cargo_todo_incluido"] = "artTInc"; //
-    mapCamposExc["id_cargo_uso_individual"] = "artUsoInd"; //
-    mapCamposExc["id_cargo_cama_supletoria"] = "artCamSup"; //
-
-    mapCamposExc["id_metodo_pago1"] = "metPagCr1"; //
-    mapCamposExc["id_metodo_pago2"] = "metPagCr2"; //
-    mapCamposExc["id_metodo_pago3"] = "metPagCr3"; //
-  }
 
   // ? Desde cada Campo en DB se componen la mayor parte de los elementos de las clases
   // ? despues "getAll" se encarga de ordenarlos y crear losque faltan
@@ -194,7 +110,7 @@ class CreaClasesTablaAndDRow {
       campo = row[0];
       type = row[1];
       String cVar = getNameVariable(campo);
-      String cType = getTipoSQL(type, row[2] ?? 0, row[3] ?? 0, row[4] ?? 0);
+      String cType = Utils.getTipoSQL(type, row[2] ?? 0, row[3] ?? 0, row[4] ?? 0);
       String cPlantilla = '$cVar = CampoSQL("$campo", "$cType", oTablaMain: this);';
       String cPlantillaGet = 'CampoSQL get $cVar => _$cVar ?? CampoSQL("$campo", "$cType", this);\n';
 
@@ -204,7 +120,7 @@ class CreaClasesTablaAndDRow {
       lstGetsCamposSQL.add(cPlantillaGet);
 
       // DRows
-      String cTipoDart = getTipoDart(type);
+      String cTipoDart = Utils.getTipoDart(type);
       // cPlantilla = "late $cTipoDart $cVar;\n";
       // lstDeclaracionesDRows.add(cPlantilla);
 
@@ -219,7 +135,7 @@ class CreaClasesTablaAndDRow {
 
 
 
-      String cDef = getDefectoDart(type);
+      String cDef = Utils.getDefectoDart(type);
       if (cTipoDart == "double") {
         cPlantilla = '$cVar = double.tryParse(map["$campo"].toString()) ?? 0;\n';
       } else if (cDef == "") {
@@ -249,8 +165,7 @@ class CreaClasesTablaAndDRow {
   // ? Compone las clases necesarias para cada tabla
   String getAll() {
     String cDatos = "";
-    String tabla = tablaLower;
-    DRowRelacionesCamposEtc? row = lstRelaciones.firstWhereOrNull((it) => it.tablaJoin == tabla);
+    DRowRelacionesCamposEtc? row = lstRelaciones.firstWhereOrNull((it) => it.tablaJoin == tablaLower);
     if (row == null) {
       aliasTabla = tablaLower.substring(0, 3);
     } else {
@@ -293,20 +208,33 @@ class CreaClasesTablaAndDRow {
     String cCad = "class ${tablaProper}SQL extends TablaSQL {\n";
 
     /// VARIABLES
-    cCad += getDeclaracionVars("CampoSQL?", lstCamposSQLVars);
+    cCad += Utils.getDeclaracionVars("CampoSQL?", lstCamposSQLVars);
     cCad += "/// Joins Vars\n";
     mapVarsTblJoins.forEach((key, value) {
-      cCad += getDeclaracionVars(key, value);
+      cCad += Utils.getDeclaracionVars(key, value);
     });
+    /// Excepciones vars joins
+    if (mapExcepVarsTbl[tablaLower] != null) {
+    for (var it in mapExcepVarsTbl[tablaLower]!) {
+      cCad += it;
+    }
+    }
+
 
     cCad += "/// CamposSQL Gets\n";
     cCad += "CampoSQL get all => CampoSQL('*', '', this);\n";
     cCad += lstGetsCamposSQL.join();
     cCad += "/// JOINS Gets\n";
     cCad += lstGetsTblJoins.join();
+    /// Excepciones Get joins
+    if (mapExcepJoinsTbl[tablaLower] != null) {
+      for (var it in mapExcepJoinsTbl[tablaLower]!) {
+        cCad += it;
+      }
+    }
 
     /// CONSTRUCTOR JOINS
-    cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasJoin, TablaSQL? oTablaSelectJoin) {\n";
+    cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasJoin, TablaSQL? oTablaSelectJoin, {String joinManual = ''}) {\n";
     cCad += "initCampos();\n";
     cCad += "campoJoin = cCampoJoin;\n";
     cCad += "aliasJoin = cAliasJoin;\n";
@@ -325,29 +253,10 @@ class CreaClasesTablaAndDRow {
     return cCad;
   }
 
-  String getDeclaracionVars(String cTipo, List<String> lstVars) {
-    cTipo += " ";
-    String cFila = cTipo, cTodo = "";
-    for (String campo in lstVars) {
-      if ((cFila.length + campo.length) > 150) {
-        cFila = cFila.trim().replaceFirst(",", ";", cFila.length - 2);
-        cTodo += "$cFila\n";
-        cFila = "$cTipo$campo, ";
-      } else {
-        cFila += "$campo, ";
-      }
-    }
-    if (cFila != cTipo) {
-      if (cFila.trim().endsWith(",")) {
-        cFila = cFila.replaceFirst(",", ";", cFila.length - 2);
-      }
-      cTodo += "${cFila.trim()}\n";
-    }
-    return cTodo;
-  }
+
 
   void getDeclaracionJoinsFromRelaciones() {
-    for (var campo in lstJoins) {
+    for (var campo in lstJoinsTablas) {
       DRowRelacionesCamposEtc? rowRel = lstRelaciones.firstWhereOrNull((it) => it.tablaOrigen == tablaLower && it.campoID == campo);
       if (rowRel == null) {
         continue;
@@ -380,8 +289,8 @@ class CreaClasesTablaAndDRow {
       /// ArbolesSQL? _arbCat;
       /// ArbolesSQL get arb => _arb ?? ArbolesSQL.joins('id_padre', 'arb', this);
       String alias = rowRel.alias;
-      if (mapCamposExc[rowRel.campoID] != null) {
-        alias = mapCamposExc[rowRel.campoID]!;
+      if (mapExcepCampos[rowRel.campoID] != null) {
+        alias = mapExcepCampos[rowRel.campoID]!;
       } else {
         alias = alias + getNameVariable(rowRel.campoID.substring(3)).proper; // ? provisional, se irá haciendo poco a poco
       }
@@ -409,21 +318,32 @@ class CreaClasesTablaAndDRow {
       cPlantilla = " late $cDRow? row${alias.proper} = $cDRow.join(mapParam!['${cTablaJoin.proper}']);\n";
       lstJoinsDRowsNew.add(cPlantilla);
     }
+    if (mapExcepDRow[tablaLower] != null) {
+      lstJoinsDRowsNew.add(mapExcepDRow[tablaLower]!.join());
+    }
   }
 
   String getImports() {
     String cCad = "import '../abstract/entidades_sql.dart';\n";
     cCad += "import '../../global/utils.dart';\n";
+
     mapImports.forEach((key, value) {
       cCad += "$value\n";
     });
+    if (mapExcepImportsTbl[tablaLower] != null) {
+      for(var it in mapExcepImportsTbl[tablaLower]!) {
+        if (!mapImports.values.contains(it)) {
+          cCad += it;
+        }
+      }
+    }
     return "$cCad\n\n";
   }
 
   String getDRows() {
     String cCad = "class DRow$tablaProper {\n";
     mapVarsROW.forEach((key, value) {
-      cCad += getDeclaracionVars(key, value);
+      cCad += Utils.getDeclaracionVars(key, value);
     });
 
     cCad += "DRow$tablaProper.fromMap(Map<String, dynamic> mapParam) {\n";
@@ -437,7 +357,7 @@ class CreaClasesTablaAndDRow {
 
   String getDRowsNew() {
     String cClase = "DRow${tablaProper}Mapping";
-    String cCad = "class $cClase extends DRowEntidad {\n";
+    String cCad = "class $cClase extends DRowMapping {\n";
     cCad += "$cClase.select(super.mapParam, super.cTabla) : super.select();\n";
     cCad += "$cClase.join(super.mapParamJoin) : super.join();\n\n";
     cCad += lstGetsSetsDRowsNew.join("");
@@ -449,7 +369,7 @@ class CreaClasesTablaAndDRow {
   String getNameVariable(String campo) {
     String cFinal = "";
     if (campo.startsWith("id_")) {
-      lstJoins.add(campo);
+      lstJoinsTablas.add(campo);
     }
     List<String> lstPartes = campo.split("_");
     for (String it in lstPartes) {
@@ -461,57 +381,7 @@ class CreaClasesTablaAndDRow {
   }
 
   // ? tipos para sql [PENDIENTE] TODO
-  String getTipoSQL(String type, int numMaxStr, int radix, int scale) {
-    if (type.contains("varying")) return 'C$numMaxStr';
-    if (type == "smallint") return 'I2';
-    if (type == "integer") return 'I4';
-    if (type == "bigint") return 'I8';
-    if (type == "date") return 'D';
-    if (type.contains("timestamp")) return 'DT';
-    if (type == "real") return 'F4';
-    if (type == "double precision") return 'F8';
-    if (type == "numeric" || type == "decimal") return 'N($radix,$scale)';
-    return type;
-  }
 
-  // ? PAra DRow
-  String getTipoDart(String type) {
-    if (["smallint", "integer"].contains(type)) {
-      return 'int';
-    }
-    if (type.contains("varying") || type.contains("text")) {
-      return 'String';
-    }
 
-    // "double precision" ...
-    if (type.contains("double") || type.contains("numeric")) {
-      return 'double';
-    }
 
-    if (type.contains("timestamp") || type.contains("date") || type.contains("time")) {
-      return 'DateTime?';
-    }
-
-    return type;
-  }
-
-  String getDefectoDart(String type) {
-    if (["smallint", "integer"].contains(type)) {
-      return "0";
-    }
-    if (type.contains("varying") || type.contains("text")) {
-      return "''";
-    }
-
-    // "double precision" ...
-    if (type.contains("double") || type.contains("numeric")) {
-      return "0";
-    }
-
-    if (type.contains("timestamp") || type.contains("date") || type.contains("time")) {
-      return "";
-    }
-
-    return "";
-  }
 }

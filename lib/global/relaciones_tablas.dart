@@ -1707,9 +1707,10 @@ class RelacionesTablas {
 //Zonas
     addRelation("zonas", "clientes", "id_zona");
 
-
     return lstRelaciones;
   }
+
+
 
   void addRelation(String tablaDestino, String tablaOrigen, String campoID,
       {String selectCanBeDel = "verialid", String filtro = "", String joinStr = "", String alias = "", bool lCanBeDeleteManual = false}) {
@@ -1729,13 +1730,13 @@ class RelacionesTablas {
 
     DRowRelacionesCamposEtc row = DRowRelacionesCamposEtc();
     row.tablaJoin = tablaDestino;
-    row.tablaOrigen = tablaOrigen.toLowerCase();
-    row.tablaJoinDBEx = tablaJoin.toLowerCase();
-    row.campoID = campoID.toLowerCase();
-    row.camposSelectCanBeDelete = selectCanBeDel.toLowerCase();
-    row.joins = joinStr.toLowerCase();
-    row.filtroWhere = filtro.toLowerCase();
-    row.lCanBeDeleteManual = lCanBeDeleteManual;
+    row.tablaOrigen = tablaOrigen;
+    // row.tablaJoinDBEx = tablaJoin;
+    row.campoID = campoID;
+    // row.camposSelectCanBeDelete = selectCanBeDel;
+    // row.joins = joinStr.toLowerCase();
+    // row.filtroWhere = filtro.toLowerCase();
+    // row.lCanBeDeleteManual = lCanBeDeleteManual;
     row.isEmpresasGrupo = lEmpGrupo;
     String cAlias = alias;
     if (cAlias == "") {
