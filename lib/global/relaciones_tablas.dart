@@ -1711,7 +1711,6 @@ class RelacionesTablas {
   }
 
 
-
   void addRelation(String tablaDestino, String tablaOrigen, String campoID,
       {String selectCanBeDel = "verialid", String filtro = "", String joinStr = "", String alias = "", bool lCanBeDeleteManual = false}) {
     String tablaJoin = tablaDestino;
@@ -1766,6 +1765,7 @@ class RelacionesTablas {
     mapAlias["areas_compra"] = "ac";
     mapAlias["areas_venta"] = "av";
     mapAlias["articulos"] = "art";
+    mapAlias["art_delegaciones"] = "artDel";
     mapAlias["art_stocks"] = "artStk";
     mapAlias["arqueos"] = "arq";
     mapAlias["art_lotes"] = "artLot";

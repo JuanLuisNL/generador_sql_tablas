@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:generador_sql_tablas/global/drow_json.dart';
 import 'package:generador_sql_tablas/global/drow_mapping.dart';
@@ -33,14 +34,14 @@ class CreaClasesTablaAndDRow {
   late List<DRowRelacionesCamposEtc> lstRelaciones = [];
   List<List<dynamic>> lstCols = [];
   List<String> lstTablasServer = [];
-
+  late RelacionesTablas oRelTab;
   Future<void> run() async {
-    RelacionesTablas oRelTab = RelacionesTablas();
-    lstRelaciones = oRelTab.init();
     await creaClases();
   }
 
   Future<void> creaClases() async {
+    oRelTab = RelacionesTablas();
+    lstRelaciones = oRelTab.init();
 
     String cSQL = "SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE' AND table_schema = 'public'";
     List<List<dynamic>> lstTablasSQL = await GBL.oCnEmp.query(cSQL);
@@ -64,7 +65,19 @@ class CreaClasesTablaAndDRow {
   String getAllNew() {
     String cDatos = "";
     try {
-      GenerarTablaSQL oGenTblSQL = GenerarTablaSQL(tablaLower, tablaProper, lstRelaciones, lstCols, lstTablasServer);
+      String aliasTabla = "";
+      DRowRelacionesCamposEtc? row = lstRelaciones.firstWhereOrNull((it) => it.tablaJoin == tablaLower);
+      if (row == null) {
+        if (oRelTab.mapAlias[tablaLower] != null) {
+          aliasTabla = oRelTab.mapAlias[tablaLower]!;
+        } else {
+          aliasTabla = tablaLower;
+        }
+      } else {
+        aliasTabla = row.alias;
+      }
+
+      GenerarTablaSQL oGenTblSQL = GenerarTablaSQL(tablaLower, tablaProper, aliasTabla, lstRelaciones, lstCols, lstTablasServer);
       cDatos = oGenTblSQL.create();
 
       GenerarDRowJson oGenDRowJson = GenerarDRowJson(tablaLower, tablaProper, lstRelaciones, lstCols);

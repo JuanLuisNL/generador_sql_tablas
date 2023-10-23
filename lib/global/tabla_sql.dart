@@ -5,8 +5,8 @@ import 'package:generador_sql_tablas/global/utils.dart';
 import 'maps_excepciones.dart';
 
 class GenerarTablaSQL {
-  GenerarTablaSQL(this.tablaLower, this.tablaProper, this.lstRelaciones, this.lstCols, this.lstTablasServer);
-  final String tablaLower, tablaProper;
+  GenerarTablaSQL(this.tablaLower, this.tablaProper, this.aliasTabla, this.lstRelaciones, this.lstCols, this.lstTablasServer);
+  final String tablaLower, tablaProper, aliasTabla;
   final List<DRowRelacionesCamposEtc> lstRelaciones;
   final List<List<dynamic>> lstCols;
   final List<String> lstTablasServer;
@@ -27,24 +27,34 @@ class GenerarTablaSQL {
 
 
   String generarClaseTablaSQL() {
-    String aliasTabla;
     mapExcepVarsTbl = MapExcepciones.initTablaVarsExcepciones();
     mapExcepJoinsTbl = MapExcepciones.initTablaJoinsExcepciones();
     mapExcepImportsTbl = MapExcepciones.initTablaImportsExcepciones();
     mapExcepCampos = MapExcepciones.initMapCamposExcepciones();
 
-    DRowRelacionesCamposEtc? row = lstRelaciones.firstWhereOrNull((it) => it.tablaJoin == tablaLower);
-    if (row == null) {
-      aliasTabla = tablaLower.substring(0, 3);
-    } else {
-      aliasTabla = row.alias;
-    }
-
-    /// JOINS CON OTRAS TABLAS
+     /// JOINS CON OTRAS TABLAS
     getDeclaracionJoinsFromRelaciones();
 
     /// DECLARACION CLASE
     String cCad = "class ${tablaProper}SQL extends TablaSQL {\n";
+
+    /// CONSTRUCTOR JOINS
+    cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasJoin, TablaSQL? oTablaSelectJoin, {String joinManual = ''}) {\n";
+    cCad += "initCampos();\n";
+    cCad += "campoJoin = cCampoJoin;\n";
+    cCad += "aliasJoin = cAliasJoin;\n";
+    cCad += "joinStr = joinManual;\n";
+    cCad += "oTablaJoin = oTablaSelectJoin;\n}\n\n";
+
+    /// CONSTRUCTOR
+    cCad += "${tablaProper}SQL() {\n initCampos();\n}\n\n";
+
+    /// INITCAMPOS
+    cCad += "void initCampos() {\n";
+    cCad += "nombreSQL = '$tablaLower';\n";
+    cCad += "aliasSQL = '$aliasTabla';\n";
+    cCad += "\n}\n";
+
 
     /// VARIABLES
     cCad += Utils.getDeclaracionVars("CampoSQL?", lstCamposSQLVars);
@@ -72,22 +82,9 @@ class GenerarTablaSQL {
       }
     }
 
-    /// CONSTRUCTOR JOINS
-    cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasJoin, TablaSQL? oTablaSelectJoin, {String joinManual = ''}) {\n";
-    cCad += "initCampos();\n";
-    cCad += "campoJoin = cCampoJoin;\n";
-    cCad += "aliasJoin = cAliasJoin;\n";
-    cCad += "joinStr = joinManual;\n";
-    cCad += "oTablaJoin = oTablaSelectJoin;\n}\n\n";
 
-    /// CONSTRUCTOR
-    cCad += "${tablaProper}SQL() {\n initCampos();\n}\n\n";
 
-    /// INITCAMPOS
-    cCad += "void initCampos() {\n";
-    cCad += "nombreSQL = '$tablaLower';\n";
-    cCad += "aliasSQL = '$aliasTabla';\n";
-    cCad += "\n}\n}\n\n";
+    cCad += "\n}\n\n";
     cCad = getImports() + cCad;
 
     return cCad;
