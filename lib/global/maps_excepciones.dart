@@ -101,24 +101,9 @@ class MapExcepciones {
     return map;
   }
 
-  static Map<String, List<String>> initTablaVarsExcepciones() {
-    Map<String, List<String>> map = {};
-    map["articulos"] = ["ArtDelegacionesSQL? _artDel;\n"];
-    return map;
-  }
 
-  static Map<String, List<String>> initTablaJoinsExcepciones() {
-    String cJoin = "";
-    Map<String, List<String>> map = {};
-    map["articulos"] = ["ArtDelegacionesSQL get artDel => _artDel ?? ArtDelegacionesSQL.joins('', 'artDel', this, joinManual: JoinsManuales.artJoinArtDelegaciones);\n"];
-    return map;
-  }
 
-  static Map<String, List<String>> initTablaImportsExcepciones() {
-    Map<String, List<String>> map = {};
-    map["articulos"] = ["import 'art_delegaciones_base.dart';\n"];
-    return map;
-  }
+
 
 
 }
