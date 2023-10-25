@@ -57,7 +57,9 @@ class GenerarDRowMapping {
         cPlantilla = "int get $cVar => map['$campo'] ?? 0;\n";
         lstGetsSetsDRowsNew.add(cPlantilla);
       } else {
-        if (cDef == "") {
+        if (type == "numeric") {
+          cPlantilla = "$cTipoDart get $cVar => double.tryParse(map['$campo'] ?? '0') ?? 0;\n";
+        } else if (cDef == "") {
           cPlantilla = "$cTipoDart get $cVar => map['$campo'];\n";
         } else {
           cPlantilla = "$cTipoDart get $cVar => map['$campo'] ?? $cDef;\n";
