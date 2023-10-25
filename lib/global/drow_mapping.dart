@@ -2,7 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:generador_sql_tablas/global/extension_metodos.dart';
 import 'package:generador_sql_tablas/global/relaciones_tablas.dart';
 import 'package:generador_sql_tablas/global/utils.dart';
-
 import 'maps_excepciones.dart';
 
 class GenerarDRowMapping {
@@ -24,12 +23,16 @@ class GenerarDRowMapping {
 
   String generarClaseDRowJsonMappnig() {
     getDeclaracionJoinsFromRelaciones();
-
-    String cClase = "DRow${tablaProper}Mapping";
+    /// Declaracion
+    String cName = Utils.nombreKeyClasesBase(tablaLower, tablaProper);
+    String cClase = "DRow${cName}Mapping";
     String cCad = "class $cClase extends DRowMapping {\n";
+    /// Constructores
     cCad += "$cClase.select(super.mapParam, super.cTabla) : super.select();\n";
     cCad += "$cClase.join(super.mapParamJoin) : super.join();\n\n";
+    /// Get y set de las variables en relacion al map que recibmos de SQL
     cCad += lstGetsSetsDRowsNew.join("");
+    /// rows de las tablas con lkas que se hace JOIN
     cCad += lstJoinsDRowsNew.join("");
     return "$cCad}\n\n";
   }

@@ -35,24 +35,28 @@ class GenerarTablaSQL {
     getDeclaracionJoinsFromRelaciones();
 
     /// DECLARACION CLASE
-    String cCad = "class ${tablaProper}SQL extends TablaSQL {\n";
+    String cName = Utils.nombreKeyClasesBase(tablaLower, tablaProper);
+
+    String cCad = "class ${cName}SQL extends TablaSQL {\n";
 
     /// CONSTRUCTOR JOINS
-    cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasJoin, TablaSQL? oTablaSelectJoin, {String joinManual = ''}) {\n";
-    cCad += "initCampos();\n";
-    cCad += "campoJoin = cCampoJoin;\n";
-    cCad += "aliasJoin = cAliasJoin;\n";
-    cCad += "joinStr = joinManual;\n";
-    cCad += "oTablaJoin = oTablaSelectJoin;\n}\n\n";
+    if (!Utils.isClaseBase(tablaLower)) {
+      cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasJoin, TablaSQL? oTablaSelectJoin, {String joinManual = ''}) {\n";
+      cCad += "initCampos();\n";
+      cCad += "campoJoin = cCampoJoin;\n";
+      cCad += "aliasJoin = cAliasJoin;\n";
+      cCad += "joinStr = joinManual;\n";
+      cCad += "oTablaJoin = oTablaSelectJoin;\n}\n\n";
 
-    /// CONSTRUCTOR
-    cCad += "${tablaProper}SQL() {\n initCampos();\n}\n\n";
+      /// CONSTRUCTOR
+      cCad += "${tablaProper}SQL() {\n initCampos();\n}\n\n";
 
-    /// INITCAMPOS
-    cCad += "void initCampos() {\n";
-    cCad += "nombreSQL = '$tablaLower';\n";
-    cCad += "aliasSQL = '$aliasTabla';\n";
-    cCad += "\n}\n";
+      /// INITCAMPOS
+      cCad += "void initCampos() {\n";
+      cCad += "nombreSQL = '$tablaLower';\n";
+      cCad += "aliasSQL = '$aliasTabla';\n";
+      cCad += "\n}\n";
+    }
 
     /// VARIABLES
     cCad += Utils.getDeclaracionVars("CampoSQL?", lstCamposSQLVars);
@@ -62,9 +66,11 @@ class GenerarTablaSQL {
     });
 
     /// Excepciones vars joins
-    String cKey = "$tablaLower-";
-    for (var it in mapExcepVarsTbl.entries.where((it) => it.key.startsWith(cKey))) {
-      cCad += it.value.first;
+    if (false) {
+      String cKey = "$tablaLower-";
+      for (var it in mapExcepVarsTbl.entries.where((it) => it.key.startsWith(cKey))) {
+        cCad += it.value.first;
+      }
     }
 
     cCad += "/// CamposSQL Gets\n";
@@ -74,11 +80,13 @@ class GenerarTablaSQL {
     cCad += lstGetsTblJoins.join();
 
     /// Excepciones Get joins
-    if (mapExcepJoinsTbl[tablaLower] != null) {
-      for (var it in mapExcepJoinsTbl[tablaLower]!) {
-        cCad += it;
-      }
-    }
+     if (false) {
+       if (mapExcepJoinsTbl[tablaLower] != null) {
+         for (var it in mapExcepJoinsTbl[tablaLower]!) {
+           cCad += it;
+         }
+       }
+     }
 
     cCad += "\n}\n\n";
     cCad = getImports() + cCad;
@@ -101,7 +109,9 @@ class GenerarTablaSQL {
       if (cTablaJoin != tablaLower) {
         String cImport = lstTablasServer.firstWhereOrNull((it) => it == cTablaJoin) ?? "";
         if (cImport != tablaLower) {
-          if (cImport != "") {
+          if (Utils.isClaseBase(cTablaJoin)) {
+            mapImports[cTablaJoin] = "import '../modelos_ext/${cTablaJoin}_ext.dart';";
+          } else if (cImport != "") {
             mapImports[cTablaJoin] = "import '${cImport}_base.dart';";
           } else {
             // hay alguna tabla original con guiones
@@ -112,6 +122,10 @@ class GenerarTablaSQL {
               Utils.printInfo(tablaLower);
             }
           }
+        }
+      } else {
+        if (Utils.isClaseBase(tablaLower)) {
+          mapImports[cTablaJoin] = "import '../modelos_ext/${cTablaJoin}_ext.dart';";
         }
       }
       // ? EJEMPLO
@@ -163,7 +177,7 @@ class GenerarTablaSQL {
   String getImports() {
     String cCad = "import '../abstract/entidades_sql.dart';\n";
     cCad += "import '../../global/utils.dart';\n";
-    cCad += "import '../main_tablas/joins_manuales.dart';";
+    //cCad += "import '../modelos_ext/joins_manuales.dart';\n";
 
     mapImports.forEach((key, value) {
       cCad += "$value\n";
@@ -215,7 +229,7 @@ class GenerarTablaSQL {
     Map<String, List<String>> map = {};
     List<String> lstValues = [];
     lstValues.add("ArtDelegacionesSQL get artDel => _artDel ?? ArtDelegacionesSQL.joins('', 'artDel', this, joinManual: JoinsMan.artJoinArtDel);\n");
-    lstValues.add("ProveedoresSQL get prvdArtDel => _prvdArtDel ?? ProveedoresSQL.joins('', 'prvdArtDel', this, joinManual: JoinsMan.artJoinArtDelProv);\n");
+    lstValues.add("ProveedoresSQL get prvdArtDel => _prvdArtDel ?? ProveedoresSQL.joins('', 'artDel.prvd', this, joinManual: JoinsMan.artJoinArtDelProv);\n");
     map["articulos"] = lstValues;
     return map;
   }

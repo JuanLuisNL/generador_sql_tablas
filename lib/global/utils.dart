@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:generador_sql_tablas/global/extension_metodos.dart';
 
 class Utils {
-
   // Devuelve una cadena en base a un tipo de dato no variables: CamposSQL y otro tipo de datos
   static String getDeclaracionVars(String cTipo, List<String> lstVars) {
     cTipo += " ";
@@ -94,5 +93,15 @@ class Utils {
     if (kDebugMode) {
       print(info);
     }
+  }
+
+  static bool isClaseBase(String tabla) {
+    return ["articulos"].contains(tabla);
+  }
+  static String nombreKeyClasesBase(String tabla, String tablaProper) {
+    if (isClaseBase(tabla)) {
+      return "${tablaProper}Part";
+    }
+    return tablaProper;
   }
 }
