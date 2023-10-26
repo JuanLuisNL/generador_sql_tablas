@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:generador_sql_tablas/global/drow_json.dart';
 import 'package:generador_sql_tablas/global/drow_mapping.dart';
 import 'package:generador_sql_tablas/global/extension_metodos.dart';
-import 'package:generador_sql_tablas/global/maps_excepciones.dart';
 import 'package:generador_sql_tablas/global/relaciones_tablas.dart';
 import 'package:generador_sql_tablas/global/tabla_sql.dart';
 import 'package:generador_sql_tablas/global/utils.dart';
@@ -36,15 +35,23 @@ class CreaClasesTablaAndDRow {
   List<String> lstTablasServer = [];
   late RelacionesTablas oRelTab;
   Future<void> run() async {
-    await creaClases();
+    await creaClases(1);
   }
 
-  Future<void> creaClases() async {
+  Future<void> creaClases(int tipo) async {
+    PostgreSQLConnection oCn;
+    if (tipo == 1) {
+      oCn = GBL.oCnEmp;
+    } else  if (tipo == 2) {
+      oCn = GBL.oCnBase;
+    } else {
+      oCn = GBL.oCnImgs;
+    }
     oRelTab = RelacionesTablas();
     lstRelaciones = oRelTab.init();
 
     String cSQL = "SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE' AND table_schema = 'public'";
-    List<List<dynamic>> lstTablasSQL = await GBL.oCnEmp.query(cSQL);
+    List<List<dynamic>> lstTablasSQL = await oCn.query(cSQL);
 
     for (var row in lstTablasSQL) {
       lstTablasServer.add(row[0]);
@@ -55,7 +62,7 @@ class CreaClasesTablaAndDRow {
       cSQL += " FROM INFORMATION_SCHEMA.COLUMNS";
       cSQL += " WHERE table_name = '$tabla'";
       cSQL += " ORDER BY ordinal_position";
-      lstCols = await GBL.oCnEmp.query(cSQL);
+      lstCols = await oCn.query(cSQL);
       tablaProper = Utils.getNameVariable(tabla).proper;
       tablaLower = tabla;
       String cFile = getAllNew();

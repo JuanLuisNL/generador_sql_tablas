@@ -182,10 +182,12 @@ class GenerarTablaSQL {
     mapImports.forEach((key, value) {
       cCad += "$value\n";
     });
-    if (mapExcepImportsTbl[tablaLower] != null) {
-      for (var it in mapExcepImportsTbl[tablaLower]!) {
-        if (!mapImports.values.contains(it)) {
-          cCad += it;
+    if (false) {
+      if (mapExcepImportsTbl[tablaLower] != null) {
+        for (var it in mapExcepImportsTbl[tablaLower]!) {
+          if (!mapImports.values.contains(it)) {
+            cCad += it;
+          }
         }
       }
     }
