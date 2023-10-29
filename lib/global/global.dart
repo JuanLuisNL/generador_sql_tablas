@@ -35,7 +35,7 @@ class CreaClasesTablaAndDRow {
   List<String> lstTablasServer = [];
   late RelacionesTablas oRelTab;
   Future<void> run() async {
-    await creaClases(1);
+    await creaClases(2);
   }
 
   Future<void> creaClases(int tipo) async {
