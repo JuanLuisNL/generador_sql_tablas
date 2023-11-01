@@ -16,7 +16,7 @@ class GenerarTablaSQL {
   late List<String> lstGetsTblJoins;
   late Map<String, List<String>> mapVarsTblJoins = {};
   late Map<String, String> mapImports, mapExcepCampos;
-  late Map<String, List<String>> mapExcepVarsTbl, mapExcepJoinsTbl, mapExcepImportsTbl;
+
 
   String create() {
     initListsAndMaps();
@@ -26,9 +26,6 @@ class GenerarTablaSQL {
   }
 
   String generarClaseTablaSQL() {
-    mapExcepVarsTbl = initTablaVarsExcepciones();
-    mapExcepJoinsTbl = initTablaJoinsExcepciones();
-    mapExcepImportsTbl = initTablaImportsExcepciones();
     mapExcepCampos = MapExcepciones.initMapCamposExcepciones();
 
     /// JOINS CON OTRAS TABLAS
@@ -42,10 +39,10 @@ class GenerarTablaSQL {
     /// CONSTRUCTOR JOINS
     if (!Utils.isClaseBase(tablaLower)) {
       // cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasJoin, TablaSQL? oTablaSelectJoin, {String joinManual = ''}) {\n";
-      cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, TablaSQL? oTablaSelectJoin, {String joinManual = ''}) {\n";
+      cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cNexoAlias, TablaSQL? oTablaSelectJoin, {String joinManual = ''}) {\n";
       cCad += "initCampos();\n";
       cCad += "campoJoin = cCampoJoin;\n";
-      // cCad += "aliasJoin = cAliasJoin;\n";
+      cCad += "nexoAlias = cNexoAlias;\n";
       cCad += "joinStr = joinManual;\n";
       cCad += "oTablaJoin = oTablaSelectJoin;\n}\n\n";
 
@@ -66,28 +63,11 @@ class GenerarTablaSQL {
       cCad += Utils.getDeclaracionVars(key, value);
     });
 
-    /// Excepciones vars joins
-    if (false) {
-      String cKey = "$tablaLower-";
-      for (var it in mapExcepVarsTbl.entries.where((it) => it.key.startsWith(cKey))) {
-        cCad += it.value.first;
-      }
-    }
-
-    cCad += "/// CamposSQL Gets\n";
+      cCad += "/// CamposSQL Gets\n";
     cCad += "CampoSQL get all => CampoSQL('*', '', this);\n";
     cCad += lstGetsCamposSQL.join();
     cCad += "/// JOINS Gets\n";
     cCad += lstGetsTblJoins.join();
-
-    /// Excepciones Get joins
-     if (false) {
-       if (mapExcepJoinsTbl[tablaLower] != null) {
-         for (var it in mapExcepJoinsTbl[tablaLower]!) {
-           cCad += it;
-         }
-       }
-     }
 
     cCad += "\n}\n\n";
     cCad = getImports() + cCad;
@@ -151,8 +131,8 @@ class GenerarTablaSQL {
         mapVarsTblJoins[key] = lstTmp;
       }
 
-      //String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ?? $tipoDatoTabla.joins('${rowRel.campoID}', '$alias', this);\n";
-      String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ?? $tipoDatoTabla.joins('${rowRel.campoID}', this);\n";
+      String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ?? $tipoDatoTabla.joins('${rowRel.campoID}', '$alias', this);\n";
+//      String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ?? $tipoDatoTabla.joins('${rowRel.campoID}', this);\n";
       lstGetsTblJoins.add(cTablaJoinGet);
 
       /// TODO Ver los joins manuales. habrá que ver cuales son realmente
@@ -184,15 +164,6 @@ class GenerarTablaSQL {
     mapImports.forEach((key, value) {
       cCad += "$value\n";
     });
-    if (false) {
-      if (mapExcepImportsTbl[tablaLower] != null) {
-        for (var it in mapExcepImportsTbl[tablaLower]!) {
-          if (!mapImports.values.contains(it)) {
-            cCad += it;
-          }
-        }
-      }
-    }
     return "$cCad\n\n";
   }
 
@@ -213,28 +184,5 @@ class GenerarTablaSQL {
     mapImports = {};
     mapVarsTblJoins = {};
     // mapCamposExc, mapDRowExc, mapVarsTblExc, mapJoinsTblExc  NO se vacia
-  }
-
-  Map<String, List<String>> initTablaImportsExcepciones() {
-    Map<String, List<String>> map = {};
-    map["articulos"] = ["import 'art_delegaciones_base.dart';\n"];
-    return map;
-  }
-
-  static Map<String, List<String>> initTablaVarsExcepciones() {
-    Map<String, List<String>> map = {};
-    map["articulos-1"] = ["ArtDelegacionesSQL? _artDel;\n"];
-    map["articulos-2"] = ["ProveedoresSQL? _prvdArtDel;\n"];
-    return map;
-  }
-
-  Map<String, List<String>> initTablaJoinsExcepciones() {
-    String cJoin = "";
-    Map<String, List<String>> map = {};
-    List<String> lstValues = [];
-    lstValues.add("ArtDelegacionesSQL get artDel => _artDel ?? ArtDelegacionesSQL.joins('', 'artDel', this, joinManual: JoinsMan.artJoinArtDel);\n");
-    lstValues.add("ProveedoresSQL get prvdArtDel => _prvdArtDel ?? ProveedoresSQL.joins('', 'artDel.prvd', this, joinManual: JoinsMan.artJoinArtDelProv);\n");
-    map["articulos"] = lstValues;
-    return map;
   }
 }

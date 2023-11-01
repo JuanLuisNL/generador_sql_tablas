@@ -35,7 +35,7 @@ class CreaClasesTablaAndDRow {
   List<String> lstTablasServer = [];
   late RelacionesTablas oRelTab;
   Future<void> run() async {
-    await creaClases(2);
+    await creaClases(1);
   }
 
   Future<void> creaClases(int tipo) async {
@@ -102,7 +102,6 @@ class CreaClasesTablaAndDRow {
 
   // ? Transformacion del nombre del campo en DB a Variable
   String getNameVariable(String campo) {
-    String cFinal = "";
     if (campo.startsWith("id_")) {
       lstJoinsTablas.add(campo);
     }

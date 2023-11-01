@@ -1713,16 +1713,12 @@ class RelacionesTablas {
 
   void addRelation(String tablaDestino, String tablaOrigen, String campoID,
       {String selectCanBeDel = "verialid", String filtro = "", String joinStr = "", String alias = "", bool lCanBeDeleteManual = false}) {
-    String tablaJoin = tablaDestino;
     // TODO ************
     if (tablaDestino.endsWith("_g")) {
-      tablaJoin = tablaDestino.replaceAll("_g", "");
       return;
     } else if (tablaDestino.endsWith("_i")) {
-      tablaJoin = tablaDestino.replaceAll("_i", "");
       return;
     } else if (tablaDestino.endsWith("_l")) {
-      tablaJoin = tablaDestino.replaceAll("_l", "");
       return;
     }
 
