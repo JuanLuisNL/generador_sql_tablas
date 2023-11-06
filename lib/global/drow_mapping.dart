@@ -86,7 +86,7 @@ class GenerarDRowMapping {
       }
 
       String cTablaJoin = rowRel.tablaJoin;
-      if (cTablaJoin.endsWith("_g") || cTablaJoin.endsWith("_i")) continue; // *************** TODO: ver que se hace
+      //if (cTablaJoin.endsWith("_g") || cTablaJoin.endsWith("_i")) continue; // *************** TODO: ver que se hace
 
       String cPlantilla;
       String cDRow = "DRow${getNameVariableCampo(cTablaJoin).proper}Mapping";

@@ -1,4 +1,6 @@
-﻿/// ******************************** NOTAS IMPORTANTES **************
+﻿import 'package:generador_sql_tablas/global/utils.dart';
+
+/// ******************************** NOTAS IMPORTANTES **************
 // ? Los alias de los CanBeDel hay que cambiarlos por el alias real
 /// /// **********************************************
 
@@ -137,54 +139,54 @@ enum EnumArtRevisionesAveriasTipo { ninguno, averia, revision }
 enum EnumTecnicosRevisionesAveriasTipo { ninguno, averia, revision }
 
 class AppTablas {
-  static String cGrupoEmpresa = "dv#00001_0001@e", cDBLog = "", cDBImg = "", cDBConfig = "";
-  static String cBancos = "$cGrupoEmpresa.public.Bancos";
-  static String cCajones = "$cGrupoEmpresa.public.Cajones";
-  static String cInformesCfg = "$cGrupoEmpresa.public.InformesCfg";
-  static String cInformesCfgX = "$cGrupoEmpresa.public.InformesCfgX";
-  static String cModificacionCfg = "$cGrupoEmpresa.public.ModificacionCfg";
-  static String cUbicaciones = "$cGrupoEmpresa.public.Ubicaciones";
-  static String cProvincias = "$cGrupoEmpresa.public.Provincias";
-  static String cPaises = "$cGrupoEmpresa.public.Paises";
-  static String cUsuarios = "$cGrupoEmpresa.public.Usuarios";
-  static String cUsuariosPerfiles = "$cGrupoEmpresa.public.UsuariosPerfiles";
-  static String cUsuariosPerfilesX = "$cGrupoEmpresa.public.UsuariosPerfilesX";
-  static String cDispositivos = "$cGrupoEmpresa.public.Dispositivos";
-  static String cXSettings = "$cGrupoEmpresa.public.XSettings";
-  static String cMonedas = "$cGrupoEmpresa.public.Monedas";
-  static String cPuestos = "$cGrupoEmpresa.public.Puestos";
-  static String cGrupos = "$cGrupoEmpresa.public.Grupos";
-  static String cImpresoras = "$cGrupoEmpresa.public.Impresoras";
-  static String cLogFichas = "$cGrupoEmpresa.public.LogFichas";
-  static String cAgenda = "$cGrupoEmpresa.public.Agenda";
-  static String cComentarios = "$cGrupoEmpresa.public.Comentarios";
-  static String cPID = "$cGrupoEmpresa.public.PID";
-  static String cCfgFondo = "$cGrupoEmpresa.public.Cfg_Fondo";
-  static String cCfgFondoX = "$cGrupoEmpresa.public.Cfg_FondoX";
-  static String cCfgMenu = "$cGrupoEmpresa.public.Cfg_Menu";
-  static String cCfgMenuX = "$cGrupoEmpresa.public.Cfg_MenuX";
-  static String cLocks = "$cGrupoEmpresa.public.Locks";
-  static String cCfgBotonesFicha = "$cGrupoEmpresa.public.Cfg_BotonesFicha";
-  static String cIncidencias = "$cDBLog.public.Incidencias";
-  static String cIncidenciasX = "$cDBLog.public.IncidenciasX";
-  static String cStock = "$cDBLog.public.Stock";
-  static String cStockNumSerie = "$cDBLog.public.StockNumSerie";
-  static String cAppBlobs = "$cDBImg.public.AppBlobs";
-  static String cBlobs = "$cGrupoEmpresa.public.Blobs";
-  static String cGruposLicencia = "$cGrupoEmpresa.public.GruposLicencia";
-  static String cIdiomaInformes = "$cGrupoEmpresa.public.IdiomaInformes";
-  static String ccfgDispositivos = "$cDBConfig.public.cfgDispositivos";
-  static String ccfgPuestos = "$cDBConfig.public.cfgPuestos";
-  static String cUsuariosRespuestas = "$cGrupoEmpresa.public.UsuariosRespuestas";
-  static String cMessenger = "$cGrupoEmpresa.public.Messenger";
-  static String cMessengerX = "$cGrupoEmpresa.public.MessengerX";
-  static String cChequeos = "$cDBLog.public.Chequeos";
-  static String cExTrans = "$cDBLog.public.ExTrans";
+  static String cBancos = "bancos";
+  static String cCajones = "cajones";
+  static String cInformesCfg = "informescfg";
+  static String cInformesCfgX = "informescfgx";
+  static String cModificacionCfg = "modificacioncfg";
+  static String cUbicaciones = "ubicaciones";
+  static String cProvincias = "provincias";
+  static String cPaises = "paises";
+  static String cUsuarios = "usuarios";
+  static String cUsuariosPerfiles = "usuariosperfiles";
+  static String cUsuariosPerfilesX = "usuariosperfilesx";
+  static String cDispositivos = "dispositivos";
+  static String cXSettings = "xsettings";
+  static String cMonedas = "monedas";
+  static String cPuestos = "puestos";
+  static String cGrupos = "grupos";
+  static String cImpresoras = "impresoras";
+  static String cLogFichas = "logfichas";
+  static String cAgenda = "agenda";
+  static String cComentarios = "comentarios";
+  static String cPID = "pid";
+  static String cCfgFondo = "cfg_fondo";
+  static String cCfgFondoX = "cfg_fondox";
+  static String cCfgMenu = "cfg_menu";
+  static String cCfgMenuX = "cfg_menux";
+  static String cLocks = "locks";
+  static String cCfgBotonesFicha = "cfg_botonesficha";
+  static String cIncidencias = "incidencias";
+  static String cIncidenciasX = "incidenciasx";
+  static String cStock = "stock";
+  static String cStockNumSerie = "stocknumserie";
+  static String cAppBlobs = "appblobs";
+  static String cBlobs = "blobs";
+  static String cGruposLicencia = "gruposlicencia";
+  static String cIdiomaInformes = "idiomainformes";
+  static String ccfgDispositivos = "cfgdispositivos";
+  static String ccfgPuestos = "cfgpuestos";
+  static String cUsuariosRespuestas = "usuariosrespuestas";
+  static String cMessenger = "messenger";
+  static String cMessengerX = "messengerx";
+  static String cChequeos = "chequeos";
+  static String cExTrans = "extrans";
 }
 
 class RelacionesTablas {
   List<DRowRelacionesCamposEtc> lstRelaciones = [];
   Map<String, String> mapAlias = {};
+  List<String> lstTmp = [];
 
   List<DRowRelacionesCamposEtc>  init() {
     getAliasTablas();
@@ -228,7 +230,7 @@ class RelacionesTablas {
     addRelation("almacenes", "pdas", "id_almacen_pedidos");
     addRelation("almacenes", "doc_pro", "id_almacen_origen");
     addRelation("almacenes", "clientes", "id_almacen_urdi");
-    addRelation("almacenes", AppTablas.cStock, "id_almacen");
+    addRelation("almacenes", AppTablas.cStock, "id_almacen"); // TODO ??
 
 //Aparatos
     addRelation("aparatos", "averias", "id_aparato");
@@ -240,10 +242,10 @@ class RelacionesTablas {
     addRelation("aparatos", "doc_clix", "id_aparato");
 
 //AppBlobs_I
-    addRelation("app_blobs_i", "empresas", "id_s_ii_certificado");
-    addRelation("app_blobs_i", "empresas", "id_certificado_recetas");
-    addRelation("app_blobs_i", "veterinarios", "id_certificado");
-    addRelation("app_blobs_i", "delegaciones", "id_certificado_pdf");
+    addRelation("app_blobs", "empresas", "id_s_ii_certificado");
+    addRelation("app_blobs", "empresas", "id_certificado_recetas");
+    addRelation("app_blobs", "veterinarios", "id_certificado");
+    addRelation("app_blobs", "delegaciones", "id_certificado_pdf");
 
 //Arboles
     addRelation("arboles", "arboles", "id_padre");
@@ -412,7 +414,7 @@ class RelacionesTablas {
     addRelation("articulos", "telepedido_ofertasx", "id_articulo");
     addRelation("articulos", "puestosx", "id_articulo_portes_web");
     addRelation("articulos", "art_visibles_xdelegacion", "id_articulo");
-    addRelation("articulos", AppTablas.cStock, "id_articulo");
+    addRelation("articulos", AppTablas.cStock, "id_articulo");   // TODO ??
 
 //ArtLotes
     addRelation("art_lotes", "art_lotesx", "id_art_lotes");
@@ -455,7 +457,7 @@ class RelacionesTablas {
     addRelation("balances", "balancesx", "id_sub_balance");
 
 //Bancos
-    addRelation("bancos_g", "cuentas_bancarias", "id_banco");
+    addRelation("bancos", "cuentas_bancarias", "id_banco");
 
 //BonosAcceso
     addRelation("bonos_acceso", "bonos_accesox", "id_bono_acceso");
@@ -510,12 +512,12 @@ class RelacionesTablas {
     addRelation("cfg_fichero_policia", "habitaciones", "id_cfg_fichero_policia");
 
 //Cfg_Fondo
-    addRelation("cfg_fondo_g", AppTablas.cCfgFondoX, "id_cfg_fondo");
-    addRelation("cfg_fondo_g", AppTablas.cUsuarios, "id_cfg_fondo");
+    addRelation("cfg_fondo", AppTablas.cCfgFondoX, "id_cfg_fondo");
+    addRelation("cfg_fondo", AppTablas.cUsuarios, "id_cfg_fondo");
 
 //Cfg_Menu
-    addRelation("cfg_menu_g", AppTablas.cCfgMenuX, "id_cfg_menu");
-    addRelation("cfg_menu_g", AppTablas.cUsuarios, "id_cfg_menu");
+    addRelation("cfg_menu", AppTablas.cCfgMenuX, "id_cfg_menu");
+    addRelation("cfg_menu", AppTablas.cUsuarios, "id_cfg_menu");
 
 //Clientes
     addRelation("clientes", "mantenimientos", "id_cliente_atendido");
@@ -753,50 +755,50 @@ class RelacionesTablas {
     addRelation("delegaciones", "centro_informes", "id_delegacion");
 
 //Dispositivos
-    addRelation("dispositivos_g", AppTablas.cImpresoras, "id_dispositivo");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_impresora");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_ticadora");
-    addRelation("dispositivos_g", AppTablas.cInformesCfgX, "id_dispositivo");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_visor");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_scanner_barras");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_scanner_mag");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_bascula");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_smart_card");
-    addRelation("dispositivos_g", AppTablas.cDispositivos, "id_dispositivo");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_srv_in_hova1");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_srv_in_hova2");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_firma_manuscrita");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_impresora1_comandero");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_impresora2_comandero");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_impresora3_comandero");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_terminal_cobro");
-    addRelation("dispositivos_g", AppTablas.cPuestos, "id_etiquetadora");
-    addRelation("dispositivos_g", "areas_venta", "id_impresora_facturas");
-    addRelation("dispositivos_g", "areas_venta", "id_impresora_albaranes");
-    addRelation("dispositivos_g", "areas_venta", "id_impresora_tickets");
-    addRelation("dispositivos_g", "areas_venta", "id_impresora_justificantes");
-    addRelation("dispositivos_g", "carta_articulos", "id_impresora1");
-    addRelation("dispositivos_g", "carta_articulos", "id_impresora2");
-    addRelation("dispositivos_g", "carta_grupos", "id_impresora1");
-    addRelation("dispositivos_g", "carta_grupos", "id_impresora2");
-    addRelation("dispositivos_g", "menu_restx", "id_impresora1");
-    addRelation("dispositivos_g", "menu_restx", "id_impresora2");
-    addRelation("dispositivos_g", "areas_venta", "id_impresora_facturas_tic");
-    addRelation("dispositivos_g", "areas_venta", "id_impresora_albaranes_tic");
-    addRelation("dispositivos_g", "areas_venta", "id_impresora_tickets_tic");
-    addRelation("dispositivos_g", "areas_venta", "id_impresora_pedidos");
-    addRelation("dispositivos_g", "areas_venta", "id_impresora_pedidos_tic");
-    addRelation("dispositivos_g", "areas_venta", "id_impresora_presupuestos");
-    addRelation("dispositivos_g", "areas_venta", "id_impresora_presupuestos_tic");
-    addRelation("dispositivos_g", "areas_venta", "id_impresora_justificantes_tic");
-    addRelation("dispositivos_g", "cajones", "id_dispositivo");
-    addRelation("dispositivos_g", "habitaciones", "id_srv_in_hova");
-    addRelation("dispositivos_g", "areas_venta", "id_imp_facturas_plantilla");
-    addRelation("dispositivos_g", "areas_venta", "id_imp_albaranes_plantilla");
-    addRelation("dispositivos_g", "areas_venta", "id_imp_tickets_plantilla");
-    addRelation("dispositivos_g", "areas_venta", "id_imp_pedidos_plantilla");
-    addRelation("dispositivos_g", "areas_venta", "id_imp_presupuestos_plantilla");
-    addRelation("dispositivos_g", "areas_venta", "id_imp_notas_plantilla");
+    addRelation("dispositivos", AppTablas.cImpresoras, "id_dispositivo");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_impresora");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_ticadora");
+    addRelation("dispositivos", AppTablas.cInformesCfgX, "id_dispositivo");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_visor");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_scanner_barras");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_scanner_mag");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_bascula");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_smart_card");
+    addRelation("dispositivos", AppTablas.cDispositivos, "id_dispositivo");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_srv_in_hova1");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_srv_in_hova2");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_firma_manuscrita");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_impresora1_comandero");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_impresora2_comandero");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_impresora3_comandero");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_terminal_cobro");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_etiquetadora");
+    addRelation("dispositivos", "areas_venta", "id_impresora_facturas");
+    addRelation("dispositivos", "areas_venta", "id_impresora_albaranes");
+    addRelation("dispositivos", "areas_venta", "id_impresora_tickets");
+    addRelation("dispositivos", "areas_venta", "id_impresora_justificantes");
+    addRelation("dispositivos", "carta_articulos", "id_impresora1");
+    addRelation("dispositivos", "carta_articulos", "id_impresora2");
+    addRelation("dispositivos", "carta_grupos", "id_impresora1");
+    addRelation("dispositivos", "carta_grupos", "id_impresora2");
+    addRelation("dispositivos", "menu_restx", "id_impresora1");
+    addRelation("dispositivos", "menu_restx", "id_impresora2");
+    addRelation("dispositivos", "areas_venta", "id_impresora_facturas_tic");
+    addRelation("dispositivos", "areas_venta", "id_impresora_albaranes_tic");
+    addRelation("dispositivos", "areas_venta", "id_impresora_tickets_tic");
+    addRelation("dispositivos", "areas_venta", "id_impresora_pedidos");
+    addRelation("dispositivos", "areas_venta", "id_impresora_pedidos_tic");
+    addRelation("dispositivos", "areas_venta", "id_impresora_presupuestos");
+    addRelation("dispositivos", "areas_venta", "id_impresora_presupuestos_tic");
+    addRelation("dispositivos", "areas_venta", "id_impresora_justificantes_tic");
+    addRelation("dispositivos", "cajones", "id_dispositivo");
+    addRelation("dispositivos", "habitaciones", "id_srv_in_hova");
+    addRelation("dispositivos", "areas_venta", "id_imp_facturas_plantilla");
+    addRelation("dispositivos", "areas_venta", "id_imp_albaranes_plantilla");
+    addRelation("dispositivos", "areas_venta", "id_imp_tickets_plantilla");
+    addRelation("dispositivos", "areas_venta", "id_imp_pedidos_plantilla");
+    addRelation("dispositivos", "areas_venta", "id_imp_presupuestos_plantilla");
+    addRelation("dispositivos", "areas_venta", "id_imp_notas_plantilla");
 
 //DocAlmacen
     addRelation("doc_almacen", "averias", "id_doc_almacen");
@@ -1033,9 +1035,9 @@ class RelacionesTablas {
     addRelation("grupos", "doc_clix", "id_grupo_regimen");
 
 //Grupos
-    addRelation("grupos_g", AppTablas.cProvincias, "id_grupo");
-    addRelation("grupos_g", AppTablas.cProvincias, "id_region");
-    addRelation("grupos_g", AppTablas.cPaises, "id_estadistica_pais");
+    addRelation("grupos", AppTablas.cProvincias, "id_grupo");
+    addRelation("grupos", AppTablas.cProvincias, "id_region");
+    addRelation("grupos", AppTablas.cPaises, "id_estadistica_pais");
 
 //GruposComisiones
     addRelation("grupos_comisiones", "comisionistas", "id_grupo");
@@ -1105,39 +1107,39 @@ class RelacionesTablas {
     addRelation("incidencias_l", AppTablas.cIncidenciasX, "id_incidencia");
 
 //InformesCfg
-    addRelation("informes_cfg_g", AppTablas.cInformesCfgX, "id_origen");
-    addRelation("informes_cfg_g", AppTablas.cInformesCfgX, "id_presets");
-    addRelation("informes_cfg_g", AppTablas.cInformesCfg, "id_cabecera_informe");
-    addRelation("informes_cfg_g", AppTablas.cInformesCfg, "id_pie_informe");
-    addRelation("informes_cfg_g", AppTablas.cInformesCfg, "id_modelo_design");
-    addRelation("informes_cfg_g", "delegaciones", "id_cabecera_informes");
-    addRelation("informes_cfg_g", "delegaciones", "id_pie_informes");
-    addRelation("informes_cfg_g", "delegaciones", "id_cabecera_doc_a4");
-    addRelation("informes_cfg_g", "delegaciones", "id_pie_doc_a4");
-    addRelation("informes_cfg_g", "delegaciones", "id_cabecera_doc_a5");
-    addRelation("informes_cfg_g", "delegaciones", "id_pie_doc_a5");
-    addRelation("informes_cfg_g", "areas_venta", "id_modelo_facturas");
-    addRelation("informes_cfg_g", "areas_venta", "id_modelo_albaranes");
-    addRelation("informes_cfg_g", "areas_venta", "id_modelo_tickets");
-    addRelation("informes_cfg_g", "areas_venta", "id_modelo_presupuestos");
-    addRelation("informes_cfg_g", "areas_venta", "id_modelo_pedidos");
-    addRelation("informes_cfg_g", "areas_compra", "id_modelo_facturas");
-    addRelation("informes_cfg_g", "areas_compra", "id_modelo_albaranes");
-    addRelation("informes_cfg_g", "areas_compra", "id_modelo_pedidos");
-    addRelation("informes_cfg_g", "areas_compra", "id_modelo_presupuestos");
-    addRelation("informes_cfg_g", "areas_compra", "id_modelo_devoluciones");
-    addRelation("informes_cfg_g", "fabricacion_cfg", "id_modelo_etiqueta_cajas");
-    addRelation("informes_cfg_g", "fabricacion_cfg", "id_modelo_etiqueta_articulo");
-    addRelation("informes_cfg_g", "fabricacion", "id_modelo_etiqueta_cajas");
-    addRelation("informes_cfg_g", "fabricacion", "id_modelo_etiqueta_articulo");
-    addRelation("informes_cfg_g", "centro_informesx", "id_presets");
-    addRelation("informes_cfg_g", "areas_venta", "id_modelo_welcome");
-    addRelation("informes_cfg_g", "areas_venta", "id_modelo_facturas_plantilla");
-    addRelation("informes_cfg_g", "areas_venta", "id_modelo_albaranes_plantilla");
-    addRelation("informes_cfg_g", "areas_venta", "id_modelo_tickets_plantilla");
-    addRelation("informes_cfg_g", "areas_venta", "id_modelo_pedidos_plantilla");
-    addRelation("informes_cfg_g", "areas_venta", "id_modelo_presupuestos_plantilla");
-    addRelation("informes_cfg_g", "areas_venta", "id_modelo_notas_plantilla");
+    addRelation("informes_cfg", AppTablas.cInformesCfgX, "id_origen");
+    addRelation("informes_cfg", AppTablas.cInformesCfgX, "id_presets");
+    addRelation("informes_cfg", AppTablas.cInformesCfg, "id_cabecera_informe");
+    addRelation("informes_cfg", AppTablas.cInformesCfg, "id_pie_informe");
+    addRelation("informes_cfg", AppTablas.cInformesCfg, "id_modelo_design");
+    addRelation("informes_cfg", "delegaciones", "id_cabecera_informes");
+    addRelation("informes_cfg", "delegaciones", "id_pie_informes");
+    addRelation("informes_cfg", "delegaciones", "id_cabecera_doc_a4");
+    addRelation("informes_cfg", "delegaciones", "id_pie_doc_a4");
+    addRelation("informes_cfg", "delegaciones", "id_cabecera_doc_a5");
+    addRelation("informes_cfg", "delegaciones", "id_pie_doc_a5");
+    addRelation("informes_cfg", "areas_venta", "id_modelo_facturas");
+    addRelation("informes_cfg", "areas_venta", "id_modelo_albaranes");
+    addRelation("informes_cfg", "areas_venta", "id_modelo_tickets");
+    addRelation("informes_cfg", "areas_venta", "id_modelo_presupuestos");
+    addRelation("informes_cfg", "areas_venta", "id_modelo_pedidos");
+    addRelation("informes_cfg", "areas_compra", "id_modelo_facturas");
+    addRelation("informes_cfg", "areas_compra", "id_modelo_albaranes");
+    addRelation("informes_cfg", "areas_compra", "id_modelo_pedidos");
+    addRelation("informes_cfg", "areas_compra", "id_modelo_presupuestos");
+    addRelation("informes_cfg", "areas_compra", "id_modelo_devoluciones");
+    addRelation("informes_cfg", "fabricacion_cfg", "id_modelo_etiqueta_cajas");
+    addRelation("informes_cfg", "fabricacion_cfg", "id_modelo_etiqueta_articulo");
+    addRelation("informes_cfg", "fabricacion", "id_modelo_etiqueta_cajas");
+    addRelation("informes_cfg", "fabricacion", "id_modelo_etiqueta_articulo");
+    addRelation("informes_cfg", "centro_informesx", "id_presets");
+    addRelation("informes_cfg", "areas_venta", "id_modelo_welcome");
+    addRelation("informes_cfg", "areas_venta", "id_modelo_facturas_plantilla");
+    addRelation("informes_cfg", "areas_venta", "id_modelo_albaranes_plantilla");
+    addRelation("informes_cfg", "areas_venta", "id_modelo_tickets_plantilla");
+    addRelation("informes_cfg", "areas_venta", "id_modelo_pedidos_plantilla");
+    addRelation("informes_cfg", "areas_venta", "id_modelo_presupuestos_plantilla");
+    addRelation("informes_cfg", "areas_venta", "id_modelo_notas_plantilla");
 
 //InformesUsuarios
     addRelation("informes_usuarios", "informes_usuariosx", "id_informes_usuarios");
@@ -1198,7 +1200,7 @@ class RelacionesTablas {
     addRelation("mesas", "hst_doc_hotelx", "id_mesa");
 
 //Messenger
-    addRelation("messenger_g", AppTablas.cMessengerX, "id_messenger");
+    addRelation("messenger", AppTablas.cMessengerX, "id_messenger");
 
 //MetodosPago
     addRelation("metodos_pago", "mantenimientos", "id_como_pago");
@@ -1240,10 +1242,10 @@ class RelacionesTablas {
     addRelation("metodos_pago", "cfg_central_reservas_clientes_agencias", "id_como_pago");
 
 //Monedas
-    addRelation("monedas_g", AppTablas.cPaises, "id_moneda");
-    addRelation("monedas_g", "clientes", "id_moneda");
-    addRelation("monedas_g", "doc_cli", "id_moneda2");
-    addRelation("monedas_g", "vias_pago", "id_moneda");
+    addRelation("monedas", AppTablas.cPaises, "id_moneda");
+    addRelation("monedas", "clientes", "id_moneda");
+    addRelation("monedas", "doc_cli", "id_moneda2");
+    addRelation("monedas", "vias_pago", "id_moneda");
 
 //Nombres
     addRelation("nombres", "data_imp", "id_destinatario");
@@ -1269,31 +1271,31 @@ class RelacionesTablas {
     addRelation("ordenes_trabajo", "campos_auxiliares", "id_origen");
 
 //Paises
-    addRelation("paises_g", AppTablas.cProvincias, "id_pais");
-    addRelation("paises_g", AppTablas.cBancos, "id_pais");
-    addRelation("paises_g", AppTablas.cUbicaciones, "id_pais");
-    addRelation("paises_g", "articulos", "id_pais");
-    addRelation("paises_g", "clientes", "id_pais_nacionalidad");
-    addRelation("paises_g", "data_impx", "id_pais_publicacion");
-    addRelation("paises_g", "ocupantes", "id_pais");
-    addRelation("paises_g", "ocupantes", "id_pais_nacionalidad");
-    addRelation("paises_g", "nombres", "id_pais");
-    addRelation("paises_g", "clientes", "id_pais");
-    addRelation("paises_g", "proveedores", "id_pais");
-    addRelation("paises_g", "fabricantes", "id_pais");
-    addRelation("paises_g", "personal", "id_pais");
-    addRelation("paises_g", "almacenes", "id_pais");
-    addRelation("paises_g", "transportistas", "id_pais");
-    addRelation("paises_g", "contactos_externos", "id_pais");
-    addRelation("paises_g", "veterinarios", "id_pais");
-    addRelation("paises_g", "tecnicos", "id_pais");
-    addRelation("paises_g", "empresas", "id_pais");
-    addRelation("paises_g", "delegaciones", "id_pais");
-    addRelation("paises_g", "ocupantesx", "id_pais");
-    addRelation("paises_g", "hst_ocupantesx", "id_pais");
-    addRelation("paises_g", "vias_pago", "id_pais");
-    addRelation("paises_g", "clientes", "id_pais_nif");
-    addRelation("paises_g", "obras", "id_pais");
+    addRelation("paises", AppTablas.cProvincias, "id_pais");
+    addRelation("paises", AppTablas.cBancos, "id_pais");
+    addRelation("paises", AppTablas.cUbicaciones, "id_pais");
+    addRelation("paises", "articulos", "id_pais");
+    addRelation("paises", "clientes", "id_pais_nacionalidad");
+    addRelation("paises", "data_impx", "id_pais_publicacion");
+    addRelation("paises", "ocupantes", "id_pais");
+    addRelation("paises", "ocupantes", "id_pais_nacionalidad");
+    addRelation("paises", "nombres", "id_pais");
+    addRelation("paises", "clientes", "id_pais");
+    addRelation("paises", "proveedores", "id_pais");
+    addRelation("paises", "fabricantes", "id_pais");
+    addRelation("paises", "personal", "id_pais");
+    addRelation("paises", "almacenes", "id_pais");
+    addRelation("paises", "transportistas", "id_pais");
+    addRelation("paises", "contactos_externos", "id_pais");
+    addRelation("paises", "veterinarios", "id_pais");
+    addRelation("paises", "tecnicos", "id_pais");
+    addRelation("paises", "empresas", "id_pais");
+    addRelation("paises", "delegaciones", "id_pais");
+    addRelation("paises", "ocupantesx", "id_pais");
+    addRelation("paises", "hst_ocupantesx", "id_pais");
+    addRelation("paises", "vias_pago", "id_pais");
+    addRelation("paises", "clientes", "id_pais_nif");
+    addRelation("paises", "obras", "id_pais");
 
 //PartesMedicos
     addRelation("partes_medicos", "campos_auxiliares", "id_origen");
@@ -1390,64 +1392,64 @@ class RelacionesTablas {
     addRelation("proveedores", "categorias_de", "id_quien");
 
 //Provincias
-    addRelation("provincias_g", AppTablas.cUbicaciones, "id_provincia");
-    addRelation("provincias_g", "ocupantes", "id_provincia");
-    addRelation("provincias_g", "nombres", "id_provincia");
-    addRelation("provincias_g", "clientes", "id_provincia");
-    addRelation("provincias_g", "proveedores", "id_provincia");
-    addRelation("provincias_g", "fabricantes", "id_provincia");
-    addRelation("provincias_g", "personal", "id_provincia");
-    addRelation("provincias_g", "almacenes", "id_provincia");
-    addRelation("provincias_g", "transportistas", "id_provincia");
-    addRelation("provincias_g", "contactos_externos", "id_provincia");
-    addRelation("provincias_g", "veterinarios", "id_provincia");
-    addRelation("provincias_g", "tecnicos", "id_provincia");
-    addRelation("provincias_g", "empresas", "id_provincia");
-    addRelation("provincias_g", "delegaciones", "id_provincia");
-    addRelation("provincias_g", "ocupantesx", "id_provincia");
-    addRelation("provincias_g", "hst_ocupantesx", "id_provincia");
-    addRelation("provincias_g", "obras", "id_provincia");
+    addRelation("provincias", AppTablas.cUbicaciones, "id_provincia");
+    addRelation("provincias", "ocupantes", "id_provincia");
+    addRelation("provincias", "nombres", "id_provincia");
+    addRelation("provincias", "clientes", "id_provincia");
+    addRelation("provincias", "proveedores", "id_provincia");
+    addRelation("provincias", "fabricantes", "id_provincia");
+    addRelation("provincias", "personal", "id_provincia");
+    addRelation("provincias", "almacenes", "id_provincia");
+    addRelation("provincias", "transportistas", "id_provincia");
+    addRelation("provincias", "contactos_externos", "id_provincia");
+    addRelation("provincias", "veterinarios", "id_provincia");
+    addRelation("provincias", "tecnicos", "id_provincia");
+    addRelation("provincias", "empresas", "id_provincia");
+    addRelation("provincias", "delegaciones", "id_provincia");
+    addRelation("provincias", "ocupantesx", "id_provincia");
+    addRelation("provincias", "hst_ocupantesx", "id_provincia");
+    addRelation("provincias", "obras", "id_provincia");
 
 //Puestos
-    addRelation("puestos_g", AppTablas.cImpresoras, "id_puesto");
-    addRelation("puestos_g", AppTablas.cXSettings, "id_puesto");
-    addRelation("puestos_g", AppTablas.cInformesCfg, "id_puesto");
-    addRelation("puestos_g", AppTablas.cPID, "id_puesto");
-    addRelation("puestos_g", AppTablas.cInformesCfgX, "id_puesto");
-    addRelation("puestos_g", AppTablas.cMessenger, "id_de_puesto");
-    addRelation("puestos_g", AppTablas.cMessengerX, "id_puesto");
-    addRelation("puestos_g", "ordenes_trabajo", "id_puesto");
-    addRelation("puestos_g", "arqueos", "id_puesto");
-    addRelation("puestos_g", "operaciones_tpv", "id_puesto");
-    addRelation("puestos_g", "xsettings", "id_puesto");
-    addRelation("puestos_g", "data_imp", "id_puesto");
-    addRelation("puestos_g", "doc_cli", "id_puesto");
-    addRelation("puestos_g", "doc_clix", "id_puesto");
-    addRelation("puestos_g", "puntos_clientes", "id_puesto");
-    addRelation("puestos_g", "doc_hotel", "id_puesto");
-    addRelation("puestos_g", "doc_hotelx", "id_puesto");
-    addRelation("puestos_g", "doc_pro", "id_puesto");
-    addRelation("puestos_g", "mandatos", "id_puesto");
-    addRelation("puestos_g", "reservas_rest", "id_puesto");
-    addRelation("puestos_g", "pdas", "id_puesto");
-    addRelation("puestos_g", "pdas", "id_puesto_alternativo");
-    addRelation("puestos_g", "tpvext_cajas", "id_puesto");
-    addRelation("puestos_g", "doc_almacen", "id_puesto");
-    addRelation("puestos_g", "puestosx", "id_puesto");
-    addRelation("puestos_g", "efectos", "id_puesto");
-    addRelation("puestos_g", "agenda", "id_puesto");
-    addRelation("puestos_g", "inventario", "id_puesto");
-    addRelation("puestos_g", "inventariox", "id_puesto");
-    addRelation("puestos_g", "hst_doc_hotel", "id_puesto_proceso");
-    addRelation("puestos_g", "hst_doc_hotel", "id_puesto");
-    addRelation("puestos_g", "hst_doc_hotelx", "id_puesto");
-    addRelation("puestos_g", "instalaciones_props", "id_puesto");
-    addRelation("puestos_g", "fianzas", "id_puesto");
-    addRelation("puestos_g", "webs", "id_puesto");
-    addRelation("puestos_g", AppTablas.cIncidencias, "id_puesto");
-    addRelation("puestos_g", AppTablas.cStock, "id_puesto");
-    addRelation("puestos_g", AppTablas.cChequeos, "id_puesto");
-    addRelation("puestos_g", AppTablas.cExTrans, "id_puesto");
+    addRelation("puestos", AppTablas.cImpresoras, "id_puesto");
+    addRelation("puestos", AppTablas.cXSettings, "id_puesto");
+    addRelation("puestos", AppTablas.cInformesCfg, "id_puesto");
+    addRelation("puestos", AppTablas.cPID, "id_puesto");
+    addRelation("puestos", AppTablas.cInformesCfgX, "id_puesto");
+    addRelation("puestos", AppTablas.cMessenger, "id_de_puesto");
+    addRelation("puestos", AppTablas.cMessengerX, "id_puesto");
+    addRelation("puestos", "ordenes_trabajo", "id_puesto");
+    addRelation("puestos", "arqueos", "id_puesto");
+    addRelation("puestos", "operaciones_tpv", "id_puesto");
+    addRelation("puestos", "xsettings", "id_puesto");
+    addRelation("puestos", "data_imp", "id_puesto");
+    addRelation("puestos", "doc_cli", "id_puesto");
+    addRelation("puestos", "doc_clix", "id_puesto");
+    addRelation("puestos", "puntos_clientes", "id_puesto");
+    addRelation("puestos", "doc_hotel", "id_puesto");
+    addRelation("puestos", "doc_hotelx", "id_puesto");
+    addRelation("puestos", "doc_pro", "id_puesto");
+    addRelation("puestos", "mandatos", "id_puesto");
+    addRelation("puestos", "reservas_rest", "id_puesto");
+    addRelation("puestos", "pdas", "id_puesto");
+    addRelation("puestos", "pdas", "id_puesto_alternativo");
+    addRelation("puestos", "tpvext_cajas", "id_puesto");
+    addRelation("puestos", "doc_almacen", "id_puesto");
+    addRelation("puestos", "puestosx", "id_puesto");
+    addRelation("puestos", "efectos", "id_puesto");
+    addRelation("puestos", "agenda", "id_puesto");
+    addRelation("puestos", "inventario", "id_puesto");
+    addRelation("puestos", "inventariox", "id_puesto");
+    addRelation("puestos", "hst_doc_hotel", "id_puesto_proceso");
+    addRelation("puestos", "hst_doc_hotel", "id_puesto");
+    addRelation("puestos", "hst_doc_hotelx", "id_puesto");
+    addRelation("puestos", "instalaciones_props", "id_puesto");
+    addRelation("puestos", "fianzas", "id_puesto");
+    addRelation("puestos", "webs", "id_puesto");
+    addRelation("puestos", AppTablas.cIncidencias, "id_puesto");
+    addRelation("puestos", AppTablas.cStock, "id_puesto");
+    addRelation("puestos", AppTablas.cChequeos, "id_puesto");
+    addRelation("puestos", AppTablas.cExTrans, "id_puesto");
 
 //Recetas
     addRelation("recetas", "doc_clix", "id_receta");
@@ -1633,64 +1635,64 @@ class RelacionesTablas {
     addRelation("turnos", "reservas_rest", "id_turno");
 
 //Ubicaciones
-    addRelation("ubicaciones_g", "ocupantes", "id_ubicacion");
-    addRelation("ubicaciones_g", "nombres", "id_ubicacion");
-    addRelation("ubicaciones_g", "clientes", "id_ubicacion");
-    addRelation("ubicaciones_g", "proveedores", "id_ubicacion");
-    addRelation("ubicaciones_g", "fabricantes", "id_ubicacion");
-    addRelation("ubicaciones_g", "personal", "id_ubicacion");
-    addRelation("ubicaciones_g", "almacenes", "id_ubicacion");
-    addRelation("ubicaciones_g", "transportistas", "id_ubicacion");
-    addRelation("ubicaciones_g", "contactos_externos", "id_ubicacion");
-    addRelation("ubicaciones_g", "veterinarios", "id_ubicacion");
-    addRelation("ubicaciones_g", "tecnicos", "id_ubicacion");
-    addRelation("ubicaciones_g", "empresas", "id_ubicacion");
-    addRelation("ubicaciones_g", "delegaciones", "id_ubicacion");
-    addRelation("ubicaciones_g", "ocupantesx", "id_ubicacion");
-    addRelation("ubicaciones_g", "hst_ocupantesx", "id_ubicacion");
-    addRelation("ubicaciones_g", "obras", "id_ubicacion");
+    addRelation("ubicaciones", "ocupantes", "id_ubicacion");
+    addRelation("ubicaciones", "nombres", "id_ubicacion");
+    addRelation("ubicaciones", "clientes", "id_ubicacion");
+    addRelation("ubicaciones", "proveedores", "id_ubicacion");
+    addRelation("ubicaciones", "fabricantes", "id_ubicacion");
+    addRelation("ubicaciones", "personal", "id_ubicacion");
+    addRelation("ubicaciones", "almacenes", "id_ubicacion");
+    addRelation("ubicaciones", "transportistas", "id_ubicacion");
+    addRelation("ubicaciones", "contactos_externos", "id_ubicacion");
+    addRelation("ubicaciones", "veterinarios", "id_ubicacion");
+    addRelation("ubicaciones", "tecnicos", "id_ubicacion");
+    addRelation("ubicaciones", "empresas", "id_ubicacion");
+    addRelation("ubicaciones", "delegaciones", "id_ubicacion");
+    addRelation("ubicaciones", "ocupantesx", "id_ubicacion");
+    addRelation("ubicaciones", "hst_ocupantesx", "id_ubicacion");
+    addRelation("ubicaciones", "obras", "id_ubicacion");
 
 //Usuarios
-    addRelation("usuarios_g", AppTablas.cPuestos, "id_usuario");
-    addRelation("usuarios_g", AppTablas.cUsuariosRespuestas, "id_usuario");
-    addRelation("usuarios_g", AppTablas.cMessenger, "id_de_usuario");
-    addRelation("usuarios_g", AppTablas.cMessengerX, "id_usuario");
-    addRelation("usuarios_g", "ordenes_trabajo", "id_usuario");
-    addRelation("usuarios_g", "arqueos", "id_usuario");
-    addRelation("usuarios_g", "operaciones_tpv", "id_usuario");
-    addRelation("usuarios_g", "data_imp", "id_usuario");
-    addRelation("usuarios_g", "doc_cli", "id_usuario");
-    addRelation("usuarios_g", "doc_clix", "id_usuario");
-    addRelation("usuarios_g", "puntos_clientes", "id_usuario");
-    addRelation("usuarios_g", "doc_hotel", "id_usuario");
-    addRelation("usuarios_g", "doc_hotelx", "id_usuario");
-    addRelation("usuarios_g", "doc_pro", "id_usuario");
-    addRelation("usuarios_g", "instalacionesx", "id_usuario");
-    addRelation("usuarios_g", "mandatos", "id_usuario");
-    addRelation("usuarios_g", "reservas_rest", "id_usuario");
-    addRelation("usuarios_g", "pdas", "id_usuario");
-    addRelation("usuarios_g", "doc_almacen", "id_usuario");
-    addRelation("usuarios_g", "usuariosx", "id_usuario");
-    addRelation("usuarios_g", "efectos", "id_usuario");
-    addRelation("usuarios_g", "agenda", "id_usuario");
-    addRelation("usuarios_g", "inventario", "id_usuario");
-    addRelation("usuarios_g", "inventariox", "id_usuario");
-    addRelation("usuarios_g", "hst_doc_hotel", "id_usuario_proceso");
-    addRelation("usuarios_g", "hst_doc_hotel", "id_usuario");
-    addRelation("usuarios_g", "hst_doc_hotelx", "id_usuario");
-    addRelation("usuarios_g", "crm_cfg", "id_usuario");
-    addRelation("usuarios_g", "fianzas", "id_usuario");
-    addRelation("usuarios_g", "conocimientos", "id_usuario");
-    addRelation("usuarios_g", "conocimientos", "id_usuario2");
-    addRelation("usuarios_g", AppTablas.cIncidencias, "id_usuario");
-    addRelation("usuarios_g", AppTablas.cIncidencias, "id_usuario_autorizado");
-    addRelation("usuarios_g", AppTablas.cStock, "id_usuario");
-    addRelation("usuarios_g", AppTablas.cChequeos, "id_usuario");
-    addRelation("usuarios_g", AppTablas.cExTrans, "id_usuario");
+    addRelation("usuarios", AppTablas.cPuestos, "id_usuario");
+    addRelation("usuarios", AppTablas.cUsuariosRespuestas, "id_usuario");
+    addRelation("usuarios", AppTablas.cMessenger, "id_de_usuario");
+    addRelation("usuarios", AppTablas.cMessengerX, "id_usuario");
+    addRelation("usuarios", "ordenes_trabajo", "id_usuario");
+    addRelation("usuarios", "arqueos", "id_usuario");
+    addRelation("usuarios", "operaciones_tpv", "id_usuario");
+    addRelation("usuarios", "data_imp", "id_usuario");
+    addRelation("usuarios", "doc_cli", "id_usuario");
+    addRelation("usuarios", "doc_clix", "id_usuario");
+    addRelation("usuarios", "puntos_clientes", "id_usuario");
+    addRelation("usuarios", "doc_hotel", "id_usuario");
+    addRelation("usuarios", "doc_hotelx", "id_usuario");
+    addRelation("usuarios", "doc_pro", "id_usuario");
+    addRelation("usuarios", "instalacionesx", "id_usuario");
+    addRelation("usuarios", "mandatos", "id_usuario");
+    addRelation("usuarios", "reservas_rest", "id_usuario");
+    addRelation("usuarios", "pdas", "id_usuario");
+    addRelation("usuarios", "doc_almacen", "id_usuario");
+    addRelation("usuarios", "usuariosx", "id_usuario");
+    addRelation("usuarios", "efectos", "id_usuario");
+    addRelation("usuarios", "agenda", "id_usuario");
+    addRelation("usuarios", "inventario", "id_usuario");
+    addRelation("usuarios", "inventariox", "id_usuario");
+    addRelation("usuarios", "hst_doc_hotel", "id_usuario_proceso");
+    addRelation("usuarios", "hst_doc_hotel", "id_usuario");
+    addRelation("usuarios", "hst_doc_hotelx", "id_usuario");
+    addRelation("usuarios", "crm_cfg", "id_usuario");
+    addRelation("usuarios", "fianzas", "id_usuario");
+    addRelation("usuarios", "conocimientos", "id_usuario");
+    addRelation("usuarios", "conocimientos", "id_usuario2");
+    addRelation("usuarios", AppTablas.cIncidencias, "id_usuario");
+    addRelation("usuarios", AppTablas.cIncidencias, "id_usuario_autorizado");
+    addRelation("usuarios", AppTablas.cStock, "id_usuario");
+    addRelation("usuarios", AppTablas.cChequeos, "id_usuario");
+    addRelation("usuarios", AppTablas.cExTrans, "id_usuario");
 
 //UsuariosPerfiles
-    addRelation("usuarios_perfiles_g", AppTablas.cUsuarios, "id_perfil");
-    addRelation("usuarios_perfiles_g", AppTablas.cUsuariosPerfilesX, "id_perfil");
+    addRelation("usuarios_perfiles", AppTablas.cUsuarios, "id_perfil");
+    addRelation("usuarios_perfiles", AppTablas.cUsuariosPerfilesX, "id_perfil");
 
 //Vehiculos
     addRelation("vehiculos", "transportistas", "id_vehiculo");
@@ -1706,26 +1708,18 @@ class RelacionesTablas {
 
 //Zonas
     addRelation("zonas", "clientes", "id_zona");
-
+    Utils.printInfo(lstTmp.toString().replaceAll(",", "\n"));
     return lstRelaciones;
   }
 
 
   void addRelation(String tablaDestino, String tablaOrigen, String campoID,
       {String selectCanBeDel = "verialid", String filtro = "", String joinStr = "", String alias = "", bool lCanBeDeleteManual = false}) {
-    // TODO ************
-    if (tablaDestino.endsWith("_g")) {
-      return;
-    } else if (tablaDestino.endsWith("_i")) {
-      return;
-    } else if (tablaDestino.endsWith("_l")) {
-      return;
-    }
 
-    bool lEmpGrupo = false;
-    if (tablaDestino.endsWith("_g") && !tablaOrigen.contains(".")) {
-      lEmpGrupo = true;
-    }
+    // bool lEmpGrupo = false;
+    // if (tablaDestino.endsWith("") && !tablaOrigen.contains(".")) {
+    //   lEmpGrupo = true;
+    // }
 
     DRowRelacionesCamposEtc row = DRowRelacionesCamposEtc();
     row.tablaJoin = tablaDestino;
@@ -1736,12 +1730,14 @@ class RelacionesTablas {
     // row.joins = joinStr.toLowerCase();
     // row.filtroWhere = filtro.toLowerCase();
     // row.lCanBeDeleteManual = lCanBeDeleteManual;
-    row.isEmpresasGrupo = lEmpGrupo;
+    //row.isEmpresasGrupo = lEmpGrupo;
     String cAlias = alias;
     if (cAlias == "") {
       if (mapAlias[tablaDestino] != null) {
         cAlias = mapAlias[tablaDestino]!;
       } else {
+        if (!lstTmp.contains(tablaDestino)) lstTmp.add(tablaDestino);
+
         cAlias = tablaDestino.replaceAll("_", "").substring(0, 3);
       }
     }
@@ -1755,7 +1751,7 @@ class RelacionesTablas {
     mapAlias["agenda"] = "age";
     mapAlias["almacenes"] = "alm";
     mapAlias["aparatos"] = "apar";
-    mapAlias["app_blobs_i"] = "appBlobsImg";
+    mapAlias["app_blobs"] = "appBlobsImg";
     mapAlias["arboles"] = "arb";
     mapAlias["arboles_auxiliares"] = "arbAux";
     mapAlias["areas_compra"] = "ac";
@@ -1770,7 +1766,7 @@ class RelacionesTablas {
     mapAlias["averias"] = "ave";
     mapAlias["balances"] = "bal";
     mapAlias["balancesx"] = "balX";
-    mapAlias["bancos_g"] = "bang";
+    mapAlias["bancos"] = "bang";
     mapAlias["bonos_acceso"] = "bonAcc";
     mapAlias["cajones"] = "caj";
     mapAlias["carta_clientes"] = "carCli";
@@ -1796,6 +1792,72 @@ class RelacionesTablas {
     mapAlias["cuentas_email"] = "ctasEmail";
     mapAlias["cuentas_especiales"] = "ctasEsp";
     mapAlias["cupos"] = "cupos";
+
+
+    mapAlias["paises"] = "paises";
+    mapAlias["provincias"] = "provin";
+    mapAlias["ubicaciones"] = "ubic";
+    mapAlias["cfg_menu"] = "cfgMenu";
+    mapAlias["cfg_fondo"] = "cfgFondo";
+    mapAlias["data_imp"] = "dataImp";
+    mapAlias["data_impx"] = "dataImpX";
+    mapAlias["delegaciones"] = "deleg";
+    mapAlias["dispositivos"] = "dispos";
+    mapAlias["empresas"] = "empresas";
+    mapAlias["especies"] = "especies";
+    mapAlias["estantes"] = "estantes";
+    mapAlias["fianzas"] = "fianzas";
+    mapAlias["grupos_comisiones"] = "grpComis";
+    mapAlias["grupos_series"] = "grpSeries";
+    mapAlias["habitaciones"] = "habit";
+    mapAlias["hoja"] = "hoja";
+    mapAlias["hotel_dtos"] = "hotDtos";
+    mapAlias["hst_recursos_actos"] = "hstRecAct";
+    mapAlias["impuestos"] = "impuestos";
+    mapAlias["incidencias_l"] = "incidL";
+    mapAlias["informes_cfg"] = "infCfg";
+    mapAlias["informes_usuarios"] = "infUsr";
+    mapAlias["inmovilizado"] = "inmov";
+    mapAlias["instalaciones"] = "instal";
+    mapAlias["inventario"] = "invent";
+    mapAlias["mandatos"] = "mandatos";
+    mapAlias["menu_eventos"] = "menuEven";
+    mapAlias["menu_rest"] = "menuRest";
+    mapAlias["mesas"] = "mesas";
+    mapAlias["messenger"] = "messenger";
+    mapAlias["monedas"] = "monedas";
+    mapAlias["nombres"] = "nombres";
+    mapAlias["nominas"] = "nominas";
+    mapAlias["obras"] = "obras";
+    mapAlias["ocupantes"] = "ocupantes";
+    mapAlias["ordenes_trabajo"] = "ordTrab";
+    mapAlias["partes_medicos"] = "parMed";
+    mapAlias["partes_reparaciones"] = "parRep";
+    mapAlias["pdas"] = "pdas";
+    mapAlias["prevision"] = "prevision";
+    mapAlias["puestos"] = "puestos";
+    mapAlias["puestos"] = "puestos";
+    mapAlias["recursos_actos"] = "recAct";
+    mapAlias["remesas"] = "remesas";
+    mapAlias["retenciones"] = "retenc";
+    mapAlias["revisiones"] = "revis";
+    mapAlias["recetas"] = "recetas";
+    mapAlias["salones"] = "salones";
+    mapAlias["secciones"] = "secciones";
+    mapAlias["series"] = "series";
+    mapAlias["stock_l"] = "stkL";
+    mapAlias["tareas_tecnicos"] = "tarTec";
+    mapAlias["tecnicos"] = "tecnicos";
+    mapAlias["telepedido_ofertas"] = "teleOfer";
+    mapAlias["tiendas_virtuales"] = "tiendaVir";
+    mapAlias["tipo_habitaciones"] = "tipoHab";
+    mapAlias["transportistas"] = "transp";
+    mapAlias["turnos"] = "turnos";
+    mapAlias["usuarios_perfiles"] = "usrPerf";
+    mapAlias["vehiculos"] = "vehiculos";
+    mapAlias["veterinarios"] = "veter";
+    mapAlias["zonas"] = "zonas";
+
     /// POR AQUI
     mapAlias["doc_almacen"] = "docAlm";
     mapAlias["doc_cli"] = "dc";
@@ -1810,17 +1872,16 @@ class RelacionesTablas {
     mapAlias["doc_sinlix"] = "docSinliX";
     mapAlias["efectos"] = "efec";
     mapAlias["fabricacion"] = "fabricacion";
-    mapAlias["fabricacion_cfg"] = "fabricacionCfg";
-    mapAlias["fabricacion_etapas"] = "fabricacionEt";
-    mapAlias["fabricacion_grupo"] = "fabricacionGrp";
-    mapAlias["fabricacion_tareas"] = "fabricacionTar";
+    mapAlias["fabricacion_cfg"] = "fabCfg";
+    mapAlias["fabricacion_etapas"] = "fabEt";
+    mapAlias["fabricacion_grupo"] = "fabGrp";
+    mapAlias["fabricacion_tareas"] = "fabTar";
     mapAlias["fabricantes"] = "fab";
     mapAlias["grupos"] = "grp";
     mapAlias["habitaciones_props"] = "habProps";
     mapAlias["hst_doc_hotel"] = "hstDh";
     mapAlias["hst_doc_hotelx"] = "hstDhX";
     mapAlias["mantenimientos"] = "manten";
-
     mapAlias["metodos_pago"] = "metPag";
     mapAlias["perfiles"] = "perf";
     mapAlias["perfiles_campos_aux"] = "perfAux";
@@ -1840,6 +1901,7 @@ class RelacionesTablas {
     mapAlias["logi_formas"] = "logiFormas";
     mapAlias["logi_formatos"] = "logiFormat";
     mapAlias["logi_uds"] = "logiFormat";
+    mapAlias["logi_unidades"] = "logiUds";
 
   }
 }

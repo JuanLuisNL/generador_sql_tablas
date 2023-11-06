@@ -5,18 +5,19 @@ import 'package:generador_sql_tablas/global/utils.dart';
 import 'maps_excepciones.dart';
 
 class GenerarTablaSQL {
-  GenerarTablaSQL(this.tablaLower, this.tablaProper, this.aliasTabla, this.lstRelaciones, this.lstCols, this.lstTablasServer);
+  GenerarTablaSQL(this.schema, this.tablaLower, this.tablaProper, this.aliasTabla, this.lstRelaciones, this.lstCols, this.mapTablasServer);
 
-  final String tablaLower, tablaProper, aliasTabla;
+  final String schema, tablaLower, tablaProper, aliasTabla;
   final List<DRowRelacionesCamposEtc> lstRelaciones;
   final List<List<dynamic>> lstCols;
-  final List<String> lstTablasServer;
+  final Map<String, String> mapTablasServer;
+
 
   late List<String> lstCamposSQLVars, lstGetsCamposSQL, lstJoinsTablas, lstAsignacionesCamposSQL;
   late List<String> lstGetsTblJoins;
   late Map<String, List<String>> mapVarsTblJoins = {};
   late Map<String, String> mapImports, mapExcepCampos;
-
+  bool lGrupoEmp = false;
 
   String create() {
     initListsAndMaps();
@@ -26,6 +27,7 @@ class GenerarTablaSQL {
   }
 
   String generarClaseTablaSQL() {
+    lGrupoEmp = (schema == "public");
     mapExcepCampos = MapExcepciones.initMapCamposExcepciones();
 
     /// JOINS CON OTRAS TABLAS
@@ -49,11 +51,13 @@ class GenerarTablaSQL {
       /// CONSTRUCTOR
       cCad += "${tablaProper}SQL() {\n initCampos();\n}\n\n";
 
+
       /// INITCAMPOS
       cCad += "void initCampos() {\n";
       cCad += "nombreSQL = '$tablaLower';\n";
       cCad += "aliasSQL = '$aliasTabla';\n";
-      cCad += "\n}\n";
+      cCad += "lGrupoEmp = $lGrupoEmp;\n";
+      cCad += "}\n\n";
     }
 
     /// VARIABLES
@@ -82,26 +86,20 @@ class GenerarTablaSQL {
         continue;
       }
 
-      if (rowRel.tablaJoin.endsWith("_g") || rowRel.tablaJoin.endsWith("_i")) {
-        continue;
-      }
+      // if (rowRel.tablaJoin.endsWith("_g") || rowRel.tablaJoin.endsWith("_i")) {
+      //   continue;
+      // }
       String cTablaJoin = rowRel.tablaJoin;
 
       if (cTablaJoin != tablaLower) {
-        String cImport = lstTablasServer.firstWhereOrNull((it) => it == cTablaJoin) ?? "";
-        if (cImport != tablaLower) {
+        String cImport = mapTablasServer.containsKey(cTablaJoin) ? cTablaJoin : "";
+        if (cImport != "") {
           if (Utils.isClaseBase(cTablaJoin)) {
             mapImports[cTablaJoin] = "import '../modelos_ext/${cTablaJoin}_ext.dart';";
-          } else if (cImport != "") {
-            mapImports[cTablaJoin] = "import '${cImport}_base.dart';";
           } else {
-            // hay alguna tabla original con guiones
-            String cImport = lstTablasServer.firstWhereOrNull((it) => it == cTablaJoin) ?? "";
-            if (cImport != "") {
-              mapImports[cTablaJoin] = "import '${cImport}_base.dart';";
-            } else {
-              Utils.printInfo(tablaLower);
-            }
+            String cNexo = (mapTablasServer[cTablaJoin] == "public") ? "grp" : "emp";
+            mapImports[cTablaJoin] = "import '${cImport}_$cNexo.dart';";
+            Utils.printInfo(cTablaJoin + " " + cNexo);
           }
         }
       } else {
