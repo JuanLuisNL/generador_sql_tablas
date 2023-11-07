@@ -15,6 +15,7 @@ class GBL {
   // static late PostgreSQLConnection oCnImgs;
   static late PostgreSQLConnection oCn;
   static double order = 0;
+  static List<TablasSQL> lstTablas = [];
 
   static init() async {
     // oCnBase = PostgreSQLConnection("192.168.0.51", 5432, "dv00001", username: "postgres", password: "verialvtx");
@@ -32,10 +33,10 @@ class GBL {
 
 class CreaClasesTablaAndDRow {
   late String tablaProper, tablaLower;
-  late List<String> lstJoinsTablas = [] ;
+  late List<String> lstJoinsTablas = [];
+
   late List<DRowRelacionesCamposEtc> lstRelaciones = [];
   List<List<dynamic>> lstCols = [];
-  Map<String, String> mapTablasServer = {};
   late RelacionesTablas oRelTab;
 
   Future<void> run() async {
@@ -53,28 +54,30 @@ class CreaClasesTablaAndDRow {
     // }
     oRelTab = RelacionesTablas();
     lstRelaciones = oRelTab.init();
-
-    String cSQL = "SELECT table_name, table_schema FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE' AND (table_schema = 'public' OR table_schema = 'emp0001')";
+    GBL.lstTablas = [];
+    String cSQL =
+        "SELECT table_name, table_schema FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE' AND (table_schema = 'public' OR table_schema = 'emp0001') ORDER BY table_schema, table_name";
     List<List<dynamic>> lstTablasSQL = await GBL.oCn.query(cSQL);
 
     for (var row in lstTablasSQL) {
-      mapTablasServer[row.first] = row.last;
+      String cKey = row.first + "_" + row.last;
+      GBL.lstTablas.add(TablasSQL(cKey, row.first, row.last));
     }
-
-    mapTablasServer.forEach((key, value) async {
-      String tabla = key;
+    for (var row in GBL.lstTablas) {
+      String tabla = row.tablaName;
       cSQL = "SELECT column_name, data_type, character_maximum_length, numeric_precision_radix, numeric_scale";
       cSQL += " FROM INFORMATION_SCHEMA.COLUMNS";
-      cSQL += " WHERE table_name = '$tabla' AND table_schema = '$value'";
+      cSQL += " WHERE table_name = '$tabla' AND table_schema = '${row.schema}'";
       cSQL += " ORDER BY ordinal_position";
       lstCols = await GBL.oCn.query(cSQL);
       tablaProper = Utils.getNameVariable(tabla).proper;
       tablaLower = tabla;
-      String cFile = getAllNew(value);
-      String cNexo = (value == "public") ? "grp" : "emp";
+      String cFile = getAllNew(row.schema);
+      String cNexo = (row.schema == "public") ? "grp" : "emp";
       await File("c:\\Kotlin\\GestionVerial\\gestion_verial\\lib\\data\\modelos_tablas\\${tablaLower}_$cNexo.dart").writeAsString(cFile);
-    });
+    }
   }
+
   String getAllNew(String schema) {
     String cDatos = "";
     try {
@@ -90,7 +93,7 @@ class CreaClasesTablaAndDRow {
         aliasTabla = row.alias;
       }
 
-      GenerarTablaSQL oGenTblSQL = GenerarTablaSQL(schema, tablaLower, tablaProper, aliasTabla, lstRelaciones, lstCols, mapTablasServer);
+      GenerarTablaSQL oGenTblSQL = GenerarTablaSQL(schema, tablaLower, tablaProper, aliasTabla, lstRelaciones, lstCols);
       cDatos = oGenTblSQL.create();
 
       GenerarDRowJson oGenDRowJson = GenerarDRowJson(tablaLower, tablaProper, lstRelaciones, lstCols);
@@ -106,7 +109,7 @@ class CreaClasesTablaAndDRow {
     return cDatos;
   }
 
-  // ? Transformacion del nombre del campo en DB a Variable
+// ? Transformacion del nombre del campo en DB a Variable
   String getNameVariable(String campo) {
     if (campo.startsWith("id_")) {
       lstJoinsTablas.add(campo);
@@ -114,8 +117,13 @@ class CreaClasesTablaAndDRow {
     return Utils.getNameVariable(campo);
   }
 
-  // ? tipos para sql [PENDIENTE] TODO
+// ? tipos para sql [PENDIENTE] TODO
+}
 
+class TablasSQL {
+  TablasSQL(this.clave, this.tablaName, this.schema);
 
-
+  late final String clave;
+  late final String tablaName;
+  late final String schema;
 }

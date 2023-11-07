@@ -2,15 +2,15 @@ import 'package:generador_sql_tablas/global/extension_metodos.dart';
 import 'package:generador_sql_tablas/global/relaciones_tablas.dart';
 import 'package:collection/collection.dart';
 import 'package:generador_sql_tablas/global/utils.dart';
+import 'global.dart';
 import 'maps_excepciones.dart';
 
 class GenerarTablaSQL {
-  GenerarTablaSQL(this.schema, this.tablaLower, this.tablaProper, this.aliasTabla, this.lstRelaciones, this.lstCols, this.mapTablasServer);
-
+  GenerarTablaSQL(this.schema, this.tablaLower, this.tablaProper, this.aliasTabla, this.lstRelaciones, this.lstCols);
   final String schema, tablaLower, tablaProper, aliasTabla;
   final List<DRowRelacionesCamposEtc> lstRelaciones;
   final List<List<dynamic>> lstCols;
-  final Map<String, String> mapTablasServer;
+
 
 
   late List<String> lstCamposSQLVars, lstGetsCamposSQL, lstJoinsTablas, lstAsignacionesCamposSQL;
@@ -92,15 +92,18 @@ class GenerarTablaSQL {
       String cTablaJoin = rowRel.tablaJoin;
 
       if (cTablaJoin != tablaLower) {
-        String cImport = mapTablasServer.containsKey(cTablaJoin) ? cTablaJoin : "";
-        if (cImport != "") {
+        List<TablasSQL> lstTmp = GBL.lstTablas.where((it) => it.tablaName == cTablaJoin).toList();
+        if (lstTmp.length == 1) {
+           TablasSQL row = lstTmp.first;
+
           if (Utils.isClaseBase(cTablaJoin)) {
             mapImports[cTablaJoin] = "import '../modelos_ext/${cTablaJoin}_ext.dart';";
           } else {
-            String cNexo = (mapTablasServer[cTablaJoin] == "public") ? "grp" : "emp";
-            mapImports[cTablaJoin] = "import '${cImport}_$cNexo.dart';";
-            Utils.printInfo(cTablaJoin + " " + cNexo);
+            String cNexo = (row.schema == "public") ? "grp" : "emp";
+            mapImports[cTablaJoin] = "import '${row.tablaName}_$cNexo.dart';";
           }
+        } else {
+          Utils.printInfo(cTablaJoin);
         }
       } else {
         if (Utils.isClaseBase(tablaLower)) {

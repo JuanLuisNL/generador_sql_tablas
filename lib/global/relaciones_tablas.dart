@@ -1035,9 +1035,9 @@ class RelacionesTablas {
     addRelation("grupos", "doc_clix", "id_grupo_regimen");
 
 //Grupos
-    addRelation("grupos", AppTablas.cProvincias, "id_grupo");
-    addRelation("grupos", AppTablas.cProvincias, "id_region");
-    addRelation("grupos", AppTablas.cPaises, "id_estadistica_pais");
+    addRelation("grupos_g", AppTablas.cProvincias, "id_grupo");
+    addRelation("grupos_g", AppTablas.cProvincias, "id_region");
+    addRelation("grupos_g", AppTablas.cPaises, "id_estadistica_pais");
 
 //GruposComisiones
     addRelation("grupos_comisiones", "comisionistas", "id_grupo");
@@ -1878,6 +1878,7 @@ class RelacionesTablas {
     mapAlias["fabricacion_tareas"] = "fabTar";
     mapAlias["fabricantes"] = "fab";
     mapAlias["grupos"] = "grp";
+    mapAlias["grupos_g"] = "grpG";
     mapAlias["habitaciones_props"] = "habProps";
     mapAlias["hst_doc_hotel"] = "hstDh";
     mapAlias["hst_doc_hotelx"] = "hstDhX";

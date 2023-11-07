@@ -92,6 +92,19 @@ class MapExcepciones {
     mapCamposExc["id_metodo_pago1"] = "metPagCr1"; //
     mapCamposExc["id_metodo_pago2"] = "metPagCr2"; //
     mapCamposExc["id_metodo_pago3"] = "metPagCr3"; //
+
+    mapCamposExc["id_provincia"] = "provin";
+    mapCamposExc["id_pais"] = "paises";
+    mapCamposExc["id_ubicacion"] = "ubica"; //
+
+    mapCamposExc["id_cuando_pago"] = "plazos"; //
+    mapCamposExc["id_como_pago"] = "metPago"; //
+    mapCamposExc["id_trasportista"] = "transp"; //
+    mapCamposExc["id_estadistica_pais"] = "grpEstPais"; //
+    mapCamposExc["id_moneda"] = "monedas"; //
+    mapCamposExc["id_region"] = "grpGReg"; //
+
+
     return mapCamposExc;
   }
 
