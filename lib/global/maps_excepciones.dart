@@ -106,6 +106,18 @@ class MapExcepciones {
     mapCamposExc["clientes.id_ficha_fiscal"] = "cliFiscal"; //
     mapCamposExc["proveedores.id_ficha_fiscal"] = "prvdFiscal"; //
 
+    mapCamposExc["provincias.id_grupo"] = "provinGrp";
+    mapCamposExc["provincias.id_region"] = "provinReg";
+
+    mapCamposExc["id_veterinario"] = "veter";
+    mapCamposExc["id_veterinario_responsable"] = "veterResp";
+
+    mapCamposExc["clientes.id_especie_defecto"] = "cliEspDef";
+    mapCamposExc["articulos.id_especie_defecto"] = "artEspDef";
+
+
+
+
 
     return mapCamposExc;
   }
