@@ -102,7 +102,7 @@ class MapExcepciones {
     mapCamposExc["id_trasportista"] = "transp"; //
     mapCamposExc["id_estadistica_pais"] = "grpEstPais"; //
     mapCamposExc["id_moneda"] = "monedas"; //
-    mapCamposExc["id_region"] = "grpGReg"; //
+
     mapCamposExc["clientes.id_ficha_fiscal"] = "cliFiscal"; //
     mapCamposExc["proveedores.id_ficha_fiscal"] = "prvdFiscal"; //
 
@@ -115,8 +115,8 @@ class MapExcepciones {
     mapCamposExc["clientes.id_especie_defecto"] = "cliEspDef";
     mapCamposExc["articulos.id_especie_defecto"] = "artEspDef";
 
-
-
+    mapCamposExc["id_tarifa"] = "tar";
+    mapCamposExc["id_tarifa_excepciones"] = "tarExcep";
 
 
     return mapCamposExc;
