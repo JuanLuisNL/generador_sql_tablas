@@ -1737,7 +1737,6 @@ class RelacionesTablas {
         cAlias = mapAlias[tablaDestino]!;
       } else {
         if (!lstTmp.contains(tablaDestino)) lstTmp.add(tablaDestino);
-
         cAlias = tablaDestino.replaceAll("_", "").substring(0, 3);
       }
     }
@@ -1781,6 +1780,7 @@ class RelacionesTablas {
     mapAlias["cfg_central_reservas"] = "cfgCenRes";
     mapAlias["cfg_fichero_policia"] = "cfgFicPol";
     mapAlias["clientes"] = "cli";
+    mapAlias["clientesx"] = "cliX";
     mapAlias["coleccionables"] = "colec";
     mapAlias["comisiones"] = "comi";
     mapAlias["comisionistas"] = "comiTas";

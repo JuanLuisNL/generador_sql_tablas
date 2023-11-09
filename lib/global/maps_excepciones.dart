@@ -103,6 +103,8 @@ class MapExcepciones {
     mapCamposExc["id_estadistica_pais"] = "grpEstPais"; //
     mapCamposExc["id_moneda"] = "monedas"; //
     mapCamposExc["id_region"] = "grpGReg"; //
+    mapCamposExc["clientes.id_ficha_fiscal"] = "cliFiscal"; //
+    mapCamposExc["proveedores.id_ficha_fiscal"] = "prvdFiscal"; //
 
 
     return mapCamposExc;

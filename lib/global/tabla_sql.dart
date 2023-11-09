@@ -114,7 +114,9 @@ class GenerarTablaSQL {
       /// ArbolesSQL? _arbCat;
       /// ArbolesSQL get arb => _arb ?? ArbolesSQL.joins('id_padre', 'arb', this);
       String alias = rowRel.alias;
-      if (mapExcepCampos[rowRel.campoID] != null) {
+      if (mapExcepCampos["${rowRel.tablaJoin}.${rowRel.campoID}"] != null) {
+        alias = mapExcepCampos["${rowRel.tablaJoin}.${rowRel.campoID}"]!;
+      } else if (mapExcepCampos[rowRel.campoID] != null) {
         alias = mapExcepCampos[rowRel.campoID]!;
       } else {
         alias = alias + getNameVariableCampo(rowRel.campoID.substring(3)).proper; // ? provisional, se irá haciendo poco a poco
