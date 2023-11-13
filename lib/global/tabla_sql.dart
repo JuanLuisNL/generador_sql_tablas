@@ -150,7 +150,7 @@ class GenerarTablaSQL {
       String cVar = getNameVariableCampo(campo);
       String cType = Utils.getTipoSQL(type, row[2] ?? 0, row[3] ?? 0, row[4] ?? 0);
       String cPlantilla = '$cVar = CampoSQL("$campo", "$cType", oTablaMain: this);';
-      String cPlantillaGet = 'CampoSQL get $cVar => _$cVar ?? CampoSQL("$campo", "$cType", this);\n';
+      String cPlantillaGet = 'CampoSQL get $cVar => (_$cVar ??= CampoSQL("$campo", "$cType", this));\n';
 
       lstAsignacionesCamposSQL.add(cPlantilla);
 

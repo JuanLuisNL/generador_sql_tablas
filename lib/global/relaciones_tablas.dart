@@ -1782,8 +1782,8 @@ class RelacionesTablas {
     mapAlias["clientes"] = "cli";
     mapAlias["clientesx"] = "cliX";
     mapAlias["coleccionables"] = "colec";
-    mapAlias["comisiones"] = "comi";
-    mapAlias["comisionistas"] = "comiTas";
+    mapAlias["comisiones"] = "comis";
+    mapAlias["comisionistas"] = "comistas";
     mapAlias["conocimientos"] = "conoc";
     mapAlias["contactos_externos"] = "contExt";
     mapAlias["ctas_anuales"] = "ctasAn";

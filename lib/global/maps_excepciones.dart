@@ -99,7 +99,7 @@ class MapExcepciones {
 
     mapCamposExc["id_cuando_pago"] = "plazos"; //
     mapCamposExc["id_como_pago"] = "metPago"; //
-    mapCamposExc["id_trasportista"] = "transp"; //
+    mapCamposExc["id_transportista"] = "transp"; //
     mapCamposExc["id_estadistica_pais"] = "grpEstPais"; //
     mapCamposExc["id_moneda"] = "monedas"; //
 
@@ -117,6 +117,32 @@ class MapExcepciones {
 
     mapCamposExc["id_tarifa"] = "tar";
     mapCamposExc["id_tarifa_excepciones"] = "tarExcep";
+
+    mapCamposExc["id_retencion"] = "reten";
+    mapCamposExc["id_pais_nacionalidad"] = "paisesNac";
+
+    mapCamposExc["id_agente1"] = "comisAge1";
+    mapCamposExc["id_agente2"] = "comisAge2";
+    mapCamposExc["id_agente3"] = "comisAge3";
+
+    mapCamposExc["id_contacto_externo"] = "contacExt";
+    mapCamposExc["id_tipo_contingente"] = "arbTipoCon";
+    mapCamposExc["id_ficha_varios"] = "cliVarios";
+    mapCamposExc["id_cuenta_ingresos"] = "ctasIngr";
+
+    mapCamposExc["id_receptor_efactura"] = "cliRecFac";
+    mapCamposExc["id_pagador_efactura"] = "cliPagFac";
+    mapCamposExc["id_contable_efactura"] = "cliConFac";
+    mapCamposExc["id_almacen_urdi"] = "almUrdi";
+    mapCamposExc["id_forma_envio"] = "logiFormEnv";
+
+
+
+
+
+
+
+
 
 
     return mapCamposExc;
