@@ -30,7 +30,7 @@ class GenerarDRowJson {
     cCad += 'Map<String, dynamic> map = mapParam["$tablaLower"];\n';
     cCad += lstAsignacionesDRows.join("");
     cCad += '} catch (e, stack) {\n';
-    cCad += 'Utils.printError(e, traza: stack, mapInfo: {"Proceso": "DRowArticulo.fromMap"});\n}\n}\n';
+    cCad += 'Utils.printError(e, stack, mapInfo: {"Proceso": "DRowArticulo.fromMap"});\n}\n}\n';
     return "$cCad}\n\n";
   }
 

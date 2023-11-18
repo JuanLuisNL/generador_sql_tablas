@@ -40,18 +40,10 @@ class CreaClasesTablaAndDRow {
   late RelacionesTablas oRelTab;
 
   Future<void> run() async {
-    await creaClases(1);
+    await creaClases();
   }
 
-  Future<void> creaClases(int tipo) async {
-    // PostgreSQLConnection oCn;
-    // if (tipo == 1) {
-    //   oCn = GBL.oCnEmp;
-    // } else  if (tipo == 2) {
-    //   oCn = GBL.oCnBase;
-    // } else {
-    //   oCn = GBL.oCnImgs;
-    // }
+  Future<void> creaClases() async {
     oRelTab = RelacionesTablas();
     lstRelaciones = oRelTab.init();
     GBL.lstTablas = [];
