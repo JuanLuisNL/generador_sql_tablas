@@ -136,6 +136,9 @@ class MapExcepciones {
     mapCamposExc["id_almacen_urdi"] = "almUrdi";
     mapCamposExc["id_forma_envio"] = "logiFormEnv";
 
+    mapCamposExc["id_empresa"] = "emp";
+
+
 
 
 

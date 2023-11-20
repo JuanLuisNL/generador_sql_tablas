@@ -40,12 +40,11 @@ class GenerarTablaSQL {
 
     /// CONSTRUCTOR JOINS
     if (!Utils.isClaseBase(tablaLower)) {
-      // cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasJoin, TablaSQL? oTablaSelectJoin, {String joinManual = ''}) {\n";
-      cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cNexoAlias, TablaSQL? oTablaSelectJoin, {String joinManual = ''}) {\n";
+      cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasColumn, TablaSQL? oTablaSelectJoin, {String cJoinManual = ''}) {\n";
       cCad += "initCampos();\n";
       cCad += "campoJoin = cCampoJoin;\n";
-      cCad += "nexoAlias = cNexoAlias;\n";
-      cCad += "joinStr = joinManual;\n";
+      cCad += "aliasColumn = cAliasColumn;\n";
+      cCad += "joinManual = cJoinManual;\n";
       cCad += "oTablaJoin = oTablaSelectJoin;\n}\n\n";
 
       /// CONSTRUCTOR
