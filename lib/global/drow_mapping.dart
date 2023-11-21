@@ -28,7 +28,7 @@ class GenerarDRowMapping {
     String cClase = "DRow${cName}Mapping";
     String cCad = "class $cClase extends DRowMapping {\n";
     /// Constructores
-    cCad += "$cClase.select(super.mapParam, super.cTabla) : super.select();\n";
+    cCad += "$cClase.select(super.map) : super.select();\n";
     cCad += "$cClase.join(super.mapParamJoin) : super.join();\n\n";
     /// Get y set de las variables en relacion al map que recibmos de SQL
     cCad += lstGetsSetsDRowsNew.join("");
@@ -92,7 +92,7 @@ class GenerarDRowMapping {
 
       String cPlantilla;
       String cDRow = "DRow${getNameVariableCampo(cTablaJoin).proper}Mapping";
-      cPlantilla = " late $cDRow? row${alias.proper} = $cDRow.join(mapParam!['$cTablaJoin']);\n";
+      cPlantilla = " late $cDRow? row${alias.proper} = $cDRow.join(map['$cTablaJoin']);\n";
       lstJoinsDRowsNew.add(cPlantilla);
     }
 

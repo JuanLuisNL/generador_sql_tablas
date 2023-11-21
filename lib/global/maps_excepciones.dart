@@ -137,6 +137,9 @@ class MapExcepciones {
     mapCamposExc["id_forma_envio"] = "logiFormEnv";
 
     mapCamposExc["id_empresa"] = "emp";
+    mapCamposExc["id_perfil_campos_aux"] = "perfCampAux";
+    mapCamposExc["id_cuenta_especial"] = "ctasEsp";
+
 
 
 
