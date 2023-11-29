@@ -98,7 +98,7 @@ class MapExcepciones {
     mapCamposExc["id_ubicacion"] = "ubica"; //
 
     mapCamposExc["id_cuando_pago"] = "plazos"; //
-    mapCamposExc["id_como_pago"] = "metPago"; //
+    mapCamposExc["id_como_pago"] = "metPag"; //
     mapCamposExc["id_transportista"] = "transp"; //
     mapCamposExc["id_estadistica_pais"] = "grpEstPais"; //
     mapCamposExc["id_moneda"] = "monedas"; //
@@ -140,15 +140,13 @@ class MapExcepciones {
     mapCamposExc["id_perfil_campos_aux"] = "perfCampAux";
     mapCamposExc["id_cuenta_especial"] = "ctasEsp";
 
+    mapCamposExc["fabricacionx.id_fabricacion"] = "fabCn";
+    mapCamposExc["fabricacion.id_fabricacion_grupo"] = "fabCnGrp";
+    mapCamposExc["fabricacion.id_fabricacion_cfg"] = "fabCnCfg";
 
-
-
-
-
-
-
-
-
+    mapCamposExc["fabricacion.id_almacen_origen"] = "almOrig";
+    mapCamposExc["fabricacion.id_almacen_destino"] = "almDest";
+    mapCamposExc["fabricacion_grupo.id_delegacion"] = "deleg";
 
 
     return mapCamposExc;

@@ -50,14 +50,15 @@ class GenerarTablaSQL {
       /// CONSTRUCTOR
       cCad += "${tablaProper}SQL() {\n initCampos();\n}\n\n";
 
-
-      /// INITCAMPOS
-      cCad += "void initCampos() {\n";
-      cCad += "nombreSQL = '$tablaLower';\n";
-      cCad += "aliasSQL = '$aliasTabla';\n";
-      cCad += "lGrupoEmp = $lGrupoEmp;\n";
-      cCad += "}\n\n";
     }
+
+    /// INITCAMPOS
+    cCad += "void initCampos() {\n";
+    cCad += "nombreSQL = '$tablaLower';\n";
+    cCad += "aliasSQL = '$aliasTabla';\n";
+    cCad += "lGrupoEmp = $lGrupoEmp;\n";
+    cCad += "sql = SqlEntity(this);\n";
+    cCad += "}\n\n";
 
     /// VARIABLES
     cCad += Utils.getDeclaracionVars("CampoSQL?", lstCamposSQLVars);
@@ -161,6 +162,7 @@ class GenerarTablaSQL {
   String getImports() {
     String cCad = "import '../abstract/entidades_sql.dart';\n";
     cCad += "import '../../global/utils.dart';\n";
+    cCad += "import '../sql/sql_entity.dart';\n";
     //cCad += "import '../modelos_ext/joins_manuales.dart';\n";
 
     mapImports.forEach((key, value) {

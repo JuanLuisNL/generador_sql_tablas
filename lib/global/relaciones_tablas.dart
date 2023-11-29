@@ -1792,8 +1792,6 @@ class RelacionesTablas {
     mapAlias["cuentas_email"] = "ctasEmail";
     mapAlias["cuentas_especiales"] = "ctasEsp";
     mapAlias["cupos"] = "cupos";
-
-
     mapAlias["paises"] = "paises";
     mapAlias["provincias"] = "provin";
     mapAlias["ubicaciones"] = "ubic";
@@ -1857,8 +1855,6 @@ class RelacionesTablas {
     mapAlias["vehiculos"] = "vehiculos";
     mapAlias["veterinarios"] = "veter";
     mapAlias["zonas"] = "zonas";
-
-    /// POR AQUI
     mapAlias["doc_almacen"] = "docAlm";
     mapAlias["doc_cli"] = "dc";
     mapAlias["doc_cli_valores"] = "dcVal";
@@ -1871,12 +1867,14 @@ class RelacionesTablas {
     mapAlias["doc_sinli"] = "docSinli";
     mapAlias["doc_sinlix"] = "docSinliX";
     mapAlias["efectos"] = "efec";
-    mapAlias["fabricacion"] = "fabricacion";
-    mapAlias["fabricacion_cfg"] = "fabCfg";
-    mapAlias["fabricacion_etapas"] = "fabEt";
-    mapAlias["fabricacion_grupo"] = "fabGrp";
-    mapAlias["fabricacion_tareas"] = "fabTar";
+    mapAlias["fabricacion"] = "fabCn";
+    mapAlias["fabricacionx"] = "fabCnX";
+    mapAlias["fabricacion_cfg"] = "fabCnCfg";
+    mapAlias["fabricacion_etapas"] = "fabCnEt";
+    mapAlias["fabricacion_grupo"] = "fabCnGrp";
+    mapAlias["fabricacion_tareas"] = "fabCnTar";
     mapAlias["fabricantes"] = "fab";
+    mapAlias["fabricantesx"] = "fabx";
     mapAlias["grupos"] = "grp";
     mapAlias["grupos_g"] = "grpG";
     mapAlias["habitaciones_props"] = "habProps";
