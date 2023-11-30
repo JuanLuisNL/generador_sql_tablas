@@ -160,10 +160,12 @@ class GenerarTablaSQL {
   }
 
   String getImports() {
-    String cCad = "import '../abstract/entidades_sql.dart';\n";
+    String cCad = "";
     cCad += "import '../../global/utils.dart';\n";
     cCad += "import '../sql/sql_entity.dart';\n";
-    //cCad += "import '../modelos_ext/joins_manuales.dart';\n";
+    cCad += "import '../sql/campos_sql.dart';\n";
+    cCad += "import '../sql/tablas_sql.dart';\n";
+    cCad += "import '../sql/drow_mapping.dart';\n";
 
     mapImports.forEach((key, value) {
       cCad += "$value\n";

@@ -31,6 +31,7 @@ class Utils {
     if (type == "bigint") return 'I8';
     if (type == "date") return 'D';
     if (type.contains("timestamp")) return 'DT';
+    if (type.contains("time with time zone")) return 'H';
     if (type == "real") return 'F4';
     if (type == "double precision") return 'F8';
     if (type == "numeric" || type == "decimal") return 'N($radix,$scale)';
