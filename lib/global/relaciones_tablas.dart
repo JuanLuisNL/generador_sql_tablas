@@ -1810,7 +1810,7 @@ class RelacionesTablas {
     mapAlias["doc_sinli"] = "docSinli";
     mapAlias["doc_sinlix"] = "docSinliX";
     mapAlias["efectos"] = "efec";
-    mapAlias["empresas"] = "empresas";
+    mapAlias["empresas"] = "emp";
     mapAlias["especies"] = "especies";
     mapAlias["estantes"] = "estantes";
     mapAlias["fabricacion"] = "fabCn";
