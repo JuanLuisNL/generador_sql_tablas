@@ -1811,7 +1811,8 @@ class RelacionesTablas {
     mapAlias["hoja"] = "hoja";
     mapAlias["hotel_dtos"] = "hotDtos";
     mapAlias["hst_recursos_actos"] = "hstRecAct";
-    mapAlias["impuestos"] = "impuestos";
+    mapAlias["impuestos"] = "imp";
+    mapAlias["impuestosx"] = "impX";
     mapAlias["incidencias_l"] = "incidL";
     mapAlias["informes_cfg"] = "infCfg";
     mapAlias["informes_usuarios"] = "infUsr";

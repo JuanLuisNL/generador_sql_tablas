@@ -91,7 +91,7 @@ class CreaClasesTablaAndDRow {
       GenerarDRowJson oGenDRowJson = GenerarDRowJson(tablaLower, tablaProper, lstRelaciones, lstCols);
       cDatos += oGenDRowJson.create();
 
-      GenerarDRowMapping oGenDRowMapping = GenerarDRowMapping(tablaLower, tablaProper, lstRelaciones, lstCols);
+      GenerarDRowMapping oGenDRowMapping = GenerarDRowMapping(tablaLower, tablaProper, lstRelaciones, lstCols, aliasTabla);
       cDatos += oGenDRowMapping.create();
     } catch (e) {
       if (kDebugMode) {

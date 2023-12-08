@@ -97,7 +97,7 @@ class Utils {
   }
 
   static bool isClaseBase(String tabla) {
-    return ["articulos", "proveedores", "clientes", "fabricantes", "art_delegaciones", "veterinarios"].contains(tabla);
+    return ["articulos", "proveedores", "clientes", "fabricantes", "art_delegaciones", "veterinarios", "impuestos"].contains(tabla);
   }
 
   static String nombreKeyClasesBase(String tabla, String tablaProper) {
