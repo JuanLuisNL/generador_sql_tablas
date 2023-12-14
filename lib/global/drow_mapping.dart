@@ -12,7 +12,6 @@ class GenerarDRowMapping {
   String aliasForJoin = "";
 
   late List<String> lstGetsSetsDRowsNew, lstJoinsDRowsNew, lstJoinsTablas;
-  Map<String, String> mapExcepCampos = {};
 
   String create() {
     initListsAndMaps();
@@ -84,7 +83,7 @@ class GenerarDRowMapping {
   }
 
   void getDeclaracionJoinsFromRelaciones() {
-    mapExcepCampos = MapExcepciones.initMapCamposExcepciones();
+    Map<String, String> mapExcepCampos = MapExcepciones.initMapCamposExcepciones();
     for (var campo in lstJoinsTablas) {
       DRowRelacionesCamposEtc? rowRel = lstRelaciones.firstWhereOrNull((it) => it.tablaOrigen == tablaLower && it.campoID == campo);
       if (rowRel == null) {

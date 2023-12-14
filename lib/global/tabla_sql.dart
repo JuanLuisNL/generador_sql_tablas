@@ -147,6 +147,9 @@ class GenerarTablaSQL {
     for (List<dynamic> row in lstCols) {
       campo = row[0];
       type = row[1];
+      if (campo == "id") {
+        continue;
+      }
       String cVar = getNameVariableCampo(campo);
       String cType = Utils.getTipoSQL(type, row[2] ?? 0, row[3] ?? 0, row[4] ?? 0);
       String cPlantilla = '$cVar = CampoSQL("$campo", "$cType", oTablaMain: this);';

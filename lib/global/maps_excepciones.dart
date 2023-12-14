@@ -35,6 +35,7 @@ class MapExcepciones {
     mapCamposExc["id_categoria_web2"] = "arbWeb2";
     mapCamposExc["id_categoria_web3"] = "arbWeb3";
     mapCamposExc["id_categoria_web4"] = "arbWeb4";
+    mapCamposExc["id_certificado_recetas"] = "blobCertRec";
     mapCamposExc["id_coleccion"] = "grpColec";
     mapCamposExc["id_coleccionable"] = "colec";
     mapCamposExc["id_como_pago"] = "metPag"; //
@@ -62,6 +63,7 @@ class MapExcepciones {
     mapCamposExc["id_grupo_destino"] = "grpDest";
     mapCamposExc["id_grupo_personal"] = "arbGrpPers";
     mapCamposExc["id_grupo_proveedores"] = "arbGrpProv"; // CentroCostesDefectoSQL
+    mapCamposExc["id_grupo_series_defecto"] = "grpSerDef";
     mapCamposExc["id_grupo_spa"] = "grpSpa";
     mapCamposExc["id_grupofactura"] = "grpFac"; // CartaGruposSQL
     mapCamposExc["id_ingrediente"] = "artIngr"; //ArtIngredientesSQL

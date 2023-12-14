@@ -1,5 +1,9 @@
+import 'package:collection/collection.dart';
+import 'package:generador_sql_tablas/global/extension_metodos.dart';
 import 'package:generador_sql_tablas/global/relaciones_tablas.dart';
 import 'package:generador_sql_tablas/global/utils.dart';
+
+import 'maps_excepciones.dart';
 
 class GenerarDRowJson {
   GenerarDRowJson(this.tablaLower, this.tablaProper, this.lstRelaciones, this.lstCols);
@@ -8,7 +12,7 @@ class GenerarDRowJson {
   final List<List<dynamic>> lstCols;
 
   Map<String, List<String>> mapVarsROW = {};
-  List<String> lstAsignacionesDRows = [], lstJoinsDRows = [];
+  List<String> lstAsignacionesDRows = [], lstJoinsDRows = [], lstJoinsTablas = [], lstVarsRows = [];
 
 
   String create() {
@@ -20,15 +24,21 @@ class GenerarDRowJson {
   }
 
   String generarClaseDRowJson() {
-    String cCad = "class DRow$tablaProper {\n";
+    String cNexo = (Utils.isClaseBase(tablaLower)) ? "Part" : "";
+    String cCad = "class DRow$tablaProper$cNexo {\n";
     mapVarsROW.forEach((key, value) {
       cCad += Utils.getDeclaracionVars(key, value);
     });
+    cCad += "\n";
+    cCad += lstVarsRows.join("");
+    cCad += "\n";
 
-    cCad += "DRow$tablaProper.fromMap(Map<String, dynamic> mapParam) {\n";
+    cCad += "DRow$tablaProper$cNexo.fromMap(Map<String, dynamic>? map) {\n";
+    cCad += "if (map == null) return;\n";
     cCad += "try {\n";
-    cCad += 'Map<String, dynamic> map = mapParam["$tablaLower"];\n';
     cCad += lstAsignacionesDRows.join("");
+    cCad += "\n\n";
+    cCad += lstJoinsTablas.join("");
     cCad += '} catch (e, stack) {\n';
     cCad += 'Utils.printError(e, stack, mapInfo: {"Proceso": "DRowArticulo.fromMap"});\n}\n}\n';
     return "$cCad}\n\n";
@@ -38,13 +48,35 @@ class GenerarDRowJson {
     mapVarsROW = {};
     lstAsignacionesDRows = [];
     lstJoinsDRows = [];
+    lstJoinsTablas = [];
   }
 
   void addItemsFromCols() {
     String campo, type;
+    Map<String, String> mapExcepCampos = MapExcepciones.initMapCamposExcepciones();
     for (List<dynamic> row in lstCols) {
       campo = row[0];
       type = row[1];
+
+      if (campo.startsWith("id_")) {
+        DRowRelacionesCamposEtc? rowRel = lstRelaciones.firstWhereOrNull((it) => it.tablaOrigen == tablaLower && it.campoID == campo);
+        if (rowRel == null) {
+          continue;
+        }
+        String alias = rowRel.alias;
+        if (mapExcepCampos["${rowRel.tablaOrigen}.${rowRel.campoID}"] != null) {
+          alias = mapExcepCampos["${rowRel.tablaOrigen}.${rowRel.campoID}"]!;
+        } else if (mapExcepCampos[rowRel.campoID] != null) {
+          alias = mapExcepCampos[rowRel.campoID]!;
+        } else {
+          alias = alias + Utils.getNameVariable(rowRel.campoID.substring(3)).proper; // ? provisional, se irá haciendo poco a poco en relacionestablas
+        }
+        String cTablaJoin = rowRel.tablaJoin;
+        String cTbl  = Utils.getNameVariable(cTablaJoin).proper;
+        String cVarRow = "row${alias.proper}";
+        lstJoinsTablas.add("$cVarRow = map['$alias'] == null ? null :  DRow$cTbl.fromMap(map['$alias']);\n");
+        lstVarsRows.add("late DRow$cTbl? $cVarRow;\n");
+      }
 
       String cVar = Utils.getNameVariable(campo);
       String cTipoDart = Utils.getTipoDart(type);
