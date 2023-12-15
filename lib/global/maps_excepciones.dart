@@ -51,6 +51,7 @@ class MapExcepciones {
     mapCamposExc["id_cuenta_especial"] = "ctasEsp";
     mapCamposExc["id_cuenta_ingresos"] = "ctasIngr";
     mapCamposExc["id_curso"] = "grpCurso";
+    mapCamposExc["id_delegacion"] = "deleg";
     mapCamposExc["id_empresa"] = "emp";
     mapCamposExc["id_estadistica_pais"] = "grpEstPais"; //
     mapCamposExc["id_estado"] = "grpEstado";
@@ -66,6 +67,7 @@ class MapExcepciones {
     mapCamposExc["id_grupo_series_defecto"] = "grpSerDef";
     mapCamposExc["id_grupo_spa"] = "grpSpa";
     mapCamposExc["id_grupofactura"] = "grpFac"; // CartaGruposSQL
+    mapCamposExc["id_impuesto"] = "imp";
     mapCamposExc["id_ingrediente"] = "artIngr"; //ArtIngredientesSQL
     mapCamposExc["id_marca_hora"] = "grpMH"; // grupos
     mapCamposExc["id_metodo_cobro1"] = "metPag1";
@@ -111,6 +113,7 @@ class MapExcepciones {
     mapCamposExc["id_tarifa_excepciones_visor_precios"] = "tarVisorExc";
     mapCamposExc["id_tarifa_gestion"] = "tarGes";
     mapCamposExc["id_tarifa_ofertas_tpvext"] = "tarOferTEx";
+    mapCamposExc["id_tarifa_precio_base"] = "tarPrecBase";
     mapCamposExc["id_tarifa_precios_tpvext"] = "tarPrecTEx";
     mapCamposExc["id_tarifa_visor_precios"] = "tarVisor";
     mapCamposExc["id_tipo_contingente"] = "arbTipoCon";
@@ -156,7 +159,6 @@ class MapExcepciones {
     mapCamposExc["fabricacion.id_almacen_origen"] = "almOrig";
     mapCamposExc["fabricacion.id_fabricacion_cfg"] = "fabCnCfg";
     mapCamposExc["fabricacion.id_fabricacion_grupo"] = "fabCnGrp";
-    mapCamposExc["fabricacion_grupo.id_delegacion"] = "deleg";
     mapCamposExc["fabricacionx.id_fabricacion"] = "fabCn";
     mapCamposExc["id_veterinario"] = "veter";
     mapCamposExc["id_veterinario_responsable"] = "veterResp";

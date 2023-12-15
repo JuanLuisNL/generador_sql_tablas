@@ -74,7 +74,7 @@ class GenerarDRowJson {
         String cTablaJoin = rowRel.tablaJoin;
         String cTbl  = Utils.getNameVariable(cTablaJoin).proper;
         String cVarRow = "row${alias.proper}";
-        lstJoinsTablas.add("$cVarRow = map['$alias'] == null ? null :  DRow$cTbl.fromMap(map['$alias']);\n");
+        lstJoinsTablas.add("$cVarRow = map['${alias.toLowerCase()}'] == null ? null :  DRow$cTbl.fromMap(map['${alias.toLowerCase()}']);\n");
         lstVarsRows.add("late DRow$cTbl? $cVarRow;\n");
       }
 
