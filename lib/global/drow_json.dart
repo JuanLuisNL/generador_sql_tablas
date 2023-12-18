@@ -59,23 +59,27 @@ class GenerarDRowJson {
       type = row[1];
 
       if (campo.startsWith("id_")) {
+        String alias = "", cTablaJoin = "" ;
         DRowRelacionesCamposEtc? rowRel = lstRelaciones.firstWhereOrNull((it) => it.tablaOrigen == tablaLower && it.campoID == campo);
         if (rowRel == null) {
-          continue;
-        }
-        String alias = rowRel.alias;
-        if (mapExcepCampos["${rowRel.tablaOrigen}.${rowRel.campoID}"] != null) {
-          alias = mapExcepCampos["${rowRel.tablaOrigen}.${rowRel.campoID}"]!;
-        } else if (mapExcepCampos[rowRel.campoID] != null) {
-          alias = mapExcepCampos[rowRel.campoID]!;
+          Utils.printInfo("tabla: $tablaLower, campo: $campo");
         } else {
-          alias = alias + Utils.getNameVariable(rowRel.campoID.substring(3)).proper; // ? provisional, se irá haciendo poco a poco en relacionestablas
+          alias = rowRel.alias;
+          if (mapExcepCampos["${rowRel.tablaOrigen}.${rowRel.campoID}"] != null) {
+            alias = mapExcepCampos["${rowRel.tablaOrigen}.${rowRel.campoID}"]!;
+          } else if (mapExcepCampos[rowRel.campoID] != null) {
+            alias = mapExcepCampos[rowRel.campoID]!;
+          } else {
+            alias = alias + Utils
+                .getNameVariable(rowRel.campoID.substring(3))
+                .proper; // ? provisional, se irá haciendo poco a poco en relacionestablas
+          }
+          cTablaJoin = rowRel.tablaJoin;
+          String cTbl  = Utils.getNameVariable(cTablaJoin).proper;
+          String cVarRow = "row${alias.proper}";
+          lstJoinsTablas.add("$cVarRow = map['${alias.toLowerCase()}'] == null ? null :  DRow$cTbl.fromMap(map['${alias.toLowerCase()}']);\n");
+          lstVarsRows.add("late DRow$cTbl? $cVarRow;\n");
         }
-        String cTablaJoin = rowRel.tablaJoin;
-        String cTbl  = Utils.getNameVariable(cTablaJoin).proper;
-        String cVarRow = "row${alias.proper}";
-        lstJoinsTablas.add("$cVarRow = map['${alias.toLowerCase()}'] == null ? null :  DRow$cTbl.fromMap(map['${alias.toLowerCase()}']);\n");
-        lstVarsRows.add("late DRow$cTbl? $cVarRow;\n");
       }
 
       String cVar = Utils.getNameVariable(campo);

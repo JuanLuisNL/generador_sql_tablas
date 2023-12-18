@@ -182,6 +182,59 @@ class AppTablas {
   static String cChequeos = "chequeos";
   static String cExTrans = "extrans";
 }
+// flutter: tabla: app_blobs, campo: id_origen
+// flutter: tabla: app_blobs, campo: id_blob_origen
+// flutter: Es clase base: art_delegaciones
+// flutter: tabla: art_stocks, campo: id_origen
+// flutter: Es clase base: articulos
+// flutter: tabla: campos_upd_importacion, campo: id_ficha
+// ---------------- flutter: tabla: clientes, campo: id_web_client
+// flutter: Es clase base: clientes
+// flutter: tabla: comanda_visual, campo: id_uds_destino
+// flutter: tabla: conocimientos, campo: id_verial_id
+// ---------------- flutter: tabla: doc_cli, campo: id_web_client
+// flutter: tabla: doc_cli, campo: id_web_nombre
+// flutter: tabla: doc_cli, campo: id_sii_empresa_sucedida
+// flutter: tabla: doc_cli, campo: id_urdi
+// flutter: tabla: doc_pro, campo: id_dua
+// flutter: tabla: doc_pro, campo: id_sii_empresa_sucedida
+// flutter: tabla: efectos, campo: id_origen
+// flutter: tabla: efectos, campo: id_quien
+// flutter: tabla: efectos, campo: id_existente
+// flutter: tabla: empresas, campo: id_sii_certificado
+// flutter: Es clase base: empresas
+// flutter: Es clase base: fabricantes
+// flutter: tabla: fianzas, campo: id_origen
+// flutter: tabla: fianzas, campo: id_quien
+// flutter: Es clase base: impuestos
+// flutter: tabla: instalaciones_clientes, campo: id_instalacion
+// flutter: tabla: instalaciones_clientes, campo: id_cliente
+// flutter: tabla: instalaciones_clientes, campo: id_contacto_cliente
+// flutter: tabla: locks, campo: id_verial
+// flutter: tabla: nombres, campo: id_web_nombre
+// -------------- flutter: tabla: nombres, campo: id_web_client
+// flutter: tabla: pdas_sincronizaciones, campo: id_pda
+// flutter: Es clase base: proveedores
+// flutter: tabla: puestosx, campo: id_como_pago_check_in
+// flutter: tabla: series, campo: id_serie_rectificativa
+// flutter: Es clase base: veterinarios
+// flutter: tabla: vias_pago, campo: id_quien
+// flutter: tabla: xsettings, campo: id_destino
+// flutter: tabla: informes_cfg, campo: id_puesto
+// flutter: tabla: informes_cfg, campo: id_cabecera_informe
+// flutter: tabla: informes_cfg, campo: id_pie_informe
+// flutter: tabla: informes_cfg, campo: id_modelo_design
+// flutter: tabla: informes_cfgx, campo: id_origen
+// flutter: tabla: informes_cfgx, campo: id_puesto
+// flutter: tabla: informes_cfgx, campo: id_dispositivo
+// flutter: tabla: informes_cfgx, campo: id_presets
+// flutter: tabla: locks_g, campo: id_verial
+// flutter: tabla: puestos, campo: id_verificador_precios
+// flutter: tabla: usuarios_perfilesx, campo: id_perfil
+// flutter: tabla: usuarios_respuestas, campo: id_usuario
+// flutter: tabla: xsettings_g, campo: id_destino
+
+
 
 class RelacionesTablas {
   List<DRowRelacionesCamposEtc> lstRelaciones = [];
@@ -193,7 +246,7 @@ class RelacionesTablas {
 
 
 //AEAT
-    addRelation("aeat", "aeatx", "id_a_eat");
+    addRelation("aeat", "aeatx", "id_aeat");
 
 //Agenda
     addRelation("agenda", "agenda", "id_padre");
@@ -545,6 +598,7 @@ class RelacionesTablas {
     addRelation("clientes", "instalaciones", "id_vendedor");
     addRelation("clientes", "instalaciones", "id_mayorista");
     addRelation("clientes", "nombres", "id_ficha");
+    addRelation("clientes", "nombres", "id_web_client"); // JUAN LUIS
     addRelation("clientes", "mandatos", "id_cliente");
     addRelation("clientes", "reservas_rest", "id_cliente");
     addRelation("clientes", "tarifa_hotel_clientes", "id_cliente");
@@ -559,6 +613,7 @@ class RelacionesTablas {
     addRelation("clientes", "fabricacion_grupo", "id_cliente");
     addRelation("clientes", "doc_cli", "id_remitente_cliente");
     addRelation("clientes", "doc_cli", "id_envio_cliente");
+    addRelation("clientes", "doc_cli", "id_web_client"); // JUAN LUIS
     addRelation("clientes", "hst_doc_hotel", "id_cliente");
     addRelation("clientes", "hst_doc_hotel", "id_reservador");
     addRelation("clientes", "hst_doc_hotelx", "id_cliente");
@@ -568,6 +623,7 @@ class RelacionesTablas {
     addRelation("clientes", "clientes", "id_receptor_efactura");
     addRelation("clientes", "clientes", "id_pagador_efactura");
     addRelation("clientes", "clientes", "id_contable_efactura");
+    addRelation("clientes", "clientes", "id_web_client"); // JUAN LUIS
     addRelation("clientes", "objetos_perdidos", "id_cliente_encontrado");
     addRelation("clientes", "objetos_perdidos", "id_cliente_reclamado");
     addRelation("clientes", "bonos_acceso", "id_cliente");
@@ -1422,6 +1478,7 @@ class RelacionesTablas {
     addRelation("puestos", "arqueos", "id_puesto");
     addRelation("puestos", "operaciones_tpv", "id_puesto");
     addRelation("puestos", "xsettings", "id_puesto");
+    addRelation("puestos", "xsettings_g", "id_puesto"); // JUANLUIS
     addRelation("puestos", "data_imp", "id_puesto");
     addRelation("puestos", "doc_cli", "id_puesto");
     addRelation("puestos", "doc_clix", "id_puesto");
