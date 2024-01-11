@@ -48,6 +48,9 @@ class MapExcepciones {
     mapCamposExc["id_criterio_comision"] = "grpCriComis";
     mapCamposExc["id_criterio_tarifa"] = "grpCriTar";
     mapCamposExc["id_cuando_pago"] = "plazos"; //
+    mapCamposExc["id_cta_anticipos"] = "ctasAntic";
+    mapCamposExc["id_cta_pendiente"] = "ctasPend";
+    mapCamposExc["id_cta_salarios"] = "ctasSalar";
     mapCamposExc["id_cuenta_especial"] = "ctasEsp";
     mapCamposExc["id_cuenta_ingresos"] = "ctasIngr";
     mapCamposExc["id_curso"] = "grpCurso";

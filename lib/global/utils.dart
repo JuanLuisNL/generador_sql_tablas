@@ -40,6 +40,13 @@ class Utils {
 
   // ? PAra DRow
   static String getTipoDart(String type) {
+    if (type == "ARRAY_INT") {
+      return 'List<int>';
+    }
+    if (type == "ARRAY_TEXT") {
+      return 'List<String>';
+    }
+
     if (["smallint", "integer"].contains(type)) {
       return 'int';
     }
@@ -60,6 +67,10 @@ class Utils {
   }
 
   static String getDefectoDart(String type) {
+    if (type == "ARRAY_INT" || type == "ARRAY_TEXT") {
+      return '[]';
+    }
+
     if (["smallint", "integer"].contains(type)) {
       return "0";
     }
@@ -97,7 +108,7 @@ class Utils {
   }
 
   static bool isClaseBase(String tabla) {
-    return ["articulos", "proveedores", "clientes", "fabricantes", "art_delegaciones", "veterinarios", "impuestos", "empresas"].contains(tabla);
+    return ["articulos", "proveedores", "clientes", "fabricantes", "art_delegaciones", "veterinarios", "impuestos", "empresas", "cuentas", "personal"].contains(tabla);
   }
 
   static String nombreKeyClasesBase(String tabla, String tablaProper) {

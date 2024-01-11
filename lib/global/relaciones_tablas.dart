@@ -1468,7 +1468,6 @@ class RelacionesTablas {
 
 //Puestos
     addRelation("puestos", AppTablas.cImpresoras, "id_puesto");
-    addRelation("puestos", AppTablas.cXSettings, "id_puesto");
     addRelation("puestos", AppTablas.cInformesCfg, "id_puesto");
     addRelation("puestos", AppTablas.cPID, "id_puesto");
     addRelation("puestos", AppTablas.cInformesCfgX, "id_puesto");
@@ -1478,7 +1477,6 @@ class RelacionesTablas {
     addRelation("puestos", "arqueos", "id_puesto");
     addRelation("puestos", "operaciones_tpv", "id_puesto");
     addRelation("puestos", "xsettings", "id_puesto");
-    addRelation("puestos", "xsettings_g", "id_puesto"); // JUANLUIS
     addRelation("puestos", "data_imp", "id_puesto");
     addRelation("puestos", "doc_cli", "id_puesto");
     addRelation("puestos", "doc_clix", "id_puesto");

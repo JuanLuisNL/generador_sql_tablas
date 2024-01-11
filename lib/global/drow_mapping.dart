@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:generador_sql_tablas/global/extension_metodos.dart';
+import 'package:generador_sql_tablas/global/global.dart';
 import 'package:generador_sql_tablas/global/relaciones_tablas.dart';
 import 'package:generador_sql_tablas/global/utils.dart';
 import 'maps_excepciones.dart';
@@ -8,7 +9,7 @@ class GenerarDRowMapping {
   GenerarDRowMapping(this.tablaLower, this.tablaProper, this.lstRelaciones, this.lstCols, this.aliasTabla);
   final String tablaLower, tablaProper, aliasTabla;
   final List<DRowRelacionesCamposEtc> lstRelaciones;
-  final List<List<dynamic>> lstCols;
+  final List<DRowColsTabla> lstCols;
   String aliasForJoin = "";
 
   late List<String> lstGetsSetsDRowsNew, lstJoinsDRowsNew, lstJoinsTablas;
@@ -55,9 +56,9 @@ class GenerarDRowMapping {
 
   void addItemsFromCols() {
     String campo, type, cPlantilla = "";
-    for (List<dynamic> row in lstCols) {
-      campo = row[0];
-      type = row[1];
+    for (DRowColsTabla row in lstCols) {
+      campo = row.campo;
+      type = row.tipo;
       String cVar = getNameVariableCampo(campo);
 
       // DRowsNew

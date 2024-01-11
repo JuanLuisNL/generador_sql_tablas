@@ -9,7 +9,7 @@ class GenerarTablaSQL {
   GenerarTablaSQL(this.schema, this.tablaLower, this.tablaProper, this.aliasTabla, this.lstRelaciones, this.lstCols);
   final String schema, tablaLower, tablaProper, aliasTabla;
   final List<DRowRelacionesCamposEtc> lstRelaciones;
-  final List<List<dynamic>> lstCols;
+  final List<DRowColsTabla> lstCols;
 
 
 
@@ -144,14 +144,14 @@ class GenerarTablaSQL {
 
   void addItemsFromCols() {
     String campo, type;
-    for (List<dynamic> row in lstCols) {
-      campo = row[0];
-      type = row[1];
+    for (DRowColsTabla row in lstCols) {
+      campo = row.campo;
+      type = row.tipo;
       if (campo == "id") {
         continue;
       }
       String cVar = getNameVariableCampo(campo);
-      String cType = Utils.getTipoSQL(type, row[2] ?? 0, row[3] ?? 0, row[4] ?? 0);
+      String cType = Utils.getTipoSQL(type, row.longitud ?? 0, row.precision ?? 0, row.scale ?? 0);
       String cPlantilla = '$cVar = CampoSQL("$campo", "$cType", oTablaMain: this);';
       String cPlantillaGet = 'CampoSQL get $cVar => (_$cVar ??= CampoSQL("$campo", "$cType", this));\n';
 

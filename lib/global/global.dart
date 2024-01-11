@@ -36,7 +36,7 @@ class CreaClasesTablaAndDRow {
   late List<String> lstJoinsTablas = [];
 
   late List<DRowRelacionesCamposEtc> lstRelaciones = [];
-  List<List<dynamic>> lstCols = [];
+  List<DRowColsTabla> lstCols = [];
   late RelacionesTablas oRelTab;
 
   Future<void> run() async {
@@ -57,11 +57,22 @@ class CreaClasesTablaAndDRow {
     }
     for (var row in GBL.lstTablas) {
       String tabla = row.tablaName;
-      cSQL = "SELECT column_name, data_type, character_maximum_length, numeric_precision_radix, numeric_scale";
+      cSQL = "SELECT column_name, data_type, character_maximum_length, numeric_precision_radix, numeric_scale, udt_name";
       cSQL += " FROM INFORMATION_SCHEMA.COLUMNS";
       cSQL += " WHERE table_name = '$tabla' AND table_schema = '${row.schema}'";
       cSQL += " ORDER BY ordinal_position";
-      lstCols = await GBL.oCn.query(cSQL);
+      PostgreSQLResult result = await GBL.oCn.query(cSQL);
+      lstCols = [];
+      for (List<dynamic> row in result) {
+        lstCols.add(DRowColsTabla(row[0], row[1], row[2], row[3], row[4], row[5]));
+        DRowColsTabla rowLast = lstCols.last;
+        if (rowLast.tipo == "ARRAY" && rowLast.udtName == "_int4") {
+          rowLast.tipo = "ARRAY_INT";
+        }
+        if (rowLast.tipo == "ARRAY" && rowLast.udtName == "_text") {
+          rowLast.tipo = "ARRAY_TEXT";
+        }
+      }
       tablaProper = Utils.getNameVariable(tabla).proper;
       tablaLower = tabla;
       String cFile = getAllNew(row.schema);
@@ -118,4 +129,16 @@ class TablasSQL {
   late final String clave;
   late final String tablaName;
   late final String schema;
+}
+
+
+class DRowColsTabla {
+  DRowColsTabla(this.campo, this.tipo, this.longitud, this.precision, this.scale, this.udtName);
+
+  late String campo;
+  late String tipo;
+  late int? longitud;
+  late int? precision;
+  late int? scale;
+  late String udtName;
 }

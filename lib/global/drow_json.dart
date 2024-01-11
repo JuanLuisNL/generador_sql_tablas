@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:generador_sql_tablas/global/extension_metodos.dart';
+import 'package:generador_sql_tablas/global/global.dart';
 import 'package:generador_sql_tablas/global/relaciones_tablas.dart';
 import 'package:generador_sql_tablas/global/utils.dart';
 
@@ -9,7 +10,7 @@ class GenerarDRowJson {
   GenerarDRowJson(this.tablaLower, this.tablaProper, this.lstRelaciones, this.lstCols);
   final String tablaLower, tablaProper;
   final List<DRowRelacionesCamposEtc> lstRelaciones;
-  final List<List<dynamic>> lstCols;
+  final List<DRowColsTabla> lstCols;
 
   Map<String, List<String>> mapVarsROW = {};
   List<String> lstAsignacionesDRows = [], lstJoinsDRows = [], lstJoinsTablas = [], lstVarsRows = [];
@@ -54,9 +55,9 @@ class GenerarDRowJson {
   void addItemsFromCols() {
     String campo, type;
     Map<String, String> mapExcepCampos = MapExcepciones.initMapCamposExcepciones();
-    for (List<dynamic> row in lstCols) {
-      campo = row[0];
-      type = row[1];
+    for (DRowColsTabla row in lstCols) {
+      campo = row.campo;
+      type = row.tipo;
 
       if (campo.startsWith("id_")) {
         String alias = "", cTablaJoin = "" ;
