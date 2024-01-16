@@ -124,6 +124,10 @@ class MapExcepciones {
     mapCamposExc["id_tipo_tratamiento"] = "grpTipoTrat";
     mapCamposExc["id_transportista"] = "transp";
     mapCamposExc["id_ubicacion"] = "ubica";
+    mapCamposExc["id_estante"] = "est";
+    mapCamposExc["id_articulo"] = "art";
+    mapCamposExc["id_almacen"] = "alm";
+
 
     /// Ultimos: una vez comprobados se ordenan
     mapCamposExc["id_cabecera_informes"] = "infCfgCab";
