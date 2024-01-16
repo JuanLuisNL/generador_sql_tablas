@@ -46,6 +46,12 @@ class Utils {
     if (type == "ARRAY_TEXT") {
       return 'List<String>';
     }
+    if (type == "ARRAY_JSONB") {
+      return 'List<dynamic>';
+    }
+    if (type == "ARRAY_JSON") {
+      return 'List<dynamic>';
+    }
 
     if (["smallint", "integer"].contains(type)) {
       return 'int';
@@ -108,7 +114,7 @@ class Utils {
   }
 
   static bool isClaseBase(String tabla) {
-    return ["articulos", "proveedores", "clientes", "fabricantes", "art_delegaciones", "veterinarios", "impuestos", "empresas", "cuentas", "personal"].contains(tabla);
+    return ["articulos", "proveedores", "clientes", "fabricantes", "art_delegaciones", "veterinarios", "impuestos", "empresas", "cuentas", "personal", "almacenes"].contains(tabla);
   }
 
   static String nombreKeyClasesBase(String tabla, String tablaProper) {

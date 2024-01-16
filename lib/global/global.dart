@@ -48,7 +48,10 @@ class CreaClasesTablaAndDRow {
     lstRelaciones = oRelTab.init();
     GBL.lstTablas = [];
     String cSQL =
-        "SELECT table_name, table_schema FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE' AND (table_schema = 'public' OR table_schema = 'emp0001') ORDER BY table_schema, table_name";
+        ''' SELECT table_name, table_schema 
+          FROM INFORMATION_SCHEMA.TABLES 
+          WHERE table_type = 'BASE TABLE' AND (table_schema = 'public' OR table_schema = 'emp0001') 
+          ORDER BY table_schema, table_name''';
     List<List<dynamic>> lstTablasSQL = await GBL.oCn.query(cSQL);
 
     for (var row in lstTablasSQL) {
@@ -71,6 +74,12 @@ class CreaClasesTablaAndDRow {
         }
         if (rowLast.tipo == "ARRAY" && rowLast.udtName == "_text") {
           rowLast.tipo = "ARRAY_TEXT";
+        }
+        if (rowLast.tipo == "ARRAY" && rowLast.udtName == "_jsonb") {
+          rowLast.tipo = "ARRAY_JSONB";
+        }
+        if (rowLast.tipo == "ARRAY" && rowLast.udtName == "_json") {
+          rowLast.tipo = "ARRAY_JSON";
         }
       }
       tablaProper = Utils.getNameVariable(tabla).proper;
