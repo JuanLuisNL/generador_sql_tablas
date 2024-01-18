@@ -40,11 +40,12 @@ class GenerarTablaSQL {
 
     /// CONSTRUCTOR JOINS
     if (!Utils.isClaseBase(tablaLower)) {
-      cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasColumn, TablaSQL? oTablaSelectJoin, {String cJoinManual = ''}) {\n";
+      cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasColumn, TablaSQL? oTablaSelectJoin, {String cJoinManual = '', required List<String> lstDep}) {\n";
       cCad += "initCampos();\n";
       cCad += "campoJoin = cCampoJoin;\n";
       cCad += "aliasColumn = cAliasColumn;\n";
       cCad += "joinManual = cJoinManual;\n";
+      cCad += "lstDependencias = lstDep;\n";
       cCad += "oTablaJoin = oTablaSelectJoin;\n}\n\n";
 
       /// CONSTRUCTOR
@@ -134,7 +135,7 @@ class GenerarTablaSQL {
         mapVarsTblJoins[key] = lstTmp;
       }
 
-      String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ?? $tipoDatoTabla.joins('${rowRel.campoID}', '$alias', this);\n";
+      String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ?? $tipoDatoTabla.joins('${rowRel.campoID}', '$alias', this, lstDep: const []);\n";
 //      String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ?? $tipoDatoTabla.joins('${rowRel.campoID}', this);\n";
       lstGetsTblJoins.add(cTablaJoinGet);
 

@@ -126,7 +126,10 @@ class MapExcepciones {
     mapCamposExc["id_ubicacion"] = "ubica";
     mapCamposExc["id_estante"] = "est";
     mapCamposExc["id_articulo"] = "art";
+    mapCamposExc["id_cliente"] = "cli";
     mapCamposExc["id_almacen"] = "alm";
+    mapCamposExc["id_cta_hpdeudora"] = "ctaHpDeud";
+    mapCamposExc["id_cta_hpacreedora"] = "ctaHpAcre";
 
 
     /// Ultimos: una vez comprobados se ordenan
