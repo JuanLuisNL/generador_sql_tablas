@@ -98,7 +98,7 @@ class GenerarTablaSQL {
            TablasSQL row = lstTmp.first;
 
           if (Utils.isClaseBase(cTablaJoin)) {
-            mapImports[cTablaJoin] = "import '../modelos_ext/${cTablaJoin}_ext.dart';";
+            mapImports[cTablaJoin] = "import '../tablas/$cTablaJoin/${cTablaJoin}_ext.dart';";
           } else {
             String cNexo = (row.schema == "public") ? "grp" : "emp";
             mapImports[cTablaJoin] = "import '${row.tablaName}_$cNexo.dart';";
@@ -108,7 +108,7 @@ class GenerarTablaSQL {
         }
       } else {
         if (Utils.isClaseBase(tablaLower)) {
-          mapImports[cTablaJoin] = "import '../modelos_ext/${cTablaJoin}_ext.dart';";
+          mapImports[cTablaJoin] = "import '../tablas/$cTablaJoin/${cTablaJoin}_ext.dart';";
         }
       }
       // ? EJEMPLO
