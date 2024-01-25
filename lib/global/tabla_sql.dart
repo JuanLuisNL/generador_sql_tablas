@@ -135,8 +135,7 @@ class GenerarTablaSQL {
         mapVarsTblJoins[key] = lstTmp;
       }
 
-      String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ?? $tipoDatoTabla.joins('${rowRel.campoID}', '$alias', this, lstDep: const []);\n";
-//      String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ?? $tipoDatoTabla.joins('${rowRel.campoID}', this);\n";
+      String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ??= $tipoDatoTabla.joins('${rowRel.campoID}', '$alias', this, lstDep: const []);\n";
       lstGetsTblJoins.add(cTablaJoinGet);
 
       /// TODO Ver los joins manuales. habrá que ver cuales son realmente

@@ -80,7 +80,7 @@ class Utils {
     if (["smallint", "integer"].contains(type)) {
       return "0";
     }
-    if (type.contains("varying") || type.contains("text")) {
+    if (type.startsWith("varying") || type.startsWith("text")) {
       return "''";
     }
 
@@ -90,6 +90,10 @@ class Utils {
     }
 
     if (type.contains("timestamp") || type.contains("date") || type.contains("time")) {
+      return "";
+    }
+
+    if (type.contains("bit varying")) {
       return "";
     }
 
@@ -114,7 +118,7 @@ class Utils {
   }
 
   static bool isClaseBase(String tabla) {
-    return ["articulos", "proveedores", "clientes", "fabricantes", "art_delegaciones", "veterinarios", "impuestos", "empresas", "cuentas", "personal", "almacenes", "estantes", "art_stocks"].contains(tabla);
+    return ["articulos", "proveedores", "clientes", "fabricantes", "art_delegaciones", "veterinarios", "impuestos", "empresas", "cuentas", "personal", "almacenes", "estantes", "art_stocks", "doc_pro", "tecnicos"].contains(tabla);
   }
 
   static String nombreKeyClasesBase(String tabla, String tablaProper) {
