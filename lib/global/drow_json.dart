@@ -63,6 +63,10 @@ class GenerarDRowJson {
         String alias = "", cTablaJoin = "" ;
         DRowRelacionesCamposEtc? rowRel = lstRelaciones.firstWhereOrNull((it) => it.tablaOrigen == tablaLower && it.campoID == campo);
         if (rowRel == null) {
+          // no estan en relaciones, son excepciones?? habrá que verlo
+          // Por ejemplo, estos pueden apuntar a varios sitios, hay que studiar cada caso
+          // tabla: app_blobs, campo: id_origen
+          // tabla: app_blobs, campo: id_blob_origen
           Utils.printInfo("tabla: $tablaLower, campo: $campo");
         } else {
           alias = rowRel.alias;
