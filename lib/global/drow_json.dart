@@ -116,6 +116,8 @@ class GenerarDRowJson {
       String cDef = Utils.getDefectoDart(type);
       if (cTipoDart == "double") {
         cPlantilla = '$cVar = double.tryParse(map["$campo"].toString()) ?? 0;\n';
+      } else if (cTipoDart == "List<int>") {
+        cPlantilla = '$cVar = (map["$campo"] as List).cast<int>();\n';
       } else if (cDef == "") {
         cPlantilla = '$cVar = map["$campo"];\n';
       } else {

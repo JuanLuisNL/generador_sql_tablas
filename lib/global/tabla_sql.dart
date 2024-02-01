@@ -178,8 +178,11 @@ class GenerarTablaSQL {
     }
 
     if (tablaLower == "app_blobs") {
-      cCad += "import 'dart:typed_data';\n";
       cCad += "import 'package:flutter/material.dart';\n";
+    }
+
+    if (lstCols.any((it) => it.tipo == "Uint8List")) {
+      cCad += "import 'dart:typed_data';\n";
     }
 
     mapImports.forEach((key, value) {
