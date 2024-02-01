@@ -161,6 +161,14 @@ class MapExcepciones {
     mapCamposExc["id_certificado_pdf"] = "blobsCertPdf";
     mapCamposExc["id_cfg_fichero_policia"] = "cfgFichPol";
     mapCamposExc["id_cliente_varios"] = "cliVarios";
+    mapCamposExc["id_remitente_cliente"] = "cliRemit";
+    mapCamposExc["id_envio_cliente"] = "cliEnvio";
+    mapCamposExc["id_web_client"] = "cliWeb";
+    mapCamposExc["id_cliente_agencia"] = "cliAg";
+    mapCamposExc["id_remitente_contacto"] = "contacRemit"; // nombres
+    mapCamposExc["id_envio_contacto"] = "contacEnvio";
+    mapCamposExc["id_asiento"] = "asi";
+    mapCamposExc["id_personal"] = "pers";
 
 
     // NO ORDENAR CON LO DE ARRIBA
@@ -177,6 +185,8 @@ class MapExcepciones {
     mapCamposExc["proveedores.id_ficha_fiscal"] = "prvdFiscal";
     mapCamposExc["provincias.id_grupo"] = "provinGrp";
     mapCamposExc["provincias.id_region"] = "provinReg";
+    mapCamposExc["doc_cli.id_devolucion"] = "dcDev";
+
 
 
     return mapCamposExc;

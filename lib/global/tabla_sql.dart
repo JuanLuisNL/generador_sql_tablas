@@ -7,11 +7,10 @@ import 'maps_excepciones.dart';
 
 class GenerarTablaSQL {
   GenerarTablaSQL(this.schema, this.tablaLower, this.tablaProper, this.aliasTabla, this.lstRelaciones, this.lstCols);
+
   final String schema, tablaLower, tablaProper, aliasTabla;
   final List<DRowRelacionesCamposEtc> lstRelaciones;
   final List<DRowColsTabla> lstCols;
-
-
 
   late List<String> lstCamposSQLVars, lstGetsCamposSQL, lstJoinsTablas, lstAsignacionesCamposSQL;
   late List<String> lstGetsTblJoins;
@@ -50,7 +49,6 @@ class GenerarTablaSQL {
 
       /// CONSTRUCTOR
       cCad += "${tablaProper}SQL() {\n initCampos();\n}\n\n";
-
     }
 
     /// INITCAMPOS
@@ -68,9 +66,14 @@ class GenerarTablaSQL {
       cCad += Utils.getDeclaracionVars(key, value);
     });
 
-      cCad += "/// CamposSQL Gets\n";
+    cCad += "/// CamposSQL Gets\n";
     cCad += "CampoSQL get all => CampoSQL('*', '', this);\n";
     cCad += lstGetsCamposSQL.join();
+    if (lstCols.any((it) => it.campo == "nombre") && lstCols.any((it) => it.campo == "apellido1") && lstCols.any((it) => it.campo == "apellido2")) {
+      cCad += "\nCampoSQL? _nombreApellidos;\n";
+      cCad += "CampoSQL get nombreApellidos => _nombreApellidos ??= UtilsData.nombreApellidos(this, nombre, apellido1, apellido2);\n";
+    }
+
     cCad += "/// JOINS Gets\n";
     cCad += lstGetsTblJoins.join();
 
@@ -95,7 +98,7 @@ class GenerarTablaSQL {
       if (cTablaJoin != tablaLower) {
         List<TablasSQL> lstTmp = GBL.lstTablas.where((it) => it.tablaName == cTablaJoin).toList();
         if (lstTmp.length == 1) {
-           TablasSQL row = lstTmp.first;
+          TablasSQL row = lstTmp.first;
 
           if (Utils.isClaseBase(cTablaJoin)) {
             mapImports[cTablaJoin] = "import '../tablas/$cTablaJoin/${cTablaJoin}_ext.dart';";
@@ -169,6 +172,10 @@ class GenerarTablaSQL {
     cCad += "import '../sql/campos_sql.dart';\n";
     cCad += "import '../sql/tablas_sql.dart';\n";
     cCad += "import '../sql/drow_mapping.dart';\n";
+
+    if (lstCols.any((it) => it.campo == "nombre") && lstCols.any((it) => it.campo == "apellido1") && lstCols.any((it) => it.campo == "apellido2")) {
+      cCad += "import '../comun/utils_data.dart';\n";
+    }
 
     mapImports.forEach((key, value) {
       cCad += "$value\n";
