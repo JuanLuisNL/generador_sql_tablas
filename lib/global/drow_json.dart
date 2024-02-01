@@ -32,12 +32,22 @@ class GenerarDRowJson {
     });
     cCad += "\n";
     cCad += lstVarsRows.join("");
+    if (tablaLower == "app_blobs") {
+     cCad += "Uint8List? recurso; //  Uint8List.fromList([]);\n";
+     cCad += "Image? image;\n";
+    }
     cCad += "\n";
 
     cCad += "DRow$tablaProper$cNexo.fromMap(Map<String, dynamic>? map) {\n";
     cCad += "if (map == null) return;\n";
     cCad += "try {\n";
     cCad += lstAsignacionesDRows.join("");
+    /// Excepcion AppBlobs
+    if (tablaLower == "app_blobs") {
+      cCad += "if(map['recurso'] != null) {\n";
+      cCad += "recurso = map['recurso'] as Uint8List;\n";
+      cCad += "image = Image.memory(recurso!);\n}\n";
+    }
     cCad += "\n\n";
     cCad += lstJoinsTablas.join("");
     cCad += '} catch (e, stack) {\n';
@@ -58,6 +68,10 @@ class GenerarDRowJson {
     for (DRowColsTabla row in lstCols) {
       campo = row.campo;
       type = row.tipo;
+
+      if (tablaLower == "app_blobs" && campo == "recurso") {
+        continue;
+      }
 
       if (campo.startsWith("id_")) {
         String alias = "", cTablaJoin = "" ;

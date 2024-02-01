@@ -85,6 +85,10 @@ class Utils {
       return "";
     }
 
+    if (type == "bytea") {
+      return "Uint8List.fromList([])";
+    }
+
     if (type.startsWith("character varying") || type.startsWith("text")) {
       return "''";
     }

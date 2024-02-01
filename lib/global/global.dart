@@ -81,6 +81,9 @@ class CreaClasesTablaAndDRow {
         if (rowLast.tipo == "ARRAY" && rowLast.udtName == "_json") {
           rowLast.tipo = "ARRAY_JSON";
         }
+        if (rowLast.tipo == "bytea") {
+          rowLast.tipo = "Uint8List";
+        }
       }
       tablaProper = Utils.getNameVariable(tabla).proper;
       tablaLower = tabla;

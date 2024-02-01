@@ -177,6 +177,11 @@ class GenerarTablaSQL {
       cCad += "import '../comun/utils_data.dart';\n";
     }
 
+    if (tablaLower == "app_blobs") {
+      cCad += "import 'dart:typed_data';\n";
+      cCad += "import 'package:flutter/material.dart';\n";
+    }
+
     mapImports.forEach((key, value) {
       cCad += "$value\n";
     });
