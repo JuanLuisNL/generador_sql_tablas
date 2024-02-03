@@ -26,7 +26,7 @@ class GenerarDRowJson {
 
   String generarClaseDRowJson() {
     String cNexo = (Utils.isClaseBase(tablaLower)) ? "Part" : "";
-    String cCad = "class DRow$tablaProper$cNexo {\n";
+    String cCad = "class DRow$tablaProper$cNexo extends DRowBasico {\n";
     mapVarsROW.forEach((key, value) {
       cCad += Utils.getDeclaracionVars(key, value);
     });
@@ -38,7 +38,7 @@ class GenerarDRowJson {
     }
     cCad += "\n";
 
-    cCad += "DRow$tablaProper$cNexo.fromMap(Map<String, dynamic>? map) {\n";
+    cCad += "DRow$tablaProper$cNexo.fromMap(Map<String, dynamic>? map, {bool lAddMap = false}) {\n";
     cCad += "if (map == null) return;\n";
     cCad += "try {\n";
     cCad += lstAsignacionesDRows.join("");
@@ -48,7 +48,8 @@ class GenerarDRowJson {
       cCad += "recurso = map['recurso'] as Uint8List;\n";
       cCad += "image = Image.memory(recurso!);\n}\n";
     }
-    cCad += "\n\n";
+    cCad += "\n";
+    cCad += "if (lAddMap) addMaps(map);\n";
     cCad += lstJoinsTablas.join("");
     cCad += '} catch (e, stack) {\n';
     cCad += 'Utils.printError(e, stack, mapInfo: {"Proceso": "DRowArticulo.fromMap"});\n}\n}\n';
