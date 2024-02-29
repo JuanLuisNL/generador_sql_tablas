@@ -53,6 +53,7 @@ class MapExcepciones {
     mapCamposExc["id_cta_salarios"] = "ctasSalar";
     mapCamposExc["id_cuenta_especial"] = "ctasEsp";
     mapCamposExc["id_cuenta_ingresos"] = "ctasIngr";
+    mapCamposExc["id_cuenta"] = "ctas";
     mapCamposExc["id_curso"] = "grpCurso";
     mapCamposExc["id_delegacion"] = "deleg";
     mapCamposExc["id_empresa"] = "emp";
@@ -69,6 +70,7 @@ class MapExcepciones {
     mapCamposExc["id_grupo_proveedores"] = "arbGrpProv"; // CentroCostesDefectoSQL
     mapCamposExc["id_grupo_series_defecto"] = "grpSerDef";
     mapCamposExc["id_grupo_spa"] = "grpSpa";
+    mapCamposExc["id_grupo_ine"] = "grpINE";
     mapCamposExc["id_grupofactura"] = "grpFac"; // CartaGruposSQL
     mapCamposExc["id_impuesto"] = "imp";
     mapCamposExc["id_ingrediente"] = "artIngr"; //ArtIngredientesSQL
@@ -89,10 +91,12 @@ class MapExcepciones {
     mapCamposExc["id_metodo_tarjeta_kiosko_hotel"] = "metPagTarKiosko";
     mapCamposExc["id_metodo_telepedido"] = "metPagTele";
     mapCamposExc["id_moneda"] = "monedas"; //
-    mapCamposExc["id_padre"] = "ccArbXPadre";
+    mapCamposExc["id_padre"] = "tsPadre";
     mapCamposExc["id_pagador_efactura"] = "cliPagFac";
     mapCamposExc["id_pais"] = "paises";
     mapCamposExc["id_pais_nacionalidad"] = "paisesNac";
+    mapCamposExc["id_pais_nif"] = "paisesNIF";
+
     mapCamposExc["id_perfil_campos_aux"] = "perfCampAux";
     mapCamposExc["id_proveedor"] = "prvd";
     mapCamposExc["id_provincia"] = "provin";
@@ -169,6 +173,8 @@ class MapExcepciones {
     mapCamposExc["id_envio_contacto"] = "contacEnvio";
     mapCamposExc["id_asiento"] = "asi";
     mapCamposExc["id_personal"] = "pers";
+    mapCamposExc["id_grupo_series"] = "grpSer";
+
 
 
     // NO ORDENAR CON LO DE ARRIBA

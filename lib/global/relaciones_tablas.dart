@@ -1880,7 +1880,7 @@ class RelacionesTablas {
     mapAlias["grupos"] = "grp";
     mapAlias["grupos_comisiones"] = "grpComis";
     mapAlias["grupos_g"] = "grpG";
-    mapAlias["grupos_series"] = "grpSeries";
+    mapAlias["grupos_series"] = "grpSer";
     mapAlias["habitaciones"] = "habit";
     mapAlias["habitaciones_props"] = "habProps";
     mapAlias["hoja"] = "hoja";

@@ -89,7 +89,7 @@ class CreaClasesTablaAndDRow {
       tablaLower = tabla;
       String cFile = getAllNew(row.schema);
       String cNexo = (row.schema == "public") ? "grp" : "emp";
-      await File("c:\\Kotlin\\GestionVerial\\gestion_verial\\lib\\data\\modelos_tablas\\${tablaLower}_$cNexo.dart").writeAsString(cFile);
+      await File("c:\\Kotlin\\Gestionverial\\lib\\data\\modelos_tablas\\${tablaLower}_$cNexo.dart").writeAsString(cFile);
     }
   }
 
