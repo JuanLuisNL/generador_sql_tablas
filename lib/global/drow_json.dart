@@ -39,7 +39,7 @@ class GenerarDRowJson {
     cCad += "\n";
 
     cCad += "DRow$tablaProper$cNexo.fromMap(Map<String, dynamic>? map, {bool lAddMap = false}) {\n";
-    cCad += "if (map == null) return;\n";
+    cCad += "if (map == null || map.isEmpty) return;\n";
     cCad += "try {\n";
     cCad += lstAsignacionesDRows.join("");
     /// Excepcion AppBlobs

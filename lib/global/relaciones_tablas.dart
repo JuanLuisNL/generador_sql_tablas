@@ -221,6 +221,7 @@ class AppTablas {
 // flutter: tabla: vias_pago, campo: id_quien
 // flutter: tabla: xsettings, campo: id_destino
 // flutter: tabla: informes_cfg, campo: id_puesto
+// flutter: tabla: informes_cfg, campo: id_puesto
 // flutter: tabla: informes_cfg, campo: id_cabecera_informe
 // flutter: tabla: informes_cfg, campo: id_pie_informe
 // flutter: tabla: informes_cfg, campo: id_modelo_design
@@ -829,6 +830,8 @@ class RelacionesTablas {
     addRelation("dispositivos", AppTablas.cPuestos, "id_impresora3_comandero");
     addRelation("dispositivos", AppTablas.cPuestos, "id_terminal_cobro");
     addRelation("dispositivos", AppTablas.cPuestos, "id_etiquetadora");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_verificador_precios");
+    addRelation("dispositivos", AppTablas.cPuestos, "id_scanner_verificador");
     addRelation("dispositivos", "areas_venta", "id_impresora_facturas");
     addRelation("dispositivos", "areas_venta", "id_impresora_albaranes");
     addRelation("dispositivos", "areas_venta", "id_impresora_tickets");

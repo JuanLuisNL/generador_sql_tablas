@@ -135,6 +135,27 @@ class MapExcepciones {
     mapCamposExc["id_cta_hpdeudora"] = "ctaHpDeud";
     mapCamposExc["id_cta_hpacreedora"] = "ctaHpAcre";
     mapCamposExc["id_art_lotes"] = "artLot";
+    mapCamposExc["id_usuario"] = "usr";
+    mapCamposExc["id_impresora"] = "disposImp";
+    mapCamposExc["id_ticadora"] = "disposTic";
+    mapCamposExc["id_visor"] = "disposVisor";
+    mapCamposExc["id_scanner_barras"] = "disposScanBarras";
+    mapCamposExc["id_scanner_mag"] = "disposScanMag";
+    mapCamposExc["id_bascula"] = "disposBasc";
+    mapCamposExc["id_smart_card"] = "disposSmartCard";
+    mapCamposExc["id_srv_in_hova1"] = "disposSrvInHova1";
+    mapCamposExc["id_srv_in_hova2"] = "disposSrvInHova2";
+    mapCamposExc["id_firma_manuscrita"] = "disposFirmaMan";
+    mapCamposExc["id_impresora1_comandero"] = "disposImp1Com";
+    mapCamposExc["id_impresora2_comandero"] = "disposImp2Com";
+    mapCamposExc["id_impresora3_comandero"] = "disposImp3Com";
+    mapCamposExc["id_terminal_cobro"] = "disposTermCob";
+    mapCamposExc["id_etiquetadora"] = "disposEtiq";
+    mapCamposExc["id_verificador_precios"] = "disposVerPrec";
+    mapCamposExc["id_scanner_verificador"] = "disposScanVer";
+
+
+
 
 
 
@@ -174,6 +195,10 @@ class MapExcepciones {
     mapCamposExc["id_asiento"] = "asi";
     mapCamposExc["id_personal"] = "pers";
     mapCamposExc["id_grupo_series"] = "grpSer";
+    mapCamposExc["id_dispositivo"] = "dispos";
+    mapCamposExc["id_puesto"] = "puesto";
+
+
 
 
 
