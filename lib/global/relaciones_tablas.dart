@@ -1931,8 +1931,8 @@ class RelacionesTablas {
     mapAlias["proveedores"] = "prvd";
     mapAlias["proveedoresx"] = "prvdX";
     mapAlias["provincias"] = "provin";
-    mapAlias["puestos"] = "puestos";
-    mapAlias["puestos"] = "puestos";
+    mapAlias["puestos"] = "ptos";
+    mapAlias["puestosx"] = "ptosx";
     mapAlias["recetas"] = "recetas";
     mapAlias["recursos_actos"] = "recAct";
     mapAlias["remesas"] = "remesas";

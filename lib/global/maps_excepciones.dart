@@ -158,9 +158,14 @@ class MapExcepciones {
     mapCamposExc["id_cfg_fondo"] = "cfgFondo";
     mapCamposExc["id_cfg_menu"] = "cfgMenu";
     mapCamposExc["id_cuenta_email"] = "ctasEmail";
-
-
-
+    mapCamposExc["id_area_venta1"] = "av1";
+    mapCamposExc["id_area_venta2"] = "av2";
+    mapCamposExc["id_area_venta3"] = "av3";
+    mapCamposExc["id_area_venta4"] = "av4";
+    mapCamposExc["id_area_venta5"] = "av5";
+    mapCamposExc["id_area_venta6"] = "av6";
+    mapCamposExc["id_area_venta"] = "av";
+    mapCamposExc["id_area_compra"] = "ac";
 
 
     /// Ultimos: una vez comprobados se ordenan

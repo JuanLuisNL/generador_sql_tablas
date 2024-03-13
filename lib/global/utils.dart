@@ -134,7 +134,7 @@ class Utils {
     return [
       "areas_venta", "areas_compra", "articulos", "proveedores", "clientes", "fabricantes", "art_delegaciones", "veterinarios", //
       "impuestos", "empresas", "cuentas", "personal", "almacenes", "estantes", "art_stocks", //
-      "doc_pro", "tecnicos", "perfiles", "contactos_externos", "transportistas", "usuarios"
+      "doc_pro", "tecnicos", "perfiles", "contactos_externos", "transportistas", "usuarios", "puestos"
     ].contains(tabla);
   }
 
