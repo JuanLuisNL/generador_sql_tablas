@@ -84,6 +84,11 @@ class CreaClasesTablaAndDRow {
         if (rowLast.tipo == "bytea") {
           rowLast.tipo = "Uint8List";
         }
+
+        if (rowLast.tipo == "jsonb" || rowLast.tipo == "json") {
+          rowLast.tipo = rowLast.tipo.toUpperCase();
+        }
+
       }
       tablaProper = Utils.getNameVariable(tabla).proper;
       tablaLower = tabla;

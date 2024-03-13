@@ -154,6 +154,10 @@ class MapExcepciones {
     mapCamposExc["id_verificador_precios"] = "disposVerPrec";
     mapCamposExc["id_scanner_verificador"] = "disposScanVer";
 
+    mapCamposExc["id_cajon"] = "cajon";
+    mapCamposExc["id_cfg_fondo"] = "cfgFondo";
+    mapCamposExc["id_cfg_menu"] = "cfgMenu";
+    mapCamposExc["id_cuenta_email"] = "ctasEmail";
 
 
 
@@ -217,6 +221,7 @@ class MapExcepciones {
     mapCamposExc["provincias.id_grupo"] = "provinGrp";
     mapCamposExc["provincias.id_region"] = "provinReg";
     mapCamposExc["doc_cli.id_devolucion"] = "dcDev";
+    mapCamposExc["usuarios.id_perfil"] = "usrPerf";
 
 
 

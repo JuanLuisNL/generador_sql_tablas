@@ -1956,6 +1956,7 @@ class RelacionesTablas {
     mapAlias["turnos"] = "turnos";
     mapAlias["ubicaciones"] = "ubic";
     mapAlias["usuarios"] = "usr";
+    mapAlias["usuariosx"] = "usrX";
     mapAlias["usuarios_perfiles"] = "usrPerf";
     mapAlias["vehiculos"] = "vehiculos";
     mapAlias["veterinarios"] = "veter";

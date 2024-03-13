@@ -53,6 +53,10 @@ class Utils {
       return 'List<dynamic>';
     }
 
+    if (type.contains("JSONB") || type.contains("JSON")) {
+      return 'Map<String, dynamic>';
+    }
+
     if (["smallint", "integer"].contains(type)) {
       return 'int';
     }
@@ -81,11 +85,15 @@ class Utils {
       return "0";
     }
 
+    if (type.contains("JSONB") || type.contains("JSON")) {
+      return "{}";
+    }
+
     if (type.startsWith("bit varying")) {
       return "";
     }
 
-    if (type == "bytea") {
+    if (type == "Uint8List") {
       return "Uint8List.fromList([])";
     }
 
@@ -126,7 +134,7 @@ class Utils {
     return [
       "areas_venta", "areas_compra", "articulos", "proveedores", "clientes", "fabricantes", "art_delegaciones", "veterinarios", //
       "impuestos", "empresas", "cuentas", "personal", "almacenes", "estantes", "art_stocks", //
-      "doc_pro", "tecnicos", "perfiles", "contactos_externos", "transportistas"
+      "doc_pro", "tecnicos", "perfiles", "contactos_externos", "transportistas", "usuarios"
     ].contains(tabla);
   }
 

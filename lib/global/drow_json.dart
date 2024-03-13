@@ -97,7 +97,9 @@ class GenerarDRowJson {
           cTablaJoin = rowRel.tablaJoin;
           String cTbl  = Utils.getNameVariable(cTablaJoin).proper;
           String cVarRow = "row${alias.proper}";
-          lstJoinsTablas.add("$cVarRow = DRow$cTbl.fromMap(getMapFromMap(map, '${alias.toLowerCase()}'));\n");
+          /// Otra forma si es necesario, 01/03/2024
+          // lstJoinsTablas.add("$cVarRow = DRow$cTbl.fromMap(getMapFromMap(map, '${alias.toLowerCase()}'));\n");
+          lstJoinsTablas.add("$cVarRow = DRow$cTbl.fromMap(map['${alias.toLowerCase()}']);\n");
           lstVarsRows.add("late DRow$cTbl $cVarRow;\n");
         }
       }
@@ -118,7 +120,7 @@ class GenerarDRowJson {
       if (cTipoDart == "double") {
         cPlantilla = '$cVar = double.tryParse(map["$campo"].toString()) ?? 0;\n';
       } else if (cTipoDart == "List<int>") {
-        cPlantilla = '$cVar = (map["$campo"] as List).cast<int>();\n';
+        cPlantilla = '$cVar = ((map["$campo"] ?? []) as List).cast<int>();\n';
       } else if (cDef == "") {
         cPlantilla = '$cVar = map["$campo"];\n';
       } else {
