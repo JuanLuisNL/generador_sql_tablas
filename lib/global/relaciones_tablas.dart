@@ -220,15 +220,7 @@ class AppTablas {
 // flutter: Es clase base: veterinarios
 // flutter: tabla: vias_pago, campo: id_quien
 // flutter: tabla: xsettings, campo: id_destino
-// flutter: tabla: informes_cfg, campo: id_puesto
-// flutter: tabla: informes_cfg, campo: id_puesto
-// flutter: tabla: informes_cfg, campo: id_cabecera_informe
-// flutter: tabla: informes_cfg, campo: id_pie_informe
-// flutter: tabla: informes_cfg, campo: id_modelo_design
-// flutter: tabla: informes_cfgx, campo: id_origen
-// flutter: tabla: informes_cfgx, campo: id_puesto
-// flutter: tabla: informes_cfgx, campo: id_dispositivo
-// flutter: tabla: informes_cfgx, campo: id_presets
+
 // flutter: tabla: locks_g, campo: id_verial
 // flutter: tabla: puestos, campo: id_verificador_precios
 // flutter: tabla: usuarios_perfilesx, campo: id_perfil
@@ -239,11 +231,10 @@ class AppTablas {
 
 class RelacionesTablas {
   List<DRowRelacionesCamposEtc> lstRelaciones = [];
-  Map<String, String> mapAlias = {};
+  Map<String, String> get mapAlias => getAliasTablas();
   List<String> lstTmp = [];
 
   List<DRowRelacionesCamposEtc>  init() {
-    getAliasTablas();
 
 
 //AEAT
@@ -453,6 +444,7 @@ class RelacionesTablas {
     addRelation("articulos", "articulos", "id_articulo_eco_tasas");
     addRelation("articulos", "tarifas_docx", "id_articulo");
     addRelation("articulos", "logi_unidadesx", "id_articulo");
+    addRelation("articulos", "logi_formas", "id_articulo_portes_web");
     addRelation("articulos", "articulos", "id_articulo_envase");
     addRelation("articulos", "suscripciones", "id_primer_numero");
     addRelation("articulos", "cfg_central_reservas_cargos_xpersona", "id_cargo");
@@ -1166,11 +1158,6 @@ class RelacionesTablas {
     addRelation("incidencias_l", AppTablas.cIncidenciasX, "id_incidencia");
 
 //InformesCfg
-    addRelation("informes_cfg", AppTablas.cInformesCfgX, "id_origen");
-    addRelation("informes_cfg", AppTablas.cInformesCfgX, "id_presets");
-    addRelation("informes_cfg", AppTablas.cInformesCfg, "id_cabecera_informe");
-    addRelation("informes_cfg", AppTablas.cInformesCfg, "id_pie_informe");
-    addRelation("informes_cfg", AppTablas.cInformesCfg, "id_modelo_design");
     addRelation("informes_cfg", "delegaciones", "id_cabecera_informes");
     addRelation("informes_cfg", "delegaciones", "id_pie_informes");
     addRelation("informes_cfg", "delegaciones", "id_cabecera_doc_a4");
@@ -1199,8 +1186,18 @@ class RelacionesTablas {
     addRelation("informes_cfg", "areas_venta", "id_modelo_pedidos_plantilla");
     addRelation("informes_cfg", "areas_venta", "id_modelo_presupuestos_plantilla");
     addRelation("informes_cfg", "areas_venta", "id_modelo_notas_plantilla");
+    addRelation("informes_cfg", "puestos", "id_puesto");
+    addRelation("informes_cfg", "informes_cfg", "id_cabecera_informe");
+    addRelation("informes_cfg", "informes_cfg", "id_pie_informe");
+    addRelation("informes_cfg", "informes_cfg", "id_modelo_design");
+  // InformesCfgX
+    addRelation("informes_cfgx", "puestos", "id_puesto");
+    addRelation("informes_cfgx", "informes_cfg", "id_origen");
+    addRelation("informes_cfgx", "informes_cfg", "id_presets");
+    addRelation("informes_cfgx", "dispositivos", "id_dispositivo");
 
-//InformesUsuarios
+
+  //InformesUsuarios
     addRelation("informes_usuarios", "informes_usuariosx", "id_informes_usuarios");
 
 //Inmovilizado
@@ -1802,7 +1799,13 @@ class RelacionesTablas {
     lstRelaciones.add(row);
   }
 
-  void getAliasTablas() {
+  Map<String, String> getAliasTablas() {
+    // los alias no pueden tener guiones bajos
+    // para luego poder separar las partes de un Path. Dos guiones "__" separa una tabla y 1 guion "_" separa parte de un alias
+    // "id_tarifa_aux1", "id_tarifa_aux2" ... viene de: ---mapAlias["tarifas_articulos"] = "tarArt"--- por lo tanto el alias sera "tarArt_1"
+    // Un ejemplo en sql de alias sería: "deleg__tarart_1__id_impuesto", "deleg__tarart_2__id_impuesto" ...
+    // tablas: "delegaciones", "tarifas_articulos", campo: "id_impuesto" -> en "delegaciones.tarifas_articulos.id_impuesto" si tenemos en cuenta solo las tablas
+    Map<String, String> mapAlias = {};
     mapAlias["aeat"] = "aeat";
     mapAlias["aeatx"] = "aeatX";
     mapAlias["agenda"] = "age";
@@ -1878,7 +1881,7 @@ class RelacionesTablas {
     mapAlias["fabricacion_tareas"] = "fabCnTar";
     mapAlias["fabricacionx"] = "fabCnX";
     mapAlias["fabricantes"] = "fab";
-    mapAlias["fabricantesx"] = "fabx";
+    mapAlias["fabricantesx"] = "fabX";
     mapAlias["fianzas"] = "fianzas";
     mapAlias["grupos"] = "grp";
     mapAlias["grupos_comisiones"] = "grpComis";
@@ -1895,6 +1898,7 @@ class RelacionesTablas {
     mapAlias["impuestosx"] = "impX";
     mapAlias["incidencias_l"] = "incidL";
     mapAlias["informes_cfg"] = "infCfg";
+    mapAlias["informes_cfgx"] = "infCfgX";
     mapAlias["informes_usuarios"] = "infUsr";
     mapAlias["inmovilizado"] = "inmov";
     mapAlias["instalaciones"] = "instal";
@@ -1932,7 +1936,7 @@ class RelacionesTablas {
     mapAlias["proveedoresx"] = "prvdX";
     mapAlias["provincias"] = "provin";
     mapAlias["puestos"] = "ptos";
-    mapAlias["puestosx"] = "ptosx";
+    mapAlias["puestosx"] = "ptosX";
     mapAlias["recetas"] = "recetas";
     mapAlias["recursos_actos"] = "recAct";
     mapAlias["remesas"] = "remesas";
@@ -1961,7 +1965,7 @@ class RelacionesTablas {
     mapAlias["vehiculos"] = "vehiculos";
     mapAlias["veterinarios"] = "veter";
     mapAlias["zonas"] = "zonas";
-
+    return mapAlias;
   }
 }
 

@@ -1,6 +1,10 @@
+import 'package:generador_sql_tablas/global/relaciones_tablas.dart';
+
 class MapExcepciones {
 
   static Map<String, String> initMapCamposExcepciones() {
+    RelacionesTablas oRelTab = RelacionesTablas();
+    Map<String, String> mapAlias = oRelTab.getAliasTablas();
     Map<String, String> mapCamposExc = {};
     mapCamposExc["id_agente1"] = "comisAge1";
     mapCamposExc["id_agente2"] = "comisAge2";
@@ -17,6 +21,7 @@ class MapExcepciones {
     mapCamposExc["id_articulo_eco_tasas"] = "artEcoTas";
     mapCamposExc["id_articulo_envase"] = "artEnv";
     mapCamposExc["id_articulo_stock"] = "artStk";
+    mapCamposExc["id_articulo_portes_web"] = "artPortWeb";
     mapCamposExc["id_asignatura"] = "grpAsig";
     mapCamposExc["id_cargo_cama_supletoria"] = "artCamSup"; //
     mapCamposExc["id_cargo_desayuno"] = "artDesay"; // CfgCentralReservasSQL
@@ -91,11 +96,14 @@ class MapExcepciones {
     mapCamposExc["id_metodo_tarjeta_kiosko_hotel"] = "metPagTarKiosko";
     mapCamposExc["id_metodo_telepedido"] = "metPagTele";
     mapCamposExc["id_moneda"] = "monedas"; //
-    mapCamposExc["id_padre"] = "tsPadre";
+    mapCamposExc["id_padre"] = "padre"; // padre de la misma tabla
     mapCamposExc["id_pagador_efactura"] = "cliPagFac";
     mapCamposExc["id_pais"] = "paises";
     mapCamposExc["id_pais_nacionalidad"] = "paisesNac";
     mapCamposExc["id_pais_nif"] = "paisesNIF";
+    mapCamposExc["id_presentador"] = "presentador";
+    mapCamposExc["id_ordenante"] = "ordenante";
+
 
     mapCamposExc["id_perfil_campos_aux"] = "perfCampAux";
     mapCamposExc["id_proveedor"] = "prvd";
@@ -112,6 +120,13 @@ class MapExcepciones {
     mapCamposExc["id_tarifa1"] = "tarArt1"; //Areas Venta
     mapCamposExc["id_tarifa2"] = "tarArt2";
     mapCamposExc["id_tarifa3"] = "tarArt3";
+
+    mapCamposExc["id_tarifa_aux1"] = "${mapAlias["tarifas_articulos"]}_1";  // los alias no pueden tener guiones bajos
+    mapCamposExc["id_tarifa_aux2"] = "${mapAlias["tarifas_articulos"]}_2";
+    mapCamposExc["id_tarifa_aux3"] = "${mapAlias["tarifas_articulos"]}_3";
+    mapCamposExc["id_tarifa_aux4"] = "${mapAlias["tarifas_articulos"]}_4";
+    mapCamposExc["id_tarifa_aux5"] = "${mapAlias["tarifas_articulos"]}_5";
+
     mapCamposExc["id_tarifa_alquiler_no_devuelto"] = "tarAlqNoDev";
     mapCamposExc["id_tarifa_cli_varios"] = "tarCliVar";
     mapCamposExc["id_tarifa_componentes"] = "tarComp";
@@ -175,11 +190,7 @@ class MapExcepciones {
     mapCamposExc["id_pie_doc_a4"] = "infCfgPieA4";
     mapCamposExc["id_cabecera_doc_a5"] = "infCfgCabA5";
     mapCamposExc["id_pie_doc_a5"] = "infCfgPieA5";
-    mapCamposExc["id_tarifa_aux1"] = "tarAux1";
-    mapCamposExc["id_tarifa_aux2"] = "tarAux2";
-    mapCamposExc["id_tarifa_aux3"] = "tarAux3";
-    mapCamposExc["id_tarifa_aux4"] = "tarAux4";
-    mapCamposExc["id_tarifa_aux5"] = "tarAux5";
+
     mapCamposExc["id_cli_tarifa_articulos_defecto"] = "tarCliDef";
     mapCamposExc["id_cli_tarifa_excepciones_defecto"] = "tarCliExcDef";
     mapCamposExc["id_cli_tarifa_hotel_defecto"] = "tarCliHotDef";
@@ -201,14 +212,12 @@ class MapExcepciones {
     mapCamposExc["id_cliente_agencia"] = "cliAg";
     mapCamposExc["id_remitente_contacto"] = "contacRemit"; // nombres
     mapCamposExc["id_envio_contacto"] = "contacEnvio";
-    mapCamposExc["id_asiento"] = "asi";
+    mapCamposExc["id_asiento"] = "asiento";
     mapCamposExc["id_personal"] = "pers";
     mapCamposExc["id_grupo_series"] = "grpSer";
     mapCamposExc["id_dispositivo"] = "dispos";
     mapCamposExc["id_puesto"] = "puesto";
-
-
-
+    mapCamposExc["id_grupo"] = "grp";
 
 
     // NO ORDENAR CON LO DE ARRIBA
@@ -223,8 +232,7 @@ class MapExcepciones {
     mapCamposExc["id_veterinario"] = "veter";
     mapCamposExc["id_veterinario_responsable"] = "veterResp";
     mapCamposExc["proveedores.id_ficha_fiscal"] = "prvdFiscal";
-    mapCamposExc["provincias.id_grupo"] = "provinGrp";
-    mapCamposExc["provincias.id_region"] = "provinReg";
+    mapCamposExc["provincias.id_region"] = "grpReg";
     mapCamposExc["doc_cli.id_devolucion"] = "dcDev";
     mapCamposExc["usuarios.id_perfil"] = "usrPerf";
 
