@@ -7,6 +7,7 @@ class Utils {
     cTipo += " ";
     String cFila = cTipo, cTodo = "";
     for (String campo in lstVars) {
+      campo = getVarCamelCase(campo);
       if ((cFila.length + campo.length) > 150) {
         cFila = cFila.trim().replaceFirst(",", ";", cFila.length - 2);
         cTodo += "$cFila\n";
@@ -22,6 +23,23 @@ class Utils {
       cTodo += "${cFila.trim()}\n";
     }
     return cTodo;
+  }
+
+  static String getVarCamelCase(String campo) {
+    String cFinal = "";
+    cFinal = campo;
+    if (campo.startsWith("_")) {
+      List<String> lstPartes = campo.substring(1).split("_");
+      if (lstPartes.length == 2) {
+        cFinal = "_${lstPartes[0]}${lstPartes[1].proper}";
+      }
+    } else if (campo.contains("_")) {
+      List<String> lstPartes = campo.split("_");
+      if (lstPartes.length == 2) {
+        cFinal = "${lstPartes[0]}${lstPartes[1].proper}";
+      }
+    }
+    return cFinal;
   }
 
   static String getTipoSQL(String type, int numMaxStr, int radix, int scale) {

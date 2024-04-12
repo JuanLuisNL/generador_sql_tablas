@@ -137,8 +137,8 @@ class GenerarTablaSQL {
         lstTmp.add("_$alias");
         mapVarsTblJoins[key] = lstTmp;
       }
-
-      String cTablaJoinGet = "$tipoDatoTabla get $alias => _$alias ??= $tipoDatoTabla.joins('${rowRel.campoID}', '$alias', this, lstDep: [aliasSQL]);\n";
+      String aliasDart = Utils.getVarCamelCase(alias);
+      String cTablaJoinGet = "$tipoDatoTabla get $aliasDart => _$aliasDart ??= $tipoDatoTabla.joins('${rowRel.campoID}', '${alias.toLowerCase()}', this, lstDep: [aliasSQL]);\n";
       lstGetsTblJoins.add(cTablaJoinGet);
 
       /// TODO Ver los joins manuales. habrá que ver cuales son realmente

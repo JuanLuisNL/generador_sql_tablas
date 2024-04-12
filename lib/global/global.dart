@@ -24,7 +24,7 @@ class GBL {
     // await oCnEmp.open();
     // oCnImgs = PostgreSQLConnection("192.168.0.51", 5432, "dv00001_0001i", username: "postgres", password: "verialvtx");
     // await oCnImgs.open();
-    oCn = PostgreSQLConnection("192.168.0.51", 5432, "GV00001", username: "postgres", password: "verialvtx");
+    oCn = PostgreSQLConnection("192.168.0.7", 25060, "GV00001", username: "postgres", password: "verialvtx");
     await oCn.open();
     CreaClasesTablaAndDRow oCrear = CreaClasesTablaAndDRow();
     await oCrear.run();

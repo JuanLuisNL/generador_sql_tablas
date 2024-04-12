@@ -65,7 +65,6 @@ class MapExcepciones {
     mapCamposExc["id_estadistica_pais"] = "grpEstPais"; //
     mapCamposExc["id_estado"] = "grpEstado";
     mapCamposExc["id_fabricante"] = "fab";
-    mapCamposExc["id_ficha_varios"] = "cliVarios";
     mapCamposExc["id_forma_envio"] = "logiFormEnv";
     mapCamposExc["id_grupo_articulos_doc"] = "grpArtDoc";
     mapCamposExc["id_grupo_calendario"] = "grpCalen";
@@ -106,20 +105,34 @@ class MapExcepciones {
 
 
     mapCamposExc["id_perfil_campos_aux"] = "perfCampAux";
-    mapCamposExc["id_proveedor"] = "prvd";
+    mapCamposExc["id_proveedor"] = mapAlias["proveedores"]!;
     mapCamposExc["id_provincia"] = "provin";
     mapCamposExc["id_receptor_efactura"] = "cliRecFac";
     mapCamposExc["id_retencion"] = "reten";
-    mapCamposExc["id_serie_alternativa"] = "serAlt";
-    mapCamposExc["id_serie_alternativa_tickets"] = "serAltTic";
-    mapCamposExc["id_serie_defecto"] = "serDef"; //Areas Compra
-    mapCamposExc["id_serie_defecto_tickets"] = "serDefTic";
-    mapCamposExc["id_serie_tickets"] = "serTic"; // BasculasTpvSQL
     mapCamposExc["id_sub_balance"] = "balSub"; // Balances
-    mapCamposExc["id_tarifa"] = "tar";
-    mapCamposExc["id_tarifa1"] = "tarArt1"; //Areas Venta
-    mapCamposExc["id_tarifa2"] = "tarArt2";
-    mapCamposExc["id_tarifa3"] = "tarArt3";
+
+    mapCamposExc["id_serie_alternativa"] = "${mapAlias["series"]}_alt";
+    mapCamposExc["id_serie_alternativa_tickets"] = "${mapAlias["series"]}_altTic";
+    mapCamposExc["id_serie_defecto"] = "${mapAlias["series"]}_def";
+    mapCamposExc["id_serie_defecto_tickets"] = "${mapAlias["series"]}_defTic";
+    mapCamposExc["id_serie_tickets"] = "${mapAlias["series"]}_tic";
+
+    mapCamposExc["id_tarifa"] = mapAlias["tarifas"]!;
+    mapCamposExc["id_tarifa1"] = "${mapAlias["tarifas"]}_1";
+    mapCamposExc["id_tarifa2"] = "${mapAlias["tarifas"]}_2";
+    mapCamposExc["id_tarifa3"] = "${mapAlias["tarifas"]}_3";
+
+    mapCamposExc["id_tarifa_alquiler_no_devuelto"] = "${mapAlias["tarifas"]}_Alq";
+    mapCamposExc["id_tarifa_cli_varios"] = "${mapAlias["tarifas"]}_CliVar";
+    mapCamposExc["id_tarifa_componentes"] = "${mapAlias["tarifas"]}_comp";
+    mapCamposExc["id_tarifa_excepciones"] = "${mapAlias["tarifas"]}_Excep";
+    mapCamposExc["id_tarifa_excepciones_cli_varios"] = "${mapAlias["tarifas"]}_ExcCliVar";
+    mapCamposExc["id_tarifa_excepciones_visor_precios"] = "${mapAlias["tarifas"]}_ExcVisor";
+    mapCamposExc["id_tarifa_gestion"] = "${mapAlias["tarifas"]}_Gest";
+    mapCamposExc["id_tarifa_ofertas_tpvext"] = "${mapAlias["tarifas"]}_Ofer";
+    mapCamposExc["id_tarifa_precio_base"] = "${mapAlias["tarifas"]}_PrBase";
+    mapCamposExc["id_tarifa_precios_tpvext"] = "${mapAlias["tarifas"]}_PrTpvE";
+    mapCamposExc["id_tarifa_visor_precios"] = "${mapAlias["tarifas"]}_Visor";
 
     mapCamposExc["id_tarifa_aux1"] = "${mapAlias["tarifas_articulos"]}_1";  // los alias no pueden tener guiones bajos
     mapCamposExc["id_tarifa_aux2"] = "${mapAlias["tarifas_articulos"]}_2";
@@ -127,17 +140,6 @@ class MapExcepciones {
     mapCamposExc["id_tarifa_aux4"] = "${mapAlias["tarifas_articulos"]}_4";
     mapCamposExc["id_tarifa_aux5"] = "${mapAlias["tarifas_articulos"]}_5";
 
-    mapCamposExc["id_tarifa_alquiler_no_devuelto"] = "tarAlqNoDev";
-    mapCamposExc["id_tarifa_cli_varios"] = "tarCliVar";
-    mapCamposExc["id_tarifa_componentes"] = "tarComp";
-    mapCamposExc["id_tarifa_excepciones"] = "tarExcep";
-    mapCamposExc["id_tarifa_excepciones_cli_varios"] = "tarCliVarExc";
-    mapCamposExc["id_tarifa_excepciones_visor_precios"] = "tarVisorExc";
-    mapCamposExc["id_tarifa_gestion"] = "tarGes";
-    mapCamposExc["id_tarifa_ofertas_tpvext"] = "tarOferTEx";
-    mapCamposExc["id_tarifa_precio_base"] = "tarPrecBase";
-    mapCamposExc["id_tarifa_precios_tpvext"] = "tarPrecTEx";
-    mapCamposExc["id_tarifa_visor_precios"] = "tarVisor";
     mapCamposExc["id_tipo_contingente"] = "arbTipoCon";
     mapCamposExc["id_tipo_paquete_circuito"] = "grpTipoPaq";
     mapCamposExc["id_tipo_tratamiento"] = "grpTipoTrat";
@@ -217,7 +219,9 @@ class MapExcepciones {
     mapCamposExc["id_grupo_series"] = "grpSer";
     mapCamposExc["id_dispositivo"] = "dispos";
     mapCamposExc["id_puesto"] = "puesto";
-    mapCamposExc["id_grupo"] = "grp";
+    mapCamposExc["id_grupo"] = mapAlias["grupos"]!;
+    mapCamposExc["id_veterinario"] = "veter";
+    mapCamposExc["id_veterinario_responsable"] = "veterResp";
 
 
     // NO ORDENAR CON LO DE ARRIBA
@@ -229,13 +233,13 @@ class MapExcepciones {
     mapCamposExc["fabricacion.id_fabricacion_cfg"] = "fabCnCfg";
     mapCamposExc["fabricacion.id_fabricacion_grupo"] = "fabCnGrp";
     mapCamposExc["fabricacionx.id_fabricacion"] = "fabCn";
-    mapCamposExc["id_veterinario"] = "veter";
-    mapCamposExc["id_veterinario_responsable"] = "veterResp";
-    mapCamposExc["proveedores.id_ficha_fiscal"] = "prvdFiscal";
-    mapCamposExc["provincias.id_region"] = "grpReg";
-    mapCamposExc["doc_cli.id_devolucion"] = "dcDev";
-    mapCamposExc["usuarios.id_perfil"] = "usrPerf";
-
+    mapCamposExc["proveedores.id_ficha_fiscal"] = "${mapAlias["proveedores"]!}_Fiscal";
+    mapCamposExc["provincias.id_region"] = "${mapAlias["grupos_g"]}_Reg" ;
+    mapCamposExc["provincias.id_grupo"] = mapAlias["grupos_g"]! ;
+    mapCamposExc["doc_cli.id_devolucion"] = "${mapAlias["doc_cli"]}_Dev";
+    mapCamposExc["usuarios.id_perfil"] = mapAlias["usuarios_perfiles"]!;
+    mapCamposExc["clientes.id_ficha_varios"] = "${mapAlias["clientes"]!}_Varios";
+    mapCamposExc["proveedores.id_ficha_varios"] = "${mapAlias["proveedores"]!}_Varios";
 
 
     return mapCamposExc;

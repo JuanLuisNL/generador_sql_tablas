@@ -1947,8 +1947,10 @@ class RelacionesTablas {
     mapAlias["series"] = "series";
     mapAlias["stock_l"] = "stkL";
     mapAlias["tareas_tecnicos"] = "tarTec";
+    mapAlias["tarifas"] = "tar";
     mapAlias["tarifa_hotel"] = "tarHot";
     mapAlias["tarifas_articulos"] = "tarArt";
+    mapAlias["tarifas_articulosx"] = "tarArtX";
     mapAlias["tarifas_doc"] = "tarDoc";
     mapAlias["tecnicos"] = "tecnicos";
     mapAlias["telepedido_ofertas"] = "teleOfer";

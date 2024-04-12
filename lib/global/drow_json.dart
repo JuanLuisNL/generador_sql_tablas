@@ -99,6 +99,7 @@ class GenerarDRowJson {
           String cVarRow = "row${alias.proper}";
           /// Otra forma si es necesario, 01/03/2024
           // lstJoinsTablas.add("$cVarRow = DRow$cTbl.fromMap(getMapFromMap(map, '${alias.toLowerCase()}'));\n");
+          cVarRow = Utils.getVarCamelCase(cVarRow);
           lstJoinsTablas.add("$cVarRow = DRow$cTbl.fromMap(map['${alias.toLowerCase()}']);\n");
           lstVarsRows.add("late DRow$cTbl $cVarRow;\n");
         }

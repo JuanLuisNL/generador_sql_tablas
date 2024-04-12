@@ -104,6 +104,7 @@ class GenerarDRowMapping {
 
       String cPlantilla;
       String cDRow = "DRow${getNameVariableCampo(cTablaJoin).proper}Mapping";
+      alias = Utils.getVarCamelCase(alias);
       cPlantilla = " late $cDRow row${alias.proper} = $cDRow.join(super.map, super.aliasJoin);\n";
       lstJoinsDRowsNew.add(cPlantilla);
     }
