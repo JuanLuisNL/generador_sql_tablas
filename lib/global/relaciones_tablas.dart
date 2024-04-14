@@ -6,32 +6,9 @@
 
 enum EnumDataImpTipoEmisor { nadie, cliente, proveedor, fabricante, posiblecliente, tpvext }
 
-enum EnumDataImpTipoOrigen {
-  ninguno,
-  infotarifa,
-  infofande,
-  ventainternet,
-  pda,
-  tpvexterno,
-  vtfFacturas,
-  contenedorverial,
-  pascualhermanos,
-  newholland,
-  vtfPrecios,
-  txtPrecios,
-  cegalLibros,
-  txtArticulos,
-  last
-}
+enum EnumDataImpTipoOrigen { ninguno, infotarifa, infofande, ventainternet, pda, tpvexterno, vtfFacturas, contenedorverial, pascualhermanos, newholland, vtfPrecios, txtPrecios, cegalLibros, txtArticulos, last }
 
-enum EnumNombresTipoFicha {
-  ninguno,
-  clientesContactos,
-  proveedoresContactos,
-  cuentasBancariasPropiasOficina,
-  cuentasBancariasPropiasContactos,
-  fabricantesContactos
-}
+enum EnumNombresTipoFicha { ninguno, clientesContactos, proveedoresContactos, cuentasBancariasPropiasOficina, cuentasBancariasPropiasContactos, fabricantesContactos }
 
 enum EnumAsientosTipo {
   ninguno,
@@ -101,36 +78,9 @@ enum EnumDocXTipoOrigen {
 // InfoTactil = 202      ' Información cada unidad de compuesto: Peso, Invitación, nº de plato
 }
 
-enum EnumRutasFicherosTipoFicha {
-  ninguna,
-  articulos,
-  aparatos,
-  clientes,
-  proveedores,
-  personal,
-  fabricantes,
-  tecnicos,
-  doccli,
-  docpro,
-  dochotel,
-  ordenestrabajo,
-  conocimientos,
-  asientos
-}
+enum EnumRutasFicherosTipoFicha { ninguna, articulos, aparatos, clientes, proveedores, personal, fabricantes, tecnicos, doccli, docpro, dochotel, ordenestrabajo, conocimientos, asientos }
 
-enum EnumCamposAuxiliaresTipo {
-  ninguno,
-  articulos,
-  aparatos,
-  clientes,
-  proveedores,
-  personal,
-  clientesFichamedica,
-  partesmedicos,
-  doccli,
-  docpro,
-  ordenestrabajo
-}
+enum EnumCamposAuxiliaresTipo { ninguno, articulos, aparatos, clientes, proveedores, personal, clientesFichamedica, partesmedicos, doccli, docpro, ordenestrabajo }
 
 enum EnumMensajesTipoFicha { ninguno, cliente, personal, almacen, proveedor, fabricante }
 
@@ -141,15 +91,10 @@ enum EnumTecnicosRevisionesAveriasTipo { ninguno, averia, revision }
 class AppTablas {
   static String cBancos = "bancos";
   static String cCajones = "cajones";
-  static String cInformesCfg = "informescfg";
-  static String cInformesCfgX = "informescfgx";
   static String cModificacionCfg = "modificacioncfg";
   static String cUbicaciones = "ubicaciones";
   static String cProvincias = "provincias";
   static String cPaises = "paises";
-  static String cUsuarios = "usuarios";
-  static String cUsuariosPerfiles = "usuariosperfiles";
-  static String cUsuariosPerfilesX = "usuariosperfilesx";
   static String cDispositivos = "dispositivos";
   static String cXSettings = "xsettings";
   static String cMonedas = "monedas";
@@ -182,62 +127,48 @@ class AppTablas {
   static String cChequeos = "chequeos";
   static String cExTrans = "extrans";
 }
-// flutter: tabla: app_blobs, campo: id_origen
-// flutter: tabla: app_blobs, campo: id_blob_origen
-// flutter: Es clase base: art_delegaciones
-// flutter: tabla: art_stocks, campo: id_origen
-// flutter: Es clase base: articulos
-// flutter: tabla: campos_upd_importacion, campo: id_ficha
-// ---------------- flutter: tabla: clientes, campo: id_web_client
-// flutter: Es clase base: clientes
-// flutter: tabla: comanda_visual, campo: id_uds_destino
-// flutter: tabla: conocimientos, campo: id_verial_id
-// ---------------- flutter: tabla: doc_cli, campo: id_web_client
-// flutter: tabla: doc_cli, campo: id_web_nombre
-// flutter: tabla: doc_cli, campo: id_sii_empresa_sucedida
-// flutter: tabla: doc_cli, campo: id_urdi
-// flutter: tabla: doc_pro, campo: id_dua
-// flutter: tabla: doc_pro, campo: id_sii_empresa_sucedida
-// flutter: tabla: efectos, campo: id_origen
-// flutter: tabla: efectos, campo: id_quien
-// flutter: tabla: efectos, campo: id_existente
-// flutter: tabla: empresas, campo: id_sii_certificado
-// flutter: Es clase base: empresas
-// flutter: Es clase base: fabricantes
-// flutter: tabla: fianzas, campo: id_origen
-// flutter: tabla: fianzas, campo: id_quien
-// flutter: Es clase base: impuestos
-// flutter: tabla: instalaciones_clientes, campo: id_instalacion
-// flutter: tabla: instalaciones_clientes, campo: id_cliente
-// flutter: tabla: instalaciones_clientes, campo: id_contacto_cliente
-// flutter: tabla: locks, campo: id_verial
-// flutter: tabla: nombres, campo: id_web_nombre
-// -------------- flutter: tabla: nombres, campo: id_web_client
-// flutter: tabla: pdas_sincronizaciones, campo: id_pda
-// flutter: Es clase base: proveedores
-// flutter: tabla: puestosx, campo: id_como_pago_check_in
-// flutter: tabla: series, campo: id_serie_rectificativa
-// flutter: Es clase base: veterinarios
-// flutter: tabla: vias_pago, campo: id_quien
-// flutter: tabla: xsettings, campo: id_destino
-
-// flutter: tabla: locks_g, campo: id_verial
-// flutter: tabla: puestos, campo: id_verificador_precios
-// flutter: tabla: usuarios_perfilesx, campo: id_perfil
-// flutter: tabla: usuarios_respuestas, campo: id_usuario
-// flutter: tabla: xsettings_g, campo: id_destino
-
-
 
 class RelacionesTablas {
   List<DRowRelacionesCamposEtc> lstRelaciones = [];
+
   Map<String, String> get mapAlias => getAliasTablas();
   List<String> lstTmp = [];
 
-  List<DRowRelacionesCamposEtc>  init() {
+  List<DRowRelacionesCamposEtc> init() {
+    // multiples relacions, habra que comprobar cada uno, pero porbablente habrá que hacer a mano cada JOIN
+    addRelation("XXX", "app_blobs", "id_origen");
+    addRelation("XXX", "app_blobs", "id_blob_origen");
+    addRelation("XXX", "art_stocks", "id_origen");
+    addRelation("XXX", "campos_upd_importacion", "id_ficha");
+    addRelation("XXX", "comanda_visual", "id_uds_destino"); // TODO esto no es un id ??
+    addRelation("XXX", "conocimientos", "id_verial_id"); // TODO ???
+    addRelation("XXX", "doc_cli", "id_web_nombre");
+    addRelation("XXX", "doc_cli", "id_sii_empresa_sucedida");
+    addRelation("XXX", "doc_cli", "id_urdi");
+    addRelation("XXX", "doc_pro", "id_dua");
+    addRelation("XXX", "doc_pro", "id_sii_empresa_sucedida");
+    addRelation("XXX", "efectos", "id_origen");
+    addRelation("XXX", "efectos", "id_quien");
+    addRelation("XXX", "efectos", "id_existente");
+    addRelation("XXX", "empresas", "id_sii_certificado");
+    addRelation("XXX", "fianzas", "id_origen");
+    addRelation("XXX", "fianzas", "id_quien");
+    addRelation("XXX", "instalaciones_clientes", "id_instalacion");
+    addRelation("XXX", "instalaciones_clientes", "id_cliente");
+    addRelation("XXX", "instalaciones_clientes", "id_contacto_cliente");
+    addRelation("XXX", "locks", "id_verial");
+    addRelation("XXX", "nombres", "id_web_nombre");
+    addRelation("XXX", "pdas_sincronizaciones", "id_pda");
+    addRelation("XXX", "puestosx", "id_como_pago_check_in");
+    addRelation("XXX", "series", "id_serie_rectificativa");
+    addRelation("XXX", "vias_pago", "id_quien");
+    addRelation("XXX", "xsettings", "id_destino");
+    addRelation("XXX", "locks_g", "id_verial");
+    addRelation("XXX", "puestos", "id_verificador_precios");
+    addRelation("XXX", "usuarios_respuestas", "id_usuario");
+    addRelation("XXX", "xsettings_g", "id_destino");
 
-
-//AEAT
+    //AEAT
     addRelation("aeat", "aeatx", "id_aeat");
 
 //Agenda
@@ -367,6 +298,7 @@ class RelacionesTablas {
 
 //Arqueos
     addRelation("arqueos", "arqueosx", "id_arqueo");
+    addRelation("arqueos", "efectos", "id_arqueo_pendiente");
     addRelation("arqueos", "operaciones_tpv", "id_arqueo");
     addRelation("arqueos", "doc_clix", "id_arqueo");
     addRelation("arqueos", "doc_hotelx", "id_arqueo");
@@ -460,7 +392,7 @@ class RelacionesTablas {
     addRelation("articulos", "telepedido_ofertasx", "id_articulo");
     addRelation("articulos", "puestosx", "id_articulo_portes_web");
     addRelation("articulos", "art_visibles_xdelegacion", "id_articulo");
-    addRelation("articulos", AppTablas.cStock, "id_articulo");   // TODO ??
+    addRelation("articulos", AppTablas.cStock, "id_articulo"); // TODO ??
 
 //ArtLotes
     addRelation("art_lotes", "art_lotesx", "id_art_lotes");
@@ -491,6 +423,7 @@ class RelacionesTablas {
     addRelation("asientos", "remesas", "id_asiento");
     addRelation("asientos", "fianzas", "id_asiento_constitucion");
     addRelation("asientos", "fianzas", "id_asiento_cancelacion");
+    addRelation("asientos", "nominas", "id_asiento_pago_remun_lp");
 
 //Averias
     addRelation("averias", "ordenes_trabajo", "id_averia");
@@ -559,11 +492,11 @@ class RelacionesTablas {
 
 //Cfg_Fondo
     addRelation("cfg_fondo", AppTablas.cCfgFondoX, "id_cfg_fondo");
-    addRelation("cfg_fondo", AppTablas.cUsuarios, "id_cfg_fondo");
+    addRelation("cfg_fondo", "usuarios", "id_cfg_fondo");
 
 //Cfg_Menu
     addRelation("cfg_menu", AppTablas.cCfgMenuX, "id_cfg_menu");
-    addRelation("cfg_menu", AppTablas.cUsuarios, "id_cfg_menu");
+    addRelation("cfg_menu", "usuarios", "id_cfg_menu");
 
 //Clientes
     addRelation("clientes", "mantenimientos", "id_cliente_atendido");
@@ -627,6 +560,7 @@ class RelacionesTablas {
     addRelation("clientes", "categorias_de", "id_quien");
     addRelation("clientes", "carta_clientes", "id_cliente");
     addRelation("clientes", "obras", "id_cliente");
+    addRelation("clientes", "mascotas", "id_cliente");
 
 //Coleccionables
     addRelation("coleccionables", "articulos", "id_coleccionable");
@@ -716,6 +650,9 @@ class RelacionesTablas {
     addRelation("cuentas", "personal", "id_cta_pendiente");
     addRelation("cuentas", "personal", "id_cta_anticipos");
     addRelation("cuentas", "personal", "id_cta_salarios");
+    addRelation("cuentas", "personal", "id_cta_remun_lp");
+    addRelation("cuentas", "personal", "id_cta_retrib_lp");
+
     addRelation("cuentas", "proveedores", "id_cuenta");
     addRelation("cuentas", "proveedores", "id_cuenta_gastos");
     addRelation("cuentas", "prevision", "id_cuenta");
@@ -807,7 +744,7 @@ class RelacionesTablas {
     addRelation("dispositivos", AppTablas.cImpresoras, "id_dispositivo");
     addRelation("dispositivos", AppTablas.cPuestos, "id_impresora");
     addRelation("dispositivos", AppTablas.cPuestos, "id_ticadora");
-    addRelation("dispositivos", AppTablas.cInformesCfgX, "id_dispositivo");
+    addRelation("dispositivos", "informes_cfgx", "id_dispositivo");
     addRelation("dispositivos", AppTablas.cPuestos, "id_visor");
     addRelation("dispositivos", AppTablas.cPuestos, "id_scanner_barras");
     addRelation("dispositivos", AppTablas.cPuestos, "id_scanner_mag");
@@ -877,6 +814,7 @@ class RelacionesTablas {
     addRelation("doc_cli", "doc_hotel", "id_doc_cli");
     addRelation("doc_cli", "doc_hotelx", "id_doc_cli");
     addRelation("doc_cli", "doc_pro", "id_inversion_sp");
+    addRelation("doc_cli", "doc_prox", "id_doc_cli_pedido");
     addRelation("doc_cli", "doc_almacen", "id_doc_cli");
     addRelation("doc_cli", "efectos", "id_cierre_caja");
     addRelation("doc_cli", "efectos", "id_pedido");
@@ -926,6 +864,7 @@ class RelacionesTablas {
     addRelation("doc_pro", "doc_clix", "id_partida");
     addRelation("doc_pro", "doc_pro", "id_facturado");
     addRelation("doc_pro", "doc_pro", "id_devolucion");
+    addRelation("doc_pro", "doc_pro", "id_pedido");
     addRelation("doc_pro", "doc_pro_valores", "id_documento");
     addRelation("doc_pro", "doc_prox", "id_documento");
     addRelation("doc_pro", "doc_prox", "id_procedencia");
@@ -1190,14 +1129,11 @@ class RelacionesTablas {
     addRelation("informes_cfg", "informes_cfg", "id_cabecera_informe");
     addRelation("informes_cfg", "informes_cfg", "id_pie_informe");
     addRelation("informes_cfg", "informes_cfg", "id_modelo_design");
-  // InformesCfgX
-    addRelation("informes_cfgx", "puestos", "id_puesto");
-    addRelation("informes_cfgx", "informes_cfg", "id_origen");
-    addRelation("informes_cfgx", "informes_cfg", "id_presets");
-    addRelation("informes_cfgx", "dispositivos", "id_dispositivo");
+    addRelation("informes_cfg", "informes_cfgx", "id_origen");
+    addRelation("informes_cfg", "informes_cfgx", "id_presets");
 
 
-  //InformesUsuarios
+    //InformesUsuarios
     addRelation("informes_usuarios", "informes_usuariosx", "id_informes_usuarios");
 
 //Inmovilizado
@@ -1468,9 +1404,9 @@ class RelacionesTablas {
 
 //Puestos
     addRelation("puestos", AppTablas.cImpresoras, "id_puesto");
-    addRelation("puestos", AppTablas.cInformesCfg, "id_puesto");
+    addRelation("puestos", "informes_cfg", "id_puesto");
     addRelation("puestos", AppTablas.cPID, "id_puesto");
-    addRelation("puestos", AppTablas.cInformesCfgX, "id_puesto");
+    addRelation("puestos", "informes_cfgx", "id_puesto");
     addRelation("puestos", AppTablas.cMessenger, "id_de_puesto");
     addRelation("puestos", AppTablas.cMessengerX, "id_puesto");
     addRelation("puestos", "ordenes_trabajo", "id_puesto");
@@ -1746,8 +1682,8 @@ class RelacionesTablas {
     addRelation("usuarios", AppTablas.cExTrans, "id_usuario");
 
 //UsuariosPerfiles
-    addRelation("usuarios_perfiles", AppTablas.cUsuarios, "id_perfil");
-    addRelation("usuarios_perfiles", AppTablas.cUsuariosPerfilesX, "id_perfil");
+    addRelation("usuarios_perfiles", "usuarios", "id_perfil");
+    addRelation("usuarios_perfiles", "usuarios_perfilesx", "id_perfil");
 
 //Vehiculos
     addRelation("vehiculos", "transportistas", "id_vehiculo");
@@ -1767,10 +1703,7 @@ class RelacionesTablas {
     return lstRelaciones;
   }
 
-
-  void addRelation(String tablaDestino, String tablaOrigen, String campoID,
-      {String selectCanBeDel = "verialid", String filtro = "", String joinStr = "", String alias = "", bool lCanBeDeleteManual = false}) {
-
+  void addRelation(String tablaDestino, String tablaOrigen, String campoID, {String selectCanBeDel = "verialid", String filtro = "", String joinStr = "", String alias = "", bool lCanBeDeleteManual = false}) {
     // bool lEmpGrupo = false;
     // if (tablaDestino.endsWith("") && !tablaOrigen.contains(".")) {
     //   lEmpGrupo = true;
@@ -1788,7 +1721,8 @@ class RelacionesTablas {
     //row.isEmpresasGrupo = lEmpGrupo;
     String cAlias = alias;
     if (cAlias == "") {
-      if (mapAlias[tablaDestino] != null) {
+      //  tablaDestino == "" cuando se trata de multiples relaciones
+      if (mapAlias[tablaDestino] != null || tablaDestino == "XXX") {
         cAlias = mapAlias[tablaDestino]!;
       } else {
         if (!lstTmp.contains(tablaDestino)) lstTmp.add(tablaDestino);
@@ -1806,12 +1740,13 @@ class RelacionesTablas {
     // Un ejemplo en sql de alias sería: "deleg__tarart_1__id_impuesto", "deleg__tarart_2__id_impuesto" ...
     // tablas: "delegaciones", "tarifas_articulos", campo: "id_impuesto" -> en "delegaciones.tarifas_articulos.id_impuesto" si tenemos en cuenta solo las tablas
     Map<String, String> mapAlias = {};
+    mapAlias["XXX"] = "XXX";
     mapAlias["aeat"] = "aeat";
     mapAlias["aeatx"] = "aeatX";
     mapAlias["agenda"] = "age";
     mapAlias["almacenes"] = "alm";
     mapAlias["aparatos"] = "apar";
-    mapAlias["app_blobs"] = "appBlobsImg";
+    mapAlias["app_blobs"] = "appB";
     mapAlias["arboles"] = "arb";
     mapAlias["arboles_auxiliares"] = "arbAux";
     mapAlias["areas_compra"] = "ac";
@@ -1973,6 +1908,7 @@ class RelacionesTablas {
 
 class DRowRelacionesCamposEtc {
   DRowRelacionesCamposEtc();
+
   late String tablaJoin, tablaOrigen, tablaJoinDBEx, campoID, camposSelectCanBeDelete, joins, filtroWhere, alias;
   late bool lCanBeDeleteManual, isEmpresasGrupo;
 }

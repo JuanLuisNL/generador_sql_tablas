@@ -86,7 +86,7 @@ class GenerarTablaSQL {
   void getDeclaracionJoinsFromRelaciones() {
     for (var campo in lstJoinsTablas) {
       DRowRelacionesCamposEtc? rowRel = lstRelaciones.firstWhereOrNull((it) => it.tablaOrigen == tablaLower && it.campoID == campo);
-      if (rowRel == null) {
+      if (rowRel == null || rowRel.tablaJoin == "XXX") {
         continue;
       }
 

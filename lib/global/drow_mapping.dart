@@ -32,7 +32,7 @@ class GenerarDRowMapping {
     // cCad += "nombreSQL = '$tablaLower', aliasSQL = '$aliasTabla';\n\n"; ???
     /// Constructores
     if (Utils.isClaseBase(tablaLower)) {
-      Utils.printInfo("Es clase base: $tablaLower");
+      // Utils.printInfo("Es clase base: $tablaLower");
     } else {
       cCad += "final String aliasTabla = '${aliasTabla.toLowerCase()}';\n";
       cCad += "$cClase.select(Map<String, dynamic> map) {super.map = map;}\n";
@@ -87,7 +87,7 @@ class GenerarDRowMapping {
     Map<String, String> mapExcepCampos = MapExcepciones.initMapCamposExcepciones();
     for (var campo in lstJoinsTablas) {
       DRowRelacionesCamposEtc? rowRel = lstRelaciones.firstWhereOrNull((it) => it.tablaOrigen == tablaLower && it.campoID == campo);
-      if (rowRel == null) {
+      if (rowRel == null || rowRel.tablaJoin == "XXX") {
         continue;
       }
       String alias = rowRel.alias;

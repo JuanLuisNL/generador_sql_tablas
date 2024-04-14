@@ -77,13 +77,20 @@ class GenerarDRowJson {
       if (campo.startsWith("id_")) {
         String alias = "", cTablaJoin = "" ;
         DRowRelacionesCamposEtc? rowRel = lstRelaciones.firstWhereOrNull((it) => it.tablaOrigen == tablaLower && it.campoID == campo);
-        if (rowRel == null) {
-          // no estan en relaciones, son excepciones?? habrá que verlo
+        if (rowRel == null || rowRel.tablaJoin == "XXX") {
+          // si rowRel == null, no esta en relaciones, son excepciones?? habrá que verlo
           // Por ejemplo, estos pueden apuntar a varios sitios, hay que studiar cada caso
           // tabla: app_blobs, campo: id_origen
           // tabla: app_blobs, campo: id_blob_origen
-          Utils.printInfo("tabla: $tablaLower, campo: $campo");
+          if (rowRel == null) {
+            Utils.printInfo("tabla: $tablaLower, campo: $campo");
+          }
         } else {
+          if (campo.startsWith("id_")) {
+            String cMapAlias = 'mapAlias["${rowRel.tablaJoin}"]!;';
+            Utils.printInfo('mapCamposExc["${rowRel.tablaOrigen.toLowerCase()}.$campo"] = $cMapAlias');
+          }
+
           alias = rowRel.alias;
           if (mapExcepCampos["${rowRel.tablaOrigen}.${rowRel.campoID}"] != null) {
             alias = mapExcepCampos["${rowRel.tablaOrigen}.${rowRel.campoID}"]!;
