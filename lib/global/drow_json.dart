@@ -88,7 +88,7 @@ class GenerarDRowJson {
         } else {
           if (campo.startsWith("id_")) {
             String cMapAlias = 'mapAlias["${rowRel.tablaJoin}"]!;';
-            Utils.printInfo('mapCamposExc["${rowRel.tablaOrigen.toLowerCase()}.$campo"] = $cMapAlias');
+            // Utils.printInfo('mapCamposExc["${rowRel.tablaOrigen.toLowerCase()}.$campo"] = $cMapAlias');
           }
 
           alias = rowRel.alias;
