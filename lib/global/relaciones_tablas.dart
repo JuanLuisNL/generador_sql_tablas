@@ -1713,6 +1713,7 @@ class RelacionesTablas {
     mapAlias["arqueos"] = "arq";
     mapAlias["art_delegaciones"] = "artDel";
     mapAlias["art_lotes"] = "artLot";
+    mapAlias["art_lotesx"] = "artLotX";
     mapAlias["art_revisiones_averias"] = "artRevAv";
     mapAlias["art_stocks"] = "artStk";
     mapAlias["articulos"] = "art";
