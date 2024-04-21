@@ -56,7 +56,7 @@ class GenerarTablaSQL {
     cCad += "nombreSQL = '$tablaLower';\n";
     cCad += "aliasSQL = '$aliasTabla';\n";
     cCad += "lGrupoEmp = $lGrupoEmp;\n";
-    cCad += "sql = SqlEntity(this);\n";
+    cCad += "sql = SqlEntity(this, GBL.schemaEmp);\n";
     cCad += "}\n\n";
 
     /// VARIABLES
@@ -71,7 +71,7 @@ class GenerarTablaSQL {
     cCad += lstGetsCamposSQL.join();
     if (lstCols.any((it) => it.campo == "nombre") && lstCols.any((it) => it.campo == "apellido1") && lstCols.any((it) => it.campo == "apellido2")) {
       cCad += "\nCampoSQL? _nombreApellidos;\n";
-      cCad += "CampoSQL get nombreApellidos => _nombreApellidos ??= UtilsData.nombreApellidos(this, nombre, apellido1, apellido2);\n";
+      cCad += "CampoSQL get nombreApellidos => _nombreApellidos ??= UtilsCampos.nombreApellidos(this, nombre, apellido1, apellido2);\n";
     }
 
     cCad += "/// JOINS Gets\n";
@@ -167,14 +167,15 @@ class GenerarTablaSQL {
 
   String getImports() {
     String cCad = "";
-    cCad += "import '../../global/utils.dart';\n";
-    cCad += "import '../sql/sql_entity.dart';\n";
-    cCad += "import '../sql/campos_sql.dart';\n";
-    cCad += "import '../sql/tablas_sql.dart';\n";
-    cCad += "import '../sql/drow_mapping.dart';\n";
+    cCad += "import '../../global/global.dart';\n";
+    cCad += "import 'package:sql_verial/data/sql/tablas_sql.dart';\n";
+    cCad += "import 'package:sql_verial/data/sql/sql_entity.dart';\n";
+    cCad += "import 'package:sql_verial/data/sql/campos_sql.dart';\n";
+    cCad += "import 'package:base_verial/base/utils.dart';\n";
+    cCad += "import 'package:sql_verial/data/sql/drow_mapping.dart';\n";
 
     if (lstCols.any((it) => it.campo == "nombre") && lstCols.any((it) => it.campo == "apellido1") && lstCols.any((it) => it.campo == "apellido2")) {
-      cCad += "import '../comun/utils_data.dart';\n";
+      cCad += "import '../comun/utils_gestion.dart';\n";
     }
 
     if (tablaLower == "app_blobs") {

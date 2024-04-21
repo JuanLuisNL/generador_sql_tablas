@@ -1724,6 +1724,7 @@ class RelacionesTablas {
     mapAlias["bancos"] = "bang";
     mapAlias["bonos_acceso"] = "bonAcc";
     mapAlias["cajones"] = "caj";
+    mapAlias["carta_articulos"] = "carArt";
     mapAlias["carta_clientes"] = "carCli";
     mapAlias["carta_clientes_grupos"] = "carCliGrp";
     mapAlias["carta_grupos"] = "carGrp";

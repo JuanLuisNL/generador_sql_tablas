@@ -181,6 +181,13 @@ class MapExcepciones {
     mapCamposExc["provincias.id_region"] = "${mapAlias["grupos_g"]}_Reg" ;
     mapCamposExc["usuarios.id_perfil"] = mapAlias["usuarios_perfiles"]!;
 
+    mapCamposExc["carta_articulos.id_grupo"] = mapAlias["carta_grupos"]!;
+    mapCamposExc["carta_grupos.id_carta"] = "${mapAlias["grupos"]!}_Carta";
+    mapCamposExc["carta_grupos.id_grupofactura"] = "${mapAlias["grupos"]!}_Fac";
+    mapCamposExc["carta_grupos.id_impresora1"] = "${mapAlias["dispositivos"]!}_Imp1";
+    mapCamposExc["carta_grupos.id_impresora2"] = "${mapAlias["dispositivos"]!}_Imp2";
+
+
 
     /// *********************************
 
@@ -432,16 +439,12 @@ class MapExcepciones {
     mapCamposExc["cajones.id_dispositivo"] = mapAlias["dispositivos"]!;
     mapCamposExc["campos_auxiliares.id_origen"] = mapAlias["aparatos"]!;
     mapCamposExc["campos_auxiliares.id_perfil_campos_aux"] = mapAlias["perfiles_campos_aux"]!;
-    mapCamposExc["carta_articulos.id_grupo"] = mapAlias["carta_grupos"]!;
+
     mapCamposExc["carta_articulos.id_impresora1"] = mapAlias["dispositivos"]!;
     mapCamposExc["carta_articulos.id_impresora2"] = mapAlias["dispositivos"]!;
     mapCamposExc["carta_articulos.id_seccion"] = mapAlias["secciones"]!;
     mapCamposExc["carta_clientes_articulos.id_carta_clientes_grupo"] = mapAlias["carta_clientes_grupos"]!;
     mapCamposExc["carta_clientes_grupos.id_carta_clientes"] = mapAlias["carta_clientes"]!;
-    mapCamposExc["carta_grupos.id_carta"] = mapAlias["grupos"]!;
-    mapCamposExc["carta_grupos.id_grupofactura"] = mapAlias["grupos"]!;
-    mapCamposExc["carta_grupos.id_impresora1"] = mapAlias["dispositivos"]!;
-    mapCamposExc["carta_grupos.id_impresora2"] = mapAlias["dispositivos"]!;
     mapCamposExc["categorias_de.id_categoria"] = mapAlias["arboles"]!;
     mapCamposExc["categorias_de.id_quien"] = mapAlias["clientes"]!;
     mapCamposExc["centro_costes_arbolesx.id_padre"] = mapAlias["centro_costes_arbolesx"]!;
