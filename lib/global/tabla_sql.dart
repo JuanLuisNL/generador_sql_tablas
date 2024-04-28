@@ -101,7 +101,7 @@ class GenerarTablaSQL {
           TablasSQL row = lstTmp.first;
 
           if (Utils.isClaseBase(cTablaJoin)) {
-            mapImports[cTablaJoin] = "import '../tablas/$cTablaJoin/${cTablaJoin}_ext.dart';";
+            mapImports[cTablaJoin] = "import '../ext_tablas/${cTablaJoin}_ext.dart';";
           } else {
             String cNexo = (row.schema == "public") ? "grp" : "emp";
             mapImports[cTablaJoin] = "import '${row.tablaName}_$cNexo.dart';";
@@ -171,7 +171,7 @@ class GenerarTablaSQL {
     cCad += "import 'package:sql_verial/data/sql/tablas_sql.dart';\n";
     cCad += "import 'package:sql_verial/data/sql/sql_entity.dart';\n";
     cCad += "import 'package:sql_verial/data/sql/campos_sql.dart';\n";
-    cCad += "import 'package:base_verial/base/utils.dart';\n";
+    cCad += "import 'package:sql_verial/data/base/utils.dart';\n";
     cCad += "import 'package:sql_verial/data/sql/drow_mapping.dart';\n";
 
     if (lstCols.any((it) => it.campo == "nombre") && lstCols.any((it) => it.campo == "apellido1") && lstCols.any((it) => it.campo == "apellido2")) {

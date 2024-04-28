@@ -187,7 +187,7 @@ class MapExcepciones {
     mapCamposExc["carta_grupos.id_impresora1"] = "${mapAlias["dispositivos"]!}_Imp1";
     mapCamposExc["carta_grupos.id_impresora2"] = "${mapAlias["dispositivos"]!}_Imp2";
 
-
+    mapCamposExc["id_banco"] = mapAlias["bancos"]!;
 
     /// *********************************
 
@@ -524,7 +524,7 @@ class MapExcepciones {
     mapCamposExc["crm_cfg.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["ctas_anuales_celdas.id_cta_anual"] = mapAlias["ctas_anuales"]!;
     mapCamposExc["ctas_anuales_claves.id_cta_anual"] = mapAlias["ctas_anuales"]!;
-    mapCamposExc["cuentas_bancarias.id_banco"] = mapAlias["bancos"]!;
+
     mapCamposExc["cuentas_bancarias.id_cuenta"] = mapAlias["cuentas"]!;
     mapCamposExc["cuentas_bancarias.id_cuenta_dto_efectos"] = mapAlias["cuentas"]!;
     mapCamposExc["cuentas_bancarias.id_ficha"] = mapAlias["clientes"]!;
