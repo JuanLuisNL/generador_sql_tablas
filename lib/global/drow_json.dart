@@ -25,7 +25,8 @@ class GenerarDRowJson {
   }
 
   String generarClaseDRowJson() {
-    String cNexo = (Utils.isClaseBase(tablaLower)) ? "Part" : "";
+    //String cNexo = (Utils.isClaseBase(tablaLower)) ? "Part" : "";
+    String cNexo = "";
     String cCad = "class DRow$tablaProper$cNexo extends DRowBasico {\n";
     mapVarsROW.forEach((key, value) {
       cCad += Utils.getDeclaracionVars(key, value);

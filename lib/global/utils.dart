@@ -150,17 +150,17 @@ class Utils {
 
   static bool isClaseBase(String tabla) {
     return [
-      "areas_venta", "areas_compra", "articulos", "proveedores", "clientes", "fabricantes", "art_delegaciones", "veterinarios", //
+      "areas_venta", "areas_compra", "articulos", "proveedores", "clientes",  "art_delegaciones",  //
       "impuestos", "empresas", "cuentas", "personal", "almacenes", "estantes", "art_stocks", "arqueos", //
-      "doc_pro", "tecnicos", "perfiles", "contactos_externos", "transportistas", "usuarios", "puestos", "efectos", "art_lotes", //
+      "doc_pro", "perfiles", "contactos_externos", "usuarios", "puestos", "efectos", "art_lotes", //
       "carta_grupos"
     ].contains(tabla);
   }
 
   static String nombreKeyClasesBase(String tabla, String tablaProper) {
-    if (isClaseBase(tabla)) {
-      return "${tablaProper}Part";
-    }
+    // if (isClaseBase(tabla)) {
+    //   return "${tablaProper}Part";
+    // }
     return tablaProper;
   }
 }

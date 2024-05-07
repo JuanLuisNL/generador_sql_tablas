@@ -31,13 +31,13 @@ class GenerarDRowMapping {
     String cCad = "class $cClase extends DRowMapping {\n";
     // cCad += "nombreSQL = '$tablaLower', aliasSQL = '$aliasTabla';\n\n"; ???
     /// Constructores
-    if (Utils.isClaseBase(tablaLower)) {
+    //if (Utils.isClaseBase(tablaLower)) {
       // Utils.printInfo("Es clase base: $tablaLower");
-    } else {
+    //} else {
       cCad += "final String aliasTabla = '${aliasTabla.toLowerCase()}';\n";
       cCad += "$cClase.select(Map<String, dynamic> map) {super.map = map;}\n";
       cCad += "$cClase.join(Map<String, dynamic> map, String aliasPadre) {super.map = map; super.aliasJoin = '\$aliasPadre\${aliasTabla}__'; }\n\n";
-    }
+    //}
 
     // cCad += "$cClase.select(super.map) : super.select();\n";
     // cCad += "$cClase.join(super.map, String aliasPadre) : super.join() { aliasJoin = '\${aliasPadre}$aliasForJoin'; }\n\n";

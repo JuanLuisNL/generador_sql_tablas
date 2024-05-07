@@ -2,6 +2,105 @@ import 'package:generador_sql_tablas/global/relaciones_tablas.dart';
 
 class MapExcepciones {
 
+  static Map<String, String> initMapAliasManuales() {
+    Map<String, String> map = {};
+    map["almacenes_1"] = "EstantesSQL? _est;\n";
+    map["arqueos_1"] = "ArqueosxSQL? _arqx;\n";
+    map["art_lotes_1"] = "ArtLotesxSQL? _artLotx;\n";
+
+    map["art_stocks_1"] = "EstantesSQL? _est;\n";
+    map["art_stocks_2"] = "ArtAlmacenesSQL? _artAlm;\n";
+    map["art_stocks_3"] = "DocProSQL? _docPro;\n";
+
+    map["articulos_1"] = "ArtDelegacionesSQL? _artDel;\n";
+    map["articulos_2"] = "CampoSQL? _prvdNomApeReal, _prvdIdReal, _costeReal, _costeUltReal, _costePondReal, _costeMedioReal, _precioReal;\n";
+
+    map["carta_grupos_1"] = "AreasVentaSQL? _av;\n";
+    map["carta_grupos_2"] = "CartaArticulosSQL? _carArt;\n";
+
+    map["clientes_1"] = "ClientesxSQL? _cliX;\n";
+    map["clientes_2"] = "CampoSQL? _tipoCliNombre;\n";
+
+    map["cuentas_1"] = "CuentasSQL? _ctasGrupo;\n";
+
+    map["efectos_1"] = "ClientesSQL? _cliQuien;\n";
+    map["efectos_2"] = "ProveedoresSQL? _proQuien;\n";
+
+    map["empresas_1"] = "DelegacionesSQL? _deleg;\n";
+
+    map["impuestos_1"] = "ImpuestosxSQL? _impX;\n";
+
+    map["personal_1"] = "ComisionistasSQL? _comistas;\n";
+
+    map["proveedores_1"] = "ProveedoresxSQL? _proX;\n";
+    map["proveedores_2"] = "CuentasBancariasSQL? _ctasBanc;\n";
+    map["proveedores_3"] = "NombresSQL? _contactos;\n";
+
+    map["puestos_1"] = "PuestosxSQL? _ptosX;\n";
+
+    map["usuarios_1"] = "UsuariosxSQL? _usrX;\n";
+    return map;
+  }
+
+  static Map<String, String> initMapImportsManuales() {
+    Map<String, String> map = {};
+    map["almacenes_1"] = "import '../../ext_tablas/estantes_ext.dart';\n";
+    map["areas_compra_1"] = "import 'package:sql_verial/data/base/extension_metodos.dart';\n";
+    map["areas_venta_1"] = "import 'package:sql_verial/data/base/extension_metodos.dart';\n";
+    map["arqueos_1"] = getImport("arqueosx");
+    map["art_lotes_1"] = getImport("art_lotesx");
+
+    map["art_stocks_1"] = getImport("doc_pro");
+    map["art_stocks_2"] = getImport("estantes");
+    map["art_stocks_3"] = getImport("art_almacenes");
+    map["art_stocks_4"] = "import '../../enums/enums_campos.dart';\n";
+
+    map["articulos_1"] = getImport("art_delegaciones");
+    map["articulos_2"] = "import 'package:sql_verial/data/base/utils_data.dart';\n";
+    map["articulos_3"] = "import 'package:sql_verial/data/sql/where.dart';\n";
+    map["articulos_4"] = "import '../../comun/kons.dart';\n";
+
+    map["carta_grupos_1"] = getImport("areas_venta");
+    map["carta_grupos_2"] = getImport("carta_articulos");
+
+    map["clientes_1"] = getImport("clientesx");
+    map["clientes_2"] = "import 'package:sql_verial/data/base/utils_data.dart';\n";
+    map["clientes_3"] = "import '../../../screens/clientes/clases/clientes_helper.dart';\n";
+
+    map["cuentas_1"] =getImport("cuentas");
+    map["cuentas_2"] ="import 'package:sql_verial/data/base/utils_data.dart';\n";
+
+    map["efectos_1"] = getImport("clientes");
+    map["efectos_2"] = getImport("proveedores");
+    map["efectos_3"] = "import '../../enums/enums_campos.dart';\n";
+
+    map["empresas_1"] = getImport("delegaciones");
+
+    map["estantes_1"] = "import '../../comun/joins_manuales.dart';\n";
+
+    map["impuestos_1"] = getImport("impuestosx");
+
+    map["perfiles_1"] = "import 'package:sql_verial/data/base/extension_metodos.dart';\n";
+
+    map["personal_1"] = getImport("comisionistas");
+
+    map["proveedores_1"] = getImport("proveedoresx");
+    map["proveedores_2"] = getImport("cuentas_bancarias");
+    map["proveedores_3"] = getImport("nombres");
+    map["proveedores_4"] = "import '../../enums/enums_campos.dart';\n";
+
+    map["puestos_1"] = getImport("puestosx");
+
+    map["usuarios_1"] = getImport("usuariosx");
+
+    return map;
+  }
+
+  static getImport(String tabla) {
+    return "import 'package:gestion_verial/data/tablas/$tabla/${tabla}_emp.dart';\n";
+  }
+
+
   static Map<String, String> initMapCamposExcepciones() {
     RelacionesTablas oRelTab = RelacionesTablas();
     Map<String, String> mapAlias = oRelTab.getAliasTablas();
@@ -1061,4 +1160,6 @@ class MapExcepciones {
 
     return mapCamposExc;
   }
+
+
 }

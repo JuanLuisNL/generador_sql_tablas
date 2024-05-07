@@ -15,7 +15,7 @@ class GenerarTablaSQL {
   late List<String> lstCamposSQLVars, lstGetsCamposSQL, lstJoinsTablas, lstAsignacionesCamposSQL;
   late List<String> lstGetsTblJoins;
   late Map<String, List<String>> mapVarsTblJoins = {};
-  late Map<String, String> mapImports, mapExcepCampos;
+  late Map<String, String> mapImports, mapExcepCampos, mapAliasManuales, mapImportsManuales;
   bool lGrupoEmp = false;
 
   String create() {
@@ -28,17 +28,23 @@ class GenerarTablaSQL {
   String generarClaseTablaSQL() {
     lGrupoEmp = (schema == "public");
     mapExcepCampos = MapExcepciones.initMapCamposExcepciones();
+    mapAliasManuales = MapExcepciones.initMapAliasManuales();
+    mapImportsManuales = MapExcepciones.initMapImportsManuales();
 
     /// JOINS CON OTRAS TABLAS
     getDeclaracionJoinsFromRelaciones();
 
     /// DECLARACION CLASE
     String cName = Utils.nombreKeyClasesBase(tablaLower, tablaProper);
+    String cCad = "";
+    if (Utils.isClaseBase(tablaLower)) {
+      cCad += "part '${tablaLower}_ext.dart';\n\n";
+    }
 
-    String cCad = "class ${cName}SQL extends TablaSQL {\n";
+    cCad += "class ${cName}SQL extends TablaSQL {\n";
 
     /// CONSTRUCTOR JOINS
-    if (!Utils.isClaseBase(tablaLower)) {
+    //if (!Utils.isClaseBase(tablaLower)) {
       cCad += "\n${tablaProper}SQL.joins(String cCampoJoin, String cAliasColumn, TablaSQL? oTablaSelectJoin, {String cJoinManual = '', required List<String> lstDep}) {\n";
       cCad += "initCampos();\n";
       cCad += "campoJoin = cCampoJoin;\n";
@@ -49,7 +55,7 @@ class GenerarTablaSQL {
 
       /// CONSTRUCTOR
       cCad += "${tablaProper}SQL() {\n initCampos();\n}\n\n";
-    }
+    //}
 
     /// INITCAMPOS
     cCad += "void initCampos() {\n";
@@ -64,6 +70,11 @@ class GenerarTablaSQL {
     cCad += "/// Joins Vars\n";
     mapVarsTblJoins.forEach((key, value) {
       cCad += Utils.getDeclaracionVars(key, value);
+    });
+    mapAliasManuales.forEach((key, value) {
+      if (key.startsWith("${tablaLower}_")) {
+        cCad += value;
+      }
     });
 
     cCad += "/// CamposSQL Gets\n";
@@ -100,19 +111,19 @@ class GenerarTablaSQL {
         if (lstTmp.length == 1) {
           TablasSQL row = lstTmp.first;
 
-          if (Utils.isClaseBase(cTablaJoin)) {
-            mapImports[cTablaJoin] = "import '../ext_tablas/${cTablaJoin}_ext.dart';";
-          } else {
+          //if (Utils.isClaseBase(cTablaJoin)) {
+          //  mapImports[cTablaJoin] = "import '../ext_tablas/${cTablaJoin}_ext.dart';";
+          //} else {
             String cNexo = (row.schema == "public") ? "grp" : "emp";
-            mapImports[cTablaJoin] = "import '${row.tablaName}_$cNexo.dart';";
-          }
+            mapImports[cTablaJoin] = "import '../${row.tablaName}/${row.tablaName}_$cNexo.dart';\n";
+          //}
         } else {
           Utils.printInfo(cTablaJoin);
         }
       } else {
-        if (Utils.isClaseBase(tablaLower)) {
-          mapImports[cTablaJoin] = "import '../tablas/$cTablaJoin/${cTablaJoin}_ext.dart';";
-        }
+        // if (Utils.isClaseBase(tablaLower)) {
+        //   mapImports[cTablaJoin] = "import '../tablas/$cTablaJoin/${cTablaJoin}_ext.dart';";
+        // }
       }
       // ? EJEMPLO
       /// ArbolesSQL? _arbCat;
@@ -167,7 +178,7 @@ class GenerarTablaSQL {
 
   String getImports() {
     String cCad = "";
-    cCad += "import '../../global/global.dart';\n";
+    cCad += "import '../../../global/global.dart';\n";
     cCad += "import 'package:sql_verial/data/sql/tablas_sql.dart';\n";
     cCad += "import 'package:sql_verial/data/sql/sql_entity.dart';\n";
     cCad += "import 'package:sql_verial/data/sql/campos_sql.dart';\n";
@@ -175,7 +186,11 @@ class GenerarTablaSQL {
     cCad += "import 'package:sql_verial/data/sql/drow_mapping.dart';\n";
 
     if (lstCols.any((it) => it.campo == "nombre") && lstCols.any((it) => it.campo == "apellido1") && lstCols.any((it) => it.campo == "apellido2")) {
-      cCad += "import '../comun/utils_gestion.dart';\n";
+      cCad += "import '../../comun/utils_gestion.dart';\n";
+    }
+
+    if (mapAliasManuales.keys.any((it) => it.startsWith("${tablaLower}_"))) {
+      cCad += "import '../../comun/joins_manuales.dart';\n";
     }
 
     if (tablaLower == "app_blobs") {
@@ -187,7 +202,12 @@ class GenerarTablaSQL {
     }
 
     mapImports.forEach((key, value) {
-      cCad += "$value\n";
+      cCad += value;
+    });
+    mapImportsManuales.forEach((key, value) {
+      if (key.startsWith("${tablaLower}_")) {
+        cCad += value;
+      }
     });
     return "$cCad\n\n";
   }
