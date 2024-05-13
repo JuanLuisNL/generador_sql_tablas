@@ -508,6 +508,7 @@ class RelacionesTablas {
     addRelation("clientes", "clientes", "id_receptor_efactura");
     addRelation("clientes", "clientes", "id_pagador_efactura");
     addRelation("clientes", "clientes", "id_contable_efactura");
+    addRelation("clientes", "clientes", "id_comprador_efactura");
     addRelation("clientes", "clientes", "id_web_client"); // JUAN LUIS
     addRelation("clientes", "objetos_perdidos", "id_cliente_encontrado");
     addRelation("clientes", "objetos_perdidos", "id_cliente_reclamado");

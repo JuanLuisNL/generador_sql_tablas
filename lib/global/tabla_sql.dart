@@ -65,6 +65,11 @@ class GenerarTablaSQL {
     cCad += "sql = SqlEntity(this, GBL.schemaEmp);\n";
     cCad += "}\n\n";
 
+    /// GETROW TRADICIONAL
+    cCad += "DRow$cName getRow({int index = -1, bool lAddMap = false}) {\n";
+    cCad += "return DRow$cName.fromMap((index == -1) ? rowMap : lstMapSQL[index], lAddMap: lAddMap);\n";
+    cCad += "}\n\n";
+
     /// VARIABLES
     cCad += Utils.getDeclaracionVars("CampoSQL?", lstCamposSQLVars);
     cCad += "/// Joins Vars\n";

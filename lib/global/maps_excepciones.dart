@@ -44,7 +44,7 @@ class MapExcepciones {
 
   static Map<String, String> initMapImportsManuales() {
     Map<String, String> map = {};
-    map["almacenes_1"] = "import '../../ext_tablas/estantes_ext.dart';\n";
+    map["almacenes_1"] = getImport("estantes");
     map["areas_compra_1"] = "import 'package:sql_verial/data/base/extension_metodos.dart';\n";
     map["areas_venta_1"] = "import 'package:sql_verial/data/base/extension_metodos.dart';\n";
     map["arqueos_1"] = getImport("arqueosx");
@@ -192,6 +192,7 @@ class MapExcepciones {
     mapCamposExc["id_ubicacion"] = mapAlias["ubicaciones"]!;
 
     mapCamposExc["id_cliente"] = mapAlias["clientes"]!;
+
     mapCamposExc["id_cliente_defecto"] = "${mapAlias["clientes"]!}_Def";
     mapCamposExc["id_cliente_varios"] = "${mapAlias["clientes"]!}_Varios";
     mapCamposExc["id_cliente_agencia"] = "${mapAlias["clientes"]!}_Agencia";
@@ -199,6 +200,13 @@ class MapExcepciones {
     mapCamposExc["id_cliente_facturacion"] = "${mapAlias["clientes"]!}_Fact";
     mapCamposExc["id_cliente_encontrado"] = "${mapAlias["clientes"]!}_Encon";
     mapCamposExc["id_cliente_reclamado"] = "${mapAlias["clientes"]!}_Reclam";
+
+    mapCamposExc["id_comprador_efactura"] = "${mapAlias["clientes"]!}_CompEF";
+    mapCamposExc["id_receptor_efactura"] = "${mapAlias["clientes"]!}_RecEF";
+    mapCamposExc["id_pagador_efactura"] = "${mapAlias["clientes"]!}_PagEF";
+    mapCamposExc["id_contable_efactura"] = "${mapAlias["clientes"]!}_ContEF";
+
+
 
     mapCamposExc["id_proveedor"] = mapAlias["proveedores"]!;
 
@@ -303,7 +311,7 @@ class MapExcepciones {
     mapCamposExc["id_coleccionable"] = "colec";
     mapCamposExc["id_como_pago"] = "metPag"; //
     mapCamposExc["id_compuesto"] = "artComp"; //ArtCompuestosSQL
-    mapCamposExc["id_contable_efactura"] = "cliConFac";
+
     mapCamposExc["id_contacto_externo"] = "contacExt";
     mapCamposExc["id_contrapartida"] = "ctasCP"; //Cuentas
     mapCamposExc["id_contrato"] = "manCon"; // mantenimientos
@@ -338,11 +346,11 @@ class MapExcepciones {
     mapCamposExc["id_ingrediente"] = "artIngr"; //ArtIngredientesSQL
     mapCamposExc["id_marca_hora"] = "grpMH"; // grupos
     mapCamposExc["id_padre"] = "padre"; // padre de la misma tabla
-    mapCamposExc["id_pagador_efactura"] = "cliPagFac";
+
     mapCamposExc["id_presentador"] = "presentador";
     mapCamposExc["id_ordenante"] = "ordenante";
     mapCamposExc["id_perfil_campos_aux"] = "perfCampAux";
-    mapCamposExc["id_receptor_efactura"] = "cliRecFac";
+
     mapCamposExc["id_retencion"] = "reten";
     mapCamposExc["id_sub_balance"] = "balSub"; // Balances
     mapCamposExc["id_tipo_contingente"] = "arbTipoCon";
