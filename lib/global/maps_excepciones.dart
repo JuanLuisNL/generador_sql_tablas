@@ -35,6 +35,7 @@ class MapExcepciones {
     map["proveedores_1"] = "ProveedoresxSQL? _proX;\n";
     map["proveedores_2"] = "CuentasBancariasSQL? _ctasBanc;\n";
     map["proveedores_3"] = "NombresSQL? _contactos;\n";
+    map["proveedores_4"] = "CampoSQL? _nombreFiscalReal;\n";
 
     map["puestos_1"] = "PuestosxSQL? _ptosX;\n";
 
