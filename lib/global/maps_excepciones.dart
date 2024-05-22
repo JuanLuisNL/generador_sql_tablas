@@ -26,6 +26,12 @@ class MapExcepciones {
     map["efectos_1"] = "ClientesSQL? _cliQuien;\n";
     map["efectos_2"] = "ProveedoresSQL? _proQuien;\n";
     map["efectos_3"] = "PersonalSQL? _persQuien;\n";
+    map["efectos_4"] = "CampoSQL? _fechaReal, _fechaPagadoReal, _fechaAgrupacionReal, _fechaFormalizacionReal, _fechaAlBancoReal, _fechaRechazoReal;\n";
+    map["efectos_5"] = "CampoSQL? _fechaDudosoCobroReal, _fechaIncobrableReal, _estadoReal, _opcionesReal, _tipoOperacionReal, _idComoPagoReal, _tipoEfectoReal, _numeroTarjetaReal;\n";
+    map["efectos_6"] = "CampoSQL? _idDelegacionReal, _idCuentaBancariaReal, _idAsientoPagadoReal, _idRemesaReal;\n";
+
+
+
 
     map["empresas_1"] = "DelegacionesSQL? _deleg;\n";
 
@@ -69,12 +75,15 @@ class MapExcepciones {
     map["clientes_2"] = "import 'package:sql_verial/data/base/utils_data.dart';\n";
     map["clientes_3"] = "import '../../../screens/clientes/clases/clientes_helper.dart';\n";
 
-    map["cuentas_1"] =getImport("cuentas");
-    map["cuentas_2"] ="import 'package:sql_verial/data/base/utils_data.dart';\n";
+    // map["cuentas_1"] =getImport("cuentas");
+    map["cuentas_1"] ="import 'package:sql_verial/data/base/utils_data.dart';\n";
 
     map["efectos_1"] = getImport("clientes");
     map["efectos_2"] = getImport("proveedores");
     map["efectos_3"] = "import '../../enums/enums_campos.dart';\n";
+    map["efectos_4"] = getImport("personal");
+    map["efectos_5"] = "import 'package:sql_verial/data/sql/where.dart';\n";
+
 
     map["empresas_1"] = getImport("delegaciones");
 
@@ -90,6 +99,7 @@ class MapExcepciones {
     map["proveedores_2"] = getImport("cuentas_bancarias");
     map["proveedores_3"] = getImport("nombres");
     map["proveedores_4"] = "import '../../enums/enums_campos.dart';\n";
+    map["proveedores_5"] = "import 'package:sql_verial/data/sql/where.dart';\n";
 
     map["puestos_1"] = getImport("puestosx");
 

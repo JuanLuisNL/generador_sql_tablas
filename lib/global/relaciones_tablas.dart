@@ -125,7 +125,15 @@ class RelacionesTablas {
     addRelation("XXX", "xsettings", "id_destino");
     addRelation("XXX", "locks_g", "id_verial");
     addRelation("XXX", "usuarios_respuestas", "id_usuario");
-    addRelation("XXX", "xsettings_g", "id_destino");
+    addRelation("XXX", "xsettings", "id_destino");
+
+    // TODO Ver
+    addRelation("XXX", "chequeos", "id_ficha");
+    addRelation("XXX", "incidencias", "id_ficha");
+
+    addRelation("XXX", "stock", "id_documento");
+    addRelation("XXX", "stock", "id_grupo_impresion");
+
 
     //AEAT
     addRelation("aeat", "aeatx", "id_aeat");
@@ -1054,7 +1062,7 @@ class RelacionesTablas {
     addRelation("impuestos", "tarifas_articulos", "id_impuesto");
 
 //Incidencias_L
-    addRelation("incidencias_l", "incidenciasx", "id_incidencia");
+    addRelation("incidencias", "incidenciasx", "id_incidencia");
 
 //InformesCfg
     addRelation("informes_cfg", "delegaciones", "id_cabecera_informes");
@@ -1400,7 +1408,7 @@ class RelacionesTablas {
     addRelation("puestos", "incidencias", "id_puesto");
     addRelation("puestos", "stock", "id_puesto");
     addRelation("puestos", "chequeos", "id_puesto");
-    addRelation("puestos", "extrans", "id_puesto");
+    addRelation("puestos", "ex_trans", "id_puesto");
 
 //Recetas
     addRelation("recetas", "doc_clix", "id_receta");
@@ -1445,6 +1453,7 @@ class RelacionesTablas {
     addRelation("series", "areas_venta", "id_serie_defecto");
     addRelation("series", "areas_venta", "id_serie_alternativa");
     addRelation("series", "data_imp", "id_serie");
+    addRelation("series", "errores", "id_serie"); // ???
     addRelation("series", "doc_cli", "id_serie");
     addRelation("series", "doc_pro", "id_serie");
     addRelation("series", "numeraciones", "id_serie");
@@ -1468,8 +1477,8 @@ class RelacionesTablas {
     addRelation("series", "basculas_tpv", "id_serie");
     addRelation("series", "basculas_tpv", "id_serie_tickets");
 
-//Stock_L
-    addRelation("stock_l", "stocknumserie", "id_stock");
+// Stock
+    addRelation("stock", "stock_num_serie", "id_stock");
 
 //TareasTecnicos
     addRelation("tareas_tecnicos", "tecnicos_revisiones_averias", "id_tarea_tecnicos");
@@ -1639,7 +1648,7 @@ class RelacionesTablas {
     addRelation("usuarios", "incidencias", "id_usuario_autorizado");
     addRelation("usuarios", "stock", "id_usuario");
     addRelation("usuarios", "chequeos", "id_usuario");
-    addRelation("usuarios", "extrans", "id_usuario");
+    addRelation("usuarios", "ex_trans", "id_usuario");
 
 //UsuariosPerfiles
     addRelation("usuarios_perfiles", "usuarios", "id_perfil");
@@ -1739,6 +1748,7 @@ class RelacionesTablas {
     mapAlias["cfg_fichero_policia"] = "cfgFicPol";
     mapAlias["cfg_fondo"] = "cfgFondo";
     mapAlias["cfg_menu"] = "cfgMenu";
+    mapAlias["chequeos"] = "chequeos";
     mapAlias["clientes"] = "cli";
     mapAlias["clientesx"] = "cliX";
     mapAlias["coleccionables"] = "colec";
@@ -1769,9 +1779,11 @@ class RelacionesTablas {
     mapAlias["doc_sinlix"] = "docSinliX";
     mapAlias["efectos"] = "efec";
     mapAlias["empresas"] = "emp";
+    mapAlias["errores"] = "errores";
     mapAlias["especies"] = "especies";
     mapAlias["estantes"] = "estantes";
     mapAlias["fabricacion"] = "fabCn";
+    mapAlias["ex_trans"] = "exTrans";
     mapAlias["fabricacion_cfg"] = "fabCnCfg";
     mapAlias["fabricacion_etapas"] = "fabCnEt";
     mapAlias["fabricacion_grupo"] = "fabCnGrp";
@@ -1793,7 +1805,7 @@ class RelacionesTablas {
     mapAlias["hst_recursos_actos"] = "hstRecAct";
     mapAlias["impuestos"] = "imp";
     mapAlias["impuestosx"] = "impX";
-    mapAlias["incidencias_l"] = "incidL";
+    mapAlias["incidencias"] = "incid";
     mapAlias["informes_cfg"] = "infCfg";
     mapAlias["informes_cfgx"] = "infCfgX";
     mapAlias["informes_usuarios"] = "infUsr";
@@ -1842,7 +1854,8 @@ class RelacionesTablas {
     mapAlias["salones"] = "salones";
     mapAlias["secciones"] = "secciones";
     mapAlias["series"] = "series";
-    mapAlias["stock_l"] = "stkL";
+    mapAlias["stock"] = "stk";
+    mapAlias["stock_num_serie"] = "stkNumSerie";
     mapAlias["tareas_tecnicos"] = "tarTec";
     mapAlias["tarifas"] = "tar";
     mapAlias["tarifa_hotel"] = "tarHot";
