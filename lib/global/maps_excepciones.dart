@@ -25,6 +25,7 @@ class MapExcepciones {
 
     map["efectos_1"] = "ClientesSQL? _cliQuien;\n";
     map["efectos_2"] = "ProveedoresSQL? _proQuien;\n";
+    map["efectos_3"] = "PersonalSQL? _persQuien;\n";
 
     map["empresas_1"] = "DelegacionesSQL? _deleg;\n";
 
@@ -106,6 +107,7 @@ class MapExcepciones {
     RelacionesTablas oRelTab = RelacionesTablas();
     Map<String, String> mapAlias = oRelTab.getAliasTablas();
     Map<String, String> mapCamposExc = {};
+    mapCamposExc["id_aparato"] = mapAlias["aparatos"]!;
     mapCamposExc["id_agente"] = mapAlias["comisionistas"]!;
     mapCamposExc["id_agente1"] = "${mapAlias["comisionistas"]!}_1";
     mapCamposExc["id_agente2"] = "${mapAlias["comisionistas"]!}_2";
@@ -536,7 +538,7 @@ class MapExcepciones {
     mapCamposExc["asientos.id_documento"] = mapAlias["comisiones"]!;
     mapCamposExc["asientos.id_grupo_series"] = mapAlias["grupos_series"]!;
 
-    mapCamposExc["averias.id_aparato"] = mapAlias["aparatos"]!;
+
     mapCamposExc["averias.id_doc_almacen"] = mapAlias["doc_almacen"]!;
     mapCamposExc["averias.id_doc_cli"] = mapAlias["doc_cli"]!;
     mapCamposExc["balances.id_padre"] = mapAlias["balances"]!;
@@ -717,7 +719,7 @@ class MapExcepciones {
     mapCamposExc["doc_cli_valores.id_documento"] = mapAlias["doc_cli"]!;
     mapCamposExc["doc_cli_valores.id_retencion"] = mapAlias["retenciones"]!;
 
-    mapCamposExc["doc_clix.id_aparato"] = mapAlias["aparatos"]!;
+
     mapCamposExc["doc_clix.id_arqueo"] = mapAlias["arqueos"]!;
     mapCamposExc["doc_clix.id_contacto_externo"] = mapAlias["contactos_externos"]!;
     mapCamposExc["doc_clix.id_doc_clix"] = mapAlias["doc_clix"]!;
@@ -854,7 +856,7 @@ class MapExcepciones {
     mapCamposExc["fabricacion_grupo.id_prioridad"] = mapAlias["grupos"]!;
     mapCamposExc["fabricacion_tareas.id_centro_trabajo"] = mapAlias["grupos"]!;
     mapCamposExc["fabricacion_tareas.id_tecnico"] = mapAlias["tecnicos"]!;
-    mapCamposExc["fabricacionx.id_aparato"] = mapAlias["aparatos"]!;
+
     mapCamposExc["fabricacionx.id_centro_trabajo"] = mapAlias["grupos"]!;
     mapCamposExc["fabricacionx.id_fabricacion"] = mapAlias["fabricacion"]!;
     mapCamposExc["fabricacionx.id_tarea"] = mapAlias["fabricacion_tareas"]!;
@@ -1023,7 +1025,7 @@ class MapExcepciones {
     mapCamposExc["operaciones_tpv.id_como_pago"] = mapAlias["metodos_pago"]!;
     mapCamposExc["operaciones_tpv.id_puesto"] = mapAlias["puestos"]!;
     mapCamposExc["operaciones_tpv.id_usuario"] = mapAlias["usuarios"]!;
-    mapCamposExc["ordenes_trabajo.id_aparato"] = mapAlias["aparatos"]!;
+
     mapCamposExc["ordenes_trabajo.id_averia"] = mapAlias["averias"]!;
     mapCamposExc["ordenes_trabajo.id_doc_cli"] = mapAlias["doc_cli"]!;
     mapCamposExc["ordenes_trabajo.id_etapa"] = mapAlias["grupos"]!;
@@ -1116,7 +1118,7 @@ class MapExcepciones {
     mapCamposExc["retenciones.id_cta_hpdeudora"] = mapAlias["cuentas"]!;
     mapCamposExc["retencionesx.id_retencion"] = mapAlias["retenciones"]!;
 
-    mapCamposExc["revisiones.id_aparato"] = mapAlias["aparatos"]!;
+
     mapCamposExc["revisiones.id_doc_almacen"] = mapAlias["doc_almacen"]!;
     mapCamposExc["revisiones.id_doc_cli"] = mapAlias["doc_cli"]!;
     mapCamposExc["rutas_ficheros.id_ficha"] = mapAlias["aparatos"]!;
