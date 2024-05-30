@@ -13,7 +13,8 @@ class MapExcepciones {
     map["art_stocks_3"] = "DocProSQL? _docPro;\n";
 
     map["articulos_1"] = "ArtDelegacionesSQL? _artDel;\n";
-    map["articulos_2"] = "CampoSQL? _prvdNomApeReal, _prvdIdReal, _costeReal, _costeUltReal, _costePondReal, _costeMedioReal, _precioReal;\n";
+    map["articulos_2"] = "ArtStocksTotalSQL? _artStkTotal;\n";
+    map["articulos_3"] = "CampoSQL? _prvdNomApeReal, _prvdIdReal, _costeReal, _costeUltReal, _costePondReal, _costeMedioReal, _precioReal;\n";
 
     map["carta_grupos_1"] = "AreasVentaSQL? _av;\n";
     map["carta_grupos_2"] = "CartaArticulosSQL? _carArt;\n";
@@ -67,6 +68,7 @@ class MapExcepciones {
     map["articulos_2"] = "import 'package:sql_verial/data/base/utils_data.dart';\n";
     map["articulos_3"] = "import 'package:sql_verial/data/sql/where.dart';\n";
     map["articulos_4"] = "import '../../comun/kons.dart';\n";
+    map["articulos_5"] = "import 'package:gestion_verial/data/tablas/art_stocks/art_stocks_total.dart';\n";
 
     map["carta_grupos_1"] = getImport("areas_venta");
     map["carta_grupos_2"] = getImport("carta_articulos");
@@ -309,6 +311,14 @@ class MapExcepciones {
 
     mapCamposExc["id_banco"] = mapAlias["bancos"]!;
 
+    mapCamposExc["id_usuario"] = mapAlias["usuarios"]!;
+    mapCamposExc["conocimientos.id_usuario2"] = "${mapAlias["usuarios"]!}_Con";
+    mapCamposExc["incidencias.id_usuario_autorizado"] = "${mapAlias["usuarios"]!}_Aut";
+    mapCamposExc["hst_doc_hotel.id_usuario_proceso"] =  "${mapAlias["usuarios"]!}_DH";
+
+
+
+
     /// *********************************
 
     mapCamposExc["id_remitente_contacto"] = "contacRemit"; // nombres
@@ -375,7 +385,7 @@ class MapExcepciones {
     mapCamposExc["id_cta_hpdeudora"] = "ctaHpDeud";
     mapCamposExc["id_cta_hpacreedora"] = "ctaHpAcre";
     mapCamposExc["id_art_lotes"] = "artLot";
-    mapCamposExc["id_usuario"] = "usr";
+
     mapCamposExc["id_impresora"] = "disposImp";
     mapCamposExc["id_ticadora"] = "disposTic";
     mapCamposExc["id_visor"] = "disposVisor";
@@ -444,7 +454,7 @@ class MapExcepciones {
     mapCamposExc["agenda.id_padre"] = mapAlias["agenda"]!;
 
     mapCamposExc["agenda.id_puesto"] = mapAlias["puestos"]!;
-    mapCamposExc["agenda.id_usuario"] = mapAlias["usuarios"]!;
+
     mapCamposExc["aparatos.id_contacto_externo"] = mapAlias["contactos_externos"]!;
     mapCamposExc["aparatos.id_contrato"] = mapAlias["mantenimientos"]!;
     mapCamposExc["aparatos.id_contrato2"] = mapAlias["mantenimientos"]!;
@@ -508,7 +518,7 @@ class MapExcepciones {
     mapCamposExc["areas_venta.id_tarifa_kiosko_hotel"] = mapAlias["tarifa_hotel"]!;
     mapCamposExc["arqueos.id_cajon"] = mapAlias["cajones"]!;
     mapCamposExc["arqueos.id_puesto"] = mapAlias["puestos"]!;
-    mapCamposExc["arqueos.id_usuario"] = mapAlias["usuarios"]!;
+
     mapCamposExc["arqueosx.id_arqueo"] = mapAlias["arqueos"]!;
     mapCamposExc["arqueosx.id_como_pago"] = mapAlias["metodos_pago"]!;
 
@@ -638,10 +648,7 @@ class MapExcepciones {
     mapCamposExc["conocimientos.id_duplicado"] = mapAlias["conocimientos"]!;
     mapCamposExc["conocimientos.id_instalacion"] = mapAlias["instalaciones"]!;
     mapCamposExc["conocimientos.id_sector"] = mapAlias["grupos"]!;
-    mapCamposExc["conocimientos.id_usuario"] = mapAlias["usuarios"]!;
-    mapCamposExc["conocimientos.id_usuario2"] = mapAlias["usuarios"]!;
     mapCamposExc["conocimientosx.id_conocimientos"] = mapAlias["conocimientos"]!;
-    mapCamposExc["crm_cfg.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["ctas_anuales_celdas.id_cta_anual"] = mapAlias["ctas_anuales"]!;
     mapCamposExc["ctas_anuales_claves.id_cta_anual"] = mapAlias["ctas_anuales"]!;
 
@@ -687,7 +694,6 @@ class MapExcepciones {
     mapCamposExc["doc_almacen.id_puesto"] = mapAlias["puestos"]!;
 
     mapCamposExc["doc_almacen.id_transportista"] = mapAlias["transportistas"]!;
-    mapCamposExc["doc_almacen.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["doc_almacenx.id_doc_cli_depositario"] = mapAlias["doc_cli"]!;
     mapCamposExc["doc_almacenx.id_documento"] = mapAlias["doc_almacen"]!;
     mapCamposExc["doc_almacenx.id_partida"] = mapAlias["doc_pro"]!;
@@ -721,7 +727,6 @@ class MapExcepciones {
     mapCamposExc["doc_cli.id_tecnico"] = mapAlias["tecnicos"]!;
     mapCamposExc["doc_cli.id_tipo_contingente"] = mapAlias["arboles"]!;
     mapCamposExc["doc_cli.id_transportista"] = mapAlias["transportistas"]!;
-    mapCamposExc["doc_cli.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["doc_cli.id_vehiculo"] = mapAlias["vehiculos"]!;
     mapCamposExc["doc_cli.id_veterinario"] = mapAlias["veterinarios"]!;
     mapCamposExc["doc_cli.id_web_client"] = mapAlias["clientes"]!;
@@ -752,7 +757,6 @@ class MapExcepciones {
     mapCamposExc["doc_clix.id_tarifa_doc"] = mapAlias["tarifas_doc"]!;
     mapCamposExc["doc_clix.id_tecnico"] = mapAlias["tecnicos"]!;
     mapCamposExc["doc_clix.id_tipo_acto"] = mapAlias["grupos"]!;
-    mapCamposExc["doc_clix.id_usuario"] = mapAlias["usuarios"]!;
 
     mapCamposExc["doc_hotel.id_como_pago"] = mapAlias["metodos_pago"]!;
     mapCamposExc["doc_hotel.id_doc_cli"] = mapAlias["doc_cli"]!;
@@ -763,7 +767,6 @@ class MapExcepciones {
     mapCamposExc["doc_hotel.id_tarifa_empresa"] = mapAlias["tarifa_hotel"]!;
     mapCamposExc["doc_hotel.id_tipo_contingente"] = mapAlias["arboles"]!;
     mapCamposExc["doc_hotel.id_transportista"] = mapAlias["transportistas"]!;
-    mapCamposExc["doc_hotel.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["doc_hotel_xprevision.id_doc_hotelx"] = mapAlias["doc_hotelx"]!;
 
     mapCamposExc["doc_hotelx.id_arqueo"] = mapAlias["arqueos"]!;
@@ -785,7 +788,6 @@ class MapExcepciones {
     mapCamposExc["doc_hotelx.id_tarifa_hotel"] = mapAlias["tarifa_hotel"]!;
     mapCamposExc["doc_hotelx.id_tipo_acto"] = mapAlias["grupos"]!;
     mapCamposExc["doc_hotelx.id_tipo_habitacion"] = mapAlias["tipo_habitaciones"]!;
-    mapCamposExc["doc_hotelx.id_usuario"] = mapAlias["usuarios"]!;
 
 
     mapCamposExc["doc_pro.id_asiento"] = mapAlias["asientos"]!;
@@ -806,7 +808,6 @@ class MapExcepciones {
 
     mapCamposExc["doc_pro.id_retencion"] = mapAlias["retenciones"]!;
     mapCamposExc["doc_pro.id_transportista"] = mapAlias["transportistas"]!;
-    mapCamposExc["doc_pro.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["doc_pro.id_visita"] = mapAlias["nombres"]!;
     mapCamposExc["doc_pro_valores.id_cuenta"] = mapAlias["cuentas"]!;
     mapCamposExc["doc_pro_valores.id_documento"] = mapAlias["doc_pro"]!;
@@ -842,7 +843,6 @@ class MapExcepciones {
     mapCamposExc["efectos.id_puesto"] = mapAlias["puestos"]!;
     mapCamposExc["efectos.id_rechazado"] = mapAlias["efectos"]!;
     mapCamposExc["efectos.id_remesa"] = mapAlias["remesas"]!;
-    mapCamposExc["efectos.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["empresas.id_certificado_recetas"] = mapAlias["app_blobs"]!;
     mapCamposExc["empresas.id_grupo_series_defecto"] = mapAlias["grupos_series"]!;
 
@@ -882,7 +882,6 @@ class MapExcepciones {
     mapCamposExc["fianzas.id_cta_ingresos"] = mapAlias["cuentas"]!;
     mapCamposExc["fianzas.id_grupo_series"] = mapAlias["grupos_series"]!;
     mapCamposExc["fianzas.id_puesto"] = mapAlias["puestos"]!;
-    mapCamposExc["fianzas.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["fianzasx.id_cta_fianzas"] = mapAlias["cuentas"]!;
     mapCamposExc["fianzasx.id_cta_ingresos"] = mapAlias["cuentas"]!;
     mapCamposExc["fianzasx.id_fianza"] = mapAlias["fianzas"]!;
@@ -908,8 +907,6 @@ class MapExcepciones {
     mapCamposExc["hst_doc_hotel.id_tarifa_empresa"] = mapAlias["tarifa_hotel"]!;
     mapCamposExc["hst_doc_hotel.id_tipo_contingente"] = mapAlias["arboles"]!;
     mapCamposExc["hst_doc_hotel.id_transportista"] = mapAlias["transportistas"]!;
-    mapCamposExc["hst_doc_hotel.id_usuario"] = mapAlias["usuarios"]!;
-    mapCamposExc["hst_doc_hotel.id_usuario_proceso"] = mapAlias["usuarios"]!;
 
     mapCamposExc["hst_doc_hotelx.id_arqueo"] = mapAlias["arqueos"]!;
     mapCamposExc["hst_doc_hotelx.id_cupo"] = mapAlias["cupos"]!;
@@ -929,7 +926,6 @@ class MapExcepciones {
     mapCamposExc["hst_doc_hotelx.id_tarifa_hotel"] = mapAlias["tarifa_hotel"]!;
     mapCamposExc["hst_doc_hotelx.id_tipo_acto"] = mapAlias["grupos"]!;
     mapCamposExc["hst_doc_hotelx.id_tipo_habitacion"] = mapAlias["tipo_habitaciones"]!;
-    mapCamposExc["hst_doc_hotelx.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["hst_ocupantesx.id_hst_doc_hotelx"] = mapAlias["hst_doc_hotelx"]!;
     mapCamposExc["hst_ocupantesx.id_ocupante"] = mapAlias["ocupantes"]!;
     mapCamposExc["hst_recursos_actos.id_hst_doc_hotelx"] = mapAlias["hst_doc_hotelx"]!;
@@ -963,13 +959,10 @@ class MapExcepciones {
     mapCamposExc["instalaciones_props.id_instalacion"] = mapAlias["instalaciones"]!;
     mapCamposExc["instalaciones_props.id_puesto"] = mapAlias["puestos"]!;
     mapCamposExc["instalacionesx.id_instalacion"] = mapAlias["instalaciones"]!;
-    mapCamposExc["instalacionesx.id_usuario"] = mapAlias["usuarios"]!;
 
     mapCamposExc["inventario.id_puesto"] = mapAlias["puestos"]!;
-    mapCamposExc["inventario.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["inventariox.id_inventario"] = mapAlias["inventario"]!;
     mapCamposExc["inventariox.id_puesto"] = mapAlias["puestos"]!;
-    mapCamposExc["inventariox.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["logi_destinos.id_forma_envio"] = mapAlias["logi_formas"]!;
     mapCamposExc["logi_envios.id_destino"] = mapAlias["logi_destinos"]!;
     mapCamposExc["logi_envios.id_doc_cli"] = mapAlias["doc_cli"]!;
@@ -983,7 +976,6 @@ class MapExcepciones {
     mapCamposExc["logi_unidadesx.id_unidad"] = mapAlias["logi_unidades"]!;
     mapCamposExc["mandatos.id_cta_cliente"] = mapAlias["cuentas_bancarias"]!;
     mapCamposExc["mandatos.id_puesto"] = mapAlias["puestos"]!;
-    mapCamposExc["mandatos.id_usuario"] = mapAlias["usuarios"]!;
 
     mapCamposExc["mantenimientos.id_como_pago"] = mapAlias["metodos_pago"]!;
     mapCamposExc["mantenimientos.id_cuando_pago"] = mapAlias["plazos_pago"]!;
@@ -1000,7 +992,6 @@ class MapExcepciones {
     mapCamposExc["messenger.id_de_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["messengerx.id_messenger"] = mapAlias["messenger"]!;
     mapCamposExc["messengerx.id_puesto"] = mapAlias["puestos"]!;
-    mapCamposExc["messengerx.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["metodos_pago.id_alt_cuenta"] = mapAlias["cuentas"]!;
     mapCamposExc["metodos_pago.id_cta_bancaria"] = mapAlias["cuentas_bancarias"]!;
     mapCamposExc["metodos_pago.id_cta_dto_efectos"] = mapAlias["cuentas"]!;
@@ -1034,7 +1025,6 @@ class MapExcepciones {
     mapCamposExc["operaciones_tpv.id_cajon"] = mapAlias["cajones"]!;
     mapCamposExc["operaciones_tpv.id_como_pago"] = mapAlias["metodos_pago"]!;
     mapCamposExc["operaciones_tpv.id_puesto"] = mapAlias["puestos"]!;
-    mapCamposExc["operaciones_tpv.id_usuario"] = mapAlias["usuarios"]!;
 
     mapCamposExc["ordenes_trabajo.id_averia"] = mapAlias["averias"]!;
     mapCamposExc["ordenes_trabajo.id_doc_cli"] = mapAlias["doc_cli"]!;
@@ -1044,7 +1034,6 @@ class MapExcepciones {
     mapCamposExc["ordenes_trabajo.id_tecnico_recepcion"] = mapAlias["tecnicos"]!;
     mapCamposExc["ordenes_trabajo.id_tecnico_trabajo"] = mapAlias["tecnicos"]!;
     mapCamposExc["ordenes_trabajo.id_tipo"] = mapAlias["grupos"]!;
-    mapCamposExc["ordenes_trabajo.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["paises.id_estadistica_pais"] = mapAlias["grupos_g"]!;
     mapCamposExc["partes_medicos.id_medico"] = mapAlias["tecnicos"]!;
     mapCamposExc["partes_reparaciones.id_doc_almacen"] = mapAlias["doc_almacen"]!;
@@ -1057,7 +1046,6 @@ class MapExcepciones {
     mapCamposExc["pdas.id_puesto"] = mapAlias["puestos"]!;
     mapCamposExc["pdas.id_puesto_alternativo"] = mapAlias["puestos"]!;
     mapCamposExc["pdas.id_transportista"] = mapAlias["transportistas"]!;
-    mapCamposExc["pdas.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["personal.id_como_pago"] = mapAlias["metodos_pago"]!;
     mapCamposExc["personal.id_cta_anticipos"] = mapAlias["cuentas"]!;
     mapCamposExc["personal.id_cta_pendiente"] = mapAlias["cuentas"]!;
@@ -1097,7 +1085,6 @@ class MapExcepciones {
     mapCamposExc["puestos.id_srv_in_hova2"] = mapAlias["dispositivos"]!;
     mapCamposExc["puestos.id_terminal_cobro"] = mapAlias["dispositivos"]!;
     mapCamposExc["puestos.id_ticadora"] = mapAlias["dispositivos"]!;
-    mapCamposExc["puestos.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["puestos.id_verificador_precios"] = mapAlias["dispositivos"]!;
     mapCamposExc["puestos.id_visor"] = mapAlias["dispositivos"]!;
     mapCamposExc["puestosx.id_cajon"] = mapAlias["cajones"]!;
@@ -1105,7 +1092,6 @@ class MapExcepciones {
     mapCamposExc["puestosx.id_puesto"] = mapAlias["puestos"]!;
     mapCamposExc["puntos_clientes.id_documento"] = mapAlias["doc_cli"]!;
     mapCamposExc["puntos_clientes.id_puesto"] = mapAlias["puestos"]!;
-    mapCamposExc["puntos_clientes.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["rangos_barras.id_fabricante"] = mapAlias["fabricantes"]!;
     mapCamposExc["recetas.id_especie"] = mapAlias["especies"]!;
     mapCamposExc["recetas.id_veterinario"] = mapAlias["veterinarios"]!;
@@ -1123,7 +1109,6 @@ class MapExcepciones {
     mapCamposExc["reservas_rest.id_salon"] = mapAlias["salones"]!;
     mapCamposExc["reservas_rest.id_tipo"] = mapAlias["grupos"]!;
     mapCamposExc["reservas_rest.id_turno"] = mapAlias["turnos"]!;
-    mapCamposExc["reservas_rest.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["retenciones.id_cta_hpacreedora"] = mapAlias["cuentas"]!;
     mapCamposExc["retenciones.id_cta_hpdeudora"] = mapAlias["cuentas"]!;
     mapCamposExc["retencionesx.id_retencion"] = mapAlias["retenciones"]!;
@@ -1172,7 +1157,6 @@ class MapExcepciones {
     mapCamposExc["usuariosx.id_cajon"] = mapAlias["cajones"]!;
     mapCamposExc["usuariosx.id_cuenta_email"] = mapAlias["cuentas_email"]!;
 
-    mapCamposExc["usuariosx.id_usuario"] = mapAlias["usuarios"]!;
     mapCamposExc["veterinarios.id_certificado"] = mapAlias["app_blobs"]!;
     mapCamposExc["webs.id_puesto"] = mapAlias["puestos"]!;
     mapCamposExc["webs.id_tarifa_excepciones"] = mapAlias["tarifas_articulos"]!;
