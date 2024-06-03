@@ -153,7 +153,7 @@ class Utils {
       "areas_venta", "areas_compra", "articulos", "proveedores", "clientes",  "art_delegaciones",  //
       "impuestos", "empresas", "cuentas", "personal", "almacenes", "estantes", "art_stocks", "arqueos", //
       "doc_pro", "perfiles", "contactos_externos", "usuarios", "puestos", "efectos", "art_lotes", //
-      "carta_grupos"
+      "carta_grupos", "doc_clix", "doc_prox"
     ].contains(tabla);
   }
 

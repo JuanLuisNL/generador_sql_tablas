@@ -8,13 +8,16 @@ class MapExcepciones {
     map["arqueos_1"] = "ArqueosxSQL? _arqx;\n";
     map["art_lotes_1"] = "ArtLotesxSQL? _artLotx;\n";
 
-    map["art_stocks_1"] = "EstantesSQL? _est;\n";
-    map["art_stocks_2"] = "ArtAlmacenesSQL? _artAlm;\n";
-    map["art_stocks_3"] = "DocProSQL? _docPro;\n";
+    map["art_stocks_1"] = "CampoSQL? _stockTodosAlmacenes, _stockAuxTodosAlmacenes;\n";
+    map["art_stocks_2"] = "EstantesSQL? _est;\n";
+    map["art_stocks_3"] = "ArtAlmacenesSQL? _artAlm;\n";
+    map["art_stocks_4"] = "DocProSQL? _docPro;\n";
 
     map["articulos_1"] = "ArtDelegacionesSQL? _artDel;\n";
-    map["articulos_2"] = "ArtStocksTotalSQL? _artStkTotal;\n";
-    map["articulos_3"] = "CampoSQL? _prvdNomApeReal, _prvdIdReal, _costeReal, _costeUltReal, _costePondReal, _costeMedioReal, _precioReal;\n";
+    map["articulos_2"] = "ArtStocksSQL? _artStkTotal;\n";
+    map["articulos_3"] = "DocClixSQL? _dcxUdsDep;\n";
+    map["articulos_4"] = "DocProxSQL? _dpxUdsDep;\n";
+    map["articulos_5"] = "CampoSQL? _prvdNomApeReal, _prvdIdReal, _costeReal, _costeUltReal, _costePondReal, _costeMedioReal, _precioReal;\n";
 
     map["carta_grupos_1"] = "AreasVentaSQL? _av;\n";
     map["carta_grupos_2"] = "CartaArticulosSQL? _carArt;\n";
@@ -23,6 +26,10 @@ class MapExcepciones {
     map["clientes_2"] = "CampoSQL? _tipoCliNombre;\n";
 
     map["cuentas_1"] = "CuentasSQL? _ctasGrupo;\n";
+
+    map["doc_clix_1"] = "CampoSQL? _udsDepositosCli, _udsAuxDepositosCli;\n";
+
+    map["doc_prox_1"] = "CampoSQL? _udsDepositosPro, _udsAuxDepositosPro;\n";
 
     map["efectos_1"] = "ClientesSQL? _cliQuien;\n";
     map["efectos_2"] = "ProveedoresSQL? _proQuien;\n";
@@ -67,8 +74,10 @@ class MapExcepciones {
     map["articulos_1"] = getImport("art_delegaciones");
     map["articulos_2"] = "import 'package:sql_verial/data/base/utils_data.dart';\n";
     map["articulos_3"] = "import 'package:sql_verial/data/sql/where.dart';\n";
-    map["articulos_4"] = "import '../../comun/kons.dart';\n";
-    map["articulos_5"] = "import 'package:gestion_verial/data/tablas/art_stocks/art_stocks_total.dart';\n";
+    map["articulos_4"] = getImport("art_stocks");
+    map["articulos_5"] = getImport("doc_clix");
+    map["articulos_6"] = getImport("doc_prox");
+    map["articulos_7"] = "import '../../enums/enums_campos.dart';\n";
 
     map["carta_grupos_1"] = getImport("areas_venta");
     map["carta_grupos_2"] = getImport("carta_articulos");
@@ -296,6 +305,20 @@ class MapExcepciones {
     mapCamposExc["proveedores.id_ficha_varios"] = "${mapAlias["proveedores"]!}_Varios";
 
     mapCamposExc["doc_cli.id_devolucion"] = "${mapAlias["doc_cli"]}_Dev";
+
+    mapCamposExc["doc_cli_valores.id_cuenta"] = mapAlias["cuentas"]!;
+    mapCamposExc["doc_cli_valores.id_documento"] = mapAlias["doc_cli"]!;
+    mapCamposExc["doc_cli_valores.id_retencion"] = mapAlias["retenciones"]!;
+
+    mapCamposExc["doc_clix.id_documento"] = mapAlias["doc_cli"]!;
+    mapCamposExc["doc_clix.id_procedencia"] = "${mapAlias["doc_cli"]}_Proc";
+    mapCamposExc["doc_clix.id_doc_clix"] = mapAlias["doc_clix"]!;
+    mapCamposExc["doc_clix.id_doc_origen"] = "${mapAlias["doc_cli"]}_Orig";
+    mapCamposExc["doc_clix.id_docx_menu"] = "${mapAlias["doc_clix"]}_Menu";
+    mapCamposExc["doc_clix.id_grupo_acto_evento"] = "${mapAlias["doc_clix"]}_Acto";
+    mapCamposExc["doc_clix.id_grupo_impresion"] = "${mapAlias["doc_clix"]}_GrpImp";
+
+
     mapCamposExc["fabricacion.id_fabricacion_cfg"] = mapAlias["fabricacion_cfg"]!;
     mapCamposExc["fabricacion.id_fabricacion_grupo"] = mapAlias["fabricacion_grupo"]!;
     mapCamposExc["fabricacionx.id_fabricacion"] = mapAlias["fabricacion"]!;
@@ -730,26 +753,17 @@ class MapExcepciones {
     mapCamposExc["doc_cli.id_vehiculo"] = mapAlias["vehiculos"]!;
     mapCamposExc["doc_cli.id_veterinario"] = mapAlias["veterinarios"]!;
     mapCamposExc["doc_cli.id_web_client"] = mapAlias["clientes"]!;
-    mapCamposExc["doc_cli_valores.id_cuenta"] = mapAlias["cuentas"]!;
-    mapCamposExc["doc_cli_valores.id_documento"] = mapAlias["doc_cli"]!;
-    mapCamposExc["doc_cli_valores.id_retencion"] = mapAlias["retenciones"]!;
 
 
     mapCamposExc["doc_clix.id_arqueo"] = mapAlias["arqueos"]!;
     mapCamposExc["doc_clix.id_contacto_externo"] = mapAlias["contactos_externos"]!;
-    mapCamposExc["doc_clix.id_doc_clix"] = mapAlias["doc_clix"]!;
-    mapCamposExc["doc_clix.id_doc_origen"] = mapAlias["doc_cli"]!;
-    mapCamposExc["doc_clix.id_documento"] = mapAlias["doc_cli"]!;
-    mapCamposExc["doc_clix.id_docx_menu"] = mapAlias["doc_clix"]!;
-    mapCamposExc["doc_clix.id_grupo_acto_evento"] = mapAlias["doc_clix"]!;
-    mapCamposExc["doc_clix.id_grupo_impresion"] = mapAlias["doc_clix"]!;
     mapCamposExc["doc_clix.id_grupo_regimen"] = mapAlias["grupos"]!;
     mapCamposExc["doc_clix.id_habitacion_cargo"] = mapAlias["habitaciones"]!;
     mapCamposExc["doc_clix.id_mantenimiento"] = mapAlias["mantenimientos"]!;
     mapCamposExc["doc_clix.id_mesa"] = mapAlias["mesas"]!;
     mapCamposExc["doc_clix.id_montaje_salon"] = mapAlias["grupos"]!;
     mapCamposExc["doc_clix.id_partida"] = mapAlias["doc_pro"]!;
-    mapCamposExc["doc_clix.id_procedencia"] = mapAlias["doc_cli"]!;
+
     mapCamposExc["doc_clix.id_puesto"] = mapAlias["puestos"]!;
     mapCamposExc["doc_clix.id_receta"] = mapAlias["recetas"]!;
     mapCamposExc["doc_clix.id_reservador"] = mapAlias["clientes"]!;
