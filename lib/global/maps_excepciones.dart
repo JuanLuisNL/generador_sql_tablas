@@ -17,7 +17,7 @@ class MapExcepciones {
     map["articulos_2"] = "ArtStocksSQL? _artStkTotal;\n";
     map["articulos_3"] = "DocClixSQL? _dcxUdsDep;\n";
     map["articulos_4"] = "DocProxSQL? _dpxUdsDep;\n";
-    map["articulos_5"] = "CampoSQL? _prvdNomApeReal, _prvdIdReal, _costeReal, _costeUltReal, _costePondReal, _costeMedioReal, _precioReal;\n";
+    map["articulos_5"] = "CampoSQL? _prvdNomApeReal, _prvdIdReal, _costeReal, _costeUltReal, _costePondReal, _costeMedioReal, _precioReal, _precioRealImp;\n";
 
     map["carta_grupos_1"] = "AreasVentaSQL? _av;\n";
     map["carta_grupos_2"] = "CartaArticulosSQL? _carArt;\n";

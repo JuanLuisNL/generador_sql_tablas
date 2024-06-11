@@ -1830,6 +1830,7 @@ class RelacionesTablas {
     mapAlias["nominas"] = "nominas";
     mapAlias["obras"] = "obras";
     mapAlias["ocupantes"] = "ocupantes";
+    mapAlias["operaciones_tpv"] = "opeTpv";
     mapAlias["ordenes_trabajo"] = "ordTrab";
     mapAlias["paises"] = "paises";
     mapAlias["partes_medicos"] = "parMed";

@@ -130,6 +130,8 @@ class GenerarDRowJson {
         cPlantilla = '$cVar = double.tryParse(map["$campo"].toString()) ?? 0;\n';
       } else if (cTipoDart == "List<int>") {
         cPlantilla = '$cVar = ((map["$campo"] ?? []) as List).cast<int>();\n';
+      } else if (cTipoDart == "List<String>") {
+        cPlantilla = '$cVar = ((map["$campo"] ?? []) as List).cast<String>();\n';
       } else if (cDef == "") {
         cPlantilla = '$cVar = map["$campo"];\n';
       } else {
