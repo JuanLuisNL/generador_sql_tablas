@@ -78,6 +78,7 @@ class MapExcepciones {
     map["articulos_5"] = getImport("doc_clix");
     map["articulos_6"] = getImport("doc_prox");
     map["articulos_7"] = "import '../../enums/enums_campos.dart';\n";
+    map["articulos_8"] = "import '../../enums/enums_settings.dart';\n";
 
     map["carta_grupos_1"] = getImport("areas_venta");
     map["carta_grupos_2"] = getImport("carta_articulos");
