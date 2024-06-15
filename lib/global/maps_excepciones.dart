@@ -62,7 +62,9 @@ class MapExcepciones {
     Map<String, String> map = {};
     map["almacenes_1"] = getImport("estantes");
     map["areas_compra_1"] = "import 'package:sql_verial/data/base/extension_metodos.dart';\n";
+
     map["areas_venta_1"] = "import 'package:sql_verial/data/base/extension_metodos.dart';\n";
+
     map["arqueos_1"] = getImport("arqueosx");
     map["art_lotes_1"] = getImport("art_lotesx");
 
@@ -83,11 +85,11 @@ class MapExcepciones {
     map["carta_grupos_1"] = getImport("areas_venta");
     map["carta_grupos_2"] = getImport("carta_articulos");
 
+
     map["clientes_1"] = getImport("clientesx");
     map["clientes_2"] = "import 'package:sql_verial/data/base/utils_data.dart';\n";
     map["clientes_3"] = "import '../../../screens/clientes/clases/clientes_helper.dart';\n";
 
-    // map["cuentas_1"] =getImport("cuentas");
     map["cuentas_1"] ="import 'package:sql_verial/data/base/utils_data.dart';\n";
 
     map["efectos_1"] = getImport("clientes");
@@ -102,6 +104,7 @@ class MapExcepciones {
     map["estantes_1"] = "import '../../comun/joins_manuales.dart';\n";
 
     map["impuestos_1"] = getImport("impuestosx");
+
 
     map["perfiles_1"] = "import 'package:sql_verial/data/base/extension_metodos.dart';\n";
 

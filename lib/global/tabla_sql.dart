@@ -120,7 +120,11 @@ class GenerarTablaSQL {
           //  mapImports[cTablaJoin] = "import '../ext_tablas/${cTablaJoin}_ext.dart';";
           //} else {
             String cNexo = (row.schema == "public") ? "grp" : "emp";
-            mapImports[cTablaJoin] = "import '../${row.tablaName}/${row.tablaName}_$cNexo.dart';\n";
+            if (row.tablaName == "informes_cfg") {
+             mapImports[cTablaJoin] = "import 'package:sql_verial/report_designer/class/informes_cfg.dart';\n";
+            } else {
+              mapImports[cTablaJoin] = "import '../${row.tablaName}/${row.tablaName}_$cNexo.dart';\n";
+            }
           //}
         } else {
           Utils.printInfo(cTablaJoin);
