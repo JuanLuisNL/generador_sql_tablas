@@ -70,7 +70,7 @@ class GenerarDRowMapping {
         lstGetsSetsDRowsNew.add(cPlantilla);
       } else {
         if (type == "numeric") {
-          cPlantilla = "$cTipoDart get $cVar => double.tryParse($cMapCampo ?? '0') ?? 0;\n";
+          cPlantilla = "$cTipoDart get $cVar => double.tryParse($cMapCampo.toString()) ?? 0;\n";
         } else if (cDef == "") {
           cPlantilla = "$cTipoDart get $cVar => $cMapCampo;\n";
         } else {

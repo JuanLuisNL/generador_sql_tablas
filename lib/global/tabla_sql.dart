@@ -39,9 +39,11 @@ class GenerarTablaSQL {
     String cCad = "";
     if (Utils.isClaseBase(tablaLower)) {
       cCad += "part '${tablaLower}_ext.dart';\n\n";
+      cCad += "class ${cName}SQL extends TablaSQL with ${cName}MixinSQL {\n";
+    } else {
+      cCad += "class ${cName}SQL extends TablaSQL {\n";
     }
 
-    cCad += "class ${cName}SQL extends TablaSQL {\n";
 
     /// CONSTRUCTOR JOINS
     //if (!Utils.isClaseBase(tablaLower)) {
@@ -198,9 +200,9 @@ class GenerarTablaSQL {
       cCad += "import '../../comun/utils_gestion.dart';\n";
     }
 
-    if (mapAliasManuales.keys.any((it) => it.startsWith("${tablaLower}_"))) {
-      cCad += "import '../../comun/joins_manuales.dart';\n";
-    }
+    // if (mapAliasManuales.keys.any((it) => it.startsWith("${tablaLower}_"))) {
+    //   cCad += "import '../../comun/joins_manuales.dart';\n";
+    // }
 
     if (tablaLower == "app_blobs") {
       cCad += "import 'package:flutter/material.dart';\n";

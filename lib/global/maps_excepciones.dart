@@ -4,74 +4,74 @@ class MapExcepciones {
 
   static Map<String, String> initMapAliasManuales() {
     Map<String, String> map = {};
-    map["almacenes_1"] = "EstantesSQL? _est;\n";
-    map["arqueos_1"] = "ArqueosxSQL? _arqx;\n";
-    map["art_lotes_1"] = "ArtLotesxSQL? _artLotx;\n";
+    // map["almacenes_1"] = "EstantesSQL? _est;\n";
+    // map["arqueos_1"] = "ArqueosxSQL? _arqx;\n";
+    // map["art_lotes_1"] = "ArtLotesxSQL? _artLotx;\n";
 
-    map["art_stocks_1"] = "CampoSQL? _stockTodosAlmacenes, _stockAuxTodosAlmacenes;\n";
-    map["art_stocks_2"] = "EstantesSQL? _est;\n";
-    map["art_stocks_3"] = "ArtAlmacenesSQL? _artAlm;\n";
-    map["art_stocks_4"] = "DocProSQL? _docPro;\n";
+    // map["art_stocks_1"] = "CampoSQL? _stockTodosAlmacenes, _stockAuxTodosAlmacenes;\n";
+    // map["art_stocks_2"] = "EstantesSQL? _est;\n";
+    // map["art_stocks_3"] = "ArtAlmacenesSQL? _artAlm;\n";
+    // map["art_stocks_4"] = "DocProSQL? _docPro;\n";
 
-    map["articulos_1"] = "ArtDelegacionesSQL? _artDel;\n";
-    map["articulos_2"] = "ArtStocksSQL? _artStkTotal;\n";
-    map["articulos_3"] = "DocClixSQL? _dcxUdsDep;\n";
-    map["articulos_4"] = "DocProxSQL? _dpxUdsDep;\n";
-    map["articulos_5"] = "CampoSQL? _prvdNomApeReal, _prvdIdReal, _costeReal, _costeUltReal, _costePondReal, _costeMedioReal, _precioReal, _precioRealImp;\n";
+    // map["articulos_1"] = "ArtDelegacionesSQL? _artDel;\n";
+    // map["articulos_2"] = "ArtStocksSQL? _artStkTotal;\n";
+    // map["articulos_3"] = "DocClixSQL? _dcxUdsDep;\n";
+    // map["articulos_4"] = "DocProxSQL? _dpxUdsDep;\n";
+    // map["articulos_5"] = "CampoSQL? _prvdNomApeReal, _prvdIdReal, _costeReal, _costeUltReal, _costePondReal, _costeMedioReal, _precioReal, _precioRealImp;\n";
 
-    map["carta_grupos_1"] = "AreasVentaSQL? _av;\n";
-    map["carta_grupos_2"] = "CartaArticulosSQL? _carArt;\n";
+    // map["carta_grupos_1"] = "AreasVentaSQL? _av;\n";
+    // map["carta_grupos_2"] = "CartaArticulosSQL? _carArt;\n";
 
-    map["clientes_1"] = "ClientesxSQL? _cliX;\n";
-    map["clientes_2"] = "CampoSQL? _tipoCliNombre;\n";
+    // map["clientes_1"] = "ClientesxSQL? _cliX;\n";
+    // map["clientes_2"] = "CampoSQL? _tipoCliNombre;\n";
 
-    map["cuentas_1"] = "CuentasSQL? _ctasGrupo;\n";
+    // map["cuentas_1"] = "CuentasSQL? _ctasGrupo;\n";
 
-    map["doc_clix_1"] = "CampoSQL? _udsDepositosCli, _udsAuxDepositosCli;\n";
+    //map["doc_clix_1"] = "CampoSQL? _udsDepositosCli, _udsAuxDepositosCli;\n";
 
-    map["doc_prox_1"] = "CampoSQL? _udsDepositosPro, _udsAuxDepositosPro;\n";
+    //map["doc_prox_1"] = "CampoSQL? _udsDepositosPro, _udsAuxDepositosPro;\n";
 
-    map["efectos_1"] = "ClientesSQL? _cliQuien;\n";
-    map["efectos_2"] = "ProveedoresSQL? _proQuien;\n";
-    map["efectos_3"] = "PersonalSQL? _persQuien;\n";
-    map["efectos_4"] = "CampoSQL? _fechaReal, _fechaPagadoReal, _fechaAgrupacionReal, _fechaFormalizacionReal, _fechaAlBancoReal, _fechaRechazoReal;\n";
-    map["efectos_5"] = "CampoSQL? _fechaDudosoCobroReal, _fechaIncobrableReal, _estadoReal, _opcionesReal, _tipoOperacionReal, _idComoPagoReal, _tipoEfectoReal, _numeroTarjetaReal;\n";
-    map["efectos_6"] = "CampoSQL? _idDelegacionReal, _idCuentaBancariaReal, _idAsientoPagadoReal, _idRemesaReal;\n";
+    // map["efectos_1"] = "ClientesSQL? _cliQuien;\n";
+    // map["efectos_2"] = "ProveedoresSQL? _proQuien;\n";
+    // map["efectos_3"] = "PersonalSQL? _persQuien;\n";
+    // map["efectos_4"] = "CampoSQL? _fechaReal, _fechaPagadoReal, _fechaAgrupacionReal, _fechaFormalizacionReal, _fechaAlBancoReal, _fechaRechazoReal;\n";
+    // map["efectos_5"] = "CampoSQL? _fechaDudosoCobroReal, _fechaIncobrableReal, _estadoReal, _opcionesReal, _tipoOperacionReal, _idComoPagoReal, _tipoEfectoReal, _numeroTarjetaReal;\n";
+    // map["efectos_6"] = "CampoSQL? _idDelegacionReal, _idCuentaBancariaReal, _idAsientoPagadoReal, _idRemesaReal;\n";
 
+    //map["empresas_1"] = "DelegacionesSQL? _deleg;\n";
+    // map["impuestos_1"] = "ImpuestosxSQL? _impX;\n";
+    // map["personal_1"] = "ComisionistasSQL? _comistas;\n";
 
-
-
-    map["empresas_1"] = "DelegacionesSQL? _deleg;\n";
-
-    map["impuestos_1"] = "ImpuestosxSQL? _impX;\n";
-
-    map["personal_1"] = "ComisionistasSQL? _comistas;\n";
-
-    map["proveedores_1"] = "ProveedoresxSQL? _proX;\n";
-    map["proveedores_2"] = "CuentasBancariasSQL? _ctasBanc;\n";
-    map["proveedores_3"] = "NombresSQL? _contactos;\n";
-    map["proveedores_4"] = "CampoSQL? _nombreFiscalReal;\n";
-
-    map["puestos_1"] = "PuestosxSQL? _ptosX;\n";
-
-    map["usuarios_1"] = "UsuariosxSQL? _usrX;\n";
+    // map["proveedores_1"] = "ProveedoresxSQL? _prvdX;\n";
+    // map["proveedores_2"] = "CuentasBancariasSQL? _ctasBanc;\n";
+    // map["proveedores_3"] = "NombresSQL? _contactos;\n";
+    // map["proveedores_4"] = "CampoSQL? _nombreFiscalReal;\n";
+    //
+    // map["puestos_1"] = "PuestosxSQL? _ptosX;\n";
+    // map["usuarios_1"] = "UsuariosxSQL? _usrX;\n";
     return map;
   }
 
   static Map<String, String> initMapImportsManuales() {
     Map<String, String> map = {};
     map["almacenes_1"] = getImport("estantes");
+    map["almacenes_2"] = "import '../../comun/joins_manuales.dart';\n";
+
     map["areas_compra_1"] = "import 'package:sql_verial/data/base/extension_metodos.dart';\n";
 
     map["areas_venta_1"] = "import 'package:sql_verial/data/base/extension_metodos.dart';\n";
 
     map["arqueos_1"] = getImport("arqueosx");
+    map["arqueos_2"] = "import '../../comun/joins_manuales.dart';\n";
+
     map["art_lotes_1"] = getImport("art_lotesx");
+    map["art_lotes_2"] = "import '../../comun/joins_manuales.dart';\n";
 
     map["art_stocks_1"] = getImport("doc_pro");
     map["art_stocks_2"] = getImport("estantes");
     map["art_stocks_3"] = getImport("art_almacenes");
     map["art_stocks_4"] = "import '../../enums/enums_campos.dart';\n";
+    map["art_stocks_5"] = "import '../../comun/joins_manuales.dart';\n";
 
     map["articulos_1"] = getImport("art_delegaciones");
     map["articulos_2"] = "import 'package:sql_verial/data/base/utils_data.dart';\n";
@@ -81,44 +81,54 @@ class MapExcepciones {
     map["articulos_6"] = getImport("doc_prox");
     map["articulos_7"] = "import '../../enums/enums_campos.dart';\n";
     map["articulos_8"] = "import '../../enums/enums_settings.dart';\n";
+    map["articulos_9"] = "import '../../comun/joins_manuales.dart';\n";
 
     map["carta_grupos_1"] = getImport("areas_venta");
     map["carta_grupos_2"] = getImport("carta_articulos");
-
+    map["carta_grupos_3"] = "import '../../comun/joins_manuales.dart';\n";
 
     map["clientes_1"] = getImport("clientesx");
     map["clientes_2"] = "import 'package:sql_verial/data/base/utils_data.dart';\n";
     map["clientes_3"] = "import '../../../screens/clientes/clases/clientes_helper.dart';\n";
+    map["clientes_4"] = "import '../../comun/joins_manuales.dart';\n";
 
     map["cuentas_1"] ="import 'package:sql_verial/data/base/utils_data.dart';\n";
+    map["cuentas_2"] = "import '../../comun/joins_manuales.dart';\n";
 
     map["efectos_1"] = getImport("clientes");
     map["efectos_2"] = getImport("proveedores");
     map["efectos_3"] = "import '../../enums/enums_campos.dart';\n";
     map["efectos_4"] = getImport("personal");
     map["efectos_5"] = "import 'package:sql_verial/data/sql/where.dart';\n";
+    map["efectos_6"] = "import '../../comun/joins_manuales.dart';\n";
 
 
     map["empresas_1"] = getImport("delegaciones");
+    map["empresas_2"] = "import '../../comun/joins_manuales.dart';\n";
 
     map["estantes_1"] = "import '../../comun/joins_manuales.dart';\n";
 
     map["impuestos_1"] = getImport("impuestosx");
+    map["impuestos_2"] = "import '../../comun/joins_manuales.dart';\n";
 
 
     map["perfiles_1"] = "import 'package:sql_verial/data/base/extension_metodos.dart';\n";
 
     map["personal_1"] = getImport("comisionistas");
+    map["personal_2"] = "import '../../comun/joins_manuales.dart';\n";
 
     map["proveedores_1"] = getImport("proveedoresx");
     map["proveedores_2"] = getImport("cuentas_bancarias");
     map["proveedores_3"] = getImport("nombres");
     map["proveedores_4"] = "import '../../enums/enums_campos.dart';\n";
     map["proveedores_5"] = "import 'package:sql_verial/data/sql/where.dart';\n";
+    map["proveedores_6"] = "import '../../comun/joins_manuales.dart';\n";
 
     map["puestos_1"] = getImport("puestosx");
+    map["puestos_2"] = "import '../../comun/joins_manuales.dart';\n";
 
     map["usuarios_1"] = getImport("usuariosx");
+    map["usuarios_2"] = "import '../../comun/joins_manuales.dart';\n";
 
     return map;
   }

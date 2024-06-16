@@ -150,9 +150,9 @@ class Utils {
 
   static bool isClaseBase(String tabla) {
     return [
-      "areas_venta", "areas_compra", "articulos", "proveedores", "clientes",  "art_delegaciones",  //
+      "areas_venta", "areas_compra", "articulos", "proveedores", "clientes",    //
       "impuestos", "empresas", "cuentas", "personal", "almacenes", "estantes", "art_stocks", "arqueos", //
-      "doc_pro", "perfiles", "contactos_externos", "usuarios", "puestos", "efectos", "art_lotes", //
+       "perfiles", "usuarios", "puestos", "efectos", "art_lotes", //
       "carta_grupos", "doc_clix", "doc_prox"
     ].contains(tabla);
   }
