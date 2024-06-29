@@ -82,6 +82,7 @@ class MapExcepciones {
     map["articulos_7"] = "import '../../enums/enums_campos.dart';\n";
     map["articulos_8"] = "import '../../enums/enums_settings.dart';\n";
     map["articulos_9"] = "import '../../comun/joins_manuales.dart';\n";
+    map["articulos_10"] = getImport("art_proveedor");
 
     map["carta_grupos_1"] = getImport("areas_venta");
     map["carta_grupos_2"] = getImport("carta_articulos");
