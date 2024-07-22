@@ -474,7 +474,7 @@ class MapExcepciones {
     mapCamposExc["id_web_client"] = "cliWeb";
     mapCamposExc["id_remitente_contacto"] = "contacRemit"; // nombres
     mapCamposExc["id_envio_contacto"] = "contacEnvio";
-    mapCamposExc["id_asiento"] = "asiento";
+    mapCamposExc["id_asiento"] = mapAlias["asientos"]!;
     mapCamposExc["id_grupo_series"] = "grpSer";
     mapCamposExc["id_dispositivo"] = "dispos";
     mapCamposExc["id_puesto"] = "puesto";
